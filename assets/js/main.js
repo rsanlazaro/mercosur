@@ -113,6 +113,108 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  /* ---------- Team bio modal (Erik Aaron, Anthony Edouard, Federico) ---------- */
+  (function () {
+    var triggers = document.querySelectorAll('[data-bio-open]');
+    if (!triggers.length) return;
+
+    var TEAM_BIOS = {
+      'erik-aaron-lara-riveros': {
+        name: 'Erik Aaron Lara Riveros',
+        role: 'Presidente',
+        image: 'assets/images/team-4.jpg',
+        body: [
+          'Erik Aaron Lara Riveros es un ejecutivo internacional chileno con más de veinte años de experiencia en banca, inversión, mercados regulados, gobernanza corporativa y relaciones institucionales.',
+          'Ha desempeñado funciones directivas y de consejo en entidades financieras reguladas de Europa y Oriente Medio, así como responsabilidades ejecutivas en compañías cotizadas en Norteamérica. Actualmente participa en el desarrollo de iniciativas internacionales vinculadas a minerales críticos, financiación, inversión y cadenas estratégicas de suministro entre América Latina y Norteamérica. Como presidente de la Cámara, impulsa la integración empresarial, la cooperación institucional y la proyección internacional del espacio Mercosur.'
+        ]
+      },
+      'anthony-edouard-toffoli': {
+        name: 'Anthony Edouard A. Toffoli',
+        role: 'Vicepresidente',
+        image: 'assets/images/team-3.jpg',
+        body: [
+          'Anthony Edouard André Toffoli es un ejecutivo francés con más de veinticinco años de experiencia en retail, turismo médico, inmobiliario y medios de comunicación.',
+          'Actúa activamente en varias empresas europeas, y tiene responsabilidades ejecutivas en compañías en Norteamérica. Actualmente participa en el desarrollo de varias clínicas de fertilidad humana, brindando soluciones para pacientes europeos en América Latina.',
+          'Como vicepresidente de la Cámara, lucha incansablemente para las empresas, siempre a favor de la cooperación institucional y la expansión internacional más allá del espacio Mercosur.'
+        ]
+      },
+      'walber-castillo-castellano': {
+        name: 'Walber Castillo Castellano',
+        role: 'Secretario General',
+        image: 'assets/images/team-5.webp',
+        body: [
+          'Walber Castillo Castellano es un empresario colombiano e ingeniero civil con amplia trayectoria en educación técnica, infraestructura, hidrocarburos, innovación tecnológica y desarrollo empresarial.',
+          'Entre sus principales iniciativas empresariales se destacan varios grupos internacionales y ha sido distinguido como Colombiano Estrella, empresario destacado en el Exterior, empresario del Año en Perú y Excelencia Educativa ODAEE.',
+          'Su visión empresarial, su integridad y compromiso son las bases de su implicación en la Cámara de Comercio Mercosur.'
+        ]
+      },
+      'federico-andres-brugge': {
+        name: 'Federico Andrés Brügge',
+        role: 'Síndico Titular',
+        image: 'assets/images/team-6.jpg',
+        body: [
+          'Federico Andrés Brügge es analista de mercados financieros e inversor, dedicado al estudio de la macroeconomía, los mercados internacionales y el mercado de divisas, con foco en el análisis y la operativa de XAU/USD (oro).',
+          'Es Analista Global de Inversiones (AGI) por el Instituto de Capacitación Bursátil (ICB) de Buenos Aires y Técnico Analista de Mercados y Estrategias de Comercialización. Actualmente profundiza su especialización en el análisis del mercado del oro y las divisas, y en su interacción con la política monetaria, la macroeconomía y los mercados financieros. Mantiene vinculaciones comerciales e institucionales en Argentina, Estados Unidos y Europa.'
+        ]
+      }
+    };
+
+    var overlay = null;
+
+    function buildOverlay() {
+      if (overlay) return overlay;
+      overlay = document.createElement('div');
+      overlay.className = 'privacy-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-labelledby', 'bio-modal-title');
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeBio();
+      });
+      return overlay;
+    }
+
+    function openBio(id) {
+      var person = TEAM_BIOS[id];
+      if (!person) return;
+      var ov = buildOverlay();
+      var bodyHTML = person.body.map(function (p) { return '<p>' + p + '</p>'; }).join('');
+      ov.innerHTML =
+        '<div class="privacy-modal bio-modal">' +
+          '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
+          '<div class="bio-modal-header">' +
+            '<div class="bio-modal-photo"><img src="' + person.image + '" alt="' + person.name + '"></div>' +
+            '<div>' +
+              '<p class="privacy-eyebrow">' + person.role + '</p>' +
+              '<h2 id="bio-modal-title">' + person.name + '</h2>' +
+            '</div>' +
+          '</div>' +
+          bodyHTML +
+        '</div>';
+      ov.querySelector('.privacy-close').addEventListener('click', closeBio);
+      window.requestAnimationFrame(function () {
+        ov.classList.add('is-open');
+      });
+    }
+
+    function closeBio() {
+      if (!overlay) return;
+      overlay.classList.remove('is-open');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) closeBio();
+    });
+
+    triggers.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openBio(link.getAttribute('data-bio-open'));
+      });
+    });
+  })();
+
   /* ---------- Carousels ---------- */
   document.querySelectorAll('.carousel-wrap').forEach(function (wrap) {
     var track = wrap.querySelector('.carousel-track');
