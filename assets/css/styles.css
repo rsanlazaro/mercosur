@@ -123,13 +123,16 @@ input,textarea,select{ font-family: inherit; font-size: 1rem; }
   position: relative; color:#fff;
   background: var(--blue-ink) center/cover no-repeat;
   overflow:hidden;
+  min-height: 520px;
+  display:flex; align-items:center;
 }
 .hero::after{
   content:""; position:absolute; inset:0;
   background: linear-gradient(100deg, rgba(6,14,30,.90) 20%, rgba(6,14,30,.58) 55%, rgba(6,14,30,.86));
 }
 .hero-inner{ position:relative; z-index:2; padding: 96px 0 84px; max-width: 700px; }
-.hero--page .hero-inner{ padding: 78px 0 64px; max-width: 680px; }
+.hero--page{ min-height: 480px; }
+.hero--page .hero-inner{ padding: 90px 0 74px; max-width: 680px; }
 .hero-kicker{
   font-weight:700; letter-spacing:.14em; text-transform:uppercase; font-size:.76rem;
   color: rgba(255,255,255,.72); margin-bottom: 16px;
@@ -222,11 +225,7 @@ input,textarea,select{ font-family: inherit; font-size: 1rem; }
 .cta-band p strong{ color:#fff; }
 
 /* ---------- Footer ---------- */
-.site-footer{ background: var(--blue); color: rgba(255,255,255,.86); position:relative; }
-.footer-stripe{
-  height: 10px; width:100%;
-  background: repeating-linear-gradient(90deg, rgba(255,255,255,.35) 0 2px, transparent 2px 14px);
-}
+.site-footer{ background: var(--blue); color: rgba(255,255,255,.86); position:relative; border-top: 5px solid var(--green); }
 .footer-top{
   display:grid; grid-template-columns: 1.3fr 1fr 1fr 1.2fr; gap: 48px;
   padding: 56px 0 46px;
@@ -326,6 +325,7 @@ input,textarea,select{ font-family: inherit; font-size: 1rem; }
 
 /* ---------- Hero pattern variant (Nosotros, inner pages) ---------- */
 .hero--pattern{
+  min-height: 640px;
   background-color: var(--blue-ink);
   background-image:
     repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0 2px, transparent 2px 46px),
@@ -362,8 +362,10 @@ h2 em, h1 em{ font-style: italic; }
 .principle-card .badge{
   width:176px; height:176px; border-radius:50%; margin: 0 auto 24px;
   background: var(--blue); display:flex; align-items:center; justify-content:center; overflow:hidden;
+  border: 4px solid var(--white); box-shadow: 0 0 0 1px rgba(10,24,48,.08), var(--shadow-card);
 }
 .principle-card .badge svg{ width:70px; height:70px; }
+.principle-card .badge img{ width:100%; height:100%; object-fit:cover; display:block; }
 .principle-card h3{ font-family: var(--font-display); font-weight:700; font-size:1.08rem; color: var(--blue-ink); margin-bottom:10px; }
 .principle-card p{ font-size:.88rem; color: var(--ink-soft); margin:0; }
 
@@ -420,12 +422,11 @@ h2 em, h1 em{ font-style: italic; }
 .hero-lede strong{ color:#fff; font-weight:700; }
 .hero-inner--center h1{ margin-bottom:0; }
 
-/* ---------- Wavy underline heading ---------- */
+/* ---------- Straight underline heading ---------- */
 .heading-wavy{ position:relative; display:inline-block; padding-bottom: 16px; }
 .heading-wavy::after{
-  content:""; position:absolute; left:0; right:0; bottom:0; height:14px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14'%3E%3Cpath d='M0 7 Q10 0 20 7 T40 7' stroke='%2300993d' stroke-width='3' fill='none'/%3E%3C/svg%3E");
-  background-repeat: repeat-x; background-size: 40px 14px;
+  content:""; position:absolute; left:0; right:0; bottom:0; height:4px;
+  background: var(--green); border-radius: 2px;
 }
 
 /* ---------- Note bullet (small italic callouts) ---------- */
@@ -454,6 +455,7 @@ h2 em, h1 em{ font-style: italic; }
 
 /* ---------- Hero: night-sky variant (Transparencia) ---------- */
 .hero--night{
+  min-height: 540px;
   background: radial-gradient(ellipse 900px 500px at 50% 15%, rgba(90,140,220,.55), transparent 60%),
               linear-gradient(180deg, #0a2a6b 0%, #082058 40%, #05123a 100%);
 }
@@ -715,4 +717,48 @@ h2 em, h1 em{ font-style: italic; }
   .post-grid{ grid-template-columns: 1fr; }
   .blog-feature-content{ padding: 32px 26px; }
   .contact-form-panel{ padding: 30px 22px; }
+}
+
+/* ==========================================================================
+   Institutional notice modal
+   ========================================================================== */
+.notice-overlay{
+  position: fixed; inset:0; z-index: 1000;
+  background: rgba(6,14,30,.72);
+  display:flex; align-items:center; justify-content:center;
+  padding: 24px;
+  opacity:0; pointer-events:none;
+  transition: opacity .25s var(--ease);
+}
+.notice-overlay.is-open{ opacity:1; pointer-events:auto; }
+.notice-modal{
+  background:#fff; border-radius: 10px; max-width: 720px; width:100%;
+  max-height: 84vh; overflow-y:auto; position:relative;
+  padding: 44px 44px 36px; box-shadow: 0 30px 70px rgba(0,0,0,.35);
+  transform: translateY(16px); transition: transform .25s var(--ease);
+}
+.notice-overlay.is-open .notice-modal{ transform: translateY(0); }
+.notice-close{
+  position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%;
+  background: var(--light); border:none; color: var(--ink); font-size:1.3rem; line-height:1;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  transition: background .2s var(--ease), color .2s var(--ease);
+}
+.notice-close:hover{ background: var(--blue); color:#fff; }
+.notice-eyebrow{
+  font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.76rem;
+  color: var(--green-deep); margin-bottom: 10px;
+}
+.notice-modal h2{ font-size: clamp(1.25rem, 2.4vw, 1.6rem); margin-bottom: .6em; }
+.notice-modal p{ font-size:.94rem; color: var(--ink-soft); margin-bottom: 1em; }
+.notice-modal p strong{ color: var(--ink); }
+.notice-links{ background: var(--sand); border-radius:6px; padding: 20px 22px; margin: 20px 0; }
+.notice-links p{ margin:0 0 .4em; font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-soft); }
+.notice-links ul{ display:flex; flex-direction:column; gap:8px; }
+.notice-links a{ font-size:.9rem; color: var(--blue); font-weight:600; text-decoration:underline; text-underline-offset:2px; word-break:break-word; }
+.notice-links a:hover{ color: var(--blue-deep); }
+.notice-signature{ font-weight:700; color: var(--blue-ink); margin-top: 24px; }
+
+@media (max-width: 560px){
+  .notice-modal{ padding: 34px 24px 28px; }
 }

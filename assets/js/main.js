@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var prevBtn = wrap.querySelector('.carousel-prev');
     var nextBtn = wrap.querySelector('.carousel-next');
     if (!track) return;
+    var loop = wrap.classList.contains('carousel-wrap--loop');
 
     function cardStep() {
       var card = track.querySelector(':scope > *');
@@ -99,17 +100,34 @@ document.addEventListener('DOMContentLoaded', function () {
       return card.getBoundingClientRect().width + gap;
     }
 
+    function maxScroll() {
+      return track.scrollWidth - track.clientWidth - 4;
+    }
+
     function updateButtons() {
       if (!prevBtn || !nextBtn) return;
-      var max = track.scrollWidth - track.clientWidth - 4;
+      if (loop) {
+        prevBtn.disabled = false;
+        nextBtn.disabled = false;
+        return;
+      }
+      var max = maxScroll();
       prevBtn.disabled = track.scrollLeft <= 4;
       nextBtn.disabled = track.scrollLeft >= max;
     }
 
     if (prevBtn) prevBtn.addEventListener('click', function () {
+      if (loop && track.scrollLeft <= 4) {
+        track.scrollTo({ left: maxScroll(), behavior: 'smooth' });
+        return;
+      }
       track.scrollBy({ left: -cardStep(), behavior: 'smooth' });
     });
     if (nextBtn) nextBtn.addEventListener('click', function () {
+      if (loop && track.scrollLeft >= maxScroll() - 4) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+        return;
+      }
       track.scrollBy({ left: cardStep(), behavior: 'smooth' });
     });
     track.addEventListener('scroll', updateButtons, { passive: true });
@@ -128,19 +146,22 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- Contact form (front-end only) ---------- */
+  /* ---------- Contact form (submits via FormSubmit to info@camaracomerciomercosur.org) ---------- */
   var contactForm = document.querySelector('#contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
       var msg = contactForm.querySelector('.form-msg');
       if (!contactForm.checkValidity()) {
+        e.preventDefault();
         contactForm.reportValidity();
         return;
       }
-      msg.textContent = 'Gracias por tu consulta. La Cámara se pondrá en contacto contigo a la brevedad.';
-      msg.className = 'form-msg ok';
-      contactForm.reset();
+      if (msg) {
+        msg.textContent = 'Enviando tu consulta…';
+        msg.className = 'form-msg';
+      }
+      // Native form submission proceeds to FormSubmit, which emails
+      // info@camaracomerciomercosur.org and returns a confirmation page.
     });
   }
 
@@ -178,5 +199,60 @@ document.addEventListener('DOMContentLoaded', function () {
       proposalForm.reset();
     });
   }
+
+  /* ---------- Institutional notice modal (shown once per session) ---------- */
+  (function () {
+    if (sessionStorage.getItem('mercosurNoticeShown') === '1') return;
+
+    var overlay = document.createElement('div');
+    overlay.className = 'notice-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-labelledby', 'notice-title');
+    overlay.innerHTML =
+      '<div class="notice-modal">' +
+        '<button type="button" class="notice-close" aria-label="Cerrar">&times;</button>' +
+        '<p class="notice-eyebrow">Comunicado institucional</p>' +
+        '<h2 id="notice-title">La Cámara de Comercio Mercosur expresa su solidaridad con el pueblo venezolano</h2>' +
+        '<p>Desde la Cámara de Comercio Mercosur manifestamos nuestra más profunda solidaridad con el pueblo de la República Bolivariana de Venezuela ante la tragedia provocada por el devastador terremoto que ha afectado a miles de familias, dejando una profunda huella humana, social y económica.</p>' +
+        '<p>En estos momentos de enorme dolor, extendemos nuestras condolencias a quienes han perdido seres queridos y expresamos nuestro reconocimiento a los equipos de rescate, personal sanitario, voluntarios y organismos nacionales e internacionales que trabajan incansablemente para salvar vidas y asistir a las comunidades afectadas.</p>' +
+        '<p>Las crisis también ponen a prueba la capacidad de nuestras instituciones para actuar con responsabilidad, coordinación y solidaridad.</p>' +
+        '<p>Reafirmamos que la recuperación de una tragedia de esta magnitud requiere del esfuerzo conjunto de todos los sectores: gobiernos, empresas, cámaras de comercio, organizaciones de la sociedad civil, organismos internacionales y ciudadanos.</p>' +
+        '<p>Por lo expuesto, hacemos un llamado a nuestra comunidad empresarial, a las instituciones asociadas y a todos los actores del ecosistema económico a colaborar, dentro de sus posibilidades, con las iniciativas humanitarias y los mecanismos de asistencia que se encuentren oficialmente habilitados para acompañar al pueblo venezolano.</p>' +
+        '<p>El Mercosur y nuestra región se fortalecen cuando la solidaridad trasciende las fronteras y se convierte en un compromiso compartido.</p>' +
+        '<p>Asimismo, difundimos enlaces de instituciones oficiales que se encuentran recibiendo donaciones. Aclaramos que no nos encontramos vinculadas a dichas entidades, sino que compartimos esta información a modo de difusión, habiendo verificado su validez con colegas venezolanos, destacando la importancia de que las donaciones lleguen efectivamente a los lugares y a las personas que más lo necesitan.</p>' +
+        '<div class="notice-links">' +
+          '<p>Enlaces de instituciones oficiales</p>' +
+          '<ul>' +
+            '<li><a href="https://help.unicef.org/lac/venezuela/emergenciavenezuela" target="_blank" rel="noopener">UNICEF – ONU</a></li>' +
+            '<li><a href="http://www.caritasvenezuela.org/donaciones" target="_blank" rel="noopener">Caritas Venezuela</a></li>' +
+            '<li><a href="http://www.globalgiving.org" target="_blank" rel="noopener">Global Giving (@globalgiving)</a></li>' +
+            '<li><a href="https://sharethemeal.org/campaigns/venezuela1" target="_blank" rel="noopener">Share The Meal</a></li>' +
+          '</ul>' +
+        '</div>' +
+        '<p class="notice-signature">Cámara de Comercio Mercosur</p>' +
+      '</div>';
+    document.body.appendChild(overlay);
+
+    function closeNotice() {
+      overlay.classList.remove('is-open');
+      sessionStorage.setItem('mercosurNoticeShown', '1');
+      window.setTimeout(function () {
+        overlay.remove();
+      }, 260);
+    }
+
+    overlay.querySelector('.notice-close').addEventListener('click', closeNotice);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeNotice();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeNotice();
+    });
+
+    window.requestAnimationFrame(function () {
+      overlay.classList.add('is-open');
+    });
+  })();
 
 });
