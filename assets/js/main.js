@@ -168,6 +168,17 @@ document.addEventListener('DOMContentLoaded', function () {
           'Como vicepresidente de la Cámara, lucha incansablemente para las empresas, siempre a favor de la cooperación institucional y la expansión internacional más allá del espacio Mercosur.'
         ]
       },
+      'ramon-ricardo-martinelli': {
+        name: 'Ramón R. Martinelli',
+        role: 'Tesorero',
+        image: 'assets/images/team-2.jpg',
+        body: [
+          'Ramón Ricardo Martinelli es un ejecutivo panameño con más de 17 años de experiencia en hidrocarburos, logística operativa y desarrollo de negocios energéticos.',
+          'Fue Diputado del Parlamento Centroamericano fortaleciendo su visión estratégica sobre cooperación, integración económica y relaciones regionales.',
+          'Sigue hoy liderando varias empresas en el mercado energético.',
+          'Su experiencia comercial, liderazgo institucional y visión regional son valores fundamentales para la Cámara de Comercio Mercosur.'
+        ]
+      },
       'walber-castillo-castellano': {
         name: 'Walber Castillo Castellano',
         role: 'Secretario General',
