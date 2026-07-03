@@ -16,12 +16,12 @@
       <img src="assets/images/logo.png" alt="Cámara de Comercio Mercosur">
     </a>
     <nav class="main-nav">
-      <a href="index.html" class="is-active">Inicio</a>
-      <a href="nosotros.html">Nosotros</a>
-      <a href="participacion.html">Participación</a>
-      <a href="transparencia.html">Transparencia</a>
-      <a href="blog.html">Blog</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="index.html" class="is-active" data-i18n="nav.home">Inicio</a>
+      <a href="nosotros.html" data-i18n="nav.about">Nosotros</a>
+      <a href="participacion.html" data-i18n="nav.participation">Participación</a>
+      <a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
     </nav>
     <div class="header-actions">
       <div class="social-links">
@@ -39,8 +39,8 @@
         </button>
         <ul class="lang-menu" role="menu">
           <li role="none"><button type="button" class="lang-option is-active" data-lang="es" role="menuitem">Español</button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem" disabled>Português <span class="soon-badge">Próximamente</span></button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem" disabled>English <span class="soon-badge">Próximamente</span></button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem">Português</button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem">English</button></li>
           <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem" disabled>Français <span class="soon-badge">Próximamente</span></button></li>
         </ul>
       </div>
@@ -55,10 +55,10 @@
   <section class="hero" style="background-image:url('assets/images/hero-home.jpg');">
     <div class="container">
       <div class="hero-inner">
-        <h1>Convertimos la integración regional en oportunidades concretas</h1>
-        <p>La Cámara articula empresas, comercios, inversores e instituciones para ampliar su alcance y facilitar su actuación entre <span class="hl">distintos mercados y movilizar comercio, inversión y financiación al servicio del desarrollo de</span> <strong>América Latina.</strong></p>
+        <h1 data-i18n="home.hero.title">Convertimos la integración regional en oportunidades concretas</h1>
+        <p data-i18n-html="home.hero.body">La Cámara articula empresas, comercios, inversores e instituciones para ampliar su alcance y facilitar su actuación entre <span class="hl">distintos mercados y movilizar comercio, inversión y financiación al servicio del desarrollo de</span> <strong>América Latina.</strong></p>
         <div class="hero-actions">
-          <a href="nosotros.html" class="btn btn-light">Conoce más</a>
+          <a href="nosotros.html" class="btn btn-light" data-i18n="cta.learnMore">Conoce más</a>
         </div>
       </div>
     </div>
@@ -69,9 +69,9 @@
     <div class="container">
       <div class="intro-grid">
         <div class="reveal">
-          <h2>Acercamos <span class="accent-green">capacidades</span> que con frecuencia se encuentran separadas</h2>
-          <p>Conocimiento local y presencia internacional; proyectos y capital; empresas y mercados; cámaras nacionales e interlocutores regionales y globales; oportunidades productivas y socios capaces de convertirlas en resultados.</p>
-          <a href="participacion.html" class="btn btn-outline-blue">Forma parte</a>
+          <h2 data-i18n-html="home.capabilities.title">Acercamos <span class="accent-green">capacidades</span> que con frecuencia se encuentran separadas</h2>
+          <p data-i18n="home.capabilities.body">Conocimiento local y presencia internacional; proyectos y capital; empresas y mercados; cámaras nacionales e interlocutores regionales y globales; oportunidades productivas y socios capaces de convertirlas en resultados.</p>
+          <a href="participacion.html" class="btn btn-outline-blue" data-i18n="cta.joinIn">Forma parte</a>
         </div>
 
         <div class="reveal">
@@ -80,41 +80,41 @@
 
               <div class="accordion-item">
                 <button class="accordion-trigger" aria-expanded="false">
-                  <span>Nuestra función</span>
+                  <span data-i18n="home.accordion.role.title">Nuestra función</span>
                   <span class="icon" aria-hidden="true"></span>
                 </button>
                 <div class="accordion-panel">
                   <div class="accordion-panel-inner">
-                    <p>El MERCOSUR tiene como funciones principales integrar las economías de sus países miembros, facilitar la libre circulación de bienes y servicios, y negociar conjuntamente acuerdos de libre comercio globales para insertar a la región en las cadenas internacionales de valor.</p>
-                    <p>Por su parte, la Cámara de Comercio se encarga de transformar este marco en negocios concretos, expandiendo el alcance internacional de las empresas locales, facilitando la atracción de inversiones y asesorando a actores extranjeros sobre el mercado latinoamericano.</p>
+                    <p data-i18n="home.accordion.role.p1">El MERCOSUR tiene como funciones principales integrar las economías de sus países miembros, facilitar la libre circulación de bienes y servicios, y negociar conjuntamente acuerdos de libre comercio globales para insertar a la región en las cadenas internacionales de valor.</p>
+                    <p data-i18n="home.accordion.role.p2">Por su parte, la Cámara de Comercio se encarga de transformar este marco en negocios concretos, expandiendo el alcance internacional de las empresas locales, facilitando la atracción de inversiones y asesorando a actores extranjeros sobre el mercado latinoamericano.</p>
                   </div>
                 </div>
               </div>
 
               <div class="accordion-item">
                 <button class="accordion-trigger" aria-expanded="false">
-                  <span>De América Latina hacia el mundo</span>
+                  <span data-i18n="home.accordion.fromLatam.title">De América Latina hacia el mundo</span>
                   <span class="icon" aria-hidden="true"></span>
                 </button>
                 <div class="accordion-panel">
                   <div class="accordion-panel-inner">
-                    <p class="sub">Proyección internacional del tejido empresarial latinoamericano</p>
-                    <p>América Latina reúne empresas, recursos, talento, conocimiento técnico y capacidades productivas con potencial para competir en mercados internacionales. Sin embargo, muchas organizaciones encuentran dificultades para identificar compradores, construir relaciones de confianza o acceder a financiación.</p>
-                    <p>La Cámara amplía esa proyección mediante una plataforma común de relación y cooperación. Trabaja con cámaras, asociaciones empresariales, empresas e instituciones para acercarlas a nuevos mercados, socios, inversores y redes internacionales.</p>
+                    <p class="sub" data-i18n="home.accordion.fromLatam.sub">Proyección internacional del tejido empresarial latinoamericano</p>
+                    <p data-i18n="home.accordion.fromLatam.p1">América Latina reúne empresas, recursos, talento, conocimiento técnico y capacidades productivas con potencial para competir en mercados internacionales. Sin embargo, muchas organizaciones encuentran dificultades para identificar compradores, construir relaciones de confianza o acceder a financiación.</p>
+                    <p data-i18n="home.accordion.fromLatam.p2">La Cámara amplía esa proyección mediante una plataforma común de relación y cooperación. Trabaja con cámaras, asociaciones empresariales, empresas e instituciones para acercarlas a nuevos mercados, socios, inversores y redes internacionales.</p>
                   </div>
                 </div>
               </div>
 
               <div class="accordion-item">
                 <button class="accordion-trigger" aria-expanded="false">
-                  <span>Del mundo hacia América Latina</span>
+                  <span data-i18n="home.accordion.toLatam.title">Del mundo hacia América Latina</span>
                   <span class="icon" aria-hidden="true"></span>
                 </button>
                 <div class="accordion-panel">
                   <div class="accordion-panel-inner">
-                    <p class="sub">Una puerta de entrada coordinada a la región</p>
-                    <p>Para una empresa, un inversor o una institución internacional, América Latina no constituye un mercado homogéneo. Cada país presenta normas, sistemas tributarios, estructuras administrativas y prácticas institucionales propias.</p>
-                    <p>La Cámara ofrece una puerta de entrada coordinada. Ayuda a identificar mercados, contrapartes, cámaras locales, instituciones y especialistas; facilita relaciones empresariales e institucionales y contribuye a reunir las capacidades que cada iniciativa requiere.</p>
+                    <p class="sub" data-i18n="home.accordion.toLatam.sub">Una puerta de entrada coordinada a la región</p>
+                    <p data-i18n="home.accordion.toLatam.p1">Para una empresa, un inversor o una institución internacional, América Latina no constituye un mercado homogéneo. Cada país presenta normas, sistemas tributarios, estructuras administrativas y prácticas institucionales propias.</p>
+                    <p data-i18n="home.accordion.toLatam.p2">La Cámara ofrece una puerta de entrada coordinada. Ayuda a identificar mercados, contrapartes, cámaras locales, instituciones y especialistas; facilita relaciones empresariales e institucionales y contribuye a reunir las capacidades que cada iniciativa requiere.</p>
                   </div>
                 </div>
               </div>
@@ -130,29 +130,29 @@
   <section class="section">
     <div class="container">
       <div class="voice-grid reveal">
-        <h2>Cámaras que amplían la <span class="voice-underline">voz de sus empresas</span></h2>
-        <p>Las cámaras nacionales, territoriales, binacionales y sectoriales conocen de primera mano a sus empresas, sus mercados y sus prioridades. La Cámara trabaja junto a ellas cuando esas prioridades necesitan una <strong>dimensión regional o internacional.</strong></p>
+        <h2 data-i18n-html="home.voice.title">Cámaras que amplían la <span class="voice-underline">voz de sus empresas</span></h2>
+        <p data-i18n-html="home.voice.body">Las cámaras nacionales, territoriales, binacionales y sectoriales conocen de primera mano a sus empresas, sus mercados y sus prioridades. La Cámara trabaja junto a ellas cuando esas prioridades necesitan una <strong>dimensión regional o internacional.</strong></p>
       </div>
 
       <!-- PROYECCIÓN / COMPLEMENTARIEDAD / RESULTADOS -->
       <div class="feature-strip reveal">
         <div>
           <div class="icon-wrap"><img src="assets/images/icon-projection.png" alt=""></div>
-          <span class="pill-badge">Proyección</span>
-          <h3>Altavoz y plataforma regional</h3>
-          <p>Facilitamos vínculos con otras cámaras, organismos, mercados e inversores; apoyamos iniciativas que atraviesan fronteras.</p>
+          <span class="pill-badge" data-i18n="home.feature.projection.pill">Proyección</span>
+          <h3 data-i18n="home.feature.projection.title">Altavoz y plataforma regional</h3>
+          <p data-i18n="home.feature.projection.body">Facilitamos vínculos con otras cámaras, organismos, mercados e inversores; apoyamos iniciativas que atraviesan fronteras.</p>
         </div>
         <div>
           <div class="icon-wrap"><img src="assets/images/icon-complementarity.png" alt=""></div>
-          <span class="pill-badge">Complementariedad</span>
-          <h3>Sin sustituir ni jerarquizar</h3>
-          <p>Nuestra relación con las cámaras existentes es de complementariedad. La Cámara actúa donde el objetivo trasciende una sola jurisdicción.</p>
+          <span class="pill-badge" data-i18n="home.feature.complementarity.pill">Complementariedad</span>
+          <h3 data-i18n="home.feature.complementarity.title">Sin sustituir ni jerarquizar</h3>
+          <p data-i18n="home.feature.complementarity.body">Nuestra relación con las cámaras existentes es de complementariedad. La Cámara actúa donde el objetivo trasciende una sola jurisdicción.</p>
         </div>
         <div>
           <div class="icon-wrap"><img src="assets/images/icon-results.png" alt=""></div>
-          <span class="pill-badge">Resultados</span>
-          <h3>Comercio, inversión y financiación</h3>
-          <p>La integración económica solo produce resultados cuando se traduce en relaciones comerciales, inversión productiva y acceso a capital.</p>
+          <span class="pill-badge" data-i18n="home.feature.results.pill">Resultados</span>
+          <h3 data-i18n="home.feature.results.title">Comercio, inversión y financiación</h3>
+          <p data-i18n="home.feature.results.body">La integración económica solo produce resultados cuando se traduce en relaciones comerciales, inversión productiva y acceso a capital.</p>
         </div>
       </div>
     </div>
@@ -161,56 +161,58 @@
   <!-- CTA BAND -->
   <section class="cta-band" style="background-image:url('assets/images/cta-footer.jpg');">
     <div class="container reveal">
-      <h2>Una plataforma de doble dirección</h2>
-      <p>Llevamos capacidades y oportunidades de <strong>América Latina</strong> hacia el mundo y acercamos a la región mercados, inversión, financiación, tecnología y cooperación internacional.</p>
-      <a href="contacto.html" class="btn btn-light">Contáctanos</a>
+      <h2 data-i18n="home.cta.title">Una plataforma de doble dirección</h2>
+      <p data-i18n-html="home.cta.body">Llevamos capacidades y oportunidades de <strong>América Latina</strong> hacia el mundo y acercamos a la región mercados, inversión, financiación, tecnología y cooperación internacional.</p>
+      <a href="contacto.html" class="btn btn-light" data-i18n="cta.contactUs">Contáctanos</a>
     </div>
   </section>
 
 </main>
 
 <footer class="site-footer">
+
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="footer-brand-text">Cámara de Comercio Mercosur</div>
-        <p>Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur</div>
+        <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
         <p><a class="email" href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a></p>
-        <address>República Oriental del Uruguay</address>
+        <address data-i18n="footer.address">República Oriental del Uruguay</address>
       </div>
       <div class="footer-col">
-        <h4>Páginas</h4>
+        <h4 data-i18n="footer.pagesTitle">Páginas</h4>
         <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="nosotros.html">Nosotros</a></li>
-          <li><a href="participacion.html">Participación</a></li>
-          <li><a href="transparencia.html">Transparencia</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Inicio</a></li>
+          <li><a href="nosotros.html" data-i18n="nav.about">Nosotros</a></li>
+          <li><a href="participacion.html" data-i18n="nav.participation">Participación</a></li>
+          <li><a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a></li>
+          <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h4 data-i18n="footer.legalTitle">Legal</h4>
         <ul class="footer-legal-list">
-          <li><a href="#" class="js-privacy-link">Política de Privacidad</a></li>
-          <li><a href="transparencia.html">Política de Cookies</a></li>
-          <li><a href="transparencia.html">Términos de Uso</a></li>
-          <li><a href="transparencia.html">Uso de Marca</a></li>
-          <li><a href="transparencia.html">Canal de Integridad</a></li>
+          <li><a href="#" class="js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
+          <li><a href="transparencia.html" class="js-cookies-link" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.terms">Términos de Uso</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.brand">Uso de Marca</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Datos Institucionales</h4>
-        <p class="footer-legal-note">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
-        <p class="footer-legal-note">Asociación Civil Internacional sin Ánimo de Lucro</p>
-        <p class="footer-legal-note">Registro MOS:</p>
-        <p class="footer-legal-note">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
+        <h4 data-i18n="footer.institutionalTitle">Datos Institucionales</h4>
+        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
+        <p class="footer-legal-note" data-i18n="footer.civilAssoc">Asociación Civil Internacional sin Ánimo de Lucro</p>
+        <p class="footer-legal-note" data-i18n="footer.mosRegistry">Registro MOS:</p>
+        <p class="footer-legal-note" data-i18n="footer.disclaimer">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
       </div>
     </div>
   </div>
 </footer>
 
 <button class="back-to-top" aria-label="Volver arriba">↑</button>
+<script src="assets/js/i18n-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

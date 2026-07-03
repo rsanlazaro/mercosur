@@ -16,12 +16,12 @@
       <img src="assets/images/logo.png" alt="Cámara de Comercio Mercosur">
     </a>
     <nav class="main-nav">
-      <a href="index.html">Inicio</a>
-      <a href="nosotros.html">Nosotros</a>
-      <a href="participacion.html" class="is-active">Participación</a>
-      <a href="transparencia.html">Transparencia</a>
-      <a href="blog.html">Blog</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="nosotros.html" data-i18n="nav.about">Nosotros</a>
+      <a href="participacion.html" class="is-active" data-i18n="nav.participation">Participación</a>
+      <a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
     </nav>
     <div class="header-actions">
       <div class="social-links">
@@ -39,8 +39,8 @@
         </button>
         <ul class="lang-menu" role="menu">
           <li role="none"><button type="button" class="lang-option is-active" data-lang="es" role="menuitem">Español</button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem" disabled>Português <span class="soon-badge">Próximamente</span></button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem" disabled>English <span class="soon-badge">Próximamente</span></button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem">Português</button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem">English</button></li>
           <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem" disabled>Français <span class="soon-badge">Próximamente</span></button></li>
         </ul>
       </div>
@@ -55,8 +55,8 @@
   <section class="hero hero--page hero--tint-blue" style="background-image:url('assets/images/participacion-hero.jpg');">
     <div class="container">
       <div class="hero-inner hero-inner--center">
-        <p class="hero-lede">Existen <strong>distintas formas de relacionarse</strong> con la Cámara según el <strong>objetivo de cada organización</strong></p>
-        <h1>Conoce como formar parte de la Cámara</h1>
+        <p class="hero-lede" data-i18n-html="participation.hero.lede">Existen <strong>distintas formas de relacionarse</strong> con la Cámara según el <strong>objetivo de cada organización</strong></p>
+        <h1 data-i18n="participation.hero.title">Conoce como formar parte de la Cámara</h1>
       </div>
     </div>
   </section>
@@ -67,11 +67,11 @@
       <div class="participacion-grid">
 
         <div class="reveal">
-          <h2 class="heading-wavy">¿Cómo participar?</h2>
-          <p>La Cámara se construye mediante <strong>la participación responsable de organizaciones</strong> que comparten una visión de cooperación, apertura y desarrollo regional. Cada propuesta será evaluada de acuerdo con los fines institucionales, su alcance, los recursos disponibles y los requisitos de integridad y cumplimiento.</p>
-          <p class="note-bullet">La presentación de una solicitud o iniciativa no genera automáticamente derechos, representación ni condición de asociado.</p>
+          <h2 class="heading-wavy" data-i18n="participation.how.title">¿Cómo participar?</h2>
+          <p data-i18n-html="participation.how.body">La Cámara se construye mediante <strong>la participación responsable de organizaciones</strong> que comparten una visión de cooperación, apertura y desarrollo regional. Cada propuesta será evaluada de acuerdo con los fines institucionales, su alcance, los recursos disponibles y los requisitos de integridad y cumplimiento.</p>
+          <p class="note-bullet" data-i18n="participation.how.note">La presentación de una solicitud o iniciativa no genera automáticamente derechos, representación ni condición de asociado.</p>
           <hr>
-          <a href="contacto.html" class="btn btn-blue">Manda tu propuesta</a>
+          <a href="contacto.html" class="btn btn-blue" data-i18n="cta.sendProposal">Manda tu propuesta</a>
         </div>
 
         <div class="reveal">
@@ -79,57 +79,57 @@
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <span>01 - Asociarse</span>
+                <span data-i18n="participation.step1.title">01 - Asociarse</span>
                 <span class="icon" aria-hidden="true"></span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p class="sub">Solicitud de admisión como asociado</p>
-                  <p>La Cámara podrá admitir como asociados activos a personas jurídicas empresariales, cámaras, asociaciones empresariales, cooperativas e instituciones económicas, así como a empresarios individuales, profesionales y titulares de empresas unipersonales que cumplan los requisitos estatutarios.</p>
-                  <p>La solicitud de admisión supone la aceptación de los Estatutos, la acreditación de la identidad, existencia, vigencia y representación que corresponda, y la presentación de la información necesaria para evaluar la compatibilidad del solicitante con los fines de la Cámara.</p>
-                  <p class="note-bullet">Completar el formulario de interés no produce admisión automática. La decisión corresponde al órgano competente y podrá requerir documentación adicional.</p>
+                  <p class="sub" data-i18n="participation.step1.sub">Solicitud de admisión como asociado</p>
+                  <p data-i18n="participation.step1.p1">La Cámara podrá admitir como asociados activos a personas jurídicas empresariales, cámaras, asociaciones empresariales, cooperativas e instituciones económicas, así como a empresarios individuales, profesionales y titulares de empresas unipersonales que cumplan los requisitos estatutarios.</p>
+                  <p data-i18n="participation.step1.p2">La solicitud de admisión supone la aceptación de los Estatutos, la acreditación de la identidad, existencia, vigencia y representación que corresponda, y la presentación de la información necesaria para evaluar la compatibilidad del solicitante con los fines de la Cámara.</p>
+                  <p class="note-bullet" data-i18n="participation.step1.note">Completar el formulario de interés no produce admisión automática. La decisión corresponde al órgano competente y podrá requerir documentación adicional.</p>
                 </div>
               </div>
             </div>
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <span>02 - Cooperación institucional</span>
+                <span data-i18n="participation.step2.title">02 - Cooperación institucional</span>
                 <span class="icon" aria-hidden="true"></span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p class="sub">Propuestas de organizaciones e instituciones</p>
-                  <p>Las cámaras de comercio, asociaciones, universidades, organismos públicos, agencias de inversión, instituciones financieras y organizaciones internacionales pueden proponer acuerdos, programas, estudios, actividades o iniciativas conjuntas.</p>
-                  <p>La Cámara priorizará propuestas con objetivos definidos, responsabilidades claras y capacidad real para aportar valor a las empresas y al desarrollo regional.</p>
+                  <p class="sub" data-i18n="participation.step2.sub">Propuestas de organizaciones e instituciones</p>
+                  <p data-i18n="participation.step2.p1">Las cámaras de comercio, asociaciones, universidades, organismos públicos, agencias de inversión, instituciones financieras y organizaciones internacionales pueden proponer acuerdos, programas, estudios, actividades o iniciativas conjuntas.</p>
+                  <p data-i18n="participation.step2.p2">La Cámara priorizará propuestas con objetivos definidos, responsabilidades claras y capacidad real para aportar valor a las empresas y al desarrollo regional.</p>
                 </div>
               </div>
             </div>
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <span>03 - Iniciativas empresariales</span>
+                <span data-i18n="participation.step3.title">03 - Iniciativas empresariales</span>
                 <span class="icon" aria-hidden="true"></span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p class="sub">Presentación de proyectos e iniciativas</p>
-                  <p>Las empresas y organizaciones pueden presentar iniciativas relacionadas con internacionalización, comercio, inversión, financiación, alianzas, acceso a mercados o desarrollo de proyectos regionales.</p>
-                  <p>La información inicial debe permitir comprender el objetivo, los países involucrados, el sector, las necesidades principales y el tipo de apoyo institucional solicitado.</p>
+                  <p class="sub" data-i18n="participation.step3.sub">Presentación de proyectos e iniciativas</p>
+                  <p data-i18n="participation.step3.p1">Las empresas y organizaciones pueden presentar iniciativas relacionadas con internacionalización, comercio, inversión, financiación, alianzas, acceso a mercados o desarrollo de proyectos regionales.</p>
+                  <p data-i18n="participation.step3.p2">La información inicial debe permitir comprender el objetivo, los países involucrados, el sector, las necesidades principales y el tipo de apoyo institucional solicitado.</p>
                 </div>
               </div>
             </div>
 
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <span>04 - Manifestación de interés</span>
+                <span data-i18n="participation.step4.title">04 - Manifestación de interés</span>
                 <span class="icon" aria-hidden="true"></span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p class="sub">Consulta general o interés inicial</p>
-                  <p>Quienes todavía no hayan definido una vía concreta de participación pueden enviar una manifestación general de interés. El equipo institucional orientará la consulta hacia el área o procedimiento adecuado.</p>
-                  <p class="note-bullet">Participar en una actividad, presentar una iniciativa o colaborar con la Cámara no confiere por sí mismo la condición de asociado ni autoriza el uso de su nombre, logotipo, cargos o representación institucional.</p>
+                  <p class="sub" data-i18n="participation.step4.sub">Consulta general o interés inicial</p>
+                  <p data-i18n="participation.step4.p1">Quienes todavía no hayan definido una vía concreta de participación pueden enviar una manifestación general de interés. El equipo institucional orientará la consulta hacia el área o procedimiento adecuado.</p>
+                  <p class="note-bullet" data-i18n="participation.step4.note">Participar en una actividad, presentar una iniciativa o colaborar con la Cámara no confiere por sí mismo la condición de asociado ni autoriza el uso de su nombre, logotipo, cargos o representación institucional.</p>
                 </div>
               </div>
             </div>
@@ -147,44 +147,45 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="footer-brand-text">Cámara de Comercio Mercosur</div>
-        <p>Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur</div>
+        <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
         <p><a class="email" href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a></p>
-        <address>República Oriental del Uruguay</address>
+        <address data-i18n="footer.address">República Oriental del Uruguay</address>
       </div>
       <div class="footer-col">
-        <h4>Páginas</h4>
+        <h4 data-i18n="footer.pagesTitle">Páginas</h4>
         <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="nosotros.html">Nosotros</a></li>
-          <li><a href="participacion.html">Participación</a></li>
-          <li><a href="transparencia.html">Transparencia</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Inicio</a></li>
+          <li><a href="nosotros.html" data-i18n="nav.about">Nosotros</a></li>
+          <li><a href="participacion.html" data-i18n="nav.participation">Participación</a></li>
+          <li><a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a></li>
+          <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h4 data-i18n="footer.legalTitle">Legal</h4>
         <ul class="footer-legal-list">
-          <li><a href="#" class="js-privacy-link">Política de Privacidad</a></li>
-          <li><a href="transparencia.html">Política de Cookies</a></li>
-          <li><a href="transparencia.html">Términos de Uso</a></li>
-          <li><a href="transparencia.html">Uso de Marca</a></li>
-          <li><a href="transparencia.html">Canal de Integridad</a></li>
+          <li><a href="#" class="js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
+          <li><a href="transparencia.html" class="js-cookies-link" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.terms">Términos de Uso</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.brand">Uso de Marca</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Datos Institucionales</h4>
-        <p class="footer-legal-note">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
-        <p class="footer-legal-note">Asociación Civil Internacional sin Ánimo de Lucro</p>
-        <p class="footer-legal-note">Registro MOS:</p>
-        <p class="footer-legal-note">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
+        <h4 data-i18n="footer.institutionalTitle">Datos Institucionales</h4>
+        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
+        <p class="footer-legal-note" data-i18n="footer.civilAssoc">Asociación Civil Internacional sin Ánimo de Lucro</p>
+        <p class="footer-legal-note" data-i18n="footer.mosRegistry">Registro MOS:</p>
+        <p class="footer-legal-note" data-i18n="footer.disclaimer">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
       </div>
     </div>
   </div>
 </footer>
 
 <button class="back-to-top" aria-label="Volver arriba">↑</button>
+<script src="assets/js/i18n-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

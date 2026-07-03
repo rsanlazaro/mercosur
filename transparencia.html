@@ -16,12 +16,12 @@
       <img src="assets/images/logo.png" alt="Cámara de Comercio Mercosur">
     </a>
     <nav class="main-nav">
-      <a href="index.html">Inicio</a>
-      <a href="nosotros.html">Nosotros</a>
-      <a href="participacion.html">Participación</a>
-      <a href="transparencia.html" class="is-active">Transparencia</a>
-      <a href="blog.html">Blog</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="nosotros.html" data-i18n="nav.about">Nosotros</a>
+      <a href="participacion.html" data-i18n="nav.participation">Participación</a>
+      <a href="transparencia.html" class="is-active" data-i18n="nav.transparency">Transparencia</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
     </nav>
     <div class="header-actions">
       <div class="social-links">
@@ -39,8 +39,8 @@
         </button>
         <ul class="lang-menu" role="menu">
           <li role="none"><button type="button" class="lang-option is-active" data-lang="es" role="menuitem">Español</button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem" disabled>Português <span class="soon-badge">Próximamente</span></button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem" disabled>English <span class="soon-badge">Próximamente</span></button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem">Português</button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem">English</button></li>
           <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem" disabled>Français <span class="soon-badge">Próximamente</span></button></li>
         </ul>
       </div>
@@ -55,9 +55,9 @@
   <section class="hero hero--page hero--night" style="background-image:url('assets/images/transparencia-hero-portada.jpg');">
     <div class="container">
       <div class="hero-inner hero-inner--center">
-        <h1 style="margin-bottom:26px;">Cumplimiento y transparencia</h1>
-        <p style="margin:0 auto 30px;">La Cámara integra <strong>la legalidad, la integridad, el control y la protección</strong> de la información en su modelo institucional.</p>
-        <a href="#marco" class="btn btn-light">Conoce más</a>
+        <h1 style="margin-bottom:26px;" data-i18n="transparency.hero.title">Cumplimiento y transparencia</h1>
+        <p style="margin:0 auto 30px;" data-i18n-html="transparency.hero.body">La Cámara integra <strong>la legalidad, la integridad, el control y la protección</strong> de la información en su modelo institucional.</p>
+        <a href="#marco" class="btn btn-light" data-i18n="cta.learnMore">Conoce más</a>
       </div>
     </div>
   </section>
@@ -67,38 +67,38 @@
   <section class="section" id="marco">
     <div class="container">
       <div class="reveal" style="text-align:center; max-width:760px; margin:0 auto;">
-        <span class="eyebrow" style="display:block;">- Marco Institucional -</span>
-        <p style="color:var(--ink); margin:0;">La credibilidad de una institución regional depende tanto de sus objetivos como de la forma en que actúa. Estos compromisos no se entienden como formalidades separadas de la actividad, sino como <strong>condiciones necesarias</strong> para construir relaciones de confianza.</p>
+        <span class="eyebrow" style="display:block;" data-i18n="transparency.framework.eyebrow">- Marco Institucional -</span>
+        <p style="color:var(--ink); margin:0;" data-i18n-html="transparency.framework.body">La credibilidad de una institución regional depende tanto de sus objetivos como de la forma en que actúa. Estos compromisos no se entienden como formalidades separadas de la actividad, sino como <strong>condiciones necesarias</strong> para construir relaciones de confianza.</p>
       </div>
 
       <div class="compliance-grid reveal">
         <div class="compliance-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V5Z"/><path d="M9 12l2 2 4-4"/></svg>
-          <h3>Protección de datos personales</h3>
-          <p>La Cámara trata los datos personales de forma lícita, responsable y limitada a las finalidades institucionales informadas.</p>
+          <h3 data-i18n="transparency.card.privacy.title">Protección de datos personales</h3>
+          <p data-i18n="transparency.card.privacy.body">La Cámara trata los datos personales de forma lícita, responsable y limitada a las finalidades institucionales informadas.</p>
         </div>
         <div class="compliance-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
-          <h3>Cookies y tecnologías digitales</h3>
-          <p>El sitio utiliza las cookies necesarias para su funcionamiento y aquellas categorías adicionales informadas y aceptadas por el usuario.</p>
+          <h3 data-i18n="transparency.card.cookies.title">Cookies y tecnologías digitales</h3>
+          <p data-i18n="transparency.card.cookies.body">El sitio utiliza las cookies necesarias para su funcionamiento y aquellas categorías adicionales informadas y aceptadas por el usuario.</p>
         </div>
         <div class="compliance-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.6 2.7-6 6-6s6 2.4 6 6"/><path d="M16 9a3 3 0 1 0 0-6"/><path d="M18 14c2.2.5 3.8 2.4 3.8 6"/></svg>
-          <h3>Uso del nombre, marca e identidad</h3>
-          <p>El nombre, logotipo, cargos, dominios y demás elementos de identidad pertenecen exclusivamente a la Cámara. Ninguna persona o entidad podrá presentarse como miembro, representante o portavoz sin autorización escrita y vigente.</p>
+          <h3 data-i18n="transparency.card.brand.title">Uso del nombre, marca e identidad</h3>
+          <p data-i18n="transparency.card.brand.body">El nombre, logotipo, cargos, dominios y demás elementos de identidad pertenecen exclusivamente a la Cámara. Ninguna persona o entidad podrá presentarse como miembro, representante o portavoz sin autorización escrita y vigente.</p>
         </div>
         <div class="compliance-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10c3-2.5 15-2.5 18 0"/><circle cx="8" cy="12" r="2.4"/><circle cx="16" cy="12" r="2.4"/><line x1="10.4" y1="12" x2="13.6" y2="12"/><path d="M4 12v1.5"/><path d="M20 12v1.5"/></svg>
-          <h3>Canal de Integridad</h3>
-          <p>Permite comunicar posibles casos de fraude, corrupción, conflictos no declarados, uso indebido de la marca, suplantación u otros incumplimientos institucionales. Las comunicaciones serán tratadas con confidencialidad.</p>
+          <h3 data-i18n="transparency.card.integrity.title">Canal de Integridad</h3>
+          <p data-i18n="transparency.card.integrity.body">Permite comunicar posibles casos de fraude, corrupción, conflictos no declarados, uso indebido de la marca, suplantación u otros incumplimientos institucionales. Las comunicaciones serán tratadas con confidencialidad.</p>
         </div>
       </div>
 
       <div class="link-row--grid reveal">
-        <a href="#" class="btn btn-outline-blue js-privacy-link">Política de Privacidad</a>
-        <a href="#" class="btn btn-outline-blue js-cookies-link">Configurar Cookies</a>
-        <a href="contacto.html?motivo=Uso+no+autorizado+de+identidad" class="btn btn-outline-blue">Informar de uso no autorizado</a>
-        <a href="contacto.html?motivo=Prensa" class="btn btn-outline-blue">Enviar comunicado</a>
+        <a href="#" class="btn btn-outline-blue js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a>
+        <a href="#" class="btn btn-outline-blue js-cookies-link" data-i18n="transparency.configureCookies">Configurar Cookies</a>
+        <a href="contacto.html?motivo=Uso+no+autorizado+de+identidad" class="btn btn-outline-blue" data-i18n="transparency.reportMisuse">Informar de uso no autorizado</a>
+        <a href="contacto.html?motivo=Prensa" class="btn btn-outline-blue" data-i18n="transparency.sendRelease">Enviar comunicado</a>
       </div>
     </div>
   </section>
@@ -109,73 +109,73 @@
       <div class="aspectos-grid">
 
         <div class="reveal">
-          <h2><span class="heading-wavy">Más aspectos importantes:</span></h2>
-          <p style="color:var(--ink-soft); max-width:520px;">Como los puntos para procurar una navegación e integración segura de las personas que se presentan en el aparte de arriba, también hay que mencionar:</p>
+          <h2><span class="heading-wavy" data-i18n="transparency.moreTopics.title">Más aspectos importantes:</span></h2>
+          <p style="color:var(--ink-soft); max-width:520px;" data-i18n="transparency.moreTopics.body">Como los puntos para procurar una navegación e integración segura de las personas que se presentan en el aparte de arriba, también hay que mencionar:</p>
 
           <div class="accordion accordion--compact">
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <span>Integridad y conducta</span>
+                <span data-i18n="transparency.topic.conduct.title">Integridad y conducta</span>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p>Las personas vinculadas a la Cámara deberán actuar con honestidad, respeto, diligencia, imparcialidad y confidencialidad. No podrán utilizar su cargo, relación o acceso institucional para obtener beneficios personales indebidos ni para favorecer intereses particulares en perjuicio de la Cámara.</p>
+                  <p data-i18n="transparency.topic.conduct.body">Las personas vinculadas a la Cámara deberán actuar con honestidad, respeto, diligencia, imparcialidad y confidencialidad. No podrán utilizar su cargo, relación o acceso institucional para obtener beneficios personales indebidos ni para favorecer intereses particulares en perjuicio de la Cámara.</p>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <span>Gobierno y controles</span>
+                <span data-i18n="transparency.topic.governance.title">Gobierno y controles</span>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p>La Asamblea General, la Comisión Directiva y la Sindicatura cumplen funciones distintas y complementarias. La dirección colegiada, los controles financieros, la documentación de las decisiones y la supervisión independiente reducen los riesgos de concentración y protegen el patrimonio institucional.</p>
+                  <p data-i18n="transparency.topic.governance.body">La Asamblea General, la Comisión Directiva y la Sindicatura cumplen funciones distintas y complementarias. La dirección colegiada, los controles financieros, la documentación de las decisiones y la supervisión independiente reducen los riesgos de concentración y protegen el patrimonio institucional.</p>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <span>Conflicto de interés</span>
+                <span data-i18n="transparency.topic.conflict.title">Conflicto de interés</span>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p>Toda autoridad o persona que participe en una decisión deberá declarar cualquier interés personal, familiar, profesional o empresarial que pueda afectar su imparcialidad. La persona afectada deberá abstenerse de intervenir en la deliberación, aprobación o firma correspondiente.</p>
+                  <p data-i18n="transparency.topic.conflict.body">Toda autoridad o persona que participe en una decisión deberá declarar cualquier interés personal, familiar, profesional o empresarial que pueda afectar su imparcialidad. La persona afectada deberá abstenerse de intervenir en la deliberación, aprobación o firma correspondiente.</p>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <span>Prevención de corrupción y soborno</span>
+                <span data-i18n="transparency.topic.corruption.title">Prevención de corrupción y soborno</span>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p>La Cámara adopta la tolerancia cero frente al soborno, los pagos indebidos, las comisiones ocultas, el tráfico de influencias, los regalos impropios y cualquier utilización de la institución para obtener ventajas ilegítimas.</p>
+                  <p data-i18n="transparency.topic.corruption.body">La Cámara adopta la tolerancia cero frente al soborno, los pagos indebidos, las comisiones ocultas, el tráfico de influencias, los regalos impropios y cualquier utilización de la institución para obtener ventajas ilegítimas.</p>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <span>Conocimiento de miembros y contrapartes</span>
+                <span data-i18n="transparency.topic.kyc.title">Conocimiento de miembros y contrapartes</span>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p>La Cámara podrá solicitar información y documentación proporcional a la naturaleza, el riesgo y el alcance de la relación propuesta. La institución podrá rechazar, suspender o terminar relaciones que presenten información insuficiente o indicios de actividad ilícita.</p>
+                  <p data-i18n="transparency.topic.kyc.body">La Cámara podrá solicitar información y documentación proporcional a la naturaleza, el riesgo y el alcance de la relación propuesta. La institución podrá rechazar, suspender o terminar relaciones que presenten información insuficiente o indicios de actividad ilícita.</p>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
-                <span>Documentos institucionales</span>
+                <span data-i18n="transparency.topic.documents.title">Documentos institucionales</span>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p>La Cámara publicará sus Estatutos, políticas y demás documentos institucionales a medida que sean formalmente aprobados.</p>
+                  <p data-i18n="transparency.topic.documents.body">La Cámara publicará sus Estatutos, políticas y demás documentos institucionales a medida que sean formalmente aprobados.</p>
                 </div>
               </div>
             </div>
@@ -196,44 +196,45 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="footer-brand-text">Cámara de Comercio Mercosur</div>
-        <p>Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur</div>
+        <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
         <p><a class="email" href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a></p>
-        <address>República Oriental del Uruguay</address>
+        <address data-i18n="footer.address">República Oriental del Uruguay</address>
       </div>
       <div class="footer-col">
-        <h4>Páginas</h4>
+        <h4 data-i18n="footer.pagesTitle">Páginas</h4>
         <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="nosotros.html">Nosotros</a></li>
-          <li><a href="participacion.html">Participación</a></li>
-          <li><a href="transparencia.html">Transparencia</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Inicio</a></li>
+          <li><a href="nosotros.html" data-i18n="nav.about">Nosotros</a></li>
+          <li><a href="participacion.html" data-i18n="nav.participation">Participación</a></li>
+          <li><a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a></li>
+          <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h4 data-i18n="footer.legalTitle">Legal</h4>
         <ul class="footer-legal-list">
-          <li><a href="#" class="js-privacy-link">Política de Privacidad</a></li>
-          <li><a href="transparencia.html">Política de Cookies</a></li>
-          <li><a href="transparencia.html">Términos de Uso</a></li>
-          <li><a href="transparencia.html">Uso de Marca</a></li>
-          <li><a href="transparencia.html">Canal de Integridad</a></li>
+          <li><a href="#" class="js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
+          <li><a href="transparencia.html" class="js-cookies-link" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.terms">Términos de Uso</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.brand">Uso de Marca</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Datos Institucionales</h4>
-        <p class="footer-legal-note">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
-        <p class="footer-legal-note">Asociación Civil Internacional sin Ánimo de Lucro</p>
-        <p class="footer-legal-note">Registro MOS:</p>
-        <p class="footer-legal-note">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
+        <h4 data-i18n="footer.institutionalTitle">Datos Institucionales</h4>
+        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
+        <p class="footer-legal-note" data-i18n="footer.civilAssoc">Asociación Civil Internacional sin Ánimo de Lucro</p>
+        <p class="footer-legal-note" data-i18n="footer.mosRegistry">Registro MOS:</p>
+        <p class="footer-legal-note" data-i18n="footer.disclaimer">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
       </div>
     </div>
   </div>
 </footer>
 
 <button class="back-to-top" aria-label="Volver arriba">↑</button>
+<script src="assets/js/i18n-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

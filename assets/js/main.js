@@ -1,14 +1,53 @@
 // Cámara de Comercio Mercosur — site scripts
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* ---------- Language switcher (ES active, PT/EN/FR coming soon) ---------- */
+  /* ---------- Language switcher (ES / PT / EN active — FR coming soon) ---------- */
   var langSwitcher = document.querySelector('.lang-switcher');
   if (langSwitcher) {
     var langToggle = langSwitcher.querySelector('.lang-toggle');
+    var langToggleLabel = langToggle.querySelector('span');
+    var DICT = window.MERCOSUR_I18N || null;
+    var STORAGE_KEY = 'mercosurLang';
+    var AVAILABLE = ['es', 'pt', 'en'];
 
     function closeLangMenu() {
       langSwitcher.classList.remove('is-open');
       langToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function applyTranslations(lang) {
+      if (!DICT || !DICT[lang]) return;
+      var dict = DICT[lang];
+      var esDict = DICT.es || {};
+
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        var value = dict[key] !== undefined ? dict[key] : esDict[key];
+        if (value !== undefined) el.textContent = value;
+      });
+
+      document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n-html');
+        var value = dict[key] !== undefined ? dict[key] : esDict[key];
+        if (value !== undefined) el.innerHTML = value;
+      });
+    }
+
+    function setLanguage(lang, opts) {
+      if (AVAILABLE.indexOf(lang) === -1) lang = 'es';
+      var silent = opts && opts.silent;
+
+      applyTranslations(lang);
+      document.documentElement.setAttribute('lang', lang);
+      langToggleLabel.textContent = lang.toUpperCase();
+
+      langSwitcher.querySelectorAll('.lang-option').forEach(function (opt) {
+        opt.classList.toggle('is-active', opt.getAttribute('data-lang') === lang);
+      });
+
+      if (!silent) {
+        try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* storage unavailable */ }
+      }
     }
 
     langToggle.addEventListener('click', function (e) {
@@ -19,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     langSwitcher.querySelectorAll('.lang-option:not(:disabled)').forEach(function (opt) {
       opt.addEventListener('click', function () {
+        setLanguage(opt.getAttribute('data-lang'));
         closeLangMenu();
       });
     });
@@ -29,6 +69,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLangMenu();
     });
+
+    // Initialize from saved preference (defaults to Spanish).
+    var savedLang = 'es';
+    try { savedLang = localStorage.getItem(STORAGE_KEY) || 'es'; } catch (e) { /* storage unavailable */ }
+    setLanguage(savedLang, { silent: true });
   }
 
   /* ---------- Mobile nav toggle ---------- */
@@ -151,54 +196,101 @@ document.addEventListener('DOMContentLoaded', function () {
     var TEAM_BIOS = {
       'erik-aaron-lara-riveros': {
         name: 'Erik Aaron Lara Riveros',
-        role: 'Presidente',
         image: 'assets/images/team-4.jpg',
-        body: [
-          'Erik Aaron Lara Riveros es un ejecutivo internacional chileno con más de veinte años de experiencia en banca, inversión, mercados regulados, gobernanza corporativa y relaciones institucionales.',
-          'Ha desempeñado funciones directivas y de consejo en entidades financieras reguladas de Europa y Oriente Medio, así como responsabilidades ejecutivas en compañías cotizadas en Norteamérica. Actualmente participa en el desarrollo de iniciativas internacionales vinculadas a minerales críticos, financiación, inversión y cadenas estratégicas de suministro entre América Latina y Norteamérica. Como presidente de la Cámara, impulsa la integración empresarial, la cooperación institucional y la proyección internacional del espacio Mercosur.'
-        ]
+        role: { es: 'Presidente', en: 'President', pt: 'Presidente' },
+        body: {
+          es: [
+            'Erik Aaron Lara Riveros es un ejecutivo internacional chileno con más de veinte años de experiencia en banca, inversión, mercados regulados, gobernanza corporativa y relaciones institucionales.',
+            'Ha desempeñado funciones directivas y de consejo en entidades financieras reguladas de Europa y Oriente Medio, así como responsabilidades ejecutivas en compañías cotizadas en Norteamérica. Actualmente participa en el desarrollo de iniciativas internacionales vinculadas a minerales críticos, financiación, inversión y cadenas estratégicas de suministro entre América Latina y Norteamérica. Como presidente de la Cámara, impulsa la integración empresarial, la cooperación institucional y la proyección internacional del espacio Mercosur.'
+          ]
+        }
       },
       'anthony-edouard-toffoli': {
         name: 'Anthony Edouard A. Toffoli',
-        role: 'Vicepresidente',
         image: 'assets/images/team-3.jpg',
-        body: [
-          'Anthony Edouard André Toffoli es un ejecutivo francés con más de veinticinco años de experiencia en retail, turismo médico, inmobiliario y medios de comunicación.',
-          'Actúa activamente en varias empresas europeas, y tiene responsabilidades ejecutivas en compañías en Norteamérica. Actualmente participa en el desarrollo de varias clínicas de fertilidad humana, brindando soluciones para pacientes europeos en América Latina.',
-          'Como vicepresidente de la Cámara, lucha incansablemente para las empresas, siempre a favor de la cooperación institucional y la expansión internacional más allá del espacio Mercosur.'
-        ]
+        role: { es: 'Vicepresidente', en: 'Vice President', pt: 'Vice-Presidente' },
+        body: {
+          es: [
+            'Anthony Edouard André Toffoli es un ejecutivo francés con más de veinticinco años de experiencia en retail, turismo médico, inmobiliario y medios de comunicación.',
+            'Actúa activamente en varias empresas europeas, y tiene responsabilidades ejecutivas en compañías en Norteamérica. Actualmente participa en el desarrollo de varias clínicas de fertilidad humana, brindando soluciones para pacientes europeos en América Latina.',
+            'Como vicepresidente de la Cámara, lucha incansablemente para las empresas, siempre a favor de la cooperación institucional y la expansión internacional más allá del espacio Mercosur.'
+          ]
+        }
+      },
+      'nicole-peters': {
+        name: 'Nicole M. Peters',
+        image: 'assets/images/team-1.jpg',
+        role: { es: 'Prosecretaria', en: 'Deputy Secretary', pt: 'Secretária-Adjunta' },
+        body: {
+          es: [
+            'Nicole Peters es abogada por la Universidad de Buenos Aires (UBA), con MBA y formación de posgrado en Políticas Públicas, Agenda 2030, Asuntos Públicos, marketing político y Derecho Público.',
+            'Actualmente cursa la Maestría Internacional en Ciencias Políticas con especialización en Cooperación Internacional en la Universidad Europea del Atlántico.',
+            'Cuenta con más de ocho años de experiencia en consultoría estratégica, coaching y gestión de proyectos.',
+            'Es Coordinadora del Instituto de Estudios Estratégicos y Relaciones Internacionales, así como fundadora y presidenta de la Organización Internacional de Asuntos Públicos.',
+            'Ha representado a Argentina en Brasil (AIESEC), Uruguay (Mercosur) y en Rusia (World Youth Festival), así como a Iberoamérica en España (Fundación Carolina) y al Cono Sur en la Organización de los Estados Americanos (OEA).',
+            'Sus iniciativas y experiencias profesionales hacen de ella una pieza fundamental de la Cámara de Comercio Mercosur.'
+          ],
+          en: [
+            'Nicole Peters holds a law degree from the University of Buenos Aires (UBA), along with an MBA and postgraduate training in Public Policy, the 2030 Agenda, Public Affairs, political marketing, and Public Law.',
+            'She is currently pursuing an International Master\'s Degree in Political Science with a specialization in International Cooperation at Universidad Europea del Atlántico.',
+            'She has more than eight years of experience in strategic consulting, coaching, and project management.',
+            'She is Coordinator of the Institute of Strategic Studies and International Relations, as well as founder and president of the International Organization for Public Affairs.',
+            'She has represented Argentina in Brazil (AIESEC), Uruguay (Mercosur), and Russia (World Youth Festival), as well as Ibero-America in Spain (Fundación Carolina) and the Southern Cone at the Organization of American States (OAS).',
+            'Her initiatives and professional experience make her a fundamental part of the Mercosur Chamber of Commerce.'
+          ],
+          pt: [
+            'Nicole Peters é advogada pela Universidade de Buenos Aires (UBA), com MBA e formação de pós-graduação em Políticas Públicas, Agenda 2030, Assuntos Públicos, marketing político e Direito Público.',
+            'Atualmente cursa o Mestrado Internacional em Ciências Políticas com especialização em Cooperação Internacional na Universidade Europeia do Atlântico.',
+            'Conta com mais de oito anos de experiência em consultoria estratégica, coaching e gestão de projetos.',
+            'É Coordenadora do Instituto de Estudos Estratégicos e Relações Internacionais, além de fundadora e presidente da Organização Internacional de Assuntos Públicos.',
+            'Representou a Argentina no Brasil (AIESEC), no Uruguai (Mercosul) e na Rússia (World Youth Festival), além da Ibero-América na Espanha (Fundação Carolina) e do Cone Sul na Organização dos Estados Americanos (OEA).',
+            'Suas iniciativas e experiências profissionais fazem dela uma peça fundamental da Câmara de Comércio Mercosul.'
+          ]
+        }
       },
       'ramon-ricardo-martinelli': {
         name: 'Ramón R. Martinelli',
-        role: 'Tesorero',
         image: 'assets/images/team-2.jpg',
-        body: [
-          'Ramón Ricardo Martinelli es un ejecutivo panameño con más de 17 años de experiencia en hidrocarburos, logística operativa y desarrollo de negocios energéticos.',
-          'Fue Diputado del Parlamento Centroamericano fortaleciendo su visión estratégica sobre cooperación, integración económica y relaciones regionales.',
-          'Sigue hoy liderando varias empresas en el mercado energético.',
-          'Su experiencia comercial, liderazgo institucional y visión regional son valores fundamentales para la Cámara de Comercio Mercosur.'
-        ]
+        role: { es: 'Tesorero', en: 'Treasurer', pt: 'Tesoureiro' },
+        body: {
+          es: [
+            'Ramón Ricardo Martinelli es un ejecutivo panameño con más de 17 años de experiencia en hidrocarburos, logística operativa y desarrollo de negocios energéticos.',
+            'Fue Diputado del Parlamento Centroamericano fortaleciendo su visión estratégica sobre cooperación, integración económica y relaciones regionales.',
+            'Sigue hoy liderando varias empresas en el mercado energético.',
+            'Su experiencia comercial, liderazgo institucional y visión regional son valores fundamentales para la Cámara de Comercio Mercosur.'
+          ]
+        }
       },
       'walber-castillo-castellano': {
         name: 'Walber Castillo Castellano',
-        role: 'Secretario General',
         image: 'assets/images/team-5.webp',
-        body: [
-          'Walber Castillo Castellano es un empresario colombiano e ingeniero civil con amplia trayectoria en educación técnica, infraestructura, hidrocarburos, innovación tecnológica y desarrollo empresarial.',
-          'Entre sus principales iniciativas empresariales se destacan varios grupos internacionales y ha sido distinguido como Colombiano Estrella, empresario destacado en el Exterior, empresario del Año en Perú y Excelencia Educativa ODAEE.',
-          'Su visión empresarial, su integridad y compromiso son las bases de su implicación en la Cámara de Comercio Mercosur.'
-        ]
+        role: { es: 'Secretario General', en: 'Secretary General', pt: 'Secretário-Geral' },
+        body: {
+          es: [
+            'Walber Castillo Castellano es un empresario colombiano e ingeniero civil con amplia trayectoria en educación técnica, infraestructura, hidrocarburos, innovación tecnológica y desarrollo empresarial.',
+            'Entre sus principales iniciativas empresariales se destacan varios grupos internacionales y ha sido distinguido como Colombiano Estrella, empresario destacado en el Exterior, empresario del Año en Perú y Excelencia Educativa ODAEE.',
+            'Su visión empresarial, su integridad y compromiso son las bases de su implicación en la Cámara de Comercio Mercosur.'
+          ]
+        }
       },
       'federico-andres-brugge': {
         name: 'Federico Andrés Brügge',
-        role: 'Síndico Titular',
         image: 'assets/images/team-6.jpg',
-        body: [
-          'Federico Andrés Brügge es analista de mercados financieros e inversor, dedicado al estudio de la macroeconomía, los mercados internacionales y el mercado de divisas, con foco en el análisis y la operativa de XAU/USD (oro).',
-          'Es Analista Global de Inversiones (AGI) por el Instituto de Capacitación Bursátil (ICB) de Buenos Aires y Técnico Analista de Mercados y Estrategias de Comercialización. Actualmente profundiza su especialización en el análisis del mercado del oro y las divisas, y en su interacción con la política monetaria, la macroeconomía y los mercados financieros. Mantiene vinculaciones comerciales e institucionales en Argentina, Estados Unidos y Europa.'
-        ]
+        role: { es: 'Síndico Titular', en: 'Principal Auditor', pt: 'Conselheiro Fiscal Titular' },
+        body: {
+          es: [
+            'Federico Andrés Brügge es analista de mercados financieros e inversor, dedicado al estudio de la macroeconomía, los mercados internacionales y el mercado de divisas, con foco en el análisis y la operativa de XAU/USD (oro).',
+            'Es Analista Global de Inversiones (AGI) por el Instituto de Capacitación Bursátil (ICB) de Buenos Aires y Técnico Analista de Mercados y Estrategias de Comercialización. Actualmente profundiza su especialización en el análisis del mercado del oro y las divisas, y en su interacción con la política monetaria, la macroeconomía y los mercados financieros. Mantiene vinculaciones comerciales e institucionales en Argentina, Estados Unidos y Europa.'
+          ]
+        }
       }
     };
+
+    function currentLang() {
+      var lang = 'es';
+      try { lang = localStorage.getItem('mercosurLang') || 'es'; } catch (e) { /* storage unavailable */ }
+      return lang;
+    }
 
     var overlay = null;
 
@@ -219,15 +311,18 @@ document.addEventListener('DOMContentLoaded', function () {
     function openBio(id) {
       var person = TEAM_BIOS[id];
       if (!person) return;
+      var lang = currentLang();
+      var role = person.role[lang] || person.role.es;
+      var body = (person.body[lang] && person.body[lang].length) ? person.body[lang] : person.body.es;
       var ov = buildOverlay();
-      var bodyHTML = person.body.map(function (p) { return '<p>' + p + '</p>'; }).join('');
+      var bodyHTML = body.map(function (p) { return '<p>' + p + '</p>'; }).join('');
       ov.innerHTML =
         '<div class="privacy-modal bio-modal">' +
           '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
           '<div class="bio-modal-header">' +
             '<div class="bio-modal-photo"><img src="' + person.image + '" alt="' + person.name + '"></div>' +
             '<div>' +
-              '<p class="privacy-eyebrow">' + person.role + '</p>' +
+              '<p class="privacy-eyebrow">' + role + '</p>' +
               '<h2 id="bio-modal-title">' + person.name + '</h2>' +
             '</div>' +
           '</div>' +
@@ -327,7 +422,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (motivoParam) {
         var normalized = motivoParam.trim().toLowerCase();
         var matchOption = Array.prototype.find.call(motivoSelect.options, function (opt) {
-          return opt.textContent.trim().toLowerCase() === normalized;
+          var optValue = (opt.getAttribute('value') || opt.textContent).trim().toLowerCase();
+          return optValue === normalized;
         });
         if (matchOption) {
           matchOption.selected = true;

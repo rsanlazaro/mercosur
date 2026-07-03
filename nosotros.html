@@ -16,12 +16,12 @@
       <img src="assets/images/logo.png" alt="Cámara de Comercio Mercosur">
     </a>
     <nav class="main-nav">
-      <a href="index.html">Inicio</a>
-      <a href="nosotros.html" class="is-active">Nosotros</a>
-      <a href="participacion.html">Participación</a>
-      <a href="transparencia.html">Transparencia</a>
-      <a href="blog.html">Blog</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="nosotros.html" class="is-active" data-i18n="nav.about">Nosotros</a>
+      <a href="participacion.html" data-i18n="nav.participation">Participación</a>
+      <a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
     </nav>
     <div class="header-actions">
       <div class="social-links">
@@ -39,8 +39,8 @@
         </button>
         <ul class="lang-menu" role="menu">
           <li role="none"><button type="button" class="lang-option is-active" data-lang="es" role="menuitem">Español</button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem" disabled>Português <span class="soon-badge">Próximamente</span></button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem" disabled>English <span class="soon-badge">Próximamente</span></button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem">Português</button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem">English</button></li>
           <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem" disabled>Français <span class="soon-badge">Próximamente</span></button></li>
         </ul>
       </div>
@@ -55,8 +55,8 @@
   <section class="hero hero--page hero--pattern">
     <div class="container">
       <div class="hero-inner" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; max-width:none;">
-        <h1 style="max-width:520px;">Nuestra identidad institucional</h1>
-        <p style="align-self:flex-end; max-width:340px;">Una institución regional creada para ampliar la capacidad de acción de las empresas.</p>
+        <h1 style="max-width:520px;" data-i18n="about.hero.title">Nuestra identidad institucional</h1>
+        <p style="align-self:flex-end; max-width:340px;" data-i18n="about.hero.body">Una institución regional creada para ampliar la capacidad de acción de las empresas.</p>
       </div>
     </div>
     <div class="hero-wave" aria-hidden="true">
@@ -68,11 +68,11 @@
   <section class="section">
     <div class="container">
       <div class="reveal" style="margin-bottom:20px;">
-        <h2>¿Qué es <em>Mercosur</em>?</h2>
+        <h2 data-i18n-html="about.what.title">¿Qué es <em>Mercosur</em>?</h2>
       </div>
       <div class="intro-2col reveal">
-        <p>El MERCOSUR, fundado en 1991 y compuesto actualmente por <strong>Argentina, Brasil, Paraguay, Uruguay y Bolivia</strong>, es un bloque económico clave que suma 280 millones de habitantes y un PIB de tres trillones de dólares. Su relevancia global radica en su gran capacidad agroindustrial y de recursos estratégicos, potenciada por una red de acuerdos comerciales con mercados como Israel, Egipto, India y Singapur. Destaca especialmente su Acuerdo Interino de Comercio con la Unión Europea, aplicado provisionalmente desde mayo de 2026, que abre el acceso preferencial a un mercado de 750 millones de personas.</p>
-        <p>En este contexto, la Cámara de Comercio actúa como <strong>un puente estratégico para transformar la escala del bloque en proyectos</strong> empresariales concretos y cadenas regionales de valor. Su función principal es expandir el alcance de las organizaciones locales, conectar prioridades comerciales, facilitar inversiones y promover la incorporación de tecnología. De este modo, la Cámara ayuda a las empresas de la región a diversificar sus mercados internacionales y guía a los inversores extranjeros para entender las realidades legislativas y comerciales de América Latina.</p>
+        <p data-i18n-html="about.what.p1">El MERCOSUR, fundado en 1991 y compuesto actualmente por <strong>Argentina, Brasil, Paraguay, Uruguay y Bolivia</strong>, es un bloque económico clave que suma 280 millones de habitantes y un PIB de tres trillones de dólares. Su relevancia global radica en su gran capacidad agroindustrial y de recursos estratégicos, potenciada por una red de acuerdos comerciales con mercados como Israel, Egipto, India y Singapur. Destaca especialmente su Acuerdo Interino de Comercio con la Unión Europea, aplicado provisionalmente desde mayo de 2026, que abre el acceso preferencial a un mercado de 750 millones de personas.</p>
+        <p data-i18n-html="about.what.p2">En este contexto, la Cámara de Comercio actúa como <strong>un puente estratégico para transformar la escala del bloque en proyectos</strong> empresariales concretos y cadenas regionales de valor. Su función principal es expandir el alcance de las organizaciones locales, conectar prioridades comerciales, facilitar inversiones y promover la incorporación de tecnología. De este modo, la Cámara ayuda a las empresas de la región a diversificar sus mercados internacionales y guía a los inversores extranjeros para entender las realidades legislativas y comerciales de América Latina.</p>
       </div>
     </div>
   </section>
@@ -83,31 +83,31 @@
       <div class="reason-card reveal">
         <div class="reason-card-grid">
           <div>
-            <h2>Nuestra razón de ser:</h2>
-            <p>América Latina dispone de una extraordinaria diversidad productiva y empresarial, pero esa misma diversidad suele operar de manera fragmentada. Las empresas encuentran marcos jurídicos distintos, información dispersa y barreras para construir relaciones confiables en otras jurisdicciones.</p>
-            <a href="#gobierno" class="btn btn-outline-blue">Conoce nuestro comité</a>
+            <h2 data-i18n="about.why.title">Nuestra razón de ser:</h2>
+            <p data-i18n="about.why.body">América Latina dispone de una extraordinaria diversidad productiva y empresarial, pero esa misma diversidad suele operar de manera fragmentada. Las empresas encuentran marcos jurídicos distintos, información dispersa y barreras para construir relaciones confiables en otras jurisdicciones.</p>
+            <a href="#gobierno" class="btn btn-outline-blue" data-i18n="cta.meetCommittee">Conoce nuestro comité</a>
           </div>
           <div class="accordion">
             <div class="accordion--plain">
               <div class="accordion-item">
                 <button class="accordion-trigger" aria-expanded="false">
-                  <span>Misión</span>
+                  <span data-i18n="about.mission.title">Misión</span>
                   <span class="chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="accordion-panel">
                   <div class="accordion-panel-inner">
-                    <p>Fortalecer la integración económica mediante la conexión efectiva de cámaras de comercio, empresas, inversores e instituciones; ampliar la proyección regional e internacional del tejido empresarial latinoamericano; facilitar el acceso responsable de organizaciones internacionales a los mercados de la región.</p>
+                    <p data-i18n="about.mission.body">Fortalecer la integración económica mediante la conexión efectiva de cámaras de comercio, empresas, inversores e instituciones; ampliar la proyección regional e internacional del tejido empresarial latinoamericano; facilitar el acceso responsable de organizaciones internacionales a los mercados de la región.</p>
                   </div>
                 </div>
               </div>
               <div class="accordion-item">
                 <button class="accordion-trigger" aria-expanded="false">
-                  <span>Visión</span>
+                  <span data-i18n="about.vision.title">Visión</span>
                   <span class="chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="accordion-panel">
                   <div class="accordion-panel-inner">
-                    <p>Consolidarnos como una plataforma empresarial de referencia entre América Latina y el mundo, reconocida por la confianza de sus miembros y aliados y su capacidad para convertir conocimiento local, relaciones internacionales y cooperación económica en resultados de impacto regional.</p>
+                    <p data-i18n="about.vision.body">Consolidarnos como una plataforma empresarial de referencia entre América Latina y el mundo, reconocida por la confianza de sus miembros y aliados y su capacidad para convertir conocimiento local, relaciones internacionales y cooperación económica en resultados de impacto regional.</p>
                   </div>
                 </div>
               </div>
@@ -122,7 +122,7 @@
   <section class="section">
     <div class="container">
       <div class="reveal" style="text-align:center; max-width:640px; margin:0 auto;">
-        <h2>Nuestros <em>principios institucionales</em></h2>
+        <h2 data-i18n-html="about.principles.title">Nuestros <em>principios institucionales</em></h2>
       </div>
 
       <div class="carousel-wrap carousel-wrap--overlay carousel--circle carousel-wrap--loop reveal">
@@ -132,48 +132,48 @@
             <div class="badge">
               <img src="assets/images/principio-1.webp" alt="Independencia y pluralidad" loading="lazy">
             </div>
-            <h3>Independencia y pluralidad</h3>
-            <p>Actuamos con autonomía respecto de intereses particulares y promovemos la participación de distintos países, sectores y perspectivas empresariales.</p>
+            <h3 data-i18n="about.principle.independence.title">Independencia y pluralidad</h3>
+            <p data-i18n="about.principle.independence.body">Actuamos con autonomía respecto de intereses particulares y promovemos la participación de distintos países, sectores y perspectivas empresariales.</p>
           </div>
 
           <div class="principle-card">
             <div class="badge">
               <img src="assets/images/principio-2.webp" alt="Legalidad e integridad" loading="lazy">
             </div>
-            <h3>Legalidad e integridad</h3>
-            <p>Desarrollamos nuestras actividades conforme a la ley, los Estatutos y estándares de conducta compatibles con la responsabilidad de una institución regional.</p>
+            <h3 data-i18n="about.principle.legality.title">Legalidad e integridad</h3>
+            <p data-i18n="about.principle.legality.body">Desarrollamos nuestras actividades conforme a la ley, los Estatutos y estándares de conducta compatibles con la responsabilidad de una institución regional.</p>
           </div>
 
           <div class="principle-card">
             <div class="badge">
               <img src="assets/images/principio-3.webp" alt="Transparencia y responsabilidad" loading="lazy">
             </div>
-            <h3>Transparencia y responsabilidad</h3>
-            <p>Promovemos decisiones documentadas, controles adecuados, rendición institucional y una gestión responsable de los recursos.</p>
+            <h3 data-i18n="about.principle.transparency.title">Transparencia y responsabilidad</h3>
+            <p data-i18n="about.principle.transparency.body">Promovemos decisiones documentadas, controles adecuados, rendición institucional y una gestión responsable de los recursos.</p>
           </div>
 
           <div class="principle-card">
             <div class="badge">
               <img src="assets/images/principio-4.webp" alt="Cooperación institucional" loading="lazy">
             </div>
-            <h3>Cooperación institucional</h3>
-            <p>Construimos relaciones basadas en el respeto, la complementariedad y la búsqueda de objetivos compartidos entre actores públicos y privados.</p>
+            <h3 data-i18n="about.principle.cooperation.title">Cooperación institucional</h3>
+            <p data-i18n="about.principle.cooperation.body">Construimos relaciones basadas en el respeto, la complementariedad y la búsqueda de objetivos compartidos entre actores públicos y privados.</p>
           </div>
 
           <div class="principle-card">
             <div class="badge">
               <img src="assets/images/principio-5.webp" alt="Orientación a resultados" loading="lazy">
             </div>
-            <h3>Orientación a resultados</h3>
-            <p>Procuramos que el diálogo y las relaciones institucionales evolucionen hacia iniciativas, acuerdos, proyectos y oportunidades concretas.</p>
+            <h3 data-i18n="about.principle.results.title">Orientación a resultados</h3>
+            <p data-i18n="about.principle.results.body">Procuramos que el diálogo y las relaciones institucionales evolucionen hacia iniciativas, acuerdos, proyectos y oportunidades concretas.</p>
           </div>
 
           <div class="principle-card">
             <div class="badge">
               <img src="assets/images/principio-6.webp" alt="Desarrollo sostenible" loading="lazy">
             </div>
-            <h3>Desarrollo sostenible</h3>
-            <p>Impulsamos un crecimiento económico capaz de fortalecer la empresa, el empleo, la innovación, la competitividad y la integración productiva.</p>
+            <h3 data-i18n="about.principle.sustainable.title">Desarrollo sostenible</h3>
+            <p data-i18n="about.principle.sustainable.body">Impulsamos un crecimiento económico capaz de fortalecer la empresa, el empleo, la innovación, la competitividad y la integración productiva.</p>
           </div>
 
         </div>
@@ -189,32 +189,32 @@
   <section class="section section--light" id="gobierno">
     <div class="container">
       <div class="reveal" style="max-width:700px; margin:0 auto; text-align:center;">
-        <span class="eyebrow">— Gobierno institucional —</span>
-        <h2>Estructura de gobierno</h2>
-        <p style="color:var(--ink-soft);">La Cámara se organiza mediante una estructura colegiada diseñada para separar con claridad la decisión, la administración y el control.</p>
+        <span class="eyebrow" data-i18n="about.gov.eyebrow">— Gobierno institucional —</span>
+        <h2 data-i18n="about.gov.title">Estructura de gobierno</h2>
+        <p style="color:var(--ink-soft);" data-i18n="about.gov.body">La Cámara se organiza mediante una estructura colegiada diseñada para separar con claridad la decisión, la administración y el control.</p>
       </div>
 
       <div class="gov-heads reveal">
         <div class="gov-head is-open">
           <button type="button" class="gov-head-top" aria-expanded="true">
-            <h3>Comisión Directiva</h3>
+            <h3 data-i18n="about.gov.board.title">Comisión Directiva</h3>
             <span class="gov-toggle" aria-hidden="true"></span>
           </button>
           <div class="gov-head-panel">
             <div class="gov-head-panel-inner">
-              <p>La Comisión Directiva define la orientación institucional, ejecuta las resoluciones de la Asamblea, administra los recursos y coordina la actividad de la Cámara.</p>
+              <p data-i18n="about.gov.board.body">La Comisión Directiva define la orientación institucional, ejecuta las resoluciones de la Asamblea, administra los recursos y coordina la actividad de la Cámara.</p>
               <hr>
             </div>
           </div>
         </div>
         <div class="gov-head is-open">
           <button type="button" class="gov-head-top" aria-expanded="true">
-            <h3>Sindicatura</h3>
+            <h3 data-i18n="about.gov.supervisory.title">Sindicatura</h3>
             <span class="gov-toggle" aria-hidden="true"></span>
           </button>
           <div class="gov-head-panel">
             <div class="gov-head-panel-inner">
-              <p>La Sindicatura es el órgano independiente de supervisión y control. Su función es revisar los fondos, cuentas, libros, documentación e informes financieros.</p>
+              <p data-i18n="about.gov.supervisory.body">La Sindicatura es el órgano independiente de supervisión y control. Su función es revisar los fondos, cuentas, libros, documentación e informes financieros.</p>
               <hr>
             </div>
           </div>
@@ -232,59 +232,60 @@
           <div class="team-card--plain">
             <div class="team-photo"><img src="assets/images/team-4.jpg" alt="Erik Aaron Lara Riveros"></div>
             <div class="team-info">
-              <span class="role">Presidente</span>
+              <span class="role" data-i18n="team.role.president">Presidente</span>
               <h3>Erik Aaron Lara Riveros</h3>
-              <p>Dirige la orientación institucional y ejerce la representación protocolaria.</p>
-              <a href="#" class="team-bio-link" data-bio-open="erik-aaron-lara-riveros">Leer más</a>
+              <p data-i18n="team.president.body">Dirige la orientación institucional y ejerce la representación protocolaria.</p>
+              <a href="#" class="team-bio-link" data-bio-open="erik-aaron-lara-riveros" data-i18n="team.readMore">Leer más</a>
             </div>
           </div>
 
           <div class="team-card--plain">
             <div class="team-photo"><img src="assets/images/team-3.jpg" alt="Anthony Edouard A. Toffoli"></div>
             <div class="team-info">
-              <span class="role">Vicepresidente</span>
+              <span class="role" data-i18n="team.role.vp">Vicepresidente</span>
               <h3>Anthony Edouard A. Toffoli</h3>
-              <p>Coordina la institución junto con el presidente.</p>
-              <a href="#" class="team-bio-link" data-bio-open="anthony-edouard-toffoli">Leer más</a>
+              <p data-i18n="team.vp.body">Coordina la institución junto con el presidente.</p>
+              <a href="#" class="team-bio-link" data-bio-open="anthony-edouard-toffoli" data-i18n="team.readMore">Leer más</a>
             </div>
           </div>
 
           <div class="team-card--plain">
             <div class="team-photo"><img src="assets/images/team-5.webp" alt="Walber Castillo Castellano"></div>
             <div class="team-info">
-              <span class="role">Secretario General</span>
+              <span class="role" data-i18n="team.role.secretaryGeneral">Secretario General</span>
               <h3>Walber Castillo Castellano</h3>
-              <p>Coordina la administración institucional, convocatorias y actas.</p>
-              <a href="#" class="team-bio-link" data-bio-open="walber-castillo-castellano">Leer más</a>
+              <p data-i18n="team.secretaryGeneral.body">Coordina la administración institucional, convocatorias y actas.</p>
+              <a href="#" class="team-bio-link" data-bio-open="walber-castillo-castellano" data-i18n="team.readMore">Leer más</a>
             </div>
           </div>
 
           <div class="team-card--plain">
             <div class="team-photo"><img src="assets/images/team-1.jpg" alt="Nicole M. Peters"></div>
             <div class="team-info">
-              <span class="role">Prosecretaria</span>
+              <span class="role" data-i18n="team.role.deputySecretary">Prosecretaria</span>
               <h3>Nicole M. Peters</h3>
-              <p>Apoya la revisión jurídica y el cumplimiento institucional.</p>
+              <p data-i18n="team.deputySecretary.body">Apoya la revisión jurídica y el cumplimiento institucional.</p>
+              <a href="#" class="team-bio-link" data-bio-open="nicole-peters" data-i18n="team.readMore">Leer más</a>
             </div>
           </div>
 
           <div class="team-card--plain">
             <div class="team-photo"><img src="assets/images/team-2.jpg" alt="Ramón R. Martinelli"></div>
             <div class="team-info">
-              <span class="role">Tesorero</span>
+              <span class="role" data-i18n="team.role.treasurer">Tesorero</span>
               <h3>Ramón R. Martinelli</h3>
-              <p>Supervisa la organización financiera, presupuestaria y contable.</p>
-              <a href="#" class="team-bio-link" data-bio-open="ramon-ricardo-martinelli">Leer más</a>
+              <p data-i18n="team.treasurer.body">Supervisa la organización financiera, presupuestaria y contable.</p>
+              <a href="#" class="team-bio-link" data-bio-open="ramon-ricardo-martinelli" data-i18n="team.readMore">Leer más</a>
             </div>
           </div>
 
           <div class="team-card--plain">
             <div class="team-photo"><img src="assets/images/team-6.jpg" alt="Federico Andrés Brügge"></div>
             <div class="team-info">
-              <span class="role">Síndico Titular</span>
+              <span class="role" data-i18n="team.role.auditor">Síndico Titular</span>
               <h3>Federico Andrés Brügge</h3>
-              <p>Ejerce de forma independiente las funciones de revisión y control institucional.</p>
-              <a href="#" class="team-bio-link" data-bio-open="federico-andres-brugge">Leer más</a>
+              <p data-i18n="team.auditor.body">Ejerce de forma independiente las funciones de revisión y control institucional.</p>
+              <a href="#" class="team-bio-link" data-bio-open="federico-andres-brugge" data-i18n="team.readMore">Leer más</a>
             </div>
           </div>
 
@@ -300,12 +301,12 @@
   <!-- INVITACIÓN AL BLOG + EVENTOS / NOTICIAS -->
   <section class="section--tight">
     <div class="container">
-      <p class="reveal" style="text-align:center; max-width:760px; margin:0 auto; color:var(--ink-soft); font-size:1.05rem;">
+      <p class="reveal" style="text-align:center; max-width:760px; margin:0 auto; color:var(--ink-soft); font-size:1.05rem;" data-i18n-html="about.blogInvite">
         Te invitamos a explorar nuestra cobertura informativa de actualidad para mantenerte al tanto de los <strong style="color:var(--ink);">próximos eventos, conferencias y actividades programadas.</strong>
       </p>
       <div class="reveal" style="display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-top:30px;">
-        <a href="blog.html" class="btn btn-primary">Eventos</a>
-        <a href="blog.html" class="btn btn-outline-blue">Noticias</a>
+        <a href="blog.html" class="btn btn-primary" data-i18n="cta.events">Eventos</a>
+        <a href="blog.html" class="btn btn-outline-blue" data-i18n="cta.news">Noticias</a>
       </div>
     </div>
   </section>
@@ -313,9 +314,9 @@
   <!-- CTA: URUGUAY SEDE INSTITUCIONAL -->
   <section class="cta-band" style="background-image:url('assets/images/nosotros-hero.jpg');">
     <div class="container reveal">
-      <span class="eyebrow--italic">Naturaleza e independencia</span>
-      <h2>Uruguay: sede institucional y anclaje regional</h2>
-      <a href="transparencia.html" class="btn btn-light">Conoce nuestro marco de cumplimiento</a>
+      <span class="eyebrow--italic" data-i18n="about.cta.eyebrow">Naturaleza e independencia</span>
+      <h2 data-i18n="about.cta.title">Uruguay: sede institucional y anclaje regional</h2>
+      <a href="transparencia.html" class="btn btn-light" data-i18n="cta.complianceFramework">Conoce nuestro marco de cumplimiento</a>
     </div>
   </section>
 
@@ -325,44 +326,45 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="footer-brand-text">Cámara de Comercio Mercosur</div>
-        <p>Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur</div>
+        <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
         <p><a class="email" href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a></p>
-        <address>República Oriental del Uruguay</address>
+        <address data-i18n="footer.address">República Oriental del Uruguay</address>
       </div>
       <div class="footer-col">
-        <h4>Páginas</h4>
+        <h4 data-i18n="footer.pagesTitle">Páginas</h4>
         <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="nosotros.html">Nosotros</a></li>
-          <li><a href="participacion.html">Participación</a></li>
-          <li><a href="transparencia.html">Transparencia</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Inicio</a></li>
+          <li><a href="nosotros.html" data-i18n="nav.about">Nosotros</a></li>
+          <li><a href="participacion.html" data-i18n="nav.participation">Participación</a></li>
+          <li><a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a></li>
+          <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h4 data-i18n="footer.legalTitle">Legal</h4>
         <ul class="footer-legal-list">
-          <li><a href="#" class="js-privacy-link">Política de Privacidad</a></li>
-          <li><a href="transparencia.html">Política de Cookies</a></li>
-          <li><a href="transparencia.html">Términos de Uso</a></li>
-          <li><a href="transparencia.html">Uso de Marca</a></li>
-          <li><a href="transparencia.html">Canal de Integridad</a></li>
+          <li><a href="#" class="js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
+          <li><a href="transparencia.html" class="js-cookies-link" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.terms">Términos de Uso</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.brand">Uso de Marca</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Datos Institucionales</h4>
-        <p class="footer-legal-note">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
-        <p class="footer-legal-note">Asociación Civil Internacional sin Ánimo de Lucro</p>
-        <p class="footer-legal-note">Registro MOS:</p>
-        <p class="footer-legal-note">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
+        <h4 data-i18n="footer.institutionalTitle">Datos Institucionales</h4>
+        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
+        <p class="footer-legal-note" data-i18n="footer.civilAssoc">Asociación Civil Internacional sin Ánimo de Lucro</p>
+        <p class="footer-legal-note" data-i18n="footer.mosRegistry">Registro MOS:</p>
+        <p class="footer-legal-note" data-i18n="footer.disclaimer">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
       </div>
     </div>
   </div>
 </footer>
 
 <button class="back-to-top" aria-label="Volver arriba">↑</button>
+<script src="assets/js/i18n-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

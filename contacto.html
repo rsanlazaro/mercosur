@@ -16,12 +16,12 @@
       <img src="assets/images/logo.png" alt="Cámara de Comercio Mercosur">
     </a>
     <nav class="main-nav">
-      <a href="index.html">Inicio</a>
-      <a href="nosotros.html">Nosotros</a>
-      <a href="participacion.html">Participación</a>
-      <a href="transparencia.html">Transparencia</a>
-      <a href="blog.html">Blog</a>
-      <a href="contacto.html" class="is-active">Contacto</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="nosotros.html" data-i18n="nav.about">Nosotros</a>
+      <a href="participacion.html" data-i18n="nav.participation">Participación</a>
+      <a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="contacto.html" class="is-active" data-i18n="nav.contact">Contacto</a>
     </nav>
     <div class="header-actions">
       <div class="social-links">
@@ -39,8 +39,8 @@
         </button>
         <ul class="lang-menu" role="menu">
           <li role="none"><button type="button" class="lang-option is-active" data-lang="es" role="menuitem">Español</button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem" disabled>Português <span class="soon-badge">Próximamente</span></button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem" disabled>English <span class="soon-badge">Próximamente</span></button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem">Português</button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem">English</button></li>
           <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem" disabled>Français <span class="soon-badge">Próximamente</span></button></li>
         </ul>
       </div>
@@ -57,10 +57,10 @@
       <div class="contact-top-grid">
 
         <div class="reveal">
-          <h1>Conoce nuestro <span class="circled">canal</span></h1>
-          <p>La Cámara recibe consultas de empresas, cámaras de comercio, inversores, instituciones financieras, organismos y organizaciones internacionales.</p>
+          <h1 data-i18n-html="contact.hero.title">Conoce nuestro <span class="circled">canal</span></h1>
+          <p data-i18n="contact.hero.body">La Cámara recibe consultas de empresas, cámaras de comercio, inversores, instituciones financieras, organismos y organizaciones internacionales.</p>
 
-          <div class="contact-note">
+          <div class="contact-note" data-i18n="contact.hero.note">
             Al llenar este formulario no envíe documentación jurídica sensible, contratos, estados financieros u otra información confidencial a través de este formulario abierto salvo que haya sido expresamente solicitada.
           </div>
         </div>
@@ -72,24 +72,24 @@
             <input type="hidden" name="_captcha" value="false">
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
             <div class="form-field full">
-              <label for="c-motivo">Motivo de consulta <span class="req">*</span></label>
+              <label for="c-motivo" data-i18n="contact.form.reason">Motivo de consulta <span class="req">*</span></label>
               <select id="c-motivo" name="motivo" required>
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option>Asociación</option>
-                <option>Cooperación institucional</option>
-                <option>Iniciativa institucional</option>
-                <option>Comercio e internacionalización</option>
-                <option>Inversión y financiación</option>
-                <option>Prensa</option>
-                <option>Privacidad</option>
-                <option>Cumplimiento e integridad</option>
-                <option>Uso no autorizado de identidad</option>
-                <option>Consulta general</option>
+                <option value="" disabled selected data-i18n="contact.form.selectOption">Selecciona una opción</option>
+                <option value="Asociación" data-i18n="contact.reason.membership">Asociación</option>
+                <option value="Cooperación institucional" data-i18n="contact.reason.cooperation">Cooperación institucional</option>
+                <option value="Iniciativa institucional" data-i18n="contact.reason.initiative">Iniciativa institucional</option>
+                <option value="Comercio e internacionalización" data-i18n="contact.reason.trade">Comercio e internacionalización</option>
+                <option value="Inversión y financiación" data-i18n="contact.reason.investment">Inversión y financiación</option>
+                <option value="Prensa" data-i18n="contact.reason.press">Prensa</option>
+                <option value="Privacidad" data-i18n="contact.reason.privacy">Privacidad</option>
+                <option value="Cumplimiento e integridad" data-i18n="contact.reason.compliance">Cumplimiento e integridad</option>
+                <option value="Uso no autorizado de identidad" data-i18n="contact.reason.misuse">Uso no autorizado de identidad</option>
+                <option value="Consulta general" data-i18n="contact.reason.general">Consulta general</option>
               </select>
             </div>
 
             <div class="form-field full">
-              <label>Nombre <span class="req">*</span></label>
+              <label data-i18n="contact.form.name">Nombre <span class="req">*</span></label>
               <div class="form-grid">
                 <input type="text" id="c-first" name="nombre" placeholder="First Name" aria-label="First Name" required>
                 <input type="text" id="c-last" name="apellido" placeholder="Last Name" aria-label="Last Name" required>
@@ -97,7 +97,7 @@
             </div>
 
             <div class="form-field full">
-              <label>Teléfono <span class="req">*</span></label>
+              <label data-i18n="contact.form.phone">Teléfono <span class="req">*</span></label>
               <div class="phone-group">
                 <select id="c-tel-country" name="tel_pais" aria-label="País telefónico" required>
                   <option>Argentina</option>
@@ -122,24 +122,24 @@
             </div>
 
             <div class="form-field full">
-              <label for="c-email">Correo electrónico <span class="req">*</span></label>
+              <label for="c-email" data-i18n="contact.form.email">Correo electrónico <span class="req">*</span></label>
               <input type="email" id="c-email" name="email" required>
             </div>
 
             <div class="form-field full">
-              <label for="c-website">Website</label>
+              <label for="c-website" data-i18n="contact.form.website">Website</label>
               <input type="url" id="c-website" name="website" placeholder="http://">
             </div>
 
             <div class="form-field full">
-              <label for="c-org">Organización, cargo y sector <span class="req">*</span></label>
+              <label for="c-org" data-i18n="contact.form.org">Organización, cargo y sector <span class="req">*</span></label>
               <input type="text" id="c-org" name="organizacion" required>
             </div>
 
             <div class="form-field full">
-              <label for="c-country">País <span class="req">*</span></label>
+              <label for="c-country" data-i18n="contact.form.country">País <span class="req">*</span></label>
               <select id="c-country" name="pais" required>
-                <option value="" disabled selected>Selecciona tu país</option>
+                <option value="" disabled selected data-i18n="contact.form.selectCountry">Selecciona tu país</option>
                 <option>Argentina</option>
                 <option>Bolivia</option>
                 <option>Brasil</option>
@@ -160,25 +160,25 @@
             </div>
 
             <div class="form-field full">
-              <label for="c-subject">Asunto <span class="req">*</span></label>
+              <label for="c-subject" data-i18n="contact.form.subject">Asunto <span class="req">*</span></label>
               <input type="text" id="c-subject" name="asunto" required>
             </div>
 
             <div class="form-field full">
-              <label for="c-message">Mensaje</label>
+              <label for="c-message" data-i18n="contact.form.message">Mensaje</label>
               <textarea id="c-message" name="mensaje" rows="5"></textarea>
             </div>
 
             <label class="form-checkbox">
               <input type="checkbox" required>
-              <span>He leído la <a href="#" class="js-privacy-link" style="color:var(--blue); font-weight:600;">Política de Privacidad</a> y comprendo cómo serán tratados mis datos. *</span>
+              <span data-i18n-html="contact.form.privacyCheck">He leído la <a href="#" class="js-privacy-link" style="color:var(--blue); font-weight:600;">Política de Privacidad</a> y comprendo cómo serán tratados mis datos. *</span>
             </label>
             <label class="form-checkbox">
               <input type="checkbox">
-              <span>Deseo recibir comunicaciones institucionales de la Cámara (opcional).</span>
+              <span data-i18n="contact.form.newsletterCheck">Deseo recibir comunicaciones institucionales de la Cámara (opcional).</span>
             </label>
 
-            <button type="submit" class="btn btn-primary">Enviar consulta</button>
+            <button type="submit" class="btn btn-primary" data-i18n="contact.form.submit">Enviar consulta</button>
             <p class="form-msg" role="status"></p>
           </form>
         </div>
@@ -193,44 +193,45 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="footer-brand-text">Cámara de Comercio Mercosur</div>
-        <p>Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur</div>
+        <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
         <p><a class="email" href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a></p>
-        <address>República Oriental del Uruguay</address>
+        <address data-i18n="footer.address">República Oriental del Uruguay</address>
       </div>
       <div class="footer-col">
-        <h4>Páginas</h4>
+        <h4 data-i18n="footer.pagesTitle">Páginas</h4>
         <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="nosotros.html">Nosotros</a></li>
-          <li><a href="participacion.html">Participación</a></li>
-          <li><a href="transparencia.html">Transparencia</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Inicio</a></li>
+          <li><a href="nosotros.html" data-i18n="nav.about">Nosotros</a></li>
+          <li><a href="participacion.html" data-i18n="nav.participation">Participación</a></li>
+          <li><a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a></li>
+          <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h4 data-i18n="footer.legalTitle">Legal</h4>
         <ul class="footer-legal-list">
-          <li><a href="#" class="js-privacy-link">Política de Privacidad</a></li>
-          <li><a href="transparencia.html">Política de Cookies</a></li>
-          <li><a href="transparencia.html">Términos de Uso</a></li>
-          <li><a href="transparencia.html">Uso de Marca</a></li>
-          <li><a href="transparencia.html">Canal de Integridad</a></li>
+          <li><a href="#" class="js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
+          <li><a href="transparencia.html" class="js-cookies-link" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.terms">Términos de Uso</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.brand">Uso de Marca</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Datos Institucionales</h4>
-        <p class="footer-legal-note">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
-        <p class="footer-legal-note">Asociación Civil Internacional sin Ánimo de Lucro</p>
-        <p class="footer-legal-note">Registro MOS:</p>
-        <p class="footer-legal-note">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
+        <h4 data-i18n="footer.institutionalTitle">Datos Institucionales</h4>
+        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
+        <p class="footer-legal-note" data-i18n="footer.civilAssoc">Asociación Civil Internacional sin Ánimo de Lucro</p>
+        <p class="footer-legal-note" data-i18n="footer.mosRegistry">Registro MOS:</p>
+        <p class="footer-legal-note" data-i18n="footer.disclaimer">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
       </div>
     </div>
   </div>
 </footer>
 
 <button class="back-to-top" aria-label="Volver arriba">↑</button>
+<script src="assets/js/i18n-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

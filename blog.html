@@ -16,12 +16,12 @@
       <img src="assets/images/logo.png" alt="Cámara de Comercio Mercosur">
     </a>
     <nav class="main-nav">
-      <a href="index.html">Inicio</a>
-      <a href="nosotros.html">Nosotros</a>
-      <a href="participacion.html">Participación</a>
-      <a href="transparencia.html">Transparencia</a>
-      <a href="blog.html" class="is-active">Blog</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="nosotros.html" data-i18n="nav.about">Nosotros</a>
+      <a href="participacion.html" data-i18n="nav.participation">Participación</a>
+      <a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a>
+      <a href="blog.html" class="is-active" data-i18n="nav.blog">Blog</a>
+      <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
     </nav>
     <div class="header-actions">
       <div class="social-links">
@@ -39,8 +39,8 @@
         </button>
         <ul class="lang-menu" role="menu">
           <li role="none"><button type="button" class="lang-option is-active" data-lang="es" role="menuitem">Español</button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem" disabled>Português <span class="soon-badge">Próximamente</span></button></li>
-          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem" disabled>English <span class="soon-badge">Próximamente</span></button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem">Português</button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem">English</button></li>
           <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem" disabled>Français <span class="soon-badge">Próximamente</span></button></li>
         </ul>
       </div>
@@ -56,8 +56,8 @@
     <div class="hero-split-media" style="background-image:url('assets/images/blog-network.jpg');"></div>
     <div class="container">
       <div class="hero-inner hero-inner--split">
-        <h1>Mercosur alrededor<br>del mundo</h1>
-        <p class="hero-lede">Líder en <strong>experiencias y encuentros</strong> para todo público</p>
+        <h1 data-i18n-html="blog.hero.title">Mercosur alrededor<br>del mundo</h1>
+        <p class="hero-lede" data-i18n-html="blog.hero.lede">Líder en <strong>experiencias y encuentros</strong> para todo público</p>
       </div>
     </div>
   </section>
@@ -68,10 +68,10 @@
       <div class="blog-feature reveal" style="background-image:url('assets/images/blog-event.jpg');">
         <div class="blog-feature-content">
           <h2>EXPO MARKET 2026</h2>
-          <p class="blog-feature-date">25, 26 y 27 de Septiembre de 2026</p>
+          <p class="blog-feature-date" data-i18n="blog.expo.date">25, 26 y 27 de Septiembre de 2026</p>
           <p class="blog-feature-place">ATLAPA Convention Center · Panamá</p>
-          <p>Es el principal evento oficial de negocios, integración comercial y networking de Panamá y la región. Reunirá a empresarios, académicos y líderes internacionales para impulsar el crecimiento empresarial, el intercambio cultural y la innovación tecnológica.</p>
-          <a href="https://expomarketmercosur.org/" class="btn btn-primary" target="_blank" rel="noopener">Conoce más</a>
+          <p data-i18n="blog.expo.body">Es el principal evento oficial de negocios, integración comercial y networking de Panamá y la región. Reunirá a empresarios, académicos y líderes internacionales para impulsar el crecimiento empresarial, el intercambio cultural y la innovación tecnológica.</p>
+          <a href="https://expomarketmercosur.org/" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="cta.learnMore">Conoce más</a>
         </div>
       </div>
     </div>
@@ -82,12 +82,12 @@
     <div class="container">
       <div class="split reveal" style="align-items:center; margin-bottom:8px;">
         <div>
-          <p class="eyebrow">Actualidad</p>
-          <h2>Las noticias que involucran a Mercosur</h2>
-          <p>En este espacio, ponemos a tu disposición una cobertura rigurosa, análisis profundos y el seguimiento puntual de los acontecimientos más relevantes del acontecer nacional e internacional.</p>
+          <p class="eyebrow" data-i18n="blog.news.eyebrow">Actualidad</p>
+          <h2 data-i18n="blog.news.title">Las noticias que involucran a Mercosur</h2>
+          <p data-i18n="blog.news.body">En este espacio, ponemos a tu disposición una cobertura rigurosa, análisis profundos y el seguimiento puntual de los acontecimientos más relevantes del acontecer nacional e internacional.</p>
         </div>
         <div style="text-align:left;">
-          <a href="#suscribete" class="btn btn-navy btn-arrow">Suscríbete</a>
+          <a href="#suscribete" class="btn btn-navy btn-arrow" data-i18n="cta.subscribe">Suscríbete</a>
         </div>
       </div>
 
@@ -101,17 +101,17 @@
     <div class="container">
       <div class="newsletter reveal">
         <div>
-          <p class="eyebrow" style="color:var(--gold);">Entérate de las noticias y de eventos próximos</p>
-          <h2>Ingresa tu correo para las notificaciones</h2>
+          <p class="eyebrow" style="color:var(--gold);" data-i18n="blog.newsletter.eyebrow">Entérate de las noticias y de eventos próximos</p>
+          <h2 data-i18n="blog.newsletter.title">Ingresa tu correo para las notificaciones</h2>
         </div>
         <div>
           <form id="newsletter-form">
             <div class="newsletter-form">
               <input type="email" placeholder="Email Address" aria-label="Correo electrónico" required>
-              <button type="submit" class="btn btn-primary">Registrarse</button>
+              <button type="submit" class="btn btn-primary" data-i18n="cta.subscribe">Registrarse</button>
             </div>
-            <p class="newsletter-note">El correo proporcionado solo se usará para nuevas actualizaciones.</p>
-            <p>También puedes contestar <a href="contacto.html" style="color:#fff; text-decoration:underline;">nuestro formulario</a> para consultas.</p>
+            <p class="newsletter-note" data-i18n="blog.newsletter.note">El correo proporcionado solo se usará para nuevas actualizaciones.</p>
+            <p data-i18n-html="blog.newsletter.formLink">También puedes contestar <a href="contacto.html" style="color:#fff; text-decoration:underline;">nuestro formulario</a> para consultas.</p>
             <p class="form-msg" role="status"></p>
           </form>
         </div>
@@ -125,44 +125,45 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="footer-brand-text">Cámara de Comercio Mercosur</div>
-        <p>Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur</div>
+        <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
         <p><a class="email" href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a></p>
-        <address>República Oriental del Uruguay</address>
+        <address data-i18n="footer.address">República Oriental del Uruguay</address>
       </div>
       <div class="footer-col">
-        <h4>Páginas</h4>
+        <h4 data-i18n="footer.pagesTitle">Páginas</h4>
         <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="nosotros.html">Nosotros</a></li>
-          <li><a href="participacion.html">Participación</a></li>
-          <li><a href="transparencia.html">Transparencia</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Inicio</a></li>
+          <li><a href="nosotros.html" data-i18n="nav.about">Nosotros</a></li>
+          <li><a href="participacion.html" data-i18n="nav.participation">Participación</a></li>
+          <li><a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a></li>
+          <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h4 data-i18n="footer.legalTitle">Legal</h4>
         <ul class="footer-legal-list">
-          <li><a href="#" class="js-privacy-link">Política de Privacidad</a></li>
-          <li><a href="transparencia.html">Política de Cookies</a></li>
-          <li><a href="transparencia.html">Términos de Uso</a></li>
-          <li><a href="transparencia.html">Uso de Marca</a></li>
-          <li><a href="transparencia.html">Canal de Integridad</a></li>
+          <li><a href="#" class="js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
+          <li><a href="transparencia.html" class="js-cookies-link" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.terms">Términos de Uso</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.brand">Uso de Marca</a></li>
+          <li><a href="transparencia.html" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Datos Institucionales</h4>
-        <p class="footer-legal-note">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
-        <p class="footer-legal-note">Asociación Civil Internacional sin Ánimo de Lucro</p>
-        <p class="footer-legal-note">Registro MOS:</p>
-        <p class="footer-legal-note">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
+        <h4 data-i18n="footer.institutionalTitle">Datos Institucionales</h4>
+        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
+        <p class="footer-legal-note" data-i18n="footer.civilAssoc">Asociación Civil Internacional sin Ánimo de Lucro</p>
+        <p class="footer-legal-note" data-i18n="footer.mosRegistry">Registro MOS:</p>
+        <p class="footer-legal-note" data-i18n="footer.disclaimer">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
       </div>
     </div>
   </div>
 </footer>
 
 <button class="back-to-top" aria-label="Volver arriba">↑</button>
+<script src="assets/js/i18n-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>
