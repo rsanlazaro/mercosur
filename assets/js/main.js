@@ -1,6 +1,16 @@
 // Cámara de Comercio Mercosur — site scripts
 document.addEventListener('DOMContentLoaded', function () {
 
+  /* ---------- Shared helper: translate a status/warning message on demand ---------- */
+  function mercosurText(key, fallback) {
+    try {
+      var lang = localStorage.getItem('mercosurLang') || 'es';
+      var dict = window.MERCOSUR_I18N && window.MERCOSUR_I18N[lang];
+      if (dict && dict[key]) return dict[key];
+    } catch (e) { /* storage or dict unavailable */ }
+    return fallback;
+  }
+
   /* ---------- Language switcher (ES / PT / EN active — FR coming soon) ---------- */
   var langSwitcher = document.querySelector('.lang-switcher');
   if (langSwitcher) {
@@ -202,6 +212,14 @@ document.addEventListener('DOMContentLoaded', function () {
           es: [
             'Erik Aaron Lara Riveros es un ejecutivo internacional chileno con más de veinte años de experiencia en banca, inversión, mercados regulados, gobernanza corporativa y relaciones institucionales.',
             'Ha desempeñado funciones directivas y de consejo en entidades financieras reguladas de Europa y Oriente Medio, así como responsabilidades ejecutivas en compañías cotizadas en Norteamérica. Actualmente participa en el desarrollo de iniciativas internacionales vinculadas a minerales críticos, financiación, inversión y cadenas estratégicas de suministro entre América Latina y Norteamérica. Como presidente de la Cámara, impulsa la integración empresarial, la cooperación institucional y la proyección internacional del espacio Mercosur.'
+          ],
+          en: [
+            'Erik Aaron Lara Riveros is a Chilean international executive with more than twenty years of experience in banking, investment, regulated markets, corporate governance, and institutional relations.',
+            'He has held executive and board positions at regulated financial institutions in Europe and the Middle East, as well as executive leadership roles in publicly traded companies in North America. He is currently involved in developing international initiatives related to critical minerals, financing, investment, and strategic supply chains between Latin America and North America. As President of the Chamber, he promotes business integration, institutional cooperation, and the international presence of the Mercosur region.'
+          ],
+          pt: [
+            'Erik Aaron Lara Riveros é um executivo internacional chileno com mais de vinte anos de experiência no setor bancário, de investimentos, mercados regulados, governança corporativa e relações institucionais.',
+            'Exerceu cargos de direção e de conselho em instituições financeiras reguladas na Europa e no Oriente Médio, além de responsabilidades executivas em empresas de capital aberto na América do Norte. Atualmente, participa do desenvolvimento de iniciativas internacionais relacionadas a minerais críticos, financiamento, investimentos e cadeias estratégicas de suprimentos entre a América Latina e a América do Norte. Como Presidente da Câmara, promove a integração empresarial, a cooperação institucional e a projeção internacional do espaço Mercosul.'
           ]
         }
       },
@@ -211,9 +229,19 @@ document.addEventListener('DOMContentLoaded', function () {
         role: { es: 'Vicepresidente', en: 'Vice President', pt: 'Vice-Presidente' },
         body: {
           es: [
-            'Anthony Edouard André Toffoli es un ejecutivo francés con más de veinticinco años de experiencia en retail, turismo médico, inmobiliario y medios de comunicación.',
-            'Actúa activamente en varias empresas europeas, y tiene responsabilidades ejecutivas en compañías en Norteamérica. Actualmente participa en el desarrollo de varias clínicas de fertilidad humana, brindando soluciones para pacientes europeos en América Latina.',
-            'Como vicepresidente de la Cámara, lucha incansablemente para las empresas, siempre a favor de la cooperación institucional y la expansión internacional más allá del espacio Mercosur.'
+            'Anthony Edouard André Toffoli es un ejecutivo francés con más de veinticinco años de experiencia en retail, turismo médico, sector inmobiliario y medios de comunicación.',
+            'Participa activamente en varias empresas europeas y ejerce responsabilidades ejecutivas en compañías de Norteamérica. Actualmente participa en el desarrollo de varias clínicas de fertilidad, brindando soluciones para pacientes europeos en América Latina.',
+            'Como vicepresidente de la Cámara, trabaja incansablemente en favor de las empresas, promoviendo la cooperación institucional y la expansión internacional más allá del espacio Mercosur.'
+          ],
+          en: [
+            'Anthony Edouard André Toffoli is a French executive with more than twenty-five years of experience in the retail, medical tourism, real estate, and media sectors.',
+            'He is actively involved with several European companies and holds executive positions in companies across North America. He is currently involved in the development of fertility clinics, providing solutions for European patients seeking treatment in Latin America.',
+            'As Vice President of the Chamber, he works tirelessly to support businesses, promote institutional cooperation, and expand international opportunities beyond the Mercosur region.'
+          ],
+          pt: [
+            'Anthony Edouard André Toffoli é um executivo francês com mais de vinte e cinco anos de experiência nos setores de varejo, turismo médico, mercado imobiliário e mídia.',
+            'Atua ativamente em diversas empresas europeias e exerce funções executivas em companhias na América do Norte. Atualmente, participa do desenvolvimento de diversas clínicas de fertilidade humana, oferecendo soluções para pacientes europeus na América Latina.',
+            'Como Vice-Presidente da Câmara, trabalha incansavelmente em favor das empresas, promovendo a cooperação institucional e a expansão internacional para além do espaço Mercosul.'
           ]
         }
       },
@@ -231,20 +259,20 @@ document.addEventListener('DOMContentLoaded', function () {
             'Sus iniciativas y experiencias profesionales hacen de ella una pieza fundamental de la Cámara de Comercio Mercosur.'
           ],
           en: [
-            'Nicole Peters holds a law degree from the University of Buenos Aires (UBA), along with an MBA and postgraduate training in Public Policy, the 2030 Agenda, Public Affairs, political marketing, and Public Law.',
-            'She is currently pursuing an International Master\'s Degree in Political Science with a specialization in International Cooperation at Universidad Europea del Atlántico.',
+            'Nicole Peters is a lawyer graduated from the University of Buenos Aires (UBA), with an MBA and postgraduate studies in Public Policy, the 2030 Agenda, Public Affairs, Political Marketing, and Public Law.',
+            'She is currently pursuing an International Master\'s Degree in Political Science, specializing in International Cooperation, at the European University of the Atlantic.',
             'She has more than eight years of experience in strategic consulting, coaching, and project management.',
-            'She is Coordinator of the Institute of Strategic Studies and International Relations, as well as founder and president of the International Organization for Public Affairs.',
-            'She has represented Argentina in Brazil (AIESEC), Uruguay (Mercosur), and Russia (World Youth Festival), as well as Ibero-America in Spain (Fundación Carolina) and the Southern Cone at the Organization of American States (OAS).',
-            'Her initiatives and professional experience make her a fundamental part of the Mercosur Chamber of Commerce.'
+            'She serves as Coordinator of the Institute for Strategic Studies and International Relations and is the founder and president of the International Organization for Public Affairs.',
+            'She has represented Argentina in Brazil (AIESEC), Uruguay (MERCOSUR), and Russia (World Youth Festival), as well as Ibero-America in Spain (Fundación Carolina) and the Southern Cone at the Organization of American States (OAS).',
+            'Her initiatives and professional experience make her a key member of the Mercosur Chamber of Commerce.'
           ],
           pt: [
-            'Nicole Peters é advogada pela Universidade de Buenos Aires (UBA), com MBA e formação de pós-graduação em Políticas Públicas, Agenda 2030, Assuntos Públicos, marketing político e Direito Público.',
-            'Atualmente cursa o Mestrado Internacional em Ciências Políticas com especialização em Cooperação Internacional na Universidade Europeia do Atlântico.',
-            'Conta com mais de oito anos de experiência em consultoria estratégica, coaching e gestão de projetos.',
+            'Nicole Peters é advogada formada pela Universidade de Buenos Aires (UBA), com MBA e formação de pós-graduação em Políticas Públicas, Agenda 2030, Assuntos Públicos, marketing político e Direito Público.',
+            'Atualmente, cursa o Mestrado Internacional em Ciência Política, com especialização em Cooperação Internacional, na Universidade Europeia do Atlântico.',
+            'Possui mais de oito anos de experiência em consultoria estratégica, coaching e gestão de projetos.',
             'É Coordenadora do Instituto de Estudos Estratégicos e Relações Internacionais, além de fundadora e presidente da Organização Internacional de Assuntos Públicos.',
-            'Representou a Argentina no Brasil (AIESEC), no Uruguai (Mercosul) e na Rússia (World Youth Festival), além da Ibero-América na Espanha (Fundação Carolina) e do Cone Sul na Organização dos Estados Americanos (OEA).',
-            'Suas iniciativas e experiências profissionais fazem dela uma peça fundamental da Câmara de Comércio Mercosul.'
+            'Representou a Argentina no Brasil (AIESEC), no Uruguai (Mercosul) e na Rússia (World Youth Festival), assim como a Ibero-América na Espanha (Fundación Carolina) e o Cone Sul na Organização dos Estados Americanos (OEA).',
+            'Suas iniciativas e sua trajetória profissional fazem dela uma peça fundamental da Câmara de Comércio Mercosul.'
           ]
         }
       },
@@ -270,6 +298,16 @@ document.addEventListener('DOMContentLoaded', function () {
             'Walber Castillo Castellano es un empresario colombiano e ingeniero civil con amplia trayectoria en educación técnica, infraestructura, hidrocarburos, innovación tecnológica y desarrollo empresarial.',
             'Entre sus principales iniciativas empresariales se destacan varios grupos internacionales y ha sido distinguido como Colombiano Estrella, empresario destacado en el Exterior, empresario del Año en Perú y Excelencia Educativa ODAEE.',
             'Su visión empresarial, su integridad y compromiso son las bases de su implicación en la Cámara de Comercio Mercosur.'
+          ],
+          en: [
+            'Walber Castillo Castellano is a Colombian entrepreneur and civil engineer with extensive experience in technical education, infrastructure, hydrocarbons, technological innovation, and business development.',
+            'Among his main business initiatives are several international business groups. He has received the distinctions of Colombiano Estrella, Outstanding Colombian Abroad, Businessperson of the Year in Peru, and the ODAEE Educational Excellence Award.',
+            'His business vision, integrity, and commitment are the foundations of his work with the Mercosur Chamber of Commerce.'
+          ],
+          pt: [
+            'Walber Castillo Castellano é um empresário colombiano e engenheiro civil, com ampla trajetória nas áreas de educação técnica, infraestrutura, hidrocarbonetos, inovação tecnológica e desenvolvimento empresarial.',
+            'Entre suas principais iniciativas empresariais destacam-se diversos grupos internacionais. Foi reconhecido com as distinções Colombiano Estrella, Empresário Destaque no Exterior, Empresário do Ano no Peru e Excelência Educativa ODAEE.',
+            'Sua visão empresarial, integridade e compromisso constituem os pilares de sua atuação na Câmara de Comércio Mercosul.'
           ]
         }
       },
@@ -279,8 +317,13 @@ document.addEventListener('DOMContentLoaded', function () {
         role: { es: 'Síndico Titular', en: 'Principal Auditor', pt: 'Conselheiro Fiscal Titular' },
         body: {
           es: [
-            'Federico Andrés Brügge es analista de mercados financieros e inversor, dedicado al estudio de la macroeconomía, los mercados internacionales y el mercado de divisas, con foco en el análisis y la operativa de XAU/USD (oro).',
-            'Es Analista Global de Inversiones (AGI) por el Instituto de Capacitación Bursátil (ICB) de Buenos Aires y Técnico Analista de Mercados y Estrategias de Comercialización. Actualmente profundiza su especialización en el análisis del mercado del oro y las divisas, y en su interacción con la política monetaria, la macroeconomía y los mercados financieros. Mantiene vinculaciones comerciales e institucionales en Argentina, Estados Unidos y Europa.'
+            'Federico Andrés Brügge es analista de mercados financieros e inversor, dedicado al estudio de la macroeconomía, los mercados internacionales y el mercado de divisas, con foco en el análisis y la operativa de XAU/USD (oro). Es Analista Global de Inversiones (AGI) por el Instituto de Capacitación Bursátil (ICB) de Buenos Aires y Técnico Analista de Mercados y Estrategias de Comercialización. Actualmente profundiza su especialización en el análisis del mercado del oro y las divisas, y en su interacción con la política monetaria, la macroeconomía y los mercados financieros. Mantiene vinculaciones comerciales e institucionales en Argentina, Estados Unidos y Europa.'
+          ],
+          en: [
+            'Federico Andrés Brügge is a financial markets analyst and investor dedicated to the study of macroeconomics, international markets, and the foreign exchange market, with a focus on the analysis and trading of XAU/USD (gold). He is a Global Investment Analyst (AGI) certified by the Instituto de Capacitación Bursátil (ICB) in Buenos Aires and a Market and Commercial Strategy Analyst Technician. He is currently expanding his expertise in the analysis of the gold and foreign exchange markets, as well as their interaction with monetary policy, macroeconomics, and financial markets. He maintains business and institutional relationships in Argentina, the United States, and Europe.'
+          ],
+          pt: [
+            'Federico Andrés Brügge é analista de mercados financeiros e investidor, dedicado ao estudo da macroeconomia, dos mercados internacionais e do mercado cambial, com foco na análise e na operação de XAU/USD (ouro). É Analista Global de Investimentos (AGI) pelo Instituto de Capacitação Bursátil (ICB) de Buenos Aires e Técnico Analista de Mercados e Estratégias de Comercialização. Atualmente, aprofunda sua especialização na análise do mercado de ouro e de câmbio, bem como em sua interação com a política monetária, a macroeconomia e os mercados financeiros. Mantém relações comerciais e institucionais na Argentina, nos Estados Unidos e na Europa.'
           ]
         }
       }
@@ -439,7 +482,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
       if (msg) {
-        msg.textContent = 'Enviando tu consulta…';
+        msg.textContent = mercosurText('contact.form.sending', 'Enviando tu consulta…');
         msg.className = 'form-msg';
       }
       // Native form submission proceeds to FormSubmit, which emails
@@ -613,21 +656,21 @@ document.addEventListener('DOMContentLoaded', function () {
       pager.innerHTML = html;
     }
 
-    function goToPage(page) {
+    function goToPage(page, scroll) {
       page = Math.max(1, Math.min(totalPages, page));
       currentPage = page;
       renderGrid(currentPage);
       renderPager(currentPage);
-      grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (scroll) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     pager.addEventListener('click', function (e) {
       var btn = e.target.closest('.pagination-btn');
       if (!btn || btn.disabled) return;
       var target = btn.getAttribute('data-page');
-      if (target === 'prev') goToPage(currentPage - 1);
-      else if (target === 'next') goToPage(currentPage + 1);
-      else goToPage(parseInt(target, 10));
+      if (target === 'prev') goToPage(currentPage - 1, true);
+      else if (target === 'next') goToPage(currentPage + 1, true);
+      else goToPage(parseInt(target, 10), true);
     });
 
     /* ---- Read More modal ---- */
@@ -695,22 +738,50 @@ document.addEventListener('DOMContentLoaded', function () {
     goToPage(1);
   })();
 
-  /* ---------- Newsletter form (front-end only) ---------- */
+  /* ---------- Newsletter form (delivers to info@camaracomerciomercosur.org via FormSubmit) ---------- */
   var newsletterForm = document.querySelector('#newsletter-form');
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var input = newsletterForm.querySelector('input[type="email"]');
       var msg = newsletterForm.querySelector('.form-msg');
+      var submitBtn = newsletterForm.querySelector('button[type="submit"]');
       var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+
       if (!emailOk) {
-        msg.textContent = 'Ingresa un correo electrónico válido.';
+        msg.textContent = mercosurText('newsletter.invalidEmail', 'Ingresa un correo electrónico válido.');
         msg.className = 'form-msg err';
         return;
       }
-      msg.textContent = '¡Listo! Te avisaremos de próximas novedades.';
-      msg.className = 'form-msg ok';
-      newsletterForm.reset();
+
+      msg.textContent = mercosurText('newsletter.sending', 'Enviando…');
+      msg.className = 'form-msg';
+      if (submitBtn) submitBtn.disabled = true;
+
+      fetch('https://formsubmit.co/ajax/info@camaracomerciomercosur.org', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          email: input.value.trim(),
+          _subject: 'Nueva suscripción al newsletter — Cámara de Comercio Mercosur'
+        })
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed');
+          return res.json();
+        })
+        .then(function () {
+          msg.textContent = mercosurText('newsletter.success', '¡Listo! Te avisaremos de próximas novedades.');
+          msg.className = 'form-msg ok';
+          newsletterForm.reset();
+        })
+        .catch(function () {
+          msg.textContent = mercosurText('newsletter.error', 'No pudimos procesar tu suscripción. Intenta nuevamente.');
+          msg.className = 'form-msg err';
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   }
 
@@ -724,7 +795,7 @@ document.addEventListener('DOMContentLoaded', function () {
         proposalForm.reportValidity();
         return;
       }
-      msg.textContent = 'Tu propuesta fue enviada. El equipo institucional la revisará y se contactará contigo.';
+      msg.textContent = mercosurText('participation.proposal.success', 'Tu propuesta fue enviada. El equipo institucional la revisará y se contactará contigo.');
       msg.className = 'form-msg ok';
       proposalForm.reset();
     });
@@ -732,8 +803,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Privacy Policy modal ---------- */
   (function () {
-    var triggers = document.querySelectorAll('.js-privacy-link');
-    if (!triggers.length) return;
+    if (!document.querySelector('.js-privacy-link')) return;
 
     var overlay = null;
 
@@ -855,18 +925,17 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) closePrivacy();
     });
 
-    triggers.forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        openPrivacy();
-      });
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('.js-privacy-link');
+      if (!trigger) return;
+      e.preventDefault();
+      openPrivacy();
     });
   })();
 
   /* ---------- Cookie preferences modal ---------- */
   (function () {
-    var triggers = document.querySelectorAll('.js-cookies-link');
-    if (!triggers.length) return;
+    if (!document.querySelector('.js-cookies-link')) return;
 
     var STORAGE_KEY = 'mercosurCookiePrefs';
     var overlay = null;
@@ -936,14 +1005,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
       overlay.querySelector('[data-cookie-action="save"]').addEventListener('click', function () {
         savePrefs({ analytics: analyticsBox.checked });
-        setStatus('Preferencias guardadas.');
+        setStatus(mercosurText('cookies.saved', 'Preferencias guardadas.'));
         window.setTimeout(closeCookies, 900);
       });
 
       overlay.querySelector('[data-cookie-action="reject"]').addEventListener('click', function () {
         analyticsBox.checked = false;
         savePrefs({ analytics: false });
-        setStatus('Solo se usarán las cookies necesarias.');
+        setStatus(mercosurText('cookies.necessaryOnly', 'Solo se usarán las cookies necesarias.'));
         window.setTimeout(closeCookies, 900);
       });
 
@@ -972,11 +1041,11 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) closeCookies();
     });
 
-    triggers.forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        openCookies();
-      });
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('.js-cookies-link');
+      if (!trigger) return;
+      e.preventDefault();
+      openCookies();
     });
   })();
 

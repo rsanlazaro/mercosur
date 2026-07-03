@@ -72,7 +72,7 @@
             <input type="hidden" name="_captcha" value="false">
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
             <div class="form-field full">
-              <label for="c-motivo" data-i18n="contact.form.reason">Motivo de consulta <span class="req">*</span></label>
+              <label for="c-motivo" data-i18n-html="contact.form.reason">Motivo de consulta <span class="req">*</span></label>
               <select id="c-motivo" name="motivo" required>
                 <option value="" disabled selected data-i18n="contact.form.selectOption">Selecciona una opción</option>
                 <option value="Asociación" data-i18n="contact.reason.membership">Asociación</option>
@@ -89,7 +89,7 @@
             </div>
 
             <div class="form-field full">
-              <label data-i18n="contact.form.name">Nombre <span class="req">*</span></label>
+              <label data-i18n-html="contact.form.name">Nombre <span class="req">*</span></label>
               <div class="form-grid">
                 <input type="text" id="c-first" name="nombre" placeholder="First Name" aria-label="First Name" required>
                 <input type="text" id="c-last" name="apellido" placeholder="Last Name" aria-label="Last Name" required>
@@ -97,7 +97,7 @@
             </div>
 
             <div class="form-field full">
-              <label data-i18n="contact.form.phone">Teléfono <span class="req">*</span></label>
+              <label data-i18n-html="contact.form.phone">Teléfono <span class="req">*</span></label>
               <div class="phone-group">
                 <select id="c-tel-country" name="tel_pais" aria-label="País telefónico" required>
                   <option>Argentina</option>
@@ -109,20 +109,20 @@
                   <option>Ecuador</option>
                   <option>España</option>
                   <option>Estados Unidos</option>
-                  <option selected>Mexico</option>
+                  <option>Mexico</option>
                   <option>Panamá</option>
                   <option>Paraguay</option>
                   <option>Perú</option>
-                  <option>Uruguay</option>
+                  <option selected>Uruguay</option>
                   <option>Venezuela</option>
                   <option>Otro</option>
                 </select>
-                <input type="tel" id="c-phone" name="telefono" placeholder="+52" required>
+                <input type="tel" id="c-phone" name="telefono" placeholder="+598" required>
               </div>
             </div>
 
             <div class="form-field full">
-              <label for="c-email" data-i18n="contact.form.email">Correo electrónico <span class="req">*</span></label>
+              <label for="c-email" data-i18n-html="contact.form.email">Correo electrónico <span class="req">*</span></label>
               <input type="email" id="c-email" name="email" required>
             </div>
 
@@ -132,12 +132,12 @@
             </div>
 
             <div class="form-field full">
-              <label for="c-org" data-i18n="contact.form.org">Organización, cargo y sector <span class="req">*</span></label>
+              <label for="c-org" data-i18n-html="contact.form.org">Organización, cargo y sector <span class="req">*</span></label>
               <input type="text" id="c-org" name="organizacion" required>
             </div>
 
             <div class="form-field full">
-              <label for="c-country" data-i18n="contact.form.country">País <span class="req">*</span></label>
+              <label for="c-country" data-i18n-html="contact.form.country">País <span class="req">*</span></label>
               <select id="c-country" name="pais" required>
                 <option value="" disabled selected data-i18n="contact.form.selectCountry">Selecciona tu país</option>
                 <option>Argentina</option>
@@ -160,7 +160,7 @@
             </div>
 
             <div class="form-field full">
-              <label for="c-subject" data-i18n="contact.form.subject">Asunto <span class="req">*</span></label>
+              <label for="c-subject" data-i18n-html="contact.form.subject">Asunto <span class="req">*</span></label>
               <input type="text" id="c-subject" name="asunto" required>
             </div>
 

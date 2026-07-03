@@ -326,7 +326,7 @@ input,textarea,select{ font-family: inherit; font-size: 1rem; }
 .carousel-btn[disabled]{ opacity:.35; pointer-events:none; }
 
 .principle-card{
-  width: 300px; background: var(--white); border: 1px solid var(--line); border-left: 3px solid var(--green);
+  width: 300px; background: var(--white); border: 1px solid var(--line); border-bottom: 3px solid var(--green);
   border-radius: 4px; padding: 28px 26px; box-shadow: var(--shadow-card);
 }
 .principle-card h3{ font-family: var(--font-body); font-size: 1.02rem; color: var(--blue-ink); margin-bottom:10px; }
@@ -746,7 +746,7 @@ h2 em, h1 em{ font-style: italic; }
 
 .circled{ position:relative; display:inline-block; font-style:normal; }
 .circled::after{
-  content:""; position:absolute; left:-12px; right:-14px; top:-16px; bottom:-8px;
+  content:""; position:absolute; left:-16%; right:-16%; top:-18px; bottom:-9px;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 90'%3E%3Cellipse cx='100' cy='45' rx='96' ry='40' fill='none' stroke='%2300993d' stroke-width='4'/%3E%3C/svg%3E");
   background-repeat:no-repeat; background-size:100% 100%;
   transform: rotate(-2deg); pointer-events:none; z-index:-1;
