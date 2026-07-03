@@ -32,6 +32,18 @@
           <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.9h2.65l.4-3.08h-3.05V8.05c0-.89.25-1.5 1.52-1.5h1.63V3.8A22 22 0 0 0 14.3 3.7c-2.35 0-3.96 1.44-3.96 4.07v2.26H7.68v3.07h2.66V21h3.16Z"/></svg>
         </a>
       </div>
+      <div class="lang-switcher">
+        <button type="button" class="lang-toggle" aria-haspopup="true" aria-expanded="false">
+          <span>ES</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="lang-menu" role="menu">
+          <li role="none"><button type="button" class="lang-option is-active" data-lang="es" role="menuitem">Español</button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="pt" role="menuitem" disabled>Português <span class="soon-badge">Próximamente</span></button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitem" disabled>English <span class="soon-badge">Próximamente</span></button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem" disabled>Français <span class="soon-badge">Próximamente</span></button></li>
+        </ul>
+      </div>
       <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
     </div>
   </div>

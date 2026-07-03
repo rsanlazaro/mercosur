@@ -1,6 +1,36 @@
 // Cámara de Comercio Mercosur — site scripts
 document.addEventListener('DOMContentLoaded', function () {
 
+  /* ---------- Language switcher (ES active, PT/EN/FR coming soon) ---------- */
+  var langSwitcher = document.querySelector('.lang-switcher');
+  if (langSwitcher) {
+    var langToggle = langSwitcher.querySelector('.lang-toggle');
+
+    function closeLangMenu() {
+      langSwitcher.classList.remove('is-open');
+      langToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    langToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = langSwitcher.classList.toggle('is-open');
+      langToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    langSwitcher.querySelectorAll('.lang-option:not(:disabled)').forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        closeLangMenu();
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!langSwitcher.contains(e.target)) closeLangMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLangMenu();
+    });
+  }
+
   /* ---------- Mobile nav toggle ---------- */
   var toggle = document.querySelector('.nav-toggle');
   var header = document.querySelector('.site-header');
