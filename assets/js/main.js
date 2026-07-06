@@ -1115,10 +1115,551 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 
+  /* ---------- Cookie Policy modal (footer link) ---------- */
+  (function () {
+    if (!document.querySelector('.js-cookies-policy-link')) return;
+
+    var overlay = null;
+
+    var cookiesPolicyHTML =
+      '<p class="privacy-eyebrow">Cámara de Comercio Mercosur</p>' +
+        '<h2 id="cookies-policy-modal-title">Política de Cookies</h2>' +
+        '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Julio de 2026 · Aplicable al sitio web institucional camaracomerciomercosur.org</p>' +
+        '<h3>1. Objeto y alcance de esta Política</h3>' +
+        '<p>La presente Política de Cookies informa sobre la utilización de cookies y tecnologías similares en el sitio web institucional de la Cámara de Comercio Mercosur. Su finalidad es explicar, con un lenguaje claro, qué funciones pueden desarrollar estas tecnologías, cómo se distinguen las herramientas indispensables de aquellas que requieren una decisión previa de la persona usuaria y de qué manera pueden administrarse, modificarse o retirarse las preferencias de navegación.</p>' +
+        '<p>La Política se aplica al dominio institucional y, cuando corresponda, a sus subdominios, áreas restringidas, páginas de eventos, formularios integrados y demás servicios digitales incorporados directamente bajo control de la Cámara. Los portales o servicios externos a los que se acceda mediante enlaces se rigen por sus propias condiciones, salvo respecto de las tecnologías que se activen dentro de las páginas de la Cámara antes de abandonar el sitio.</p>' +
+        '<p>Este documento complementa la Política de Privacidad. La Política de Privacidad regula el tratamiento general de datos personales, mientras que esta Política se concentra en el almacenamiento, recuperación, transmisión o utilización de información mediante navegadores, dispositivos y tecnologías equivalentes.</p>' +
+        '<h3>2. Identificación institucional</h3>' +
+        '<p>El responsable del sitio es la Cámara de Comercio Mercosur, asociación internacional uruguaya, con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Las consultas relacionadas con esta Política, con el funcionamiento del panel de preferencias o con el tratamiento de datos vinculado a cookies podrán dirigirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<h3>3. Marco jurídico y principios aplicables</h3>' +
+        '<p>Uruguay no cuenta con una norma autónoma dedicada exclusivamente a las cookies. Sin embargo, cuando estas tecnologías permiten recoger, almacenar, relacionar, transmitir o utilizar información vinculada con una persona, un navegador o un dispositivo, su empleo queda comprendido en la normativa uruguaya de protección de datos personales. En particular, resultan relevantes la Ley N.º 18.331 de Protección de Datos Personales y Acción de Habeas Data, el Decreto N.º 414/009, el Decreto N.º 64/020 y los criterios emitidos por la Unidad Reguladora y de Control de Datos Personales.</p>' +
+        '<p>La Cámara aplicará los principios de información, finalidad, proporcionalidad, minimización, seguridad, confidencialidad, conservación limitada y responsabilidad. Cuando una tecnología no sea estrictamente necesaria para prestar una función solicitada o garantizar la seguridad del sitio, su activación dependerá de una elección previa, informada y revocable de la persona usuaria.</p>' +
+        '<h3>4. Correspondencia entre la información y el funcionamiento técnico</h3>' +
+        '<p>La transparencia exige que la información jurídica, el banner de cookies, el panel de configuración y el funcionamiento real del sitio coincidan. La Cámara adoptará medidas razonables para impedir la activación de tecnologías opcionales antes de una elección válida, asegurar que el rechazo produzca efectos reales, permitir la modificación posterior de las preferencias y corregir cualquier divergencia detectada entre esta Política y la configuración técnica.</p>' +
+        '<p>La Cámara no considerará cumplida esta obligación mediante la mera publicación de un texto. El inventario de tecnologías, la clasificación de sus finalidades y la configuración del mecanismo de consentimiento se revisarán tanto cuando se incorporen nuevas herramientas o cambien proveedores como mediante comprobaciones periódicas razonables, aun cuando no se hayan identificado modificaciones aparentes en el sitio.</p>' +
+        '<h3>5. Qué son las cookies y las tecnologías similares</h3>' +
+        '<p>Una cookie es un pequeño archivo o fragmento de información que puede almacenarse en el navegador o dispositivo cuando una persona visita un sitio web. Según su finalidad, puede servir para mantener una sesión, proteger formularios, recordar preferencias, conservar una elección, mejorar el funcionamiento, medir el rendimiento o habilitar contenidos proporcionados por terceros.</p>' +
+        '<p>No todas las cookies identifican directamente a una persona. No obstante, algunas pueden asociarse con direcciones IP, identificadores, dispositivos, navegadores, sesiones o patrones de navegación y, por tanto, llegar a constituir datos personales o permitir la individualización de una persona usuaria.</p>' +
+        '<p>La expresión “cookies” se utiliza en esta Política en sentido amplio e incluye, cuando desarrollen funciones equivalentes, el almacenamiento local o de sesión, píxeles, etiquetas, balizas web, scripts, identificadores de dispositivo, herramientas de medición y otras tecnologías que puedan incorporarse al sitio.</p>' +
+        '<h3>6. Clasificación según quién las gestione y su duración</h3>' +
+        '<h4>Cookies propias y cookies de terceros</h4>' +
+        '<p>Las cookies propias son gestionadas desde dominios, sistemas o servicios bajo control de la Cámara y pueden emplearse para seguridad, mantenimiento de sesión, protección de formularios, gestión de preferencias o funcionamiento técnico. Las cookies de terceros son administradas por proveedores externos cuyos servicios se integran en el sitio, por ejemplo, herramientas de medición, videos, mapas, redes sociales, calendarios, formularios, gestión de eventos, pasarelas de pago o servicios de seguridad.</p>' +
+        '<p>Cuando intervenga un tercero, este podrá realizar tratamientos propios conforme a sus condiciones y políticas. La Cámara procurará seleccionar y configurar las integraciones de forma respetuosa con la privacidad, sin que ello sustituya la información que cada proveedor deba ofrecer respecto de sus propios tratamientos.</p>' +
+        '<h4>Cookies de sesión y cookies persistentes</h4>' +
+        '<p>Las cookies de sesión suelen eliminarse al cerrar el navegador o finalizar la sesión. Las cookies persistentes permanecen durante un periodo determinado o hasta que la persona usuaria las elimine. La duración concreta dependerá de la función y configuración de cada herramienta y deberá reflejarse en el inventario técnico cuando haya sido verificada.</p>' +
+        '<h3>7. Clasificación según su finalidad</h3>' +
+        '<h4>Cookies estrictamente necesarias</h4>' +
+        '<p>Son las indispensables para permitir el funcionamiento esencial y seguro del sitio o prestar una función expresamente solicitada por la persona usuaria. Su utilización se limitará a supuestos en los que resulte necesaria para mantener la seguridad, gestionar una sesión, proteger formularios, equilibrar cargas, prevenir usos fraudulentos, conservar la elección sobre cookies o facilitar el acceso a áreas restringidas. Estas tecnologías podrán activarse sin una elección adicional únicamente cuando su función sea estrictamente técnica o necesaria para atender la solicitud de la persona usuaria; esta categoría no se utilizará para encubrir medición, publicidad, personalización o funciones de conveniencia.</p>' +
+        '<p>La persona usuaria puede bloquearlas desde su navegador, aunque ello podría afectar sesiones, formularios, seguridad, preferencias o determinadas áreas del sitio.</p>' +
+        '<h4>Cookies funcionales o de preferencias</h4>' +
+        '<p>Estas tecnologías pueden recordar opciones como idioma, región, tamaño de texto, accesibilidad, configuración de reproducción u otras preferencias. Aunque mejoran la experiencia, no siempre son imprescindibles. Cuando no sean necesarias para una función solicitada, permanecerán desactivadas hasta que exista consentimiento.</p>' +
+        '<h4>Cookies analíticas o de medición</h4>' +
+        '<p>Las herramientas analíticas pueden ayudar a conocer el número de visitas, páginas consultadas, duración aproximada, origen general del tráfico, errores técnicos, rendimiento o interacción con contenidos. Aunque los resultados se presenten de forma agregada, pueden intervenir direcciones IP, identificadores o información del dispositivo. Como criterio general, las cookies analíticas no esenciales deberán permanecer desactivadas hasta que la persona las acepte.</p>' +
+        '<h4>Cookies publicitarias y de elaboración de perfiles</h4>' +
+        '<p>En la fecha de publicación de esta Política, el sitio no utilizará cookies destinadas a publicidad comportamental ni a la elaboración de perfiles, salvo que una auditoría técnica verifique lo contrario antes de su entrada en vigor. Si en el futuro se incorporaran estas finalidades, la Política y el panel deberán actualizarse previamente, las tecnologías correspondientes permanecerán desactivadas hasta obtener una elección específica y no se utilizarán para adoptar decisiones relevantes sobre personas sin las garantías legales aplicables.</p>' +
+        '<h4>Cookies de redes sociales y contenidos externos</h4>' +
+        '<p>Los videos, mapas, publicaciones incrustadas, botones sociales, calendarios, chats, formularios externos, herramientas de eventos, reservas o pagos pueden requerir tecnologías de terceros. Cuando estas no sean necesarias, el contenido permanecerá bloqueado hasta que la persona autorice la categoría correspondiente. Siempre que la implementación técnica lo permita, podrá ofrecerse una autorización contextual limitada al servicio concreto, sin exigir la aceptación global de otras categorías opcionales. Una vez activado el contenido, el proveedor puede recibir información sobre el navegador, dispositivo, dirección IP o interacción.</p>' +
+        '<h3>8. Inventario de tecnologías utilizadas</h3>' +
+        '<p>El inventario vigente de cookies y tecnologías similares deberá reflejar la configuración técnica efectiva del sitio. Para cada herramienta o grupo homogéneo se indicarán, cuando hayan sido comprobados, el proveedor, los nombres técnicos relevantes, la finalidad, la categoría, la condición de propia o de tercero, la duración, el momento de activación y la posible existencia de acceso internacional a información.</p>' +
+        '<p>La Cámara no atribuirá al sitio herramientas, proveedores, duraciones o finalidades que no hayan sido verificados. Cuando varias cookies compartan proveedor, finalidad y categoría, podrán describirse de forma conjunta para facilitar la comprensión, siempre que no se omita información relevante. El inventario actualizado podrá mostrarse en el panel de preferencias o en la sección correspondiente del sitio y deberá revisarse antes de incorporar nuevas integraciones.</p>' +
+        '<h3>9. Consentimiento y opciones disponibles</h3>' +
+        '<p>Las cookies no necesarias solo deberán activarse después de un consentimiento previo, libre, informado, específico, inequívoco, verificable y revocable. La mera navegación, el desplazamiento por la página, la inactividad, el cierre del aviso o la utilización continuada del sitio no se interpretarán como aceptación. Tampoco se utilizarán casillas pre marcadas para categorías opcionales.</p>' +
+        '<p>La primera capa informativa deberá ofrecer, con visibilidad comparable, las opciones de aceptar todas, rechazar las no necesarias y configurar preferencias, además de un acceso a esta Política. Las tecnologías estrictamente necesarias podrán funcionar automáticamente; las restantes dependerán de la elección realizada.</p>' +
+        '<p>El diseño del aviso y del panel evitará fórmulas engañosas o manipulativas. No se dificultará el rechazo ni se destacará de forma desproporcionada la aceptación. Las categorías opcionales aparecerán desactivadas por defecto y solo se activarán después de una acción afirmativa válida.</p>' +
+        '<p>Cuando la persona seleccione “Rechazar las no necesarias”, el sitio no activará cookies opcionales ni los scripts asociados a ellas, y mantendrá bloqueados los contenidos externos que dependan de esas tecnologías. Podrá conservarse únicamente la información técnica indispensable para recordar y respetar esa preferencia.</p>' +
+        '<h3>10. Panel de preferencias y retirada del consentimiento</h3>' +
+        '<p>El panel permitirá consultar las categorías, conocer sus finalidades, identificar los proveedores, revisar la duración disponible y activar o desactivar opciones. La persona podrá modificar su decisión en cualquier momento mediante un enlace permanente, icono de privacidad u opción accesible desde el pie de página.</p>' +
+        '<p>La retirada deberá ser tan sencilla como la aceptación. No afectará a la licitud del tratamiento realizado antes de retirarse, pero impedirá futuras activaciones de las tecnologías opcionales. Cuando sea técnicamente posible, el gestor eliminará o desactivará las cookies opcionales ya instaladas; si alguna permanece almacenada en el dispositivo, la persona podrá eliminarla desde su navegador. Cualquier activación indebida detectada deberá investigarse y corregirse sin demoras injustificadas.</p>' +
+        '<p>La modificación de preferencias podrá afectar exclusivamente a la categoría o servicio seleccionado. Cuando un contenido externo se haya autorizado de forma contextual, la persona deberá poder revocar esa autorización sin alterar necesariamente el resto de sus elecciones.</p>' +
+        '<h3>11. Registro y duración de las preferencias</h3>' +
+        '<p>El sitio podrá conservar una evidencia técnica mínima de la elección para recordar preferencias, respetar el rechazo, acreditar el consentimiento y evitar mostrar repetidamente el aviso. Este registro podrá incluir la fecha, la versión del aviso, las categorías seleccionadas, un identificador técnico limitado y la fecha de modificación o retirada.</p>' +
+        '<p>La evidencia de consentimiento no se utilizará como una herramienta adicional de seguimiento ni contendrá información superior a la necesaria. Las preferencias podrán mantenerse durante un periodo razonable y volverán a solicitarse cuando expire el registro, cambien de forma sustancial las finalidades o proveedores, se incorporen nuevas categorías o exista una exigencia jurídica, técnica o de seguridad.</p>' +
+        '<h3>12. Gestión desde el navegador</h3>' +
+        '<p>La mayoría de los navegadores permite consultar, bloquear, limitar o eliminar cookies desde sus opciones de privacidad y seguridad. Esta posibilidad es complementaria al panel del sitio y no sustituye la obligación de respetar la elección de la persona usuaria. El bloqueo general de cookies puede afectar sesiones, formularios, preferencias, contenidos, áreas restringidas o funciones de seguridad.</p>' +
+        '<h3>13. Datos personales, proveedores y transferencias internacionales</h3>' +
+        '<p>Según la herramienta utilizada, las cookies pueden implicar el tratamiento de direcciones IP, identificadores, características del navegador o dispositivo, sistema operativo, idioma, páginas visitadas, fecha y hora, origen de navegación, interacciones, preferencias o errores técnicos. La información concreta dependerá de la configuración efectiva y deberá limitarse a la finalidad informada.</p>' +
+        '<p>Algunos proveedores pueden almacenar, procesar o acceder a información desde otros países. Cuando corresponda, la Cámara informará sobre el proveedor, la naturaleza del servicio y las garantías aplicables, en coordinación con la Política de Privacidad. No se afirmará la inexistencia de transferencias internacionales sin haber verificado todos los servicios incorporados.</p>' +
+        '<h3>14. Derechos de las personas</h3>' +
+        '<p>Cuando las cookies impliquen tratamiento de datos personales, podrán ejercerse los derechos reconocidos por la normativa uruguaya, incluidos, cuando correspondan, los derechos de acceso, rectificación, actualización, inclusión y supresión y, si existieran valoraciones automatizadas o elaboración de perfiles, los derechos específicamente vinculados a esos tratamientos. Las solicitudes podrán dirigirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a> y se gestionarán de acuerdo con la Política de Privacidad y la normativa aplicable.</p>' +
+        '<p>Cuando un proveedor externo trate datos bajo su propia responsabilidad, también puede resultar necesario ejercer determinados derechos directamente ante ese proveedor. La Cámara facilitará la identificación del servicio cuando disponga de información suficiente para hacerlo.</p>' +
+        '<h3>15. Menores de edad</h3>' +
+        '<p>El sitio institucional no está diseñado específicamente para elaborar perfiles de menores, mostrarles publicidad comportamental ni recabar deliberadamente información mediante tecnologías opcionales dirigidas a ese público. Si en el futuro se incorporaran servicios destinados específicamente a menores, se adoptarán medidas reforzadas y se actualizarán la información y los mecanismos de consentimiento aplicables.</p>' +
+        '<h3>16. Seguridad, control técnico y auditoría</h3>' +
+        '<p>La Cámara adoptará medidas razonables para limitar tecnologías innecesarias, revisar scripts e integraciones, mantener actualizado el gestor de consentimiento, restringir accesos, respetar el rechazo y evitar reactivaciones no autorizadas. También revisará el inventario cuando se incorpore o elimine una herramienta, cambie un proveedor, aparezca una nueva cookie, varíe su duración o se modifique el sistema de consentimiento.</p>' +
+        '<p>El inventario será objeto de revisiones periódicas razonables y de revisiones adicionales cuando se produzcan cambios técnicos relevantes. La automatización de esas comprobaciones dependerá de las capacidades del gestor utilizado, pero no sustituirá la responsabilidad de verificar que la información publicada y la configuración efectiva continúen siendo correctas. Cuando se detecte una divergencia, se adoptarán medidas para corregirla sin demoras indebidas.</p>' +
+        '<h3>17. Cambios sustanciales y actualización de la Política</h3>' +
+        '<p>La Cámara podrá actualizar esta Política por cambios legales, nuevos criterios de la Unidad Reguladora y de Control de Datos Personales, modificaciones tecnológicas, incorporación de proveedores, nuevas finalidades o cambios del sitio. La versión vigente será la publicada en la web.</p>' +
+        '<p>Cuando la modificación afecte de forma relevante las finalidades, categorías, proveedores, elaboración de perfiles, publicidad, transferencias o naturaleza del tratamiento, podrá solicitarse una nueva elección. Un cambio sustancial no deberá aplicarse únicamente mediante una modificación silenciosa del texto cuando afecte al consentimiento previamente otorgado.</p>' +
+        '<h3>18. Relación institucional y sitios del MERCOSUR</h3>' +
+        '<p>El sitio al que se aplica esta Política pertenece a la Cámara de Comercio Mercosur y no constituye un portal oficial del MERCOSUR. La gestión de cookies corresponde a la Cámara y, en su caso, a los proveedores identificados. Esta Política no se extiende a portales oficiales del bloque ni a otros sitios externos enlazados desde la web.</p>' +
+        '<h3>19. Coordinación documental</h3>' +
+        '<p>Esta Política deberá interpretarse conjuntamente con la Política de Privacidad, los Términos de Uso, la Política de Uso de Marca, los avisos específicos de formularios y las condiciones de los servicios externos incorporados. La configuración técnica del panel deberá ser coherente con la información publicada. Si se detecta una contradicción, deberá revisarse la configuración o actualizarse la información sin demoras indebidas.</p>' +
+        '<h3>20. Contacto</h3>' +
+        '<p>Para formular consultas sobre esta Política, solicitar información sobre las cookies utilizadas o ejercer derechos relacionados con el tratamiento de datos personales, puede escribirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Cámara de Comercio Mercosur. Asociación internacional uruguaya. Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay.</p>' +
+        '<p>Marco normativo de referencia: Ley N.º 18.331 de Protección de Datos Personales y Acción de Habeas Data; Decreto N.º 414/009; Decreto N.º 64/020; orientaciones de la Unidad Reguladora y de Control de Datos Personales sobre cookies y perfiles.</p>';
+
+    function buildOverlay() {
+      if (overlay) return overlay;
+      overlay = document.createElement('div');
+      overlay.className = 'privacy-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-labelledby', 'cookies-policy-modal-title');
+      overlay.innerHTML =
+        '<div class="privacy-modal">' +
+          '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
+          cookiesPolicyHTML +
+        '</div>';
+      document.body.appendChild(overlay);
+
+      overlay.querySelector('.privacy-close').addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+      return overlay;
+    }
+
+    function openModal() {
+      var ov = buildOverlay();
+      window.requestAnimationFrame(function () {
+        ov.classList.add('is-open');
+      });
+    }
+
+    function closeModal() {
+      if (!overlay) return;
+      overlay.classList.remove('is-open');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) closeModal();
+    });
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('.js-cookies-policy-link');
+      if (!trigger) return;
+      e.preventDefault();
+      openModal();
+    });
+  })();
+
+  /* ---------- Integrity Channel policy modal (footer link) ---------- */
+  (function () {
+    if (!document.querySelector('.js-integrity-link')) return;
+
+    var overlay = null;
+
+    var integrityHTML =
+      '<p class="privacy-eyebrow">Cámara de Comercio Mercosur</p>' +
+        '<h2 id="integrity-modal-title">Política y Funcionamiento del Canal de Integridad</h2>' +
+        '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Fecha de publicación: 5 de julio de 2026</p>' +
+        '<p>La Cámara de Comercio Mercosur considera que la integridad institucional exige algo más que el cumplimiento formal de normas. Requiere mecanismos capaces de recibir alertas de buena fe, valorar los hechos con imparcialidad, proteger a las personas, preservar evidencia y adoptar medidas proporcionadas cuando exista un riesgo para la legalidad, los activos, la reputación o los fines de la institución. Esta Política explica el funcionamiento público del Canal de Integridad, delimita sus garantías y sus límites y establece los principios que deberán orientar su utilización, sin revelar los procedimientos operativos reservados que se desarrollarán en el Protocolo Interno correspondiente.</p>' +
+        '<h3>1. Identidad institucional y canal de contacto</h3>' +
+        '<p>La Cámara de Comercio Mercosur es una asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. El Canal de Integridad podrá utilizarse mediante el correo <a href="mailto:integridad@camaracomerciomercosur.org">integridad@camaracomerciomercosur.org</a>, que deberá mantenerse separado de las comunicaciones generales de la institución y bajo acceso restringido a personas formalmente designadas.</p>' +
+        '<p>El acceso al buzón deberá administrarse mediante credenciales individuales, sin reenvíos automáticos a cuentas generales ni a personas ajenas a la gestión del Canal. Los permisos deberán revisarse periódicamente y revocarse de inmediato cuando cese una responsabilidad. La Cámara procurará mantener trazabilidad suficiente de los accesos y actuaciones, así como medidas razonables de seguridad, almacenamiento y respaldo acordes con la sensibilidad de la información recibida.</p>' +
+        '<p>Cuando una comunicación afecte a una persona con acceso ordinario al Canal, al Responsable, a una autoridad que pueda influir en su gestión o a la mayoría del órgano competente, deberá utilizarse la vía alternativa que la Cámara habilite y publique específicamente para conflictos de interés. Hasta que exista un canal alternativo permanente, la comunicación deberá ser derivada sin demora a una instancia independiente y sin conflicto, conforme a lo previsto en esta Política.</p>' +
+        '<h3>2. Naturaleza y finalidad del Canal</h3>' +
+        '<p>El Canal de Integridad es un mecanismo voluntario de gobernanza institucional creado para recibir, registrar, evaluar y gestionar comunicaciones sobre posibles irregularidades vinculadas con la Cámara, sus órganos, su actividad, sus recursos, sus proyectos, sus eventos o su identidad institucional. Su finalidad es detectar riesgos, facilitar la corrección de incumplimientos, preservar evidencia, proteger a personas y activos, mejorar los controles internos y permitir que los órganos competentes adopten decisiones informadas.</p>' +
+        '<p>El Canal no es un tribunal, una fiscalía, una autoridad policial o administrativa, ni sustituye los procedimientos judiciales, penales, laborales, civiles o regulatorios que puedan resultar aplicables. Tampoco constituye por sí mismo un procedimiento disciplinario autónomo ni garantiza que toda comunicación dará lugar a una investigación completa. La recepción de un mensaje no implica que los hechos sean ciertos, que exista responsabilidad ni que la Cámara adopte necesariamente medidas sancionadoras.</p>' +
+        '<h3>3. Compromiso institucional</h3>' +
+        '<p>La Cámara gestionará el Canal conforme a los principios de legalidad, buena fe, transparencia, independencia, imparcialidad, proporcionalidad, confidencialidad restringida, respeto, dignidad y responsabilidad. Se procurará proteger a quienes comuniquen hechos de buena fe sin perjudicar los derechos de la persona afectada, sin anticipar conclusiones y sin convertir el Canal en una herramienta de confrontación personal.</p>' +
+        '<p>La creación del Canal responde a una decisión de buena gobernanza institucional. No debe interpretarse como una afirmación de que existe una obligación legal general y uniforme aplicable a todas las asociaciones civiles privadas uruguayas, sino como un compromiso voluntario de prevención, control, rendición de cuentas y mejora continua.</p>' +
+        '<h3>4. Alcance institucional y relación con el MERCOSUR</h3>' +
+        '<p>El Canal podrá recibir comunicaciones relacionadas con la Cámara, sus órganos, autoridades, asociados, empleados, asesores, proveedores, colaboradores, patrocinadores, panelistas, representantes, delegaciones, capítulos, eventos, programas, proyectos, fondos, activos, sistemas, documentos, certificados, credenciales, cuentas, datos, marca y cualquier actuación realizada o presentada como realizada en su nombre. No será necesario mantener una relación contractual previa, siempre que los hechos guarden una conexión razonable con la Cámara.</p>' +
+        '<p>La Cámara desarrolla su actividad dentro del espacio económico, empresarial, social e institucional del MERCOSUR, pero no forma parte de la estructura política, gubernamental u orgánica oficial del bloque. Este Canal pertenece exclusivamente a la Cámara, no es un canal oficial del MERCOSUR, no investiga de forma general a Estados Partes, Estados Asociados, gobiernos u órganos oficiales y no sustituye los mecanismos institucionales del bloque. Una eventual inscripción futura en el Registro de Organizaciones y Movimientos Sociales del MERCOSUR —MOS— no alteraría esta naturaleza.</p>' +
+        '<h3>5. Materias comprendidas</h3>' +
+        '<p>Podrán comunicarse hechos relacionados con fraude, corrupción, soborno, apropiación indebida, utilización irregular de recursos, manipulación de registros, falsificación documental, ocultamiento de información relevante, conflictos de interés no declarados, incumplimientos graves de los Estatutos o de las políticas internas y cualquier actuación capaz de comprometer seriamente la legalidad o la integridad financiera de la Cámara.</p>' +
+        '<p>También podrán comunicarse supuestos de suplantación, falsos representantes, uso indebido de cargos, credenciales vencidas, certificados alterados, perfiles o dominios confundibles, uso no autorizado de la marca y comunicaciones emitidas sin facultades. Quedan igualmente comprendidas la captación de fondos en nombre de la Cámara, la promoción de inversiones no autorizadas, el cobro de comisiones no aprobadas, las falsas promesas de respaldo, la utilización de documentos institucionales para legitimar operaciones privadas y la presentación de proyectos como aprobados sin autorización.</p>' +
+        '<p>El Canal podrá utilizarse además para informar sobre abuso de autoridad, acoso, discriminación, violencia, trato degradante, represalias, incumplimientos de confidencialidad, utilización indebida de información, accesos no autorizados, filtraciones, pérdida de datos, manipulación de cuentas, incidentes de ciberseguridad y otras conductas que puedan afectar gravemente a las personas, los activos, la credibilidad o los fines institucionales.</p>' +
+        '<h3>6. Materias excluidas y emergencias</h3>' +
+        '<p>El Canal no está destinado a consultas comerciales generales, solicitudes de asociación, propuestas de cooperación, presentación ordinaria de proyectos, consultas de prensa, reclamaciones sobre tiempos de respuesta, desacuerdos menores sin dimensión institucional, opiniones políticas, consultas generales de privacidad o solicitudes ordinarias de ejercicio de derechos sobre datos personales. Las comunicaciones ajenas a su objeto podrán ser redirigidas, devueltas, archivadas o remitidas al área correspondiente.</p>' +
+        '<p>El Canal tampoco es un servicio de emergencia. Cuando exista riesgo inmediato para una persona, peligro físico, un posible delito en curso, destrucción inminente de evidencia, pérdida inmediata de activos o un incidente crítico de seguridad, deberá contactarse directamente con la autoridad pública competente. La Cámara podrá comunicar información a la Policía, Fiscalía, tribunales, autoridades laborales, la Unidad Reguladora y de Control de Datos Personales u otros organismos cuando exista obligación legal, requerimiento válido, riesgo relevante o necesidad de proteger derechos.</p>' +
+        '<h3>7. Presentación de una comunicación</h3>' +
+        '<p>La comunicación debería describir los hechos de manera clara y, cuando sea posible, cronológica; indicar fechas aproximadas, personas o entidades involucradas, relación con la Cámara, documentos disponibles, posibles testigos, riesgos actuales, posibles represalias y cualquier medida urgente que pueda resultar necesaria. No se exige que la persona realice una investigación propia, aporte pruebas concluyentes o determine jurídicamente la infracción.</p>' +
+        '<p>La información debe obtenerse de forma lícita. No deberán recopilarse pruebas mediante acceso ilícito, interceptación, sustracción, manipulación, vulneración de sistemas, invasión ilegítima de privacidad o cualquier otra conducta contraria a la ley. El Canal no legitima actuaciones ilícitas realizadas con el propósito de obtener evidencia.</p>' +
+        '<h3>8. Comunicaciones identificadas, confidenciales y anónimas</h3>' +
+        '<p>Las comunicaciones identificadas permiten mantener contacto con la persona, solicitar aclaraciones y, cuando resulte posible, informar sobre el estado o cierre. Cuando la identidad sea conocida, la Cámara limitará su acceso a quienes necesiten conocerla para gestionar el asunto.</p>' +
+        '<p>También podrán admitirse comunicaciones anónimas cuando contengan información suficientemente concreta para una evaluación razonable. Sin embargo, el correo electrónico ordinario no garantiza anonimato técnico, la identidad puede inferirse del contenido o del contexto y la ausencia de contacto puede dificultar la revisión, impedir aclaraciones o limitar la información sobre el resultado. La Cámara no promete anonimato absoluto ni confidencialidad absoluta.</p>' +
+        '<h3>9. Buena fe y prohibición de represalias</h3>' +
+        '<p>Se considerará realizada de buena fe la comunicación basada en hechos que la persona considere razonablemente verdaderos al momento de informar, aunque posteriormente no puedan confirmarse. La falta de confirmación de los hechos no convierte por sí misma una comunicación en falsa, maliciosa o abusiva, ni se exige que la persona haya interpretado correctamente la normativa aplicable.</p>' +
+        '<p>La Cámara prohíbe represalias internas contra quienes comuniquen hechos de buena fe, así como contra testigos, personas colaboradoras o quienes aporten documentación. Se considerarán represalias, entre otras, las amenazas, el hostigamiento, la exclusión injustificada, la retirada arbitraria de oportunidades, la presión para retirar la comunicación, el perjuicio reputacional, la terminación injustificada de relaciones o la revelación innecesaria de identidad.</p>' +
+        '<p>Esta protección constituye un compromiso institucional y no una inmunidad absoluta frente a consecuencias legítimas derivadas de conductas propias ajenas a la comunicación. Tampoco protege las comunicaciones deliberadamente falsas o utilizadas como mecanismo de acoso, represalia, coacción o extorsión.</p>' +
+        '<h3>10. Comunicaciones falsas o abusivas</h3>' +
+        '<p>Debe distinguirse entre un error de buena fe, una comunicación no confirmada, una interpretación equivocada o una falta de evidencia suficiente y una comunicación deliberadamente falsa. Solo podrán dar lugar a medidas las comunicaciones formuladas con conocimiento de su falsedad, intención deliberada de perjudicar, documentación manipulada, ocultación consciente de hechos esenciales o utilización abusiva del Canal.</p>' +
+        '<p>Esta cláusula deberá aplicarse de manera restrictiva y no podrá utilizarse para desalentar comunicaciones legítimas, sancionar errores razonables ni trasladar al comunicante la obligación de probar definitivamente los hechos.</p>' +
+        '<h3>11. Recepción, confirmación y gestión diligente</h3>' +
+        '<p>Cuando sea posible, la Cámara confirmará la recepción, asignará una referencia interna y podrá solicitar información adicional. Procurará realizar estas actuaciones en un plazo razonable y mantener una gestión diligente, atendiendo a la gravedad, urgencia, complejidad, disponibilidad de evidencia, riesgo de represalias y necesidad de intervención externa.</p>' +
+        '<p>No se establece un plazo rígido de resolución, porque la duración dependerá de las circunstancias de cada asunto. Cuando una demora resulte significativa, la Cámara podrá informar de ello en términos generales, siempre que esa comunicación no perjudique la revisión, los derechos de terceros o la confidencialidad.</p>' +
+        '<h3>12. Etapas de evaluación, revisión e investigación</h3>' +
+        '<p>La evaluación inicial tiene por finalidad determinar si la materia entra dentro del Canal, si existe información mínima, si hay riesgo inmediato, si debe preservarse evidencia, si existe un conflicto de interés, si corresponde redirigir el asunto o si procede informar a una autoridad. Esta fase no implica la apertura de una investigación formal.</p>' +
+        '<p>Cuando existan elementos suficientes, podrá iniciarse una revisión preliminar destinada a comprobar de manera proporcionada los hechos esenciales. Solo cuando la naturaleza, gravedad o consistencia de la información lo justifiquen se abrirá una investigación interna formal. Si de las conclusiones pudieran derivarse consecuencias estatutarias, contractuales o laborales, corresponderá al órgano competente iniciar el procedimiento específico aplicable, con las garantías correspondientes.</p>' +
+        '<p>La Cámara podrá solicitar aclaraciones, acumular asuntos relacionados, archivar comunicaciones manifiestamente ajenas, adoptar medidas preventivas, solicitar asistencia externa o remitir los hechos a otro procedimiento. El archivo inicial no equivale necesariamente a negar la veracidad de lo comunicado.</p>' +
+        '<h3>13. Gobernanza, independencia y conflictos de interés</h3>' +
+        '<p>La Cámara preverá la existencia de un Responsable del Canal de Integridad, uno o más suplentes y un órgano competente para decidir las medidas que excedan la mera gestión operativa. El Responsable recibirá, registrará, protegerá, evaluará inicialmente y coordinará la tramitación, pero no podrá imponer sanciones ni adoptar decisiones que correspondan estatutariamente a otros órganos.</p>' +
+        '<p>Ninguna persona podrá recibir, evaluar, investigar o decidir un asunto que se refiera a ella, afecte a una persona estrechamente vinculada, se relacione con una actuación propia, genere un interés personal o comprometa objetivamente su imparcialidad. Cuando exista conflicto, la gestión se asignará a una instancia alternativa, que podrá ser la Comisión Fiscal, una comisión ad hoc, un asesor jurídico externo, un investigador independiente u otra instancia sin conflicto. La existencia de un conflicto no paralizará el Canal.</p>' +
+        '<h3>14. Revisión, investigación y preservación de evidencia</h3>' +
+        '<p>La tramitación se regirá por la independencia, imparcialidad, diligencia, proporcionalidad, confidencialidad, trazabilidad, presunción de inocencia, derecho de defensa, minimización de datos y respeto de la dignidad de las personas. Podrá incluir revisión documental, entrevistas, solicitudes de aclaración, verificación de nombramientos, revisión de registros institucionales, análisis de correos o sistemas cuando sea legítimo, asesoramiento profesional y preservación de evidencia.</p>' +
+        '<p>La Cámara deberá procurar que la evidencia relevante se conserve de forma íntegra, identificable y segura. El detalle de la cadena de custodia, los controles de acceso, los modelos de acta, la documentación de entrevistas y las reglas de aprobación de medidas se regularán en el Protocolo Interno del Canal de Integridad, de circulación restringida. Esta Política no describe métodos internos sensibles ni técnicas que puedan facilitar interferencias.</p>' +
+        '<h3>15. Derechos de la persona afectada</h3>' +
+        '<p>La persona señalada tendrá derecho a ser tratada con imparcialidad, no ser considerada responsable antes de una conclusión, conocer las alegaciones esenciales cuando sea procesalmente oportuno, presentar explicaciones, aportar documentos, proponer evidencia, formular observaciones y proteger su privacidad y reputación.</p>' +
+        '<p>Determinada información podrá mantenerse reservada temporalmente cuando su comunicación inmediata pueda destruir evidencia, interferir con la revisión, exponer a una persona, frustrar medidas preventivas o afectar una investigación externa. Esta reserva no podrá utilizarse para negar indefinidamente el derecho de defensa.</p>' +
+        '<h3>16. Asistencia, representación y colaboración</h3>' +
+        '<p>Cuando la naturaleza del asunto lo justifique, la persona comunicante, la persona afectada o un testigo podrán solicitar ser acompañados por un asesor, representante o persona de confianza. La Cámara podrá limitar o rechazar esa participación cuando exista conflicto de interés, riesgo para la confidencialidad, interferencia con la revisión o perjuicio para derechos de terceros.</p>' +
+        '<p>Las personas participantes deberán colaborar de buena fe, mantener la reserva que resulte razonablemente necesaria y evitar cualquier conducta que pueda alterar evidencia, influir indebidamente en testigos o perjudicar a otras personas. La asistencia permitida no convierte el Canal en un procedimiento judicial ni atribuye al acompañante facultades de dirección sobre la revisión.</p>' +
+        '<h3>17. Retirada de la comunicación y continuidad de la actuación</h3>' +
+        '<p>La persona comunicante podrá manifestar que no desea continuar colaborando o solicitar la retirada de su comunicación. La Cámara procurará respetar esa decisión en la medida posible, pero podrá continuar la evaluación o revisión cuando existan riesgos relevantes, otras personas potencialmente afectadas, evidencia que deba preservarse, obligaciones legales, posibles infracciones graves o razones suficientes de protección institucional.</p>' +
+        '<p>La retirada de la comunicación no obliga a eliminar inmediatamente la información ya recibida ni impide comunicar hechos a las autoridades competentes cuando corresponda. Cualquier continuidad deberá ser proporcionada y respetar las reglas de protección de datos y confidencialidad.</p>' +
+        '<h3>18. Medidas preventivas</h3>' +
+        '<p>Antes de concluir una revisión, la Cámara podrá adoptar medidas temporales para proteger personas, preservar evidencia, limitar accesos, suspender credenciales, detener usos de marca, impedir comunicaciones engañosas, proteger activos o evitar nuevos perjuicios. Estas medidas no constituyen una declaración de responsabilidad.</p>' +
+        '<p>Toda medida preventiva deberá ser proporcional, limitada en alcance y duración, revisada cuando corresponda y adoptada por el órgano competente de acuerdo con los Estatutos y las normas internas.</p>' +
+        '<h3>19. Resultado y medidas institucionales</h3>' +
+        '<p>Al finalizar la revisión, la Cámara podrá archivar el asunto, emitir recomendaciones, solicitar correcciones, reforzar controles, retirar contenidos, revocar autorizaciones, suspender accesos o credenciales, iniciar procedimientos estatutarios, terminar relaciones contractuales, reclamar activos, comunicar hechos a autoridades o ejercer acciones legales.</p>' +
+        '<p>Las medidas respecto de asociados, autoridades o directivos deberán respetar los Estatutos, los reglamentos internos, las competencias del órgano correspondiente, el derecho de defensa, la proporcionalidad y la normativa aplicable. El Responsable del Canal no podrá imponer por sí mismo medidas que excedan sus facultades.</p>' +
+        '<h3>20. Información a la persona comunicante</h3>' +
+        '<p>La Cámara podrá confirmar la recepción, solicitar aclaraciones, proporcionar información general sobre el estado e informar del cierre en términos generales. No estará obligada a revelar datos personales de terceros, sanciones concretas, informes completos, deliberaciones internas, información laboral o contractual, estrategias legales, comunicaciones con autoridades ni otras materias protegidas.</p>' +
+        '<p>La extensión de la información proporcionada dependerá de la naturaleza del asunto, los derechos de terceros, la confidencialidad, las restricciones legales y la necesidad de proteger la eficacia de la revisión.</p>' +
+        '<h3>21. Protección de datos personales</h3>' +
+        '<p>La Cámara de Comercio Mercosur será responsable del tratamiento de los datos personales gestionados a través del Canal. Los datos podrán utilizarse para recibir y evaluar comunicaciones, analizar hechos con alcance institucional, proteger personas y activos, adoptar medidas, preservar evidencia, cumplir obligaciones, ejercer o defender derechos y comunicar información a autoridades cuando proceda. Podrán acceder a ellos las personas responsables del Canal, los órganos competentes, asesores externos, investigadores o autoridades, únicamente cuando resulte necesario y jurídicamente procedente.</p>' +
+        '<p>El tratamiento se regirá por la Ley N.º 18.331 de Protección de Datos Personales y Acción de Habeas Data, el Decreto N.º 414/009, el Decreto N.º 64/020, la Política de Privacidad y los criterios de la Unidad Reguladora y de Control de Datos Personales. Se aplicarán los principios de minimización, pertinencia, acceso restringido, seguridad, confidencialidad, exactitud, conservación limitada, trazabilidad y responsabilidad.</p>' +
+        '<p>La evaluación realizada por la Cámara tendrá alcance exclusivamente institucional, preventivo, estatutario, laboral o contractual, según corresponda. La Cámara documentará hechos, alegaciones, evidencia, actuaciones y decisiones institucionales, pero no determinará responsabilidades penales, civiles o administrativas reservadas a las autoridades competentes, no creará una base privada de antecedentes ni mantendrá listas informales de personas denunciadas. Cuando se prevean transferencias internacionales o acceso desde otra jurisdicción, se aplicarán las garantías exigidas por la normativa y se informará conforme a la Política de Privacidad.</p>' +
+        '<h3>22. Derechos en materia de datos</h3>' +
+        '<p>Las personas podrán ejercer los derechos reconocidos por la normativa uruguaya mediante los mecanismos previstos en la Política de Privacidad. La Cámara podrá aplicar limitaciones temporales, proporcionales y jurídicamente justificadas cuando sean necesarias para preservar la revisión, proteger derechos de terceros, impedir la destrucción de evidencia, cumplir obligaciones o atender requerimientos de autoridades.</p>' +
+        '<p>Toda limitación deberá revisarse cuando desaparezcan las razones que la justificaron. La rectificación de un dato inexacto no implicará necesariamente la eliminación de documentos cuya conservación sea necesaria para acreditar el desarrollo del procedimiento o defender derechos.</p>' +
+        '<h3>23. Conservación, bloqueo y eliminación</h3>' +
+        '<p>Las comunicaciones ajenas al Canal, aquellas sin información suficiente, los expedientes cerrados sin medidas, los casos con medidas, los asuntos remitidos a autoridades y la documentación necesaria para la defensa podrán requerir periodos de conservación diferentes. Los criterios aplicables deberán estar documentados en el Protocolo Interno y revisarse periódicamente atendiendo a la finalidad, la gravedad, los plazos de responsabilidad, las obligaciones legales y la necesidad de preservar evidencia.</p>' +
+        '<p>Los datos se mantendrán únicamente durante el tiempo necesario para evaluar, revisar, adoptar medidas, cumplir obligaciones, atender plazos de responsabilidad, ejercer o defender derechos y preservar evidencia. Cuando ya no sean necesarios, deberán eliminarse, anonimizarse o bloquearse conforme corresponda. Quedan prohibidas la conservación indefinida, los expedientes informales, los registros paralelos, las listas de personas acusadas y la reutilización para finalidades ajenas.</p>' +
+        '<h3>24. Seguridad digital y gestión de incidentes</h3>' +
+        '<p>La Cámara aplicará medidas razonables para proteger el Canal frente a accesos no autorizados, pérdida, alteración, divulgación o destrucción de información. La documentación especialmente sensible deberá almacenarse de forma separada y compartirse únicamente mediante medios adecuados al riesgo. Se evitarán copias innecesarias, reenvíos indiscriminados y almacenamiento en dispositivos o cuentas personales.</p>' +
+        '<p>Cuando se detecte un incidente de seguridad relacionado con el Canal, la Cámara deberá contenerlo, preservar evidencia, evaluar sus efectos, restringir accesos comprometidos y realizar las comunicaciones exigidas por la normativa aplicable. El Protocolo Interno desarrollará las responsabilidades y actuaciones concretas.</p>' +
+        '<h3>25. Acoso, discriminación y violencia</h3>' +
+        '<p>El Canal podrá recibir comunicaciones relacionadas con acoso, discriminación, violencia, abuso de autoridad, represalias y trato degradante. Estas materias pueden exigir medidas de protección, procedimientos laborales, investigación especializada, asistencia profesional o comunicación a autoridades.</p>' +
+        '<p>Cuando los hechos se encuentren dentro de su ámbito específico, se tendrá en cuenta la Ley N.º 19.580, relativa al derecho de las mujeres a una vida libre de violencia basada en género, junto con las demás normas laborales, civiles, penales y antidiscriminatorias que correspondan. El Canal no sustituye los mecanismos legales, administrativos o judiciales de protección.</p>' +
+        '<h3>26. Transparencia agregada y coordinación documental</h3>' +
+        '<p>La Cámara podrá publicar información estadística general sobre el número de comunicaciones, categorías, estado general, tendencias de riesgo y mejoras implementadas. Nunca deberá divulgar datos que permitan identificar comunicantes, personas afectadas, testigos, proyectos, entidades, relaciones contractuales o hechos confidenciales.</p>' +
+        '<p>Esta Política se interpretará conjuntamente con los Estatutos, los Términos de Uso, la Política de Privacidad, la Política de Cookies, la Política de Uso de Marca, los reglamentos internos, los contratos, los procedimientos laborales y el Protocolo Interno del Canal de Integridad. Prevalecerán las normas imperativas, los Estatutos y las competencias legalmente atribuidas a cada órgano.</p>' +
+        '<h3>27. Modificaciones, legislación y jurisdicción</h3>' +
+        '<p>La Cámara podrá actualizar esta Política para reflejar cambios normativos, experiencia práctica, evolución tecnológica, expansión territorial, nuevas delegaciones, identificación de riesgos o mejoras de control. La versión vigente será la publicada en el sitio web y las modificaciones no afectarán retroactivamente derechos consolidados.</p>' +
+        '<p>La Política se regirá por las leyes de la República Oriental del Uruguay. Las diferencias relacionadas con su aplicación procurarán resolverse de buena fe y, cuando corresponda, serán sometidas a los tribunales competentes de Montevideo, sin perjuicio de las normas imperativas y de la intervención de autoridades públicas competentes.</p>' +
+        '<h3>28. Contacto</h3>' +
+        '<p>Para presentar una comunicación, aportar información adicional, informar una posible represalia o comunicar un conflicto de interés relacionado con el Canal, puede escribirse a <a href="mailto:integridad@camaracomerciomercosur.org">integridad@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Cámara de Comercio Mercosur. Asociación internacional uruguaya. Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay.</p>' +
+        '<p>Marco normativo de referencia: Ley N.º 18.331 de Protección de Datos Personales y Acción de Habeas Data; Decreto N.º 414/009; Decreto N.º 64/020; Ley N.º 19.580, cuando resulte aplicable; Estatutos y demás normativa uruguaya pertinente.</p>';
+
+    function buildOverlay() {
+      if (overlay) return overlay;
+      overlay = document.createElement('div');
+      overlay.className = 'privacy-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-labelledby', 'integrity-modal-title');
+      overlay.innerHTML =
+        '<div class="privacy-modal">' +
+          '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
+          integrityHTML +
+        '</div>';
+      document.body.appendChild(overlay);
+
+      overlay.querySelector('.privacy-close').addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+      return overlay;
+    }
+
+    function openModal() {
+      var ov = buildOverlay();
+      window.requestAnimationFrame(function () {
+        ov.classList.add('is-open');
+      });
+    }
+
+    function closeModal() {
+      if (!overlay) return;
+      overlay.classList.remove('is-open');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) closeModal();
+    });
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('.js-integrity-link');
+      if (!trigger) return;
+      e.preventDefault();
+      openModal();
+    });
+  })();
+
+  /* ---------- Brand Usage policy modal (footer link) ---------- */
+  (function () {
+    if (!document.querySelector('.js-brand-link')) return;
+
+    var overlay = null;
+
+    var brandHTML =
+      '<p class="privacy-eyebrow">Cámara de Comercio Mercosur</p>' +
+        '<h2 id="brand-modal-title">Política de Uso de Marca e Identidad Institucional</h2>' +
+        '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Fecha de publicación: 5 de julio de 2026</p>' +
+        '<p>La identidad de la Cámara de Comercio Mercosur constituye un activo institucional destinado a identificar de manera inequívoca sus actuaciones, documentos, autoridades, programas y relaciones legítimamente autorizadas. Esta Política establece las condiciones bajo las cuales pueden mencionarse o utilizarse la denominación, el logotipo y los demás elementos vinculados a esa identidad, con el propósito de preservar su integridad, evitar confusión y proteger a la Cámara, a sus asociados, a sus colaboradores y al público frente a apariencias falsas de membresía, representación, certificación, patrocinio o respaldo.</p>' +
+        '<h3>1. Identificación y alcance</h3>' +
+        '<p>La Cámara de Comercio Mercosur es una asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Toda solicitud de autorización o comunicación sobre un posible uso indebido deberá dirigirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Esta Política se aplica a cualquier persona física o jurídica que mencione, reproduzca, incorpore o utilice elementos de identidad de la Cámara, incluidos asociados y aspirantes a asociados, autoridades, directivos, representantes, delegados, empleados, asesores, proveedores, colaboradores, patrocinadores, panelistas, aliados institucionales, medios de comunicación, delegaciones, capítulos, organizadores de eventos y terceros en general.</p>' +
+        '<p>La membresía, la participación en una actividad, la aparición en una publicación, una colaboración, un patrocinio, una invitación, un nombramiento, una credencial o el acceso al sitio web no conceden por sí mismos una licencia general ni facultades para actuar en nombre de la Cámara.</p>' +
+        '<h3>2. Objeto, marca e identidad institucional</h3>' +
+        '<p>La presente Política tiene por objeto proteger la identidad institucional, regular sus usos legítimos y prevenir cualquier utilización que pueda inducir a error acerca de quién está autorizado para representar, comunicar, certificar, respaldar o comprometer a la Cámara.</p>' +
+        '<p>A estos efectos, la marca comprende principalmente los signos distintivos verbales, gráficos o mixtos utilizados para identificar a la Cámara. La identidad institucional es un concepto más amplio: además de esos signos, comprende cargos, títulos, firmas, credenciales, certificados, membretes, dominios, perfiles sociales, correos, documentos y cualquier otro elemento capaz de generar una apariencia de oficialidad, pertenencia o representación.</p>' +
+        '<p>Esta Política tiene naturaleza jurídica e institucional y no sustituye al Manual de Identidad Visual, que podrá desarrollar las especificaciones técnicas de reproducción, tamaños, áreas de seguridad, colores y aplicaciones gráficas.</p>' +
+        '<h3>3. Marco jurídico aplicable</h3>' +
+        '<p>La protección y utilización de la identidad de la Cámara se interpretarán conforme a la legislación de la República Oriental del Uruguay, incluidos la Ley N.º 17.011 de Marcas, su Decreto Reglamentario N.º 34/999, la Ley N.º 9.739 sobre derechos de autor, las normas civiles aplicables, los principios de buena fe y prevención de confusión, y los Estatutos y reglamentos internos de la Cámara.</p>' +
+        '<p>La Ley N.º 17.011 reconoce como marca todo signo apto para distinguir productos o servicios. Los derechos exclusivos propios del registro solo se afirmarán cuando exista efectivamente un registro concedido. En consecuencia, esta Política no utiliza el símbolo de marca registrada ni presume una situación registral que no conste documentalmente.</p>' +
+        '<p>La protección institucional puede comprender, según cada caso, marcas registradas, solicitudes de registro, nombres comerciales, denominaciones institucionales, signos distintivos, logotipos, obras gráficas, textos, fotografías, materiales audiovisuales, documentación y derechos derivados del uso legítimo o de la autoría.</p>' +
+        '<h3>4. Relación con el MERCOSUR</h3>' +
+        '<p>La Cámara desarrolla su actividad dentro del espacio económico, empresarial, social e institucional del MERCOSUR. Su denominación, misión y ámbito de actuación expresan esa vinculación regional y su vocación de promover comercio, inversión, cooperación empresarial e integración.</p>' +
+        '<p>La Cámara no forma parte, sin embargo, de la estructura política, gubernamental u orgánica oficial del MERCOSUR, ni integra sus órganos decisorios, políticos o administrativos. Su identidad no constituye un emblema oficial del bloque y la Cámara únicamente puede autorizar el uso de sus propios elementos, no el de símbolos oficiales pertenecientes al MERCOSUR, a sus Estados o a otras instituciones.</p>' +
+        '<p>Ninguna autorización sobre la identidad de la Cámara permite presentarse como representante oficial del MERCOSUR. La relación de un asociado, colaborador, patrocinador, panelista, delegado, capítulo o tercero con la Cámara tampoco implica respaldo de los Estados Partes, Estados Asociados, gobiernos u órganos del bloque.</p>' +
+        '<p>Cualquier futura inscripción de la Cámara en el Registro de Organizaciones y Movimientos Sociales del MERCOSUR (MOS) tendrá exclusivamente el alcance propio de ese mecanismo y no la convertirá en órgano político u oficial ni otorgará a sus miembros facultades generales de representación del MERCOSUR.</p>' +
+        '<h3>5. Elementos protegidos</h3>' +
+        '<p>Quedan comprendidos en esta Política la denominación completa de la Cámara, sus traducciones oficiales, siglas y abreviaturas autorizadas, logotipo, isotipo, emblemas, composiciones gráficas, colores institucionales, tipografías, eslóganes, firmas, membretes, sellos, certificados, credenciales, tarjetas, documentos, informes, presentaciones, plantillas, fotografías oficiales, materiales audiovisuales, dominios, direcciones de correo, nombres de usuario, perfiles sociales, cargos, títulos y acreditaciones.</p>' +
+        '<p>También se consideran comprendidas las adaptaciones, imitaciones, variantes abreviadas, signos fonéticamente similares, dominios confundibles, perfiles que aparenten oficialidad y cualquier composición verbal, visual, documental o digital que reproduzca elementos esenciales de la identidad o pueda generar una asociación razonable con la Cámara.</p>' +
+        '<h3>6. Titularidad, legitimidad y ausencia de licencia implícita</h3>' +
+        '<p>La Cámara es titular, solicitante, licenciataria o usuaria legítima de los elementos que integran su identidad institucional, según corresponda en cada caso. Cuando determinados materiales procedan de terceros, su utilización se realizará con arreglo a las autorizaciones, licencias o derechos aplicables.</p>' +
+        '<p>Ninguna persona adquiere por su relación con la Cámara propiedad, licencia, derecho de reproducción, adaptación, traducción, sublicencia o registro, ni facultad para emitir documentos, utilizar cargos o presentarse como representante. El silencio, la falta de oposición inmediata o la tolerancia temporal no equivalen a una autorización.</p>' +
+        '<h3>7. Regla general de autorización y apoyo técnico</h3>' +
+        '<p>Todo uso que exceda una mera referencia informativa requiere autorización previa y escrita. La autorización será expresa, específica, limitada, temporal, no exclusiva, no transferible, no sublicenciable y revocable, y quedará vinculada a una finalidad, unas piezas, unos soportes, unos medios y, cuando corresponda, un territorio determinados.</p>' +
+        '<p>La autorización no podrá interpretarse de manera extensiva. La Cámara podrá solicitar maquetas, revisar materiales antes de su publicación, exigir modificaciones, aprobar versiones concretas, limitar formatos o duración, imponer condiciones razonables y ordenar la retirada de cualquier uso que se aparte de lo autorizado.</p>' +
+        '<p>El usuario autorizado podrá facilitar los archivos estrictamente necesarios a una imprenta, diseñador, agencia o proveedor técnico que actúe por su cuenta para producir la pieza aprobada. Ese acceso no constituye sublicencia y el usuario seguirá siendo responsable del uso, custodia y eliminación de los archivos.</p>' +
+        '<h3>8. Referencias informativas y definición de uso comercial</h3>' +
+        '<p>Puede mencionarse correctamente el nombre de la Cámara, enlazarse al sitio oficial, citarse contenido dentro de los límites legales o informarse de manera periodística, académica o histórica sobre actividades reales, siempre que la referencia sea exacta, se realice de buena fe y no tenga por objeto crear una apariencia de patrocinio, representación, membresía o respaldo inexistente.</p>' +
+        '<p>A efectos de esta Política, se considerará uso comercial o promocional cualquier utilización destinada directa o indirectamente a vender productos o servicios, captar clientes, asociados, inversores o financiación, mejorar la posición competitiva de una entidad, publicitar una actividad o atribuirse una relación institucional con la Cámara. Estos usos requieren autorización escrita.</p>' +
+        '<p>El uso editorial del logotipo por medios de comunicación deberá limitarse a la identificación necesaria, utilizar archivos oficiales y preservar su integridad. Esta posibilidad no autoriza campañas publicitarias, promociones, productos, patrocinios, listados de clientes o usos permanentes con finalidad comercial.</p>' +
+        '<h3>9. Usos sujetos a autorización escrita</h3>' +
+        '<p>Requieren autorización previa la incorporación de la identidad de la Cámara en páginas web, aplicaciones, presentaciones, folletos, campañas, informes, propuestas, videos, publicaciones, notas de prensa conjuntas, materiales comerciales o promocionales, patrocinios, eventos, productos, merchandising, certificados, credenciales, perfiles digitales, documentos de inversión, procesos de financiación, anuncios de alianzas, convenios, capítulos, delegaciones o usos conjuntos con otras marcas.</p>' +
+        '<p>La misma regla se aplica a cualquier pieza que, aun sin reproducir exactamente el logotipo, pueda inducir a pensar que existe una relación de respaldo, certificación, membresía, representación o participación oficial.</p>' +
+        '<h3>10. Uso por asociados, aspirantes y antiguos miembros</h3>' +
+        '<p>La condición de asociado no concede una licencia automática. La Cámara podrá autorizar la fórmula “Miembro de la Cámara de Comercio Mercosur” únicamente mientras la membresía esté vigente, mediante un distintivo o composición oficial proporcionada o aprobada por la Cámara. El asociado no podrá utilizar por separado el logotipo corporativo principal como si representara a la institución.</p>' +
+        '<p>Esa referencia no podrá utilizarse para captar fondos, validar proyectos, promover inversiones, ofrecer garantías, sugerir representación de la Cámara ni insinuar respaldo oficial del MERCOSUR. El derecho de uso finalizará de inmediato al terminar o suspenderse la membresía, revocarse la autorización o incumplirse sus condiciones.</p>' +
+        '<p>La presentación de una solicitud de asociación o la condición de aspirante no autoriza ninguna referencia pública a una membresía todavía no concedida. Quien haya dejado de pertenecer a la Cámara podrá mencionar esa condición únicamente en términos históricos, indicando claramente el periodo correspondiente y sin utilizar distintivos que sugieran una vinculación vigente.</p>' +
+        '<h3>11. Autoridades, directivos, representantes y referencias históricas</h3>' +
+        '<p>Los cargos, títulos, firmas, correos, membretes, tarjetas, credenciales, sellos, perfiles y documentos institucionales solo podrán utilizarse durante la vigencia del nombramiento y dentro de las facultades expresamente conferidas.</p>' +
+        '<p>El nombramiento no permite comprometer a la Cámara fuera de la competencia asignada, celebrar acuerdos sin poder suficiente ni utilizar la identidad institucional para actividades personales o negocios ajenos a la función.</p>' +
+        '<p>Al finalizar el cargo o la relación, deberán dejar de utilizarse y, cuando corresponda, devolverse o desactivarse cuentas, accesos, firmas, archivos, credenciales, tarjetas, documentos, plantillas, perfiles y demás materiales institucionales. La antigua autoridad podrá referirse a su cargo únicamente de manera histórica, con indicación clara del periodo y sin sugerir que la función continúa vigente.</p>' +
+        '<h3>12. Colaboradores, patrocinadores, aliados, panelistas y medios</h3>' +
+        '<p>La autorización concedida a un colaborador, patrocinador, aliado, panelista u organizador se limita al proyecto, evento o actividad concreta. No implica una relación permanente, membresía, representación ni derecho a utilizar la identidad en otros contextos.</p>' +
+        '<p>La aparición conjunta de logotipos no supone responsabilidad conjunta ni aprobación general de los productos, servicios, declaraciones o actividades del tercero. Ninguna relación podrá anunciarse antes de su aprobación formal ni extenderse a otras personas o entidades sin autorización.</p>' +
+        '<p>Los medios podrán utilizar materiales oficiales para fines editoriales veraces, sin alteraciones y sin generar apariencia de patrocinio, asociación política o respaldo comercial.</p>' +
+        '<h3>13. Reglas visuales mínimas</h3>' +
+        '<p>Deberán utilizarse exclusivamente archivos oficiales, mantenerse las proporciones y colores aprobados, conservarse el área de seguridad, respetarse el tamaño mínimo y garantizarse contraste y legibilidad.</p>' +
+        '<p>No se permite reconstruir manualmente el logotipo, utilizar capturas de pantalla o archivos de baja resolución, deformarlo, recortarlo, girarlo, recolorearlo, animarlo, añadir efectos, cambiar tipografías, eliminar elementos, incorporar palabras, integrarlo en otro emblema o crear versiones derivadas.</p>' +
+        '<p>Cuando exista un Manual de Identidad Visual vigente, sus reglas prevalecerán en las cuestiones técnicas y gráficas.</p>' +
+        '<h3>14. Prohibición de usos políticos, electorales o partidarios</h3>' +
+        '<p>La identidad de la Cámara no podrá utilizarse para respaldar partidos políticos, candidaturas, campañas electorales, propaganda, recaudación política, actos partidarios, declaraciones proselitistas o posicionamientos que no hayan sido formalmente aprobados por los órganos competentes de la Cámara.</p>' +
+        '<p>Ningún asociado, autoridad, delegado, colaborador o tercero podrá utilizar su relación con la Cámara para sugerir apoyo electoral, gubernamental o partidario. Las opiniones personales deberán presentarse siempre como tales y sin utilizar logotipos, documentos, cargos o canales institucionales fuera de las facultades expresamente conferidas.</p>' +
+        '<h3>15. Proyectos, inversión, financiación y captación de fondos</h3>' +
+        '<p>La identidad de la Cámara no podrá utilizarse para solicitar dinero, captar inversores, vender participaciones, promover valores, anunciar rondas de financiación, captar depósitos, ofrecer crédito, garantizar proyectos, certificar empresas, validar diligencias debidas, respaldar emisiones, prometer acceso a autoridades, anunciar financiación inexistente, emitir garantías, comercializar oportunidades de inversión o solicitar pagos en nombre de la Cámara.</p>' +
+        '<p>La presencia del logotipo en un documento no implica por sí sola aprobación, recomendación, auditoría, certificación, validación, garantía, compromiso financiero, patrocinio, aceptación de riesgos ni respaldo del MERCOSUR.</p>' +
+        '<p>Solo un documento formal emitido por el órgano competente, dentro de sus facultades y para un objeto determinado, podrá acreditar una relación, autorización, participación o intervención concreta.</p>' +
+        '<h3>16. Certificados, credenciales y nombramientos</h3>' +
+        '<p>Los certificados, credenciales y nombramientos deberán ser emitidos por la autoridad competente, mediante formatos aprobados y con los mecanismos de firma, numeración, vigencia y verificación que la Cámara determine.</p>' +
+        '<p>Son personales o específicos, no transferibles y no conceden facultades distintas de las expresamente indicadas. No podrán modificarse, reutilizarse para otros fines ni reproducirse de manera que altere su alcance.</p>' +
+        '<p>La validez de determinados certificados, credenciales o nombramientos podrá quedar condicionada a su verificación mediante código, registro, enlace, correo oficial u otro mecanismo establecido por la Cámara. Una vez vencidos o finalizada la relación, deberán dejar de utilizarse y, cuando se solicite, devolverse, destruirse o retirarse de los canales públicos.</p>' +
+        '<h3>17. Dominios, correos, redes, delegaciones y capítulos</h3>' +
+        '<p>Solo se considerarán oficiales los dominios, direcciones de correo y perfiles publicados o enlazados desde el sitio institucional. Queda prohibido registrar dominios similares, crear correos o perfiles que aparenten pertenencia, utilizar nombres de usuario confundibles, replicar la identidad visual o presentarse como canal oficial sin reconocimiento formal.</p>' +
+        '<p>Toda delegación, capítulo, oficina o representación deberá ser creada o reconocida formalmente. No podrá crear submarcas, registrar dominios, abrir perfiles, emitir nombramientos o certificados, celebrar acuerdos fuera de su competencia ni comprometer jurídicamente a la Cámara sin autorización y poder suficientes.</p>' +
+        '<p>Cuando corresponda, los responsables deberán transferir o entregar a la Cámara el control de cuentas, perfiles, dominios y otros activos digitales utilizados en relación con su función.</p>' +
+        '<h3>18. Traducciones y denominaciones autorizadas</h3>' +
+        '<p>Las traducciones de la denominación, las abreviaturas, las siglas y las adaptaciones de cargos o títulos requieren aprobación. No podrán crearse nombres confundibles con organismos oficiales ni versiones que alteren el sentido institucional.</p>' +
+        '<p>La versión española será la referencia institucional principal salvo decisión expresa de la Cámara. Las traducciones oficiales publicadas por la propia Cámara podrán utilizarse únicamente en la forma exacta aprobada, sin modificaciones ni creación de nuevas siglas.</p>' +
+        '<h3>19. Solicitud, vigencia y revocación de autorizaciones</h3>' +
+        '<p>Las solicitudes deberán enviarse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a> e identificar al solicitante, su organización, la finalidad, el contexto, los materiales, los medios, la duración, la fecha prevista de publicación, los terceros involucrados y el alcance del uso solicitado.</p>' +
+        '<p>La Cámara podrá aprobar, rechazar, solicitar aclaraciones, exigir cambios, limitar el alcance, imponer condiciones o revocar la autorización. Ningún uso podrá comenzar antes de recibirse autorización escrita.</p>' +
+        '<p>La autorización terminará al vencer el plazo, finalizar el proyecto o evento, cesar la membresía o el cargo, producirse un incumplimiento, utilizarse la identidad fuera del alcance aprobado o existir un riesgo institucional o reputacional relevante.</p>' +
+        '<p>Tras el cese, deberán retirarse los materiales, eliminarse las versiones digitales, suspenderse las publicaciones, devolverse las credenciales y desactivarse o transferirse los perfiles, cuentas o dominios cuando corresponda. La Cámara podrá solicitar confirmación escrita de la retirada.</p>' +
+        '<h3>20. Supervisión, incumplimientos y comunicación de usos indebidos</h3>' +
+        '<p>La Cámara podrá revisar usos, solicitar copias o pruebas, verificar publicaciones y canales, comprobar la vigencia de membresías, cargos y autorizaciones, exigir correcciones y requerir la retirada de materiales. La falta de supervisión previa no legitima un uso no autorizado.</p>' +
+        '<p>Ante un posible incumplimiento, la Cámara podrá actuar de manera gradual y proporcional mediante solicitud de aclaración, advertencia, requerimiento de corrección o retirada, suspensión o revocación, comunicación con plataformas, solicitud de cancelación de dominios o perfiles, preservación de pruebas, aclaración pública y, cuando corresponda, acciones administrativas, civiles o penales.</p>' +
+        '<p>La respuesta atenderá a la gravedad, duración, intencionalidad, alcance, riesgo de confusión, perjuicio a terceros, daño reputacional, reiteración y cooperación del responsable.</p>' +
+        '<p>Cualquier persona puede comunicar perfiles falsos, dominios confundibles, certificados dudosos, falsos representantes, captación de fondos, proyectos no autorizados, correos engañosos, documentos alterados o usos políticos no autorizados escribiendo a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<h3>21. Coordinación y modificaciones</h3>' +
+        '<p>Esta Política se interpreta conjuntamente con los Estatutos, los Términos de Uso, la Política de Privacidad, la Política de Cookies, el Manual de Identidad Visual, los reglamentos internos, las condiciones particulares de autorización y el Canal de Integridad. En caso de conflicto prevalecerán las normas imperativas, los Estatutos, la autorización específica en su ámbito y el Manual de Identidad Visual para cuestiones técnicas.</p>' +
+        '<p>La Cámara podrá actualizar esta Política para reflejar cambios legislativos, registros marcarios, nuevas versiones de la identidad, expansión territorial, nuevos canales digitales o modalidades de colaboración. La versión vigente será la publicada en el sitio y los cambios no legitimarán usos anteriores no autorizados.</p>' +
+        '<h3>22. Legislación aplicable y jurisdicción</h3>' +
+        '<p>La Política se regirá por las leyes de la República Oriental del Uruguay. Las partes procurarán resolver de buena fe cualquier diferencia y, cuando no sea posible, serán competentes los tribunales de Montevideo, sin perjuicio de las normas imperativas aplicables.</p>' +
+        '<h3>23. Contacto y marco normativo</h3>' +
+        '<p>Para solicitar autorización o comunicar un posible uso indebido de la marca o de la identidad institucional puede escribirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>. Cámara de Comercio Mercosur, asociación internacional uruguaya, Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay.</p>' +
+        '<p>Marco normativo de referencia: Ley N.º 17.011 de Marcas; Decreto N.º 34/999; Ley N.º 9.739 sobre derechos de autor; normas civiles aplicables; Estatutos y reglamentos internos de la Cámara.</p>';
+
+    function buildOverlay() {
+      if (overlay) return overlay;
+      overlay = document.createElement('div');
+      overlay.className = 'privacy-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-labelledby', 'brand-modal-title');
+      overlay.innerHTML =
+        '<div class="privacy-modal">' +
+          '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
+          brandHTML +
+        '</div>';
+      document.body.appendChild(overlay);
+
+      overlay.querySelector('.privacy-close').addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+      return overlay;
+    }
+
+    function openModal() {
+      var ov = buildOverlay();
+      window.requestAnimationFrame(function () {
+        ov.classList.add('is-open');
+      });
+    }
+
+    function closeModal() {
+      if (!overlay) return;
+      overlay.classList.remove('is-open');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) closeModal();
+    });
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('.js-brand-link');
+      if (!trigger) return;
+      e.preventDefault();
+      openModal();
+    });
+  })();
+
+  /* ---------- Terms of Use modal (footer link) ---------- */
+  (function () {
+    if (!document.querySelector('.js-terms-link')) return;
+
+    var overlay = null;
+
+    var termsHTML =
+      '<p class="privacy-eyebrow">Cámara de Comercio Mercosur</p>' +
+        '<h2 id="terms-modal-title">Términos de Uso</h2>' +
+        '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Fecha de publicación: 5 de julio de 2026</p>' +
+        '<p>Estos Términos de Uso regulan el acceso, la navegación y la utilización del sitio web de la Cámara de Comercio Mercosur, así como el uso de sus formularios, contenidos, recursos y funcionalidades. Su finalidad es establecer un marco claro para la relación entre la Cámara y las personas, empresas, cámaras, instituciones y demás organizaciones que consultan el sitio o se comunican con ella a través de sus canales digitales.</p>' +
+        '<h3>1. Identificación y naturaleza jurídica</h3>' +
+        '<p>El titular del sitio es la Cámara de Comercio Mercosur, asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Para consultas relacionadas con estos Términos puede escribirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>La Cámara desarrolla su actividad bajo el marco jurídico aplicable a las asociaciones civiles en la República Oriental del Uruguay. Este marco se integra, entre otras disposiciones, por el artículo 39 de la Constitución de la República, que reconoce el derecho de asociación; el artículo 21 del Código Civil, relativo al reconocimiento de las asociaciones como personas jurídicas; el Decreto-Ley N.º 15.089, sobre las competencias administrativas del Ministerio de Educación y Cultura en materia de asociaciones civiles y fundaciones; la normativa reglamentaria correspondiente; y los Estatutos de la propia Cámara, que regulan su organización, representación, admisión de asociados, derechos, obligaciones y funcionamiento interno.</p>' +
+        '<h3>2. Objeto, alcance y aceptación</h3>' +
+        '<p>Estos Términos se aplican al acceso y navegación por el sitio, a la consulta de sus contenidos, al uso de formularios, a las solicitudes de asociación, a las propuestas de cooperación, a la presentación de iniciativas empresariales, a las consultas sobre comercio, inversión, financiación e internacionalización, a la suscripción a comunicaciones institucionales y al acceso a noticias, eventos, publicaciones y enlaces externos.</p>' +
+        '<p>El acceso o utilización del sitio implica la aceptación de estos Términos en la medida permitida por la normativa aplicable. Quien actúe en nombre de una empresa, institución u organización declara contar con facultades suficientes para representarla. El simple acceso al sitio no crea por sí mismo una relación contractual, asociativa, profesional, fiduciaria, de mandato o de representación con la Cámara.</p>' +
+        '<p>Determinadas actividades, eventos, programas, membresías, acuerdos o relaciones específicas podrán estar sujetos a condiciones particulares. En caso de contradicción, dichas condiciones prevalecerán únicamente respecto de la actividad concreta a la que se refieran.</p>' +
+        '<h3>3. Relación con el MERCOSUR</h3>' +
+        '<p>La Cámara desarrolla su actividad en el espacio económico, empresarial, social e institucional del MERCOSUR. Su denominación, objeto y misión responden a ese ámbito regional y a su propósito de promover el comercio, la inversión, la cooperación empresarial y la integración entre los Estados Partes, los Estados Asociados y otros mercados internacionales.</p>' +
+        '<p>Esta vinculación no significa que la Cámara forme parte de la estructura política, gubernamental u orgánica oficial del MERCOSUR. La Cámara no integra sus órganos políticos, decisorios o administrativos; no adopta decisiones en nombre del bloque; no representa oficialmente al MERCOSUR, a sus Estados Partes, a sus Estados Asociados ni a sus instituciones; y no puede emitir posiciones, certificaciones o autorizaciones oficiales en su nombre. El sitio web de la Cámara no es un portal oficial del MERCOSUR.</p>' +
+        '<p>La Cámara puede participar en mecanismos sociales, empresariales, consultivos o institucionales vinculados al proceso de integración regional. Cualquier inscripción, reconocimiento o participación institucional tendrá exclusivamente el alcance que derive del acto correspondiente. Una eventual inscripción en el Registro de Organizaciones y Movimientos Sociales del MERCOSUR (MOS) no convertiría a la Cámara en órgano político u oficial del bloque ni le atribuiría facultades generales para representarlo.</p>' +
+        '<h3>4. Finalidad del sitio y ausencia de asesoramiento profesional</h3>' +
+        '<p>El sitio tiene finalidades institucionales, informativas, empresariales, divulgativas, educativas y de cooperación. Puede incluir información sobre la Cámara, el MERCOSUR, acuerdos comerciales, datos económicos, mercados, eventos, publicaciones, oportunidades de cooperación e iniciativas de integración regional.</p>' +
+        '<p>Los contenidos relacionados con el MERCOSUR se ofrecen desde una perspectiva institucional y empresarial. No constituyen decisiones, posiciones, comunicados o interpretaciones oficiales del bloque, ni sustituyen fuentes gubernamentales, regulatorias, estadísticas, jurídicas o contractuales.</p>' +
+        '<p>La información publicada es general y no constituye asesoramiento jurídico, fiscal, contable, regulatorio, financiero, bancario, técnico, de inversión, de valores, de seguros o de cumplimiento normativo; tampoco constituye recomendación de compra o venta, oferta de valores, captación de fondos, concesión de crédito, garantía de financiación ni promesa de rentabilidad. La Cámara puede orientar institucionalmente, facilitar relaciones, identificar especialistas y coordinar interlocutores, pero estas actividades no sustituyen a profesionales autorizados ni garantizan financiación, inversión, aprobación regulatoria, cierre de operaciones o éxito empresarial.</p>' +
+        '<h3>5. Exactitud y actualización de la información</h3>' +
+        '<p>La Cámara procura utilizar fuentes fiables y mantener los contenidos actualizados. No obstante, la información puede verse afectada por cambios estadísticos, normativos, económicos, institucionales o comerciales; por modificaciones en acuerdos internacionales; por cambios en fechas, sedes o participantes de eventos; o por errores y omisiones involuntarios.</p>' +
+        '<p>Por ello, no se garantiza de forma absoluta que todos los contenidos sean completos, exactos, actuales, libres de errores, aplicables a todas las jurisdicciones o permanentemente disponibles. La Cámara podrá corregir, actualizar, reorganizar, suspender o retirar contenidos sin obligación de aviso individual. Antes de adoptar decisiones empresariales, legales, financieras o de inversión, la persona usuaria debe verificar la información en fuentes oficiales y obtener, cuando corresponda, asesoramiento especializado.</p>' +
+        '<h3>6. Uso permitido y conductas prohibidas</h3>' +
+        '<p>El sitio puede utilizarse para fines lícitos, informativos, profesionales, institucionales, educativos, académicos y empresariales. Se permite la consulta, impresión y descarga razonable de contenidos para uso interno o informativo, siempre que no se altere su sentido, se respete la autoría, se cite la fuente cuando corresponda y no exista explotación comercial no autorizada ni se sugiera una relación institucional inexistente.</p>' +
+        '<p>Queda prohibido utilizar el sitio para fines ilícitos, engañosos, abusivos o fraudulentos. No se permite suplantar a la Cámara o a sus representantes; presentarse falsamente como asociado, delegado, aliado o colaborador; introducir código malicioso; interferir con el funcionamiento del sitio; acceder sin autorización a áreas restringidas; realizar extracción masiva de información o bases de datos; recopilar contactos con fines comerciales no autorizados; enviar comunicaciones abusivas o engañosas; alterar contenidos; vulnerar derechos de terceros; captar fondos; promover inversiones no autorizadas; emitir certificados falsos; o sugerir respaldo oficial del MERCOSUR.</p>' +
+        '<p>La Cámara podrá rechazar formularios, restringir accesos, suspender funcionalidades, eliminar contenido ilícito, preservar pruebas y adoptar las acciones legales correspondientes cuando exista incumplimiento, fraude, suplantación, abuso, riesgo de seguridad o afectación de derechos. Estas medidas se aplicarán de forma proporcional a la naturaleza del riesgo o incumplimiento.</p>' +
+        '<h3>7. Solicitudes de asociación</h3>' +
+        '<p>La cumplimentación o envío de una solicitud no produce la admisión automática como asociado, no confiere derechos de membresía, no otorga representación, no autoriza el uso del nombre o logotipo y no permite presentarse como integrante de la Cámara.</p>' +
+        '<p>La admisión se rige por los Estatutos, las normas internas, los criterios de elegibilidad, las decisiones del órgano competente y la normativa uruguaya aplicable. Esta organización interna responde a la autonomía de las asociaciones civiles para ordenar su funcionamiento conforme a su objeto y a sus Estatutos.</p>' +
+        '<p>La Cámara podrá admitir o rechazar una solicitud, pedir información adicional, suspender su evaluación o archivarla conforme a sus procedimientos internos. No se establecen plazos automáticos de resolución. La decisión podrá comunicarse en la forma prevista por dichos procedimientos, sin que exista obligación de emitir una motivación extensa, salvo disposición legal o estatutaria en contrario.</p>' +
+        '<h3>8. Cooperación institucional y participación</h3>' +
+        '<p>Las propuestas de cooperación, alianzas, eventos, estudios, programas, actividades o iniciativas conjuntas podrán ser evaluadas atendiendo a su compatibilidad institucional, legalidad, reputación, viabilidad, riesgos y capacidad operativa.</p>' +
+        '<p>La recepción de una propuesta no obliga a aceptarla, negociarla o desarrollarla; no genera exclusividad; no crea una alianza; y no autoriza a utilizar el nombre, la marca o la condición de colaborador de la Cámara. Cualquier cooperación deberá formalizarse por escrito cuando su naturaleza lo requiera. La participación o aparición de una entidad en una actividad de la Cámara no implica que esta asuma responsabilidad por sus productos, servicios, declaraciones o actuaciones.</p>' +
+        '<h3>9. Presentación de iniciativas empresariales</h3>' +
+        '<p>Las iniciativas empresariales pueden remitirse para una evaluación preliminar. Su recepción no obliga a la Cámara a analizarlas, responderlas, financiarlas, representarlas, presentarlas a terceros o continuar conversaciones. Tampoco genera exclusividad, relación contractual, condición de asociado ni garantía de inversión o financiación.</p>' +
+        '<p>La persona remitente garantiza que está autorizada para compartir la información, que esta es sustancialmente veraz, que cuenta con las autorizaciones necesarias y que el material no vulnera derechos de terceros, obligaciones de confidencialidad ni disposiciones legales.</p>' +
+        '<p>La Cámara no adquiere la propiedad de una idea, iniciativa, proyecto o material por el solo hecho de recibirlo. Cualquier derecho, licencia, mandato, exclusividad o encargo deberá establecerse expresamente por escrito.</p>' +
+        '<h3>10. Confidencialidad de la información remitida</h3>' +
+        '<p>Los formularios generales y los correos de contacto no constituyen por sí mismos canales confidenciales. La información remitida mediante esos medios no será considerada confidencial automáticamente, aunque la Cámara procurará tratarla con prudencia y limitar su acceso a las personas que necesiten conocerla para atender la solicitud.</p>' +
+        '<p>No deben enviarse mediante formularios abiertos secretos empresariales, contratos completos, estados financieros integrales, documentos de identidad, datos bancarios, información técnica reservada u otra documentación sensible. La confidencialidad reforzada requerirá un acuerdo escrito y un canal seguro previamente acordado.</p>' +
+        '<p>La Cámara podrá rechazar, no abrir, devolver, archivar o eliminar documentación sensible remitida sin autorización previa. El tratamiento de datos personales se regirá por la Política de Privacidad.</p>' +
+        '<h3>11. Propiedad intelectual, marca e identidad institucional</h3>' +
+        '<p>Los textos, logotipos, nombres, marcas, diseños, fotografías, gráficos, perfiles, publicaciones, documentos, bases de datos, materiales audiovisuales, nombres de dominio y demás elementos del sitio pertenecen a la Cámara o a terceros que han autorizado su utilización. Su protección se rige, entre otras normas, por la Ley N.º 9.739 sobre derechos de autor y por la normativa aplicable en materia de propiedad intelectual e industrial.</p>' +
+        '<p>El acceso al sitio no concede una licencia general sobre esos elementos. Pueden citarse fragmentos breves con atribución adecuada y enlace, dentro de los límites legales. Salvo autorización expresa, queda prohibida la reproducción sustancial, adaptación, traducción, distribución, modificación, comercialización, publicación en otros sitios, creación de obras derivadas o incorporación a productos, servicios o bases de datos.</p>' +
+        '<p>El nombre, el logotipo y los demás signos identificativos de la Cámara no pueden utilizarse sin autorización escrita. Se prohíbe emitir certificados no autorizados, utilizar cargos institucionales falsos, crear perfiles o dominios que generen confusión, anunciar una membresía inexistente, presentar proyectos como respaldados por la Cámara o sugerir respaldo oficial del MERCOSUR. Estas reglas se complementarán con la Política de Uso de Marca.</p>' +
+        '<h3>12. Contenidos remitidos por las personas usuarias</h3>' +
+        '<p>La persona usuaria conserva los derechos que legítimamente le correspondan sobre los contenidos remitidos. Al enviarlos, concede a la Cámara una autorización limitada, no exclusiva y necesaria para recibirlos, almacenarlos, revisarlos, evaluarlos, gestionarlos y responder en relación con la finalidad solicitada.</p>' +
+        '<p>Esta autorización permanecerá vigente únicamente durante el tiempo necesario para gestionar esa finalidad, sin perjuicio de la conservación exigida por la ley o necesaria para acreditar las actuaciones realizadas. No permite a la Cámara explotar comercialmente ideas, proyectos o materiales fuera de la finalidad para la que fueron remitidos. La persona usuaria responde de la legitimidad y exactitud sustancial del contenido enviado.</p>' +
+        '<h3>13. Enlaces externos, terceros, noticias y eventos</h3>' +
+        '<p>El sitio puede incluir enlaces a páginas externas por razones de utilidad, referencia o información, incluidos sitios oficiales del MERCOSUR, eventos, instituciones, cámaras, organizaciones y proveedores. La Cámara no controla ni garantiza el contenido, disponibilidad, seguridad, privacidad, legalidad o servicios de esos sitios.</p>' +
+        '<p>La inclusión de un enlace no implica respaldo, asociación, certificación, recomendación, garantía o representación. Al abandonar el sitio de la Cámara, la persona usuaria queda sujeta a las condiciones y políticas del tercero correspondiente.</p>' +
+        '<p>Las fechas, sedes, programas, participantes, horarios, condiciones y disponibilidad de eventos o actividades pueden modificarse. La publicación de un evento no garantiza inscripción, disponibilidad, participación ni asistencia de las personas anunciadas. Cada evento podrá estar sujeto a condiciones específicas y, cuando sea organizado por un tercero, también se aplicarán sus propias reglas.</p>' +
+        '<h3>14. Disponibilidad, garantías y responsabilidad</h3>' +
+        '<p>La Cámara procurará mantener el sitio accesible, funcional y razonablemente seguro, pero no garantiza un funcionamiento ininterrumpido, ausencia absoluta de errores, compatibilidad universal, disponibilidad permanente ni inexistencia total de amenazas. El acceso podrá suspenderse temporalmente por mantenimiento, actualización, seguridad, incidentes, cambios técnicos, decisiones operativas, fuerza mayor u otras circunstancias razonables.</p>' +
+        '<p>Dentro de los límites permitidos por la ley, la Cámara no responderá por decisiones adoptadas exclusivamente con base en la información del sitio, pérdidas indirectas, pérdida de oportunidades, interrupciones, actos u omisiones de terceros, enlaces externos, información falsa remitida por usuarios, fracaso de negociaciones, falta de financiación, cambios regulatorios o de mercado, uso indebido del sitio o amenazas informáticas fuera de controles razonables.</p>' +
+        '<p>La Cámara tampoco garantiza que una consulta genere respuesta, que una iniciativa sea aceptada, que una relación llegue a formalizarse o que una operación produzca un resultado determinado. Ninguna disposición excluye o limita responsabilidad por dolo, culpa grave, incumplimientos inderogables o derechos que no puedan renunciarse. Se preservan las normas imperativas del derecho uruguayo y, cuando corresponda, la Ley N.º 17.250 de Relaciones de Consumo y sus disposiciones reglamentarias.</p>' +
+        '<h3>15. Privacidad y cookies</h3>' +
+        '<p>El tratamiento de datos personales se regula por la Política de Privacidad de la Cámara. El uso de cookies y tecnologías similares se regirá por la Política de Cookies y por el panel de preferencias disponible en el sitio.</p>' +
+        '<p>La aceptación de estos Términos no equivale a consentimiento para recibir comunicaciones promocionales ni para utilizar cookies no necesarias. Esos consentimientos, cuando correspondan, se solicitarán de forma separada y podrán retirarse conforme a la normativa aplicable.</p>' +
+        '<h3>16. Modificación de los Términos y del sitio</h3>' +
+        '<p>La Cámara podrá actualizar estos Términos para reflejar cambios normativos, tecnológicos, organizativos o funcionales. La versión vigente indicará su número y fecha de publicación y será aplicable desde su publicación, sin afectar retroactivamente derechos consolidados ni normas imperativas.</p>' +
+        '<p>Cuando los cambios sean relevantes, la Cámara podrá informarlos mediante avisos en el sitio u otros medios razonables. La continuidad en el uso del sitio después de la entrada en vigor de una nueva versión implicará su aceptación en la medida permitida por la ley.</p>' +
+        '<h3>17. Legislación aplicable, jurisdicción e idiomas</h3>' +
+        '<p>Estos Términos se regirán por las leyes de la República Oriental del Uruguay. Antes de iniciar una controversia judicial, las partes procurarán resolver de buena fe cualquier diferencia mediante comunicación directa. Si no fuera posible alcanzar una solución, serán competentes los tribunales de Montevideo, sin perjuicio de las normas imperativas de jurisdicción, competencia o protección que resulten aplicables.</p>' +
+        '<p>Los Términos podrán publicarse en español, inglés y portugués. La versión española será la versión jurídica de referencia y las traducciones tendrán finalidad informativa. En caso de discrepancia, prevalecerá la versión española, salvo norma imperativa en contrario.</p>' +
+        '<h3>18. Divisibilidad, no renuncia e integración</h3>' +
+        '<p>Si una disposición fuera declarada inválida, ilegal o inaplicable, las restantes conservarán su vigencia. La disposición afectada se interpretará o sustituirá, en la medida permitida, de la forma más cercana a su finalidad legítima.</p>' +
+        '<p>La falta de ejercicio de un derecho por parte de la Cámara no implica renuncia. Estos Términos se integran con la Política de Privacidad, la Política de Cookies, la Política de Uso de Marca, el Canal de Integridad y las condiciones particulares aplicables a actividades específicas.</p>' +
+        '<h3>19. Contacto</h3>' +
+        '<p>Para consultas relacionadas con estos Términos de Uso puede escribirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Cámara de Comercio Mercosur. Asociación internacional uruguaya. Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay.</p>';
+
+    function buildOverlay() {
+      if (overlay) return overlay;
+      overlay = document.createElement('div');
+      overlay.className = 'privacy-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-labelledby', 'terms-modal-title');
+      overlay.innerHTML =
+        '<div class="privacy-modal">' +
+          '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
+          termsHTML +
+        '</div>';
+      document.body.appendChild(overlay);
+
+      overlay.querySelector('.privacy-close').addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+      return overlay;
+    }
+
+    function openModal() {
+      var ov = buildOverlay();
+      window.requestAnimationFrame(function () {
+        ov.classList.add('is-open');
+      });
+    }
+
+    function closeModal() {
+      if (!overlay) return;
+      overlay.classList.remove('is-open');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) closeModal();
+    });
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('.js-terms-link');
+      if (!trigger) return;
+      e.preventDefault();
+      openModal();
+    });
+  })();
+
   /* ---------- Cookie preferences modal ---------- */
   (function () {
-    if (!document.querySelector('.js-cookies-link')) return;
-
     var STORAGE_KEY = 'mercosurCookiePrefs';
     var overlay = null;
 
@@ -1273,6 +1814,85 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!trigger) return;
       e.preventDefault();
       openCookies();
+    });
+  })();
+
+  /* ---------- Cookie consent banner (first layer, per Cookie Policy §9) ---------- */
+  (function () {
+    var STORAGE_KEY = 'mercosurCookiePrefs';
+    var already = null;
+    try { already = localStorage.getItem(STORAGE_KEY); } catch (e) { /* storage unavailable */ }
+    if (already !== null) return;
+
+    var BANNER_TEXT = {
+      es: {
+        message: 'Utilizamos cookies estrictamente necesarias para el funcionamiento del sitio y, de forma opcional, cookies analíticas. Puedes aceptar todas, rechazar las no necesarias o configurar tus preferencias.',
+        policyLink: 'Política de Cookies',
+        reject: 'Rechazar no necesarias',
+        configure: 'Configurar',
+        acceptAll: 'Aceptar todas'
+      },
+      en: {
+        message: 'We use strictly necessary cookies for the website to work and, optionally, analytical cookies. You can accept all, reject non-essential cookies, or configure your preferences.',
+        policyLink: 'Cookie Policy',
+        reject: 'Reject Non-Essential',
+        configure: 'Configure',
+        acceptAll: 'Accept All'
+      },
+      pt: {
+        message: 'Utilizamos cookies estritamente necessários para o funcionamento do site e, de forma opcional, cookies analíticos. Você pode aceitar todos, recusar os não necessários ou configurar suas preferências.',
+        policyLink: 'Política de Cookies',
+        reject: 'Recusar não necessários',
+        configure: 'Configurar',
+        acceptAll: 'Aceitar todos'
+      }
+    };
+
+    function bannerLang() {
+      var lang = 'es';
+      try { lang = localStorage.getItem('mercosurLang') || 'es'; } catch (e) { /* storage unavailable */ }
+      return BANNER_TEXT[lang] ? lang : 'es';
+    }
+
+    function savePrefs(prefs) {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); } catch (e) { /* storage unavailable */ }
+    }
+
+    var t = BANNER_TEXT[bannerLang()];
+    var banner = document.createElement('div');
+    banner.className = 'cookie-banner';
+    banner.setAttribute('role', 'region');
+    banner.setAttribute('aria-label', 'Cookies');
+    banner.innerHTML =
+      '<div class="cookie-banner-inner">' +
+        '<p>' + t.message + ' <a href="#" class="js-cookies-policy-link">' + t.policyLink + '</a></p>' +
+        '<div class="cookie-banner-actions">' +
+          '<button type="button" class="btn btn-outline-blue" data-banner-action="reject">' + t.reject + '</button>' +
+          '<button type="button" class="btn btn-outline-blue js-cookies-link" data-banner-action="configure">' + t.configure + '</button>' +
+          '<button type="button" class="btn btn-primary" data-banner-action="accept">' + t.acceptAll + '</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(banner);
+
+    function dismiss() {
+      banner.classList.remove('is-open');
+      window.setTimeout(function () { banner.remove(); }, 300);
+    }
+
+    banner.querySelector('[data-banner-action="accept"]').addEventListener('click', function () {
+      savePrefs({ analytics: true });
+      dismiss();
+    });
+    banner.querySelector('[data-banner-action="reject"]').addEventListener('click', function () {
+      savePrefs({ analytics: false });
+      dismiss();
+    });
+    banner.querySelector('[data-banner-action="configure"]').addEventListener('click', function () {
+      dismiss();
+    });
+
+    window.requestAnimationFrame(function () {
+      banner.classList.add('is-open');
     });
   })();
 
