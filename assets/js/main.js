@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'Actualmente cursa la Maestría Internacional en Ciencias Políticas con especialización en Cooperación Internacional en la Universidad Europea del Atlántico.',
             'Cuenta con más de ocho años de experiencia en consultoría estratégica, coaching y gestión de proyectos.',
             'Es Coordinadora del Instituto de Estudios Estratégicos y Relaciones Internacionales, así como fundadora y presidenta de la Organización Internacional de Asuntos Públicos.',
-            'Ha representado a Argentina en Brasil (AIESEC), Uruguay (Mercosur) y en Rusia (World Youth Festival), así como a Iberoamérica en España (Fundación Carolina) y al Cono Sur en la Organización de los Estados Americanos (OEA).',
+            'Ha representado a Argentina en Brasil (AIESEC), Uruguay (Mercosur) y en Rusia (World Youth Festival), así como a Iberoamérica en España (Fundación Carolina) y al Cono Sur en la Organización de los Estados Americanos (OEA), así como Youth Leader en el ONU-ECOSOC.',
             'Sus iniciativas y experiencias profesionales hacen de ella una pieza fundamental de la Cámara de Comercio Mercosur.'
           ],
           en: [
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'She is currently pursuing an International Master\'s Degree in Political Science, specializing in International Cooperation, at the European University of the Atlantic.',
             'She has more than eight years of experience in strategic consulting, coaching, and project management.',
             'She serves as Coordinator of the Institute for Strategic Studies and International Relations and is the founder and president of the International Organization for Public Affairs.',
-            'She has represented Argentina in Brazil (AIESEC), Uruguay (MERCOSUR), and Russia (World Youth Festival), as well as Ibero-America in Spain (Fundación Carolina) and the Southern Cone at the Organization of American States (OAS).',
+            'She has represented Argentina in Brazil (AIESEC), Uruguay (MERCOSUR), and Russia (World Youth Festival), as well as Ibero-America in Spain (Fundación Carolina) and the Southern Cone at the Organization of American States (OAS), as well as serving as a Youth Leader at the UN-ECOSOC.',
             'Her initiatives and professional experience make her a key member of the Mercosur Chamber of Commerce.'
           ],
           pt: [
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'Atualmente, cursa o Mestrado Internacional em Ciência Política, com especialização em Cooperação Internacional, na Universidade Europeia do Atlântico.',
             'Possui mais de oito anos de experiência em consultoria estratégica, coaching e gestão de projetos.',
             'É Coordenadora do Instituto de Estudos Estratégicos e Relações Internacionais, além de fundadora e presidente da Organização Internacional de Assuntos Públicos.',
-            'Representou a Argentina no Brasil (AIESEC), no Uruguai (Mercosul) e na Rússia (World Youth Festival), assim como a Ibero-América na Espanha (Fundación Carolina) e o Cone Sul na Organização dos Estados Americanos (OEA).',
+            'Representou a Argentina no Brasil (AIESEC), no Uruguai (Mercosul) e na Rússia (World Youth Festival), assim como a Ibero-América na Espanha (Fundación Carolina) e o Cone Sul na Organização dos Estados Americanos (OEA), além de atuar como Youth Leader na ONU-ECOSOC.',
             'Suas iniciativas e sua trajetória profissional fazem dela uma peça fundamental da Câmara de Comércio Mercosul.'
           ],
           fr: [
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'Elle poursuit actuellement un Master International en Sciences Politiques avec une spécialisation en Coopération Internationale à l\'Université Européenne de l\'Atlantique.',
             'Elle possède plus de huit ans d\'expérience en conseil stratégique, en coaching et en gestion de projet.',
             'Elle est Coordinatrice de l\'Institut d\'Études Stratégiques et des Relations Internationales, ainsi que fondatrice et présidente de l\'Organisation internationale des Affaires Publiques.',
-            'Elle a représenté l\'Argentine au Brésil (AIESEC), l\'Uruguay (Mercosur) et en Russie (Festival Mondial de la Jeunesse), ainsi que l\'Amérique Latine en Espagne (Fondation Carolina) et le Cône Sud au sein de l\'Organisation des États Américains (OEA).',
+            'Elle a représenté l\'Argentine au Brésil (AIESEC), l\'Uruguay (Mercosur) et en Russie (Festival Mondial de la Jeunesse), ainsi que l\'Amérique Latine en Espagne (Fondation Carolina) et le Cône Sud au sein de l\'Organisation des États Américains (OEA), ainsi qu\'en tant que Youth Leader à l\'ONU-ECOSOC.',
             'Ses initiatives et expériences professionnelles font d\'elle un élément fondamental de la Chambre de Commerce du Mercosur.'
           ]
         }
