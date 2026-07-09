@@ -520,18 +520,48 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
       var msg = contactForm.querySelector('.form-msg');
+      var submitBtn = contactForm.querySelector('button[type="submit"]');
+
       if (!contactForm.checkValidity()) {
-        e.preventDefault();
         contactForm.reportValidity();
         return;
       }
+
       if (msg) {
         msg.textContent = mercosurText('contact.form.sending', 'Enviando tu consulta…');
         msg.className = 'form-msg';
       }
-      // Native form submission proceeds to FormSubmit, which emails
-      // info@camaracomerciomercosur.org and returns a confirmation page.
+      if (submitBtn) submitBtn.disabled = true;
+
+      var formData = new FormData(contactForm);
+
+      fetch('https://formsubmit.co/ajax/info@camaracomerciomercosur.org', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed');
+          return res.json();
+        })
+        .then(function () {
+          if (msg) {
+            msg.textContent = mercosurText('contact.form.success', 'Tu consulta fue enviada. Nos pondremos en contacto a la brevedad.');
+            msg.className = 'form-msg ok';
+          }
+          contactForm.reset();
+        })
+        .catch(function () {
+          if (msg) {
+            msg.textContent = mercosurText('contact.form.error', 'No pudimos enviar tu consulta. Intenta nuevamente.');
+            msg.className = 'form-msg err';
+          }
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   }
 
