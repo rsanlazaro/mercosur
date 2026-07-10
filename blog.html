@@ -13,7 +13,7 @@
 <header class="site-header">
   <div class="container">
     <a href="index.html" class="brand">
-      <img src="assets/images/logo.png" alt="Cámara de Comercio Mercosur">
+      <img src="assets/images/logo.png" alt="Cámara de Comercio Mercosur" decoding="async">
     </a>
     <nav class="main-nav">
       <a href="index.html" data-i18n="nav.home">Inicio</a>
@@ -65,7 +65,7 @@
   <!-- FEATURED EVENT -->
   <section class="section section--tight">
     <div class="container">
-      <div class="blog-feature reveal" style="background-image:url('assets/images/blog-event.jpg');">
+      <div class="blog-feature reveal" data-bg="assets/images/blog-event.jpg">
         <div class="blog-feature-content">
           <h2>EXPO MARKET 2026</h2>
           <p class="blog-feature-date" data-i18n="blog.expo.date">25, 26 y 27 de Septiembre de 2026</p>
@@ -106,6 +106,7 @@
         </div>
         <div>
           <form id="newsletter-form" novalidate>
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
             <div class="newsletter-form">
               <input type="email" placeholder="Email Address" aria-label="Correo electrónico" required>
               <button type="submit" class="btn btn-primary" data-i18n="cta.subscribe">Registrarse</button>

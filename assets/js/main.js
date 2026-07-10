@@ -22,6 +22,36 @@ document.addEventListener('DOMContentLoaded', function () {
     return false;
   }
 
+  /* ---------- Lazy-load below-the-fold CSS background images ---------- */
+  (function () {
+    var targets = document.querySelectorAll('[data-bg]');
+    if (!targets.length) return;
+
+    function loadBg(el) {
+      var url = el.getAttribute('data-bg');
+      if (!url) return;
+      el.style.backgroundImage = "url('" + url + "')";
+      el.removeAttribute('data-bg');
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      // Fallback for very old browsers: just load them all.
+      targets.forEach(loadBg);
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          loadBg(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '300px 0px' });
+
+    targets.forEach(function (el) { observer.observe(el); });
+  })();
+
   /* ---------- Language switcher (ES / PT / EN active — FR coming soon) ---------- */
   var langSwitcher = document.querySelector('.lang-switcher');
   if (langSwitcher) {

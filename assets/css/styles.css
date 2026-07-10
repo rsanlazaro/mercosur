@@ -654,7 +654,7 @@ h2 em, h1 em{ font-style: italic; }
 /* ---------- Blog: featured event banner ---------- */
 .blog-feature{
   position:relative; border-radius: 8px; overflow:hidden;
-  min-height: 480px; background-size:cover; background-position:center;
+  min-height: 480px; background-size:cover; background-position:center; background-color: var(--blue-ink);
   display:flex; align-items:center; justify-content:center; padding: 60px 24px;
 }
 .blog-feature-content{
