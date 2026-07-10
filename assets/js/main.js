@@ -930,18 +930,32 @@ document.addEventListener('DOMContentLoaded', function () {
     function goToPage(page, scroll) {
       page = Math.max(1, Math.min(totalPages, page));
       currentPage = page;
+
+      var scrollY = window.scrollY;
       renderGrid(currentPage);
       renderPager(currentPage);
-      if (scroll) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (scroll) {
+        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // Replacing the grid/pager markup can shift focus and trigger the
+        // browser's own scroll adjustment (e.g. scroll anchoring). Pin the
+        // page back exactly where the user was, with no animation — and
+        // do it again next frame in case that adjustment lands late.
+        window.scrollTo({ top: scrollY, left: 0, behavior: 'instant' });
+        window.requestAnimationFrame(function () {
+          window.scrollTo({ top: scrollY, left: 0, behavior: 'instant' });
+        });
+      }
     }
 
     pager.addEventListener('click', function (e) {
       var btn = e.target.closest('.pagination-btn');
       if (!btn || btn.disabled) return;
       var target = btn.getAttribute('data-page');
-      if (target === 'prev') goToPage(currentPage - 1, true);
-      else if (target === 'next') goToPage(currentPage + 1, true);
-      else goToPage(parseInt(target, 10), true);
+      if (target === 'prev') goToPage(currentPage - 1, false);
+      else if (target === 'next') goToPage(currentPage + 1, false);
+      else goToPage(parseInt(target, 10), false);
     });
 
     /* ---- Read More modal ---- */
