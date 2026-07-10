@@ -3,6 +3,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var PAGE_LOAD_TIME = Date.now();
 
+  /* ---------- Email harvesting protection ----------
+     Spam harvesters read the raw HTML/JS as delivered by the server and
+     regex-search it for "name@domain" text — they don't run JavaScript.
+     So instead of writing the real address anywhere in the source, each
+     mail link ships as an empty anchor with the user/domain split across
+     two separate attributes (never adjacent, never joined by "@" in the
+     file itself). This function joins them back together — building both
+     the visible text and the mailto: href — only once it actually runs
+     in a real browser. */
+  function fillEmailLinks(root) {
+    (root || document).querySelectorAll('a.js-mail[data-u]:not([data-mail-filled])').forEach(function (a) {
+      var u = a.getAttribute('data-u');
+      var d = a.getAttribute('data-d') || 'camaracomerciomercosur.org';
+      if (!u) return;
+      a.setAttribute('href', 'mailto:' + u + '@' + d);
+      a.textContent = u + '@' + d;
+      a.setAttribute('data-mail-filled', '1');
+    });
+  }
+
+  // Expose so content injected later (modals built from JS) can be filled too.
+  window.mercosurFillEmails = fillEmailLinks;
+  fillEmailLinks(document);
+
+  function formSubmitEndpoint(user) {
+    return 'https://formsubmit.co/ajax/' + user + '@camaracomerciomercosur.org';
+  }
+
   /* ---------- Shared helper: translate a status/warning message on demand ---------- */
   function mercosurText(key, fallback) {
     try {
@@ -542,7 +570,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- Contact form (submits via FormSubmit to info@camaracomerciomercosur.org) ---------- */
+  /* ---------- Contact form (submits via FormSubmit) ---------- */
   var contactForm = document.querySelector('#contact-form');
   if (contactForm) {
     var motivoSelect = contactForm.querySelector('#c-motivo');
@@ -588,7 +616,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       var formData = new FormData(contactForm);
 
-      fetch('https://formsubmit.co/ajax/info@camaracomerciomercosur.org', {
+      fetch(formSubmitEndpoint('info'), {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: formData
@@ -1028,7 +1056,7 @@ document.addEventListener('DOMContentLoaded', function () {
     goToPage(1);
   })();
 
-  /* ---------- Newsletter form (delivers to info@camaracomerciomercosur.org via FormSubmit) ---------- */
+  /* ---------- Newsletter form (delivers via FormSubmit) ---------- */
   var newsletterForm = document.querySelector('#newsletter-form');
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', function (e) {
@@ -1055,7 +1083,7 @@ document.addEventListener('DOMContentLoaded', function () {
       msg.className = 'form-msg';
       if (submitBtn) submitBtn.disabled = true;
 
-      fetch('https://formsubmit.co/ajax/info@camaracomerciomercosur.org', {
+      fetch(formSubmitEndpoint('info'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
@@ -1113,7 +1141,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>La Cámara de Comercio Mercosur reconoce la protección de los datos personales como una condición esencial para construir relaciones de confianza con empresas, cámaras de comercio, instituciones, asociados, colaboradores y usuarios de su sitio web. Esta Política explica de forma clara qué información podemos tratar, para qué la utilizamos, con quién puede compartirse, durante cuánto tiempo se conserva y cómo pueden ejercerse los derechos reconocidos por la normativa aplicable.</p>' +
 
         '<h3>1. Identidad y alcance</h3>' +
-        '<p>La responsable del tratamiento es la Cámara de Comercio Mercosur, asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Las consultas relacionadas con privacidad o protección de datos pueden dirigirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>La responsable del tratamiento es la Cámara de Comercio Mercosur, asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Las consultas relacionadas con privacidad o protección de datos pueden dirigirse a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Esta Política se aplica a los datos personales tratados a través del sitio web, sus formularios, las comunicaciones electrónicas y los demás canales digitales vinculados a la actividad institucional de la Cámara. Comprende, entre otras, las consultas generales, manifestaciones de interés, solicitudes de asociación, propuestas de cooperación, presentación de iniciativas empresariales, consultas sobre comercio, internacionalización, inversión o financiación, comunicaciones de prensa, privacidad, cumplimiento e integridad, y suscripciones voluntarias a comunicaciones institucionales.</p>' +
         '<p>Cuando una actividad, evento, relación contractual, investigación de integridad u otro tratamiento requiera información adicional, la Cámara podrá proporcionar una cláusula o aviso específico que complemente esta Política.</p>' +
 
@@ -1134,7 +1162,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>5. Bases jurídicas</h3>' +
         '<p>El tratamiento se realizará sobre la base del consentimiento de la persona interesada, la atención de una solicitud o la adopción de medidas previas a una posible relación institucional o contractual, la ejecución de una relación válidamente establecida, el cumplimiento de obligaciones legales o los supuestos en los que la normativa permita o exceptúe el tratamiento sin consentimiento.</p>' +
-        '<p>Cuando el tratamiento se base en el consentimiento, este podrá retirarse en cualquier momento mediante una comunicación a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>, sin afectar la licitud del tratamiento realizado con anterioridad.</p>' +
+        '<p>Cuando el tratamiento se base en el consentimiento, este podrá retirarse en cualquier momento mediante una comunicación a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>, sin afectar la licitud del tratamiento realizado con anterioridad.</p>' +
 
         '<h3>6. Formularios y carácter de los datos</h3>' +
         '<p>Los campos identificados como obligatorios son necesarios para gestionar la consulta o solicitud. Si no se facilitan, la Cámara puede no estar en condiciones de atenderla adecuadamente. Los campos opcionales permiten aportar contexto adicional y pueden dejarse en blanco.</p>' +
@@ -1142,7 +1170,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>7. Comunicaciones institucionales</h3>' +
         '<p>La Cámara solo enviará boletines, novedades, invitaciones u otras comunicaciones institucionales periódicas cuando exista una base jurídica suficiente. Cuando se solicite consentimiento, la casilla será separada, opcional y no aparecerá premarcada.</p>' +
-        '<p>La persona podrá darse de baja en cualquier momento mediante el enlace incluido en la comunicación o escribiendo a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>. La retirada del consentimiento no afectará a otras comunicaciones necesarias para gestionar una relación o solicitud existente.</p>' +
+        '<p>La persona podrá darse de baja en cualquier momento mediante el enlace incluido en la comunicación o escribiendo a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>. La retirada del consentimiento no afectará a otras comunicaciones necesarias para gestionar una relación o solicitud existente.</p>' +
 
         '<h3>8. Destinatarios y proveedores</h3>' +
         '<p>La Cámara no vende datos personales ni los utiliza para finalidades comerciales ajenas a su actividad institucional.</p>' +
@@ -1166,7 +1194,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>12. Derechos de las personas</h3>' +
         '<p>Las personas pueden conocer si la Cámara trata sus datos, acceder a ellos, solicitar su rectificación, actualización, inclusión o supresión cuando corresponda, revocar el consentimiento y formular consultas u observaciones relacionadas con el tratamiento. También pueden impugnar valoraciones personales que afecten significativamente a sus derechos o intereses y que se basen exclusivamente o principalmente en tratamientos de datos personales, cuando resulte aplicable.</p>' +
-        '<p>Los derechos pueden ejercerse gratuitamente mediante una comunicación a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>, indicando el derecho que se desea ejercer y aportando información suficiente para verificar la identidad de manera proporcional.</p>' +
+        '<p>Los derechos pueden ejercerse gratuitamente mediante una comunicación a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>, indicando el derecho que se desea ejercer y aportando información suficiente para verificar la identidad de manera proporcional.</p>' +
         '<p>La Cámara responderá las solicitudes de acceso, rectificación, actualización, inclusión o supresión dentro del plazo máximo de cinco días hábiles desde su recepción, sin perjuicio de otros plazos que puedan resultar aplicables según la naturaleza de la solicitud. Cuando corresponda, podrá solicitar información adicional para confirmar la identidad o precisar el alcance de la petición.</p>' +
         '<p>Las personas también pueden formular consultas o presentar denuncias ante la Unidad Reguladora y de Control de Datos Personales de Uruguay: <a href="https://www.gub.uy/unidad-reguladora-control-datos-personales/" target="_blank" rel="noopener">www.gub.uy/unidad-reguladora-control-datos-personales</a>.</p>' +
 
@@ -1182,7 +1210,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>15. Actualizaciones y contacto</h3>' +
         '<p>La Cámara puede actualizar esta Política para adaptarla a cambios normativos, tecnológicos, organizativos o derivados de sus actividades. La versión vigente estará disponible en el sitio e indicará su fecha de publicación. Cuando los cambios sean relevantes, se procurará informarlos por medios razonables.</p>' +
-        '<p>Para cualquier consulta sobre esta Política o sobre el tratamiento de datos personales, puede escribir a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Para cualquier consulta sobre esta Política o sobre el tratamiento de datos personales, puede escribir a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
 
         '<p class="privacy-signature">Cámara de Comercio Mercosur. Asociación internacional uruguaya. Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay.</p>' +
         '<p style="font-size:.8rem;">Marco normativo de referencia: Ley N.º 18.331 de Protección de Datos Personales y Acción de Habeas Data; Decreto N.º 414/009; Decreto N.º 64/020; normas modificativas y criterios de la Unidad Reguladora y de Control de Datos Personales de Uruguay.</p>',
@@ -1194,7 +1222,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>The Mercosur Chamber of Commerce recognizes the protection of personal data as an essential condition for building trusted relationships with companies, chambers of commerce, institutions, members, partners, and visitors to its website. This Privacy Policy clearly explains what information we may process, the purposes for which we use it, with whom it may be shared, how long it is retained, and how individuals may exercise the rights granted under applicable data protection laws.</p>' +
 
         '<h3>1. Identity and Scope of Application</h3>' +
-        '<p>The Mercosur Chamber of Commerce, an international Uruguayan association headquartered at Carlos Quijano Street 1290, Suite 101, 11100 Montevideo, Uruguay, is the data controller responsible for the processing of personal data. Any questions regarding privacy or data protection may be sent to <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>The Mercosur Chamber of Commerce, an international Uruguayan association headquartered at Carlos Quijano Street 1290, Suite 101, 11100 Montevideo, Uruguay, is the data controller responsible for the processing of personal data. Any questions regarding privacy or data protection may be sent to <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>This Privacy Policy applies to personal data processed through the Chamber\'s website, its forms, electronic communications, and other digital channels related to the Chamber\'s institutional activities. It covers, among other things, general inquiries, expressions of interest, membership applications, cooperation proposals, business initiative submissions, inquiries regarding trade, internationalization, investment or financing, communications related to the press, privacy, compliance and integrity, as well as voluntary subscriptions to institutional communications.</p>' +
         '<p>Whenever an activity, event, contractual relationship, integrity investigation, or any other type of data processing requires additional information, the Chamber may provide a specific privacy notice or clause to supplement this Privacy Policy.</p>' +
 
@@ -1215,7 +1243,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>5. Legal Basis for Processing</h3>' +
         '<p>Personal data will be processed based on the data subject\'s consent, the handling of a request, the implementation of preliminary measures related to a potential institutional or contractual relationship, the performance of a validly established relationship, compliance with legal obligations, or in any other circumstances where applicable law permits or exempts the processing of personal data without the need for consent.</p>' +
-        '<p>Where processing is based on consent, such consent may be withdrawn at any time by contacting <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>, without affecting the lawfulness of any processing carried out prior to its withdrawal.</p>' +
+        '<p>Where processing is based on consent, such consent may be withdrawn at any time by contacting <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>, without affecting the lawfulness of any processing carried out prior to its withdrawal.</p>' +
 
         '<h3>6. Forms and Nature of the Data</h3>' +
         '<p>Fields marked as required are necessary to process and respond to an inquiry or application. If they are not completed, the Chamber may be unable to handle the request properly. Optional fields allow users to provide additional context and may be left blank.</p>' +
@@ -1223,7 +1251,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>7. Institutional Communications</h3>' +
         '<p>The Chamber will send newsletters, updates, invitations, and other periodic institutional communications only when there is a valid legal basis to do so. Whenever consent is required, the corresponding option will be presented separately, will be optional, and will not be pre-selected.</p>' +
-        '<p>Individuals may unsubscribe at any time by using the link included in the communication or by sending an email to <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>. Withdrawal of consent will not affect other communications that are necessary to manage an existing relationship or request.</p>' +
+        '<p>Individuals may unsubscribe at any time by using the link included in the communication or by sending an email to <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>. Withdrawal of consent will not affect other communications that are necessary to manage an existing relationship or request.</p>' +
 
         '<h3>8. Recipients and Service Providers</h3>' +
         '<p>The Chamber does not sell personal data or use it for commercial purposes unrelated to its institutional activities.</p>' +
@@ -1247,7 +1275,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>12. Individual Rights</h3>' +
         '<p>Individuals have the right to know whether the Chamber processes their personal data, to access it, request its correction, updating, inclusion, or deletion where applicable, withdraw consent, and submit inquiries or observations regarding the processing of their data. They may also challenge personal assessments that significantly affect their rights or interests and that are based exclusively or primarily on the processing of personal data, where applicable.</p>' +
-        '<p>These rights may be exercised free of charge by contacting <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>, specifying the right to be exercised and providing sufficient information to verify the individual\'s identity in a proportionate manner.</p>' +
+        '<p>These rights may be exercised free of charge by contacting <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>, specifying the right to be exercised and providing sufficient information to verify the individual\'s identity in a proportionate manner.</p>' +
         '<p>The Chamber will respond to requests for access, correction, updating, inclusion, or deletion within a maximum of five business days from receipt, without prejudice to any other deadlines that may apply depending on the nature of the request. When necessary, additional information may be requested to confirm the individual\'s identity or clarify the scope of the request.</p>' +
         '<p>Individuals may also submit inquiries or file complaints with the Regulatory and Supervisory Unit for Personal Data Protection of Uruguay: <a href="https://www.gub.uy/unidad-reguladora-control-datos-personales/" target="_blank" rel="noopener">www.gub.uy/unidad-reguladora-control-datos-personales</a>.</p>' +
 
@@ -1263,7 +1291,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>15. Updates and Contact</h3>' +
         '<p>The Chamber may update this Privacy Policy to reflect legal, technological, organizational, or operational changes. The current version will always be available on the website and will indicate its publication date. Whenever significant changes are made, the Chamber will make reasonable efforts to inform users.</p>' +
-        '<p>For any questions regarding this Privacy Policy or the processing of personal data, please contact <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>For any questions regarding this Privacy Policy or the processing of personal data, please contact <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
 
         '<p class="privacy-signature">Mercosur Chamber of Commerce. Uruguayan International Association. Carlos Quijano Street 1290, Suite 101, 11100 Montevideo, Uruguay.</p>' +
         '<p style="font-size:.8rem;">Legal Framework: Law No. 18,331 on Personal Data Protection and Habeas Data; Decree No. 414/009; Decree No. 64/020; related regulations; and the guidelines issued by the Regulatory and Supervisory Unit for Personal Data Protection of Uruguay.</p>',
@@ -1275,7 +1303,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>A Câmara de Comércio Mercosul reconhece a proteção dos dados pessoais como uma condição essencial para construir relações de confiança com empresas, câmaras de comércio, instituições, associados, colaboradores e usuários do site. Esta Política explica, de forma clara, quais informações podemos tratar, para quais finalidades as utilizamos, com quem elas podem ser compartilhadas, por quanto tempo são conservadas e como podem ser exercidos os direitos reconhecidos pela legislação aplicável.</p>' +
 
         '<h3>1. Identidade e Âmbito de Aplicação</h3>' +
-        '<p>A responsável pelo tratamento dos dados é a Câmara de Comércio Mercosul, associação internacional uruguaia com sede na Rua Carlos Quijano 1290, Sala 101, 11.100, Montevidéu, Uruguai. As consultas relacionadas à privacidade ou à proteção de dados podem ser encaminhadas para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>A responsável pelo tratamento dos dados é a Câmara de Comércio Mercosul, associação internacional uruguaia com sede na Rua Carlos Quijano 1290, Sala 101, 11.100, Montevidéu, Uruguai. As consultas relacionadas à privacidade ou à proteção de dados podem ser encaminhadas para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Esta Política aplica-se aos dados pessoais tratados por meio do site, de seus formulários, das comunicações eletrônicas e dos demais canais digitais vinculados às atividades institucionais da Câmara. Abrange, entre outros, consultas gerais, manifestações de interesse, solicitações de associação, propostas de cooperação, apresentação de iniciativas empresariais, consultas sobre comércio, internacionalização, investimentos ou financiamento, comunicações relacionadas à imprensa, privacidade, conformidade e integridade, bem como inscrições voluntárias para o recebimento de comunicações institucionais.</p>' +
         '<p>Sempre que uma atividade, evento, relação contratual, investigação de integridade ou outro tratamento exigir informações adicionais, a Câmara poderá fornecer uma cláusula ou aviso específico que complemente esta Política.</p>' +
 
@@ -1296,7 +1324,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>5. Bases Legais</h3>' +
         '<p>O tratamento será realizado com base no consentimento da pessoa interessada, no atendimento de uma solicitação ou na adoção de medidas preliminares para uma possível relação institucional ou contratual, na execução de uma relação validamente estabelecida, no cumprimento de obrigações legais ou nas hipóteses em que a legislação permita ou dispense o tratamento sem a necessidade de consentimento.</p>' +
-        '<p>Quando o tratamento estiver fundamentado no consentimento, este poderá ser revogado a qualquer momento mediante comunicação para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>, sem prejuízo da licitude do tratamento realizado anteriormente.</p>' +
+        '<p>Quando o tratamento estiver fundamentado no consentimento, este poderá ser revogado a qualquer momento mediante comunicação para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>, sem prejuízo da licitude do tratamento realizado anteriormente.</p>' +
 
         '<h3>6. Formulários e Natureza dos Dados</h3>' +
         '<p>Os campos identificados como obrigatórios são necessários para processar a consulta ou solicitação. Caso não sejam preenchidos, a Câmara poderá não estar em condições de atendê-la adequadamente. Os campos opcionais permitem fornecer informações adicionais de contexto e podem permanecer em branco.</p>' +
@@ -1304,7 +1332,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>7. Comunicações Institucionais</h3>' +
         '<p>A Câmara enviará boletins informativos, novidades, convites ou outras comunicações institucionais periódicas somente quando houver uma base legal suficiente para isso. Sempre que for necessário o consentimento, a respectiva opção será apresentada em campo separado, será facultativa e não aparecerá previamente marcada.</p>' +
-        '<p>A pessoa poderá cancelar sua inscrição a qualquer momento por meio do link incluído na comunicação ou enviando um e-mail para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>. A revogação do consentimento não afetará outras comunicações necessárias para a gestão de uma relação ou solicitação já existente.</p>' +
+        '<p>A pessoa poderá cancelar sua inscrição a qualquer momento por meio do link incluído na comunicação ou enviando um e-mail para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>. A revogação do consentimento não afetará outras comunicações necessárias para a gestão de uma relação ou solicitação já existente.</p>' +
 
         '<h3>8. Destinatários e Prestadores de Serviços</h3>' +
         '<p>A Câmara não comercializa dados pessoais nem os utiliza para finalidades comerciais alheias às suas atividades institucionais.</p>' +
@@ -1328,7 +1356,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>12. Direitos dos Usuários</h3>' +
         '<p>Os usuários podem verificar se a Câmara trata seus dados, acessá-los, solicitar sua retificação, atualização, inclusão ou exclusão, quando cabível, revogar o consentimento e apresentar consultas ou observações relacionadas ao tratamento. Também podem contestar avaliações pessoais que afetem significativamente seus direitos ou interesses e que se baseiem exclusiva ou principalmente em tratamentos de dados pessoais, quando aplicável.</p>' +
-        '<p>Os direitos podem ser exercidos gratuitamente mediante comunicação para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>, indicando o direito que se deseja exercer e fornecendo informações suficientes para verificar a identidade de forma adequada.</p>' +
+        '<p>Os direitos podem ser exercidos gratuitamente mediante comunicação para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>, indicando o direito que se deseja exercer e fornecendo informações suficientes para verificar a identidade de forma adequada.</p>' +
         '<p>A Câmara responderá às solicitações de acesso, retificação, atualização, inclusão ou exclusão no prazo máximo de cinco dias úteis a partir de seu recebimento, sem prejuízo de outros prazos que possam ser aplicáveis conforme a natureza da solicitação. Quando necessário, poderá solicitar informações adicionais para confirmar a identidade ou esclarecer o alcance do pedido.</p>' +
         '<p>As pessoas também poderão apresentar consultas ou registrar reclamações perante a Unidade Reguladora e de Controle de Dados Pessoais do Uruguai: <a href="https://www.gub.uy/unidad-reguladora-control-datos-personales/" target="_blank" rel="noopener">www.gub.uy/unidad-reguladora-control-datos-personales</a>.</p>' +
 
@@ -1344,7 +1372,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>15. Atualizações e Contato</h3>' +
         '<p>A Câmara poderá atualizar esta Política para adaptá-la a alterações legais, tecnológicas, organizacionais ou decorrentes de suas atividades. A versão vigente estará disponível no site e indicará sua data de publicação. Quando as alterações forem relevantes, a Câmara procurará comunicá-las por meios razoáveis.</p>' +
-        '<p>Para qualquer consulta sobre esta Política ou sobre o tratamento de dados pessoais, entre em contato pelo e-mail <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Para qualquer consulta sobre esta Política ou sobre o tratamento de dados pessoais, entre em contato pelo e-mail <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
 
         '<p class="privacy-signature">Câmara de Comércio Mercosul. Associação Internacional Uruguaia. Rua Carlos Quijano 1290, Sala 101, 11.100, Montevidéu, Uruguai.</p>' +
         '<p style="font-size:.8rem;">Marco legal de referência: Lei nº 18.331 de Proteção de Dados Pessoais e Ação de Habeas Data; Decreto nº 414/009; Decreto nº 64/020; demais normas complementares e critérios da Unidade Reguladora e de Controle de Dados Pessoais do Uruguai.</p>',
@@ -1355,7 +1383,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>La Chambre de Commerce du Mercosur reconnaît la protection des données personnelles comme une condition essentielle pour construire des relations de confiance avec les entreprises, chambres de commerce, institutions, partenaires, collaborateurs et les utilisateurs de son site web. Cette politique explique clairement quelles informations nous sommes susceptibles de traiter, à quelles fins nous les utilisons, avec qui elles peuvent être partagées, combien de temps elles sont conservées et comment peuvent s\'exercer les droits reconnus par la législation applicable.</p>' +
 
         '<h3>1. Identité et étendue</h3>' +
-        '<p>La responsable du traitement est la Chambre de Commerce du Mercosur, association internationale uruguayenne située Calle Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay. Les questions relatives à la confidentialité ou protection des données peuvent être communiquées à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>La responsable du traitement est la Chambre de Commerce du Mercosur, association internationale uruguayenne située Calle Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay. Les questions relatives à la confidentialité ou protection des données peuvent être communiquées à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>La présente politique s\'applique aux données personnelles traitées par le biais du site web, de ses formulaires, des communications électroniques et autres canaux numériques liés à l\'activité institutionnelle de la Chambre. Elle concerne notamment les demandes d\'informations générales, les manifestations d\'intérêt, les demandes d\'adhésion, les propositions de coopération, les soumissions d\'initiatives commerciales, les demandes d\'informations sur le commerce, l\'internationalisation, l\'investissement ou le financement, les communiqués de presse, les questions de confidentialité, de conformité et d\'intégrité, ainsi que les abonnements volontaires à des communications institutionnelles.</p>' +
         '<p>Lorsqu\'une activité, un événement, une relation contractuelle, une enquête d\'intégrité ou tout autre traitement nécessite des informations supplémentaires, la Chambre pourra ajouter une clause ou un avis spécifique pour compléter la présente Politique.</p>' +
 
@@ -1376,7 +1404,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>5. Fondements juridiques</h3>' +
         '<p>Le traitement sera effectué sur la base du consentement de la personne concernée, du traitement d\'une demande ou de l\'adoption de mesures préalables à une éventuelle relation institutionnelle ou contractuelle, de l\'exécution d\'une relation valablement établie, du respect des obligations légales ou des cas dans lesquels la réglementation autorise ou exclut le traitement sans consentement.</p>' +
-        '<p>Lorsque le traitement est fondé sur le consentement, celui-ci peut être retiré à tout moment en envoyant une communication à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>, sans que cela n\'affecte la licéité du traitement effectué antérieurement.</p>' +
+        '<p>Lorsque le traitement est fondé sur le consentement, celui-ci peut être retiré à tout moment en envoyant une communication à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>, sans que cela n\'affecte la licéité du traitement effectué antérieurement.</p>' +
 
         '<h3>6. Formulaires et nature des données</h3>' +
         '<p>Les champs marqués comme obligatoires sont nécessaires au traitement de la demande. S\'ils ne sont pas remplis, la Chambre risque de ne pas pouvoir la traiter correctement. Les champs facultatifs permettent d\'apporter des précisions et peuvent être laissés vides.</p>' +
@@ -1384,7 +1412,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>7. Communications institutionnelles</h3>' +
         '<p>La Chambre n\'enverra de lettres d\'information, de mises à jour, d\'invitations ou autres communications institutionnelles périodiques que si elle dispose d\'une base légale suffisante. Lorsque le consentement est demandé, la case à cocher sera distincte, facultative et non pré-cochée.</p>' +
-        '<p>La personne pourra se désinscrire à tout moment en utilisant le lien inclus dans la communication ou en écrivant à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>. Le retrait du consentement n\'aura aucune incidence sur les autres communications nécessaires à la gestion d\'une relation ou d\'une demande existante.</p>' +
+        '<p>La personne pourra se désinscrire à tout moment en utilisant le lien inclus dans la communication ou en écrivant à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>. Le retrait du consentement n\'aura aucune incidence sur les autres communications nécessaires à la gestion d\'une relation ou d\'une demande existante.</p>' +
 
         '<h3>8. Destinataires et fournisseurs</h3>' +
         '<p>La Chambre ne vend pas de données personnelles et ne les utilise pas à des fins commerciales sans lien avec son activité institutionnelle.</p>' +
@@ -1408,7 +1436,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>12. Droits des personnes</h3>' +
         '<p>Les personnes peuvent savoir si la Chambre traite leurs données, y accéder, en demander la rectification, la mise à jour, l\'ajout ou la suppression le cas échéant, retirer leur consentement et soumettre des demandes d\'informations ou des observations relatives au traitement. Elles peuvent également contester les décisions les concernant qui affectent significativement leurs droits ou leurs intérêts et qui sont fondées exclusivement ou principalement sur le traitement de données personnelles, le cas échéant.</p>' +
-        '<p>Les droits peuvent être exercés gratuitement en envoyant un courrier à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>, en indiquant le droit qui souhaite être exercé et en fournissant des informations suffisantes pour vérifier l\'identité de manière proportionnée.</p>' +
+        '<p>Les droits peuvent être exercés gratuitement en envoyant un courrier à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>, en indiquant le droit qui souhaite être exercé et en fournissant des informations suffisantes pour vérifier l\'identité de manière proportionnée.</p>' +
         '<p>La Chambre répondra aux demandes d\'accès, de rectification, de mise à jour, d\'ajout ou de suppression dans un délai maximal de cinq jours ouvrables à compter de leur réception, sans préjudice des autres délais pouvant s\'appliquer selon la nature de la demande. Le cas échéant, elle pourra demander des renseignements complémentaires afin de confirmer l\'identité ou de préciser la portée de la demande.</p>' +
         '<p>Les personnes peuvent également faire des demandes de renseignements ou déposer des plaintes auprès de l\'Unité de Réglementation et de Contrôle des Données Personnelles de l\'Uruguay : <a href="https://www.gub.uy/unidad-reguladora-control-datos-personales/" target="_blank" rel="noopener">www.gub.uy/unidad-reguladora-control-datos-personales</a>.</p>' +
 
@@ -1424,7 +1452,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         '<h3>15. Mises à jour et contact</h3>' +
         '<p>La Chambre peut mettre à jour la présente politique afin de l\'adapter aux changements réglementaires, technologiques, organisationnels ou dérivés de ses activités. La version en vigueur sera disponible sur le site web et indiquera sa date de publication. En cas de modifications importantes, la Chambre s\'efforcera d\'en informer ses membres par des moyens raisonnables.</p>' +
-        '<p>Pour toute question concernant cette Politique ou le traitement des données personnelles, vous pouvez écrire à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Pour toute question concernant cette Politique ou le traitement des données personnelles, vous pouvez écrire à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
 
         '<p class="privacy-signature">Chambre de Commerce du Mercosur. Association internationale uruguayenne. Rue Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay.</p>' +
         '<p style="font-size:.8rem;">Cadre réglementaire de référence : Loi N° 18.331 de Protection des Données Personnelles et d\'Action en Habeas Data ; Décret N° 414/009 ; Décret N° 64/020 ; règles de modifications et critères de l\'Unité de Réglementation et de Contrôle des Données Personnelles de l\'Uruguay.</p>'
@@ -1459,6 +1487,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
           PRIVACY_CONTENT[currentLang()] +
         '</div>';
+      fillEmailLinks(ov);
       ov.querySelector('.privacy-close').addEventListener('click', closePrivacy);
       window.requestAnimationFrame(function () {
         ov.classList.add('is-open');
@@ -1498,7 +1527,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>La Política se aplica al dominio institucional y, cuando corresponda, a sus subdominios, áreas restringidas, páginas de eventos, formularios integrados y demás servicios digitales incorporados directamente bajo control de la Cámara. Los portales o servicios externos a los que se acceda mediante enlaces se rigen por sus propias condiciones, salvo respecto de las tecnologías que se activen dentro de las páginas de la Cámara antes de abandonar el sitio.</p>' +
         '<p>Este documento complementa la Política de Privacidad. La Política de Privacidad regula el tratamiento general de datos personales, mientras que esta Política se concentra en el almacenamiento, recuperación, transmisión o utilización de información mediante navegadores, dispositivos y tecnologías equivalentes.</p>' +
         '<h3>2. Identificación institucional</h3>' +
-        '<p>El responsable del sitio es la Cámara de Comercio Mercosur, asociación internacional uruguaya, con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Las consultas relacionadas con esta Política, con el funcionamiento del panel de preferencias o con el tratamiento de datos vinculado a cookies podrán dirigirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>El responsable del sitio es la Cámara de Comercio Mercosur, asociación internacional uruguaya, con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Las consultas relacionadas con esta Política, con el funcionamiento del panel de preferencias o con el tratamiento de datos vinculado a cookies podrán dirigirse a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<h3>3. Marco jurídico y principios aplicables</h3>' +
         '<p>Uruguay no cuenta con una norma autónoma dedicada exclusivamente a las cookies. Sin embargo, cuando estas tecnologías permiten recoger, almacenar, relacionar, transmitir o utilizar información vinculada con una persona, un navegador o un dispositivo, su empleo queda comprendido en la normativa uruguaya de protección de datos personales. En particular, resultan relevantes la Ley N.º 18.331 de Protección de Datos Personales y Acción de Habeas Data, el Decreto N.º 414/009, el Decreto N.º 64/020 y los criterios emitidos por la Unidad Reguladora y de Control de Datos Personales.</p>' +
         '<p>La Cámara aplicará los principios de información, finalidad, proporcionalidad, minimización, seguridad, confidencialidad, conservación limitada y responsabilidad. Cuando una tecnología no sea estrictamente necesaria para prestar una función solicitada o garantizar la seguridad del sitio, su activación dependerá de una elección previa, informada y revocable de la persona usuaria.</p>' +
@@ -1548,7 +1577,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Según la herramienta utilizada, las cookies pueden implicar el tratamiento de direcciones IP, identificadores, características del navegador o dispositivo, sistema operativo, idioma, páginas visitadas, fecha y hora, origen de navegación, interacciones, preferencias o errores técnicos. La información concreta dependerá de la configuración efectiva y deberá limitarse a la finalidad informada.</p>' +
         '<p>Algunos proveedores pueden almacenar, procesar o acceder a información desde otros países. Cuando corresponda, la Cámara informará sobre el proveedor, la naturaleza del servicio y las garantías aplicables, en coordinación con la Política de Privacidad. No se afirmará la inexistencia de transferencias internacionales sin haber verificado todos los servicios incorporados.</p>' +
         '<h3>14. Derechos de las personas</h3>' +
-        '<p>Cuando las cookies impliquen tratamiento de datos personales, podrán ejercerse los derechos reconocidos por la normativa uruguaya, incluidos, cuando correspondan, los derechos de acceso, rectificación, actualización, inclusión y supresión y, si existieran valoraciones automatizadas o elaboración de perfiles, los derechos específicamente vinculados a esos tratamientos. Las solicitudes podrán dirigirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a> y se gestionarán de acuerdo con la Política de Privacidad y la normativa aplicable.</p>' +
+        '<p>Cuando las cookies impliquen tratamiento de datos personales, podrán ejercerse los derechos reconocidos por la normativa uruguaya, incluidos, cuando correspondan, los derechos de acceso, rectificación, actualización, inclusión y supresión y, si existieran valoraciones automatizadas o elaboración de perfiles, los derechos específicamente vinculados a esos tratamientos. Las solicitudes podrán dirigirse a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a> y se gestionarán de acuerdo con la Política de Privacidad y la normativa aplicable.</p>' +
         '<p>Cuando un proveedor externo trate datos bajo su propia responsabilidad, también puede resultar necesario ejercer determinados derechos directamente ante ese proveedor. La Cámara facilitará la identificación del servicio cuando disponga de información suficiente para hacerlo.</p>' +
         '<h3>15. Menores de edad</h3>' +
         '<p>El sitio institucional no está diseñado específicamente para elaborar perfiles de menores, mostrarles publicidad comportamental ni recabar deliberadamente información mediante tecnologías opcionales dirigidas a ese público. Si en el futuro se incorporaran servicios destinados específicamente a menores, se adoptarán medidas reforzadas y se actualizarán la información y los mecanismos de consentimiento aplicables.</p>' +
@@ -1563,7 +1592,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<h3>19. Coordinación documental</h3>' +
         '<p>Esta Política deberá interpretarse conjuntamente con la Política de Privacidad, los Términos de Uso, la Política de Uso de Marca, los avisos específicos de formularios y las condiciones de los servicios externos incorporados. La configuración técnica del panel deberá ser coherente con la información publicada. Si se detecta una contradicción, deberá revisarse la configuración o actualizarse la información sin demoras indebidas.</p>' +
         '<h3>20. Contacto</h3>' +
-        '<p>Para formular consultas sobre esta Política, solicitar información sobre las cookies utilizadas o ejercer derechos relacionados con el tratamiento de datos personales, puede escribirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Para formular consultas sobre esta Política, solicitar información sobre las cookies utilizadas o ejercer derechos relacionados con el tratamiento de datos personales, puede escribirse a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Cámara de Comercio Mercosur. Asociación internacional uruguaya. Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay.</p>' +
         '<p>Marco normativo de referencia: Ley N.º 18.331 de Protección de Datos Personales y Acción de Habeas Data; Decreto N.º 414/009; Decreto N.º 64/020; orientaciones de la Unidad Reguladora y de Control de Datos Personales sobre cookies y perfiles.</p>',
       en:
@@ -1575,7 +1604,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>This Policy applies to the institutional domain and, where applicable, to its subdomains, restricted areas, event pages, integrated forms, and other digital services directly managed by the Chamber. External websites or services accessed through links are governed by their own policies and terms, except for technologies that operate on the Chamber\'s pages before the user leaves the website.</p>' +
         '<p>This document complements the Privacy Policy. The Privacy Policy explains the general processing of personal data, while this Cookie Policy focuses on the storage, collection, transmission, and use of information through browsers, devices, and similar technologies.</p>' +
         '<h3>2. Institutional Identification</h3>' +
-        '<p>The website is managed by the Mercosur Chamber of Commerce, a Uruguayan international association, located at Carlos Quijano 1290, Office 101, Montevideo 11100, Uruguay. Questions about this Policy, the cookie preference panel, or the processing of data related to cookies may be sent to <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>The website is managed by the Mercosur Chamber of Commerce, a Uruguayan international association, located at Carlos Quijano 1290, Office 101, Montevideo 11100, Uruguay. Questions about this Policy, the cookie preference panel, or the processing of data related to cookies may be sent to <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<h3>3. Legal Framework and Applicable Principles</h3>' +
         '<p>Uruguay does not have a law that deals only with cookies. However, when these technologies collect, store, connect, transmit, or use information related to a person, browser, or device, they are subject to Uruguay\'s personal data protection laws. These include Law No. 18.331 on Personal Data Protection and Habeas Data, Decree No. 414/009, Decree No. 64/020, and the guidelines issued by the Personal Data Regulatory and Control Unit.</p>' +
         '<p>The Chamber follows the principles of transparency, purpose, proportionality, data minimization, security, confidentiality, limited retention, and accountability. When a technology is not strictly necessary to provide a requested function or to ensure the security of the website, it will only be activated after the user has made an informed and revocable choice.</p>' +
@@ -1625,7 +1654,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Depending on the technology used, cookies may process IP addresses, identifiers, browser or device characteristics, operating systems, language settings, visited pages, date and time, traffic sources, user interactions, preferences, or technical errors. The information processed will depend on the website\'s actual configuration and will be limited to the stated purpose.</p>' +
         '<p>Some service providers may store, process, or access information from other countries. When applicable, the Chamber will identify the provider, explain the nature of the service, and describe the applicable safeguards, in coordination with the Privacy Policy. The Chamber will not state that there are no international data transfers unless all integrated services have been verified.</p>' +
         '<h3>14. Users\' Rights</h3>' +
-        '<p>When cookies involve the processing of personal data, users may exercise the rights provided by Uruguayan law, including, where applicable, the rights of access, correction, update, inclusion, and deletion. If automated assessments or profiling are used, users may also exercise the rights specifically related to those activities. Requests may be sent to <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a> and will be handled in accordance with the Privacy Policy and applicable law.</p>' +
+        '<p>When cookies involve the processing of personal data, users may exercise the rights provided by Uruguayan law, including, where applicable, the rights of access, correction, update, inclusion, and deletion. If automated assessments or profiling are used, users may also exercise the rights specifically related to those activities. Requests may be sent to <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a> and will be handled in accordance with the Privacy Policy and applicable law.</p>' +
         '<p>When an external service provider processes data under its own responsibility, users may also need to exercise certain rights directly with that provider. The Chamber will help identify the service whenever sufficient information is available.</p>' +
         '<h3>15. Minors</h3>' +
         '<p>The institutional website is not designed to create profiles of minors, display behavioral advertising to them, or intentionally collect information through optional technologies directed at children. If services specifically designed for minors are introduced in the future, additional safeguards will be adopted, and the relevant information and consent mechanisms will be updated.</p>' +
@@ -1640,7 +1669,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<h3>19. Related Documents</h3>' +
         '<p>This Policy should be read together with the Privacy Policy, the Terms of Use, the Trademark Use Policy, the specific notices included in forms, and the terms of the external services used on the website. The technical settings of the preference panel must match the published information. If any inconsistency is found, the settings or the published information will be updated without unnecessary delay.</p>' +
         '<h3>20. Contact</h3>' +
-        '<p>If you have questions about this Policy, would like information about the cookies used on this website, or wish to exercise your rights related to the processing of personal data, please contact <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>If you have questions about this Policy, would like information about the cookies used on this website, or wish to exercise your rights related to the processing of personal data, please contact <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Mercosur Chamber of Commerce</p>' +
         '<p>Uruguayan International Association.</p>' +
         '<p>Carlos Quijano 1290, Office 101, Montevideo 11.100, Uruguay.</p>' +
@@ -1655,7 +1684,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Este documento complementa a Política de Privacidade. A Política de Privacidade regula o tratamento geral de dados pessoais, enquanto esta Política se concentra no armazenamento, coleta, transmissão e utilização de informações por meio de navegadores, dispositivos e tecnologias equivalentes.</p>' +
         '<h3>2. Identificação Institucional</h3>' +
         '<p>O responsável pelo site é a Câmara de Comércio Mercosul, associação internacional uruguaia, com sede na Rua Carlos Quijano 1290, Sala 101, 11.100, Montevidéu, Uruguai.</p>' +
-        '<p>As consultas relacionadas a esta Política, ao funcionamento do painel de preferências ou ao tratamento de dados vinculado aos cookies podem ser encaminhadas para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>As consultas relacionadas a esta Política, ao funcionamento do painel de preferências ou ao tratamento de dados vinculado aos cookies podem ser encaminhadas para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<h3>3. Marco legal e princípios aplicáveis</h3>' +
         '<p>O Uruguai não possui uma legislação específica dedicada exclusivamente aos cookies. No entanto, quando essas tecnologias permitem coletar, armazenar, relacionar, transmitir ou utilizar informações vinculadas a uma pessoa, navegador ou dispositivo, sua utilização está sujeita à legislação uruguaia de proteção de dados pessoais. Em especial, aplicam-se a Lei nº 18.331 de Proteção de Dados Pessoais e Ação de Habeas Data, o Decreto nº 414/009, o Decreto nº 64/020 e os critérios estabelecidos pela Unidade Reguladora e de Controle de Dados Pessoais.</p>' +
         '<p>A Câmara aplicará os princípios da informação, finalidade, proporcionalidade, minimização, segurança, confidencialidade, conservação limitada e responsabilidade institucional. Quando uma tecnologia não for estritamente necessária para fornecer uma funcionalidade solicitada ou garantir a segurança do site, sua ativação dependerá de uma escolha prévia, informada e revogável do usuário.</p>' +
@@ -1705,7 +1734,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Dependendo da tecnologia utilizada, os cookies podem envolver o tratamento de endereços IP, identificadores, características do navegador ou do dispositivo, sistema operacional, idioma, páginas visitadas, data e hora, origem da navegação, interações, preferências ou erros técnicos. As informações efetivamente tratadas dependerão da configuração do site e serão limitadas à finalidade informada.</p>' +
         '<p>Alguns prestadores de serviços podem armazenar, processar ou acessar informações a partir de outros países. Quando aplicável, a Câmara informará o fornecedor, a natureza do serviço e as garantias aplicáveis, em conformidade com a Política de Privacidade. A inexistência de transferências internacionais não será declarada sem que todos os serviços incorporados tenham sido previamente verificados.</p>' +
         '<h3>14. Direitos das pessoas</h3>' +
-        '<p>Quando os cookies envolverem o tratamento de dados pessoais, poderão ser exercidos os direitos previstos pela legislação uruguaia, incluindo, quando cabíveis, os direitos de acesso, retificação, atualização, inclusão e exclusão e, caso existam avaliações automatizadas ou criação de perfis, os direitos específicos relacionados a esses tratamentos. As solicitações poderão ser encaminhadas para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a> e serão tratadas de acordo com a Política de Privacidade e a legislação aplicável.</p>' +
+        '<p>Quando os cookies envolverem o tratamento de dados pessoais, poderão ser exercidos os direitos previstos pela legislação uruguaia, incluindo, quando cabíveis, os direitos de acesso, retificação, atualização, inclusão e exclusão e, caso existam avaliações automatizadas ou criação de perfis, os direitos específicos relacionados a esses tratamentos. As solicitações poderão ser encaminhadas para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a> e serão tratadas de acordo com a Política de Privacidade e a legislação aplicável.</p>' +
         '<p>Quando um prestador de serviços externo tratar dados sob sua própria responsabilidade, também poderá ser necessário exercer determinados direitos diretamente perante esse fornecedor. A Câmara facilitará a identificação do serviço sempre que dispuser de informações suficientes para isso.</p>' +
         '<h3>15. Menores de idade</h3>' +
         '<p>O site institucional não foi desenvolvido especificamente para criar perfis de menores de idade, exibir publicidade comportamental ou coletar deliberadamente informações por meio de tecnologias opcionais direcionadas a esse público. Caso, no futuro, sejam incorporados serviços destinados especificamente a menores, serão adotadas medidas reforçadas e as informações e os mecanismos de consentimento aplicáveis serão atualizados.</p>' +
@@ -1720,7 +1749,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<h3>19. Coordenação documental</h3>' +
         '<p>Esta Política deverá ser interpretada em conjunto com a Política de Privacidade, os Termos de Uso, a Política de Uso da Marca, os avisos específicos dos formulários e as condições dos serviços externos incorporados. A configuração técnica do painel de preferências deverá ser compatível com as informações publicadas. Caso seja identificada qualquer inconsistência, a configuração deverá ser revisada ou as informações atualizadas sem demora injustificada.</p>' +
         '<h3>20. Contato</h3>' +
-        '<p>Para esclarecer dúvidas sobre esta Política, solicitar informações sobre os cookies utilizados ou exercer direitos relacionados ao tratamento de dados pessoais, entre em contato pelo e-mail <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Para esclarecer dúvidas sobre esta Política, solicitar informações sobre os cookies utilizados ou exercer direitos relacionados ao tratamento de dados pessoais, entre em contato pelo e-mail <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Câmara de Comércio Mercosul</p>' +
         '<p>Associação Internacional Uruguaia.</p>' +
         '<p>Rua Carlos Quijano 1290, Sala 101, 11.100, Montevidéu, Uruguai.</p>' +
@@ -1734,7 +1763,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>La Politique s\'applique au domaine institutionnel et, le cas échéant, à ses sous-domaines, zones restreintes, pages d\'événements, formulaires intégrés et autres services numériques incorporés directement sous le contrôle de la Chambre. Les portails ou services externes accessibles par liens sont régis par leurs propres conditions générales, à l\'exception des technologies activées dans les pages de la Chambre avant de quitter le site.</p>' +
         '<p>Ce document complète la Politique de Confidentialité. La Politique de Confidentialité régule le traitement général des données personnelles, tandis que la présente Politique porte sur le stockage, la récupération, la transmission ou l\'utilisation d\'informations via les navigateurs, les appareils et les technologies équivalentes.</p>' +
         '<h3>2. Identification institutionnelle</h3>' +
-        '<p>Le responsable du site web est la Chambre de Commerce du Mercosur, association internationale uruguayenne, située Calle Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay. Pour toute question concernant cette Politique, le fonctionnement du panneau de préférences ou le traitement des données relatives aux cookies, vous pouvez contacter <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Le responsable du site web est la Chambre de Commerce du Mercosur, association internationale uruguayenne, située Calle Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay. Pour toute question concernant cette Politique, le fonctionnement du panneau de préférences ou le traitement des données relatives aux cookies, vous pouvez contacter <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<h3>3. Cadre juridique et principes applicables</h3>' +
         '<p>L\'Uruguay ne dispose pas de loi spécifique consacrée exclusivement aux cookies. Cependant, lorsque ces technologies permettent la collecte, le stockage, l\'association, la transmission ou l\'utilisation d\'informations relatives à une personne, un navigateur ou un appareil, leur utilisation relève de la réglementation uruguayenne en matière de protection des données personnelles. Plus précisément, la Loi N° 18.331 relative à la Protection des Données Personnelles et Action d\'Habeas Data, le Décret N° 414/009, le Décret N° 64/020 et les critères édictés par l\'Unité de Réglementation et de Contrôle des Données Personnelles.</p>' +
         '<p>La Chambre appliquera les principes d\'information, de finalité, de proportionnalité, de minimisation, de sécurité, de confidentialité, de conservation limitée et de responsabilité. Lorsqu\'une technologie n\'est pas strictement nécessaire à la fourniture d\'une fonction demandée ou à garantir la sécurité du site, son activation dépendra d\'un choix préalable, éclairé et révocable de l\'utilisateur.</p>' +
@@ -1784,7 +1813,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Selon l\'outil utilisé, les cookies peuvent impliquer le traitement d\'adresses IP, d\'identifiants, de caractéristiques du navigateur ou de l\'appareil, du système d\'exploitation, de la langue, des pages visitées, de la date et de l\'heure, de l\'origine de la navigation, des interactions, des préférences ou des erreurs techniques. Les informations précises dépendront de la configuration et devront se limiter à la finalité déclarée.</p>' +
         '<p>Certains prestataires peuvent stocker, traiter ou accéder à des informations provenant d\'autres pays. Le cas échéant, la Chambre fournira des informations sur le prestataire, la nature du service et les garanties applicables, conformément à la Politique de Confidentialité. L\'absence de transferts internationaux de données ne sera pas affirmée sans vérification préalable de tous les services intégrés.</p>' +
         '<h3>14. Droits des personnes</h3>' +
-        '<p>Lorsque les cookies impliquent le traitement de données personnelles, les droits reconnus par la loi uruguayenne peuvent être exercés, notamment, le cas échéant, les droits d\'accès, de rectification, de mise à jour, d\'inclusion et d\'effacement, et, si des évaluations automatisées ou un profilage sont impliqués, les droits spécifiquement liés à ces traitements. Les demandes peuvent être envoyées à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a> et seront traitées conformément à la Politique de Confidentialité et à la réglementation applicable.</p>' +
+        '<p>Lorsque les cookies impliquent le traitement de données personnelles, les droits reconnus par la loi uruguayenne peuvent être exercés, notamment, le cas échéant, les droits d\'accès, de rectification, de mise à jour, d\'inclusion et d\'effacement, et, si des évaluations automatisées ou un profilage sont impliqués, les droits spécifiquement liés à ces traitements. Les demandes peuvent être envoyées à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a> et seront traitées conformément à la Politique de Confidentialité et à la réglementation applicable.</p>' +
         '<p>Lorsqu\'un prestataire externe traite des données sous sa propre responsabilité, il peut être nécessaire d\'exercer certains droits directement auprès de ce prestataire. La Chambre fournira l\'identification du service dès qu\'elle disposera des informations suffisantes pour se faire.</p>' +
         '<h3>15. Mineurs</h3>' +
         '<p>Le site web institutionnel n\'est pas spécifiquement conçu pour profiler les mineurs, leur présenter des publicités ciblées ou collecter délibérément des informations au moyen de technologies optionnelles destinées à ce public. Si des services spécifiquement destinés aux mineurs sont intégrés ultérieurement, des mesures renforcées seront mises en œuvre et les informations et mécanismes de consentement applicables seront actualisés.</p>' +
@@ -1799,7 +1828,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<h3>19. Coordination des documents</h3>' +
         '<p>La Politique devra s\'interpréter conjointement avec la Politique de Confidentialité, les Conditions d\'Utilisation, la Politique d\'Utilisation de la Marque, les avis spécifiques de formulaires et les conditions des services externes intégrés. La configuration technique du panneau devra être cohérente avec les informations publiées. En cas de divergence, la configuration devra être vérifiée ou les informations mises à jour sans délai.</p>' +
         '<h3>20. Contact</h3>' +
-        '<p>Pour toute question concernant cette Politique, pour obtenir des informations sur les cookies utilisés ou pour exercer vos droits relatifs au traitement des données personnelles, vous pouvez écrire à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Pour toute question concernant cette Politique, pour obtenir des informations sur les cookies utilisés ou pour exercer vos droits relatifs au traitement des données personnelles, vous pouvez écrire à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Chambre de Commerce du Mercosur. Association internationale uruguayenne. Rue Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay.</p>' +
         '<p style="font-size:.8rem;">Cadre réglementaire de référence : Loi N° 18.331 sur la Protection des Données Personnelles et l\'Action en Habeas Data ; Décret N° 414/009 ; Décret N° 64/020 ; lignes directrices de l\'Unité de Réglementation et de Contrôle des Données Personnelles sur les cookies et les profils.</p>'
     };
@@ -1832,6 +1861,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
           cookiesPolicyHTML[currentLang()] +
         '</div>';
+      fillEmailLinks(ov);
       ov.querySelector('.privacy-close').addEventListener('click', closeModal);
       window.requestAnimationFrame(function () {
         ov.classList.add('is-open');
@@ -1869,7 +1899,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Fecha de publicación: 5 de julio de 2026</p>' +
         '<p>La Cámara de Comercio Mercosur considera que la integridad institucional exige algo más que el cumplimiento formal de normas. Requiere mecanismos capaces de recibir alertas de buena fe, valorar los hechos con imparcialidad, proteger a las personas, preservar evidencia y adoptar medidas proporcionadas cuando exista un riesgo para la legalidad, los activos, la reputación o los fines de la institución. Esta Política explica el funcionamiento público del Canal de Integridad, delimita sus garantías y sus límites y establece los principios que deberán orientar su utilización, sin revelar los procedimientos operativos reservados que se desarrollarán en el Protocolo Interno correspondiente.</p>' +
         '<h3>1. Identidad institucional y canal de contacto</h3>' +
-        '<p>La Cámara de Comercio Mercosur es una asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. El Canal de Integridad podrá utilizarse mediante el correo <a href="mailto:integridad@camaracomerciomercosur.org">integridad@camaracomerciomercosur.org</a>, que deberá mantenerse separado de las comunicaciones generales de la institución y bajo acceso restringido a personas formalmente designadas.</p>' +
+        '<p>La Cámara de Comercio Mercosur es una asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. El Canal de Integridad podrá utilizarse mediante el correo <a href="#" class="js-mail" data-u="integridad" data-d="camaracomerciomercosur.org"></a>, que deberá mantenerse separado de las comunicaciones generales de la institución y bajo acceso restringido a personas formalmente designadas.</p>' +
         '<p>El acceso al buzón deberá administrarse mediante credenciales individuales, sin reenvíos automáticos a cuentas generales ni a personas ajenas a la gestión del Canal. Los permisos deberán revisarse periódicamente y revocarse de inmediato cuando cese una responsabilidad. La Cámara procurará mantener trazabilidad suficiente de los accesos y actuaciones, así como medidas razonables de seguridad, almacenamiento y respaldo acordes con la sensibilidad de la información recibida.</p>' +
         '<p>Cuando una comunicación afecte a una persona con acceso ordinario al Canal, al Responsable, a una autoridad que pueda influir en su gestión o a la mayoría del órgano competente, deberá utilizarse la vía alternativa que la Cámara habilite y publique específicamente para conflictos de interés. Hasta que exista un canal alternativo permanente, la comunicación deberá ser derivada sin demora a una instancia independiente y sin conflicto, conforme a lo previsto en esta Política.</p>' +
         '<h3>2. Naturaleza y finalidad del Canal</h3>' +
@@ -1955,7 +1985,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>La Cámara podrá actualizar esta Política para reflejar cambios normativos, experiencia práctica, evolución tecnológica, expansión territorial, nuevas delegaciones, identificación de riesgos o mejoras de control. La versión vigente será la publicada en el sitio web y las modificaciones no afectarán retroactivamente derechos consolidados.</p>' +
         '<p>La Política se regirá por las leyes de la República Oriental del Uruguay. Las diferencias relacionadas con su aplicación procurarán resolverse de buena fe y, cuando corresponda, serán sometidas a los tribunales competentes de Montevideo, sin perjuicio de las normas imperativas y de la intervención de autoridades públicas competentes.</p>' +
         '<h3>28. Contacto</h3>' +
-        '<p>Para presentar una comunicación, aportar información adicional, informar una posible represalia o comunicar un conflicto de interés relacionado con el Canal, puede escribirse a <a href="mailto:integridad@camaracomerciomercosur.org">integridad@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Para presentar una comunicación, aportar información adicional, informar una posible represalia o comunicar un conflicto de interés relacionado con el Canal, puede escribirse a <a href="#" class="js-mail" data-u="integridad" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Cámara de Comercio Mercosur. Asociación internacional uruguaya. Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay.</p>' +
         '<p>Marco normativo de referencia: Ley N.º 18.331 de Protección de Datos Personales y Acción de Habeas Data; Decreto N.º 414/009; Decreto N.º 64/020; Ley N.º 19.580, cuando resulte aplicable; Estatutos y demás normativa uruguaya pertinente.</p>',
       en:
@@ -1964,7 +1994,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Publication date: July 5, 2026</p>' +
         '<p>The Mercosur Chamber of Commerce believes that institutional integrity requires more than formal compliance with rules. It also requires mechanisms that can receive reports made in good faith, assess facts fairly, protect people, preserve evidence, and take appropriate measures when there is a risk to legality, assets, reputation, or the institution’s purposes. This Policy explains how the Integrity Channel works, defines its guarantees and limits, and sets the principles that should guide its use, without revealing the confidential internal procedures that will be described in the Internal Protocol.</p>' +
         '<h3>1. Institutional Identification and Contact Channel</h3>' +
-        '<p>The Mercosur Chamber of Commerce is a Uruguayan international association located at Carlos Quijano 1290, Office 101, Montevideo 11.100, Uruguay. The Integrity Channel may be used through the email <a href="mailto:integridad@camaracomerciomercosur.org">integridad@camaracomerciomercosur.org</a>, which must remain separate from the institution’s general communications and be accessible only to formally designated persons.</p>' +
+        '<p>The Mercosur Chamber of Commerce is a Uruguayan international association located at Carlos Quijano 1290, Office 101, Montevideo 11.100, Uruguay. The Integrity Channel may be used through the email <a href="#" class="js-mail" data-u="integridad" data-d="camaracomerciomercosur.org"></a>, which must remain separate from the institution’s general communications and be accessible only to formally designated persons.</p>' +
         '<p>Access to the mailbox must be managed through individual credentials, without automatic forwarding to general accounts or to people who are not responsible for managing the Channel. Permissions must be reviewed regularly and revoked immediately when a responsibility ends. The Chamber will seek to maintain sufficient traceability of access and actions, as well as reasonable security, storage, and backup measures consistent with the sensitivity of the information received.</p>' +
         '<p>When a report involves a person who normally has access to the Channel, the Responsible Officer, an authority able to influence its management, or the majority of the competent body, the alternative reporting method that the Chamber may create and publish for conflicts of interest must be used. Until a permanent alternative channel exists, the report must be transferred without delay to an independent and conflict-free body, as provided in this Policy.</p>' +
         '<h3>2. Nature and Purpose of the Channel</h3>' +
@@ -2050,7 +2080,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>The Chamber may update this Policy to reflect legal changes, practical experience, technological developments, territorial expansion, new delegations, identified risks, or improvements to its control systems. The current version will be the one published on the website, and any changes will not affect previously established rights.</p>' +
         '<p>This Policy is governed by the laws of the Oriental Republic of Uruguay. Any disputes related to its application should first be resolved in good faith and, when appropriate, will be submitted to the competent courts of Montevideo, without prejudice to mandatory legal provisions and the authority of the competent public bodies.</p>' +
         '<h3>28. Contact</h3>' +
-        '<p>To submit a report, provide additional information, report possible retaliation, or report a conflict of interest related to the Integrity Channel, please email <a href="mailto:integridad@camaracomerciomercosur.org">integridad@camaracomerciomercosur.org</a>.</p>' +
+        '<p>To submit a report, provide additional information, report possible retaliation, or report a conflict of interest related to the Integrity Channel, please email <a href="#" class="js-mail" data-u="integridad" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Mercosur Chamber of Commerce</p>' +
         '<p>Uruguayan International Association.</p>' +
         '<p>Carlos Quijano 1290, Office 101,</p>' +
@@ -2062,7 +2092,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Data de publicação: 5 de julho de 2026</p>' +
         '<p>A Câmara de Comércio Mercosul considera que a integridade institucional exige mais do que o simples cumprimento formal de normas. Exige mecanismos capazes de receber comunicações feitas de boa-fé, avaliar os fatos com imparcialidade, proteger as pessoas, preservar evidências e adotar medidas proporcionais quando houver risco à legalidade, aos ativos, à reputação ou às finalidades da instituição. Esta Política explica o funcionamento público do Canal de Integridade, define suas garantias e seus limites e estabelece os princípios que devem orientar sua utilização, sem revelar os procedimentos operacionais internos e reservados que serão desenvolvidos no respectivo Protocolo Interno.</p>' +
         '<h3>1. Identificação institucional e canal de contato</h3>' +
-        '<p>A Câmara de Comércio Mercosul é uma associação internacional uruguaia com sede na Rua Carlos Quijano 1290, Sala 101, 11.100, Montevidéu, Uruguai. O Canal de Integridade poderá ser utilizado por meio do e-mail <a href="mailto:integridad@camaracomerciomercosur.org">integridad@camaracomerciomercosur.org</a>, que deverá permanecer separado das comunicações gerais da instituição e com acesso restrito às pessoas formalmente designadas.</p>' +
+        '<p>A Câmara de Comércio Mercosul é uma associação internacional uruguaia com sede na Rua Carlos Quijano 1290, Sala 101, 11.100, Montevidéu, Uruguai. O Canal de Integridade poderá ser utilizado por meio do e-mail <a href="#" class="js-mail" data-u="integridad" data-d="camaracomerciomercosur.org"></a>, que deverá permanecer separado das comunicações gerais da instituição e com acesso restrito às pessoas formalmente designadas.</p>' +
         '<p>O acesso à caixa de e-mail deverá ser administrado por meio de credenciais individuais, sem encaminhamento automático para contas gerais nem para pessoas não envolvidas na gestão do Canal. As permissões deverão ser revisadas periodicamente e revogadas imediatamente quando cessar a responsabilidade correspondente. A Câmara buscará manter rastreabilidade suficiente dos acessos e das ações realizadas, bem como medidas razoáveis de segurança, armazenamento e backup compatíveis com a sensibilidade das informações recebidas.</p>' +
         '<p>Quando uma comunicação envolver uma pessoa com acesso ordinário ao Canal, o Responsável, uma autoridade capaz de influenciar sua gestão ou a maioria do órgão competente, deverá ser utilizada a via alternativa que a Câmara vier a disponibilizar e divulgar especificamente para situações de conflito de interesses. Até que exista um canal alternativo permanente, a comunicação deverá ser encaminhada sem demora a uma instância independente e sem conflito, nos termos desta Política.</p>' +
         '<h3>2. Natureza e finalidade do Canal</h3>' +
@@ -2148,7 +2178,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>A Câmara poderá atualizar esta Política para refletir alterações na legislação, experiência prática, evolução tecnológica, expansão territorial, novas delegações, identificação de riscos ou melhorias nos controles. A versão vigente será a publicada no site, e as alterações não afetarão retroativamente direitos já consolidados.</p>' +
         '<p>Esta Política será regida pelas leis da República Oriental do Uruguai. As divergências relacionadas à sua aplicação buscarão ser resolvidas de boa-fé e, quando necessário, serão submetidas aos tribunais competentes de Montevidéu, sem prejuízo das normas obrigatórias e da atuação das autoridades públicas competentes.</p>' +
         '<h3>28. Contato</h3>' +
-        '<p>Para apresentar uma comunicação, fornecer informações adicionais, informar uma possível retaliação ou comunicar um conflito de interesses relacionado ao Canal, envie um e-mail para <a href="mailto:integridad@camaracomerciomercosur.org">integridad@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Para apresentar uma comunicação, fornecer informações adicionais, informar uma possível retaliação ou comunicar um conflito de interesses relacionado ao Canal, envie um e-mail para <a href="#" class="js-mail" data-u="integridad" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Câmara de Comércio Mercosul</p>' +
         '<p>Associação Internacional Uruguaia.</p>' +
         '<p>Rua Carlos Quijano 1290, Sala 101,</p>' +
@@ -2160,7 +2190,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Date de publication : 5 juillet 2026</p>' +
         '<p>La Chambre de Commerce du Mercosur estime que l\'intégrité institutionnelle exige bien plus qu\'une simple conformité formelle aux réglementations. Elle requiert des mécanismes capables de recevoir des alertes de bonne foi, d\'évaluer les faits de manière impartiale, de protéger les personnes, de préserver les preuves et de prendre des mesures proportionnées en cas de risque pour la légalité, les actifs, la réputation ou les objectifs de l\'institution. Cette Politique explique le fonctionnement public du Canal d\'Intégrité, définit ses garanties et ses limites, et établit les principes qui devront guider son utilisation, sans toutefois divulguer les procédures opérationnelles confidentielles, qui seront détaillées dans le Protocole Interne correspondant.</p>' +
         '<h3>1. Identité institutionnelle et canal de contact</h3>' +
-        '<p>La Chambre de Commerce du Mercosur est une association internationale uruguayenne dont le siège social est situé Calle Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay. Le Canal d\'Intégrité est accessible via l\'adresse électronique <a href="mailto:integrity@camaracomerciomercosur.org">integrity@camaracomerciomercosur.org</a>, qui devra rester distincte des communications générales de l\'institution et dont l\'accès est réservé aux personnes dûment désignées.</p>' +
+        '<p>La Chambre de Commerce du Mercosur est une association internationale uruguayenne dont le siège social est situé Calle Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay. Le Canal d\'Intégrité est accessible via l\'adresse électronique <a href="#" class="js-mail" data-u="integrity" data-d="camaracomerciomercosur.org"></a>, qui devra rester distincte des communications générales de l\'institution et dont l\'accès est réservé aux personnes dûment désignées.</p>' +
         '<p>L\'accès à la boîte mail devra être géré par des identifiants individuels, sans transfert automatique vers des comptes généraux ou des personnes extérieures à la direction du Canal. Les autorisations devront être revues périodiquement et révoquées immédiatement en cas de cessation de fonction. La Chambre s\'engage à assurer une traçabilité suffisante des accès et des actions, ainsi que des mesures de sécurité, de stockage et de sauvegarde adaptées à la sensibilité des informations reçues.</p>' +
         '<p>Lorsqu\'une communication concerne une personne ayant un accès ordinaire au Canal, le Responsable, une autorité susceptible d\'influencer sa gestion ou la majorité de l\'organe compétent, le canal alternatif établi et publié par la Chambre spécifiquement pour les conflits d\'intérêts devra être utilisé. En attendant la mise en place d\'un canal alternatif permanent, la communication devra être transmise sans délai à une instance indépendante et impartiale, conformément aux dispositions de la présente politique.</p>' +
         '<h3>2. Nature et finalité du Canal</h3>' +
@@ -2246,7 +2276,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>La Chambre pourra mettre à jour cette Politique afin de tenir compte des changements réglementaires, de l\'expérience acquise, des évolutions technologiques, de l\'expansion territoriale, de nouvelles délégations, de l\'identification des risques ou de l\'amélioration des contrôles. La version en vigueur sera celle publiée sur le site web, et les modifications ne seront pas rétroactives.</p>' +
         '<p>La Politique sera régie par les lois de la République Orientale de l\'Uruguay. Tout litige relatif à son application sera résolu de bonne foi et, le cas échéant, soumis aux tribunaux compétents de Montevideo, sans préjudice des dispositions réglementaires impératives et de l\'intervention des autorités publiques compétentes.</p>' +
         '<h3>28. Contact</h3>' +
-        '<p>Pour soumettre une communication, fournir des informations supplémentaires, signaler d\'éventuelles représailles ou signaler un conflit d\'intérêts lié au Canal, vous pouvez écrire à <a href="mailto:integrity@camaracomerciomercosur.org">integrity@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Pour soumettre une communication, fournir des informations supplémentaires, signaler d\'éventuelles représailles ou signaler un conflit d\'intérêts lié au Canal, vous pouvez écrire à <a href="#" class="js-mail" data-u="integrity" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p class="privacy-signature">Chambre de Commerce du Mercosur. Association internationale uruguayenne. Rue Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay.</p>' +
         '<p style="font-size:.8rem;">Cadre juridique de référence : Loi N° 18.331 sur la Protection des Données Personnelles et l\'Action en Habeas Data ; Décret N° 414/009 ; Décret N° 64/020 ; Loi N° 19.580, le cas échéant ; Statuts et autres réglementations uruguayennes pertinentes.</p>'
     };
@@ -2279,6 +2309,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
           integrityHTML[currentLang()] +
         '</div>';
+      fillEmailLinks(ov);
       ov.querySelector('.privacy-close').addEventListener('click', closeModal);
       window.requestAnimationFrame(function () {
         ov.classList.add('is-open');
@@ -2316,7 +2347,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Fecha de publicación: 5 de julio de 2026</p>' +
         '<p>La identidad de la Cámara de Comercio Mercosur constituye un activo institucional destinado a identificar de manera inequívoca sus actuaciones, documentos, autoridades, programas y relaciones legítimamente autorizadas. Esta Política establece las condiciones bajo las cuales pueden mencionarse o utilizarse la denominación, el logotipo y los demás elementos vinculados a esa identidad, con el propósito de preservar su integridad, evitar confusión y proteger a la Cámara, a sus asociados, a sus colaboradores y al público frente a apariencias falsas de membresía, representación, certificación, patrocinio o respaldo.</p>' +
         '<h3>1. Identificación y alcance</h3>' +
-        '<p>La Cámara de Comercio Mercosur es una asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Toda solicitud de autorización o comunicación sobre un posible uso indebido deberá dirigirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>La Cámara de Comercio Mercosur es una asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Toda solicitud de autorización o comunicación sobre un posible uso indebido deberá dirigirse a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Esta Política se aplica a cualquier persona física o jurídica que mencione, reproduzca, incorpore o utilice elementos de identidad de la Cámara, incluidos asociados y aspirantes a asociados, autoridades, directivos, representantes, delegados, empleados, asesores, proveedores, colaboradores, patrocinadores, panelistas, aliados institucionales, medios de comunicación, delegaciones, capítulos, organizadores de eventos y terceros en general.</p>' +
         '<p>La membresía, la participación en una actividad, la aparición en una publicación, una colaboración, un patrocinio, una invitación, un nombramiento, una credencial o el acceso al sitio web no conceden por sí mismos una licencia general ni facultades para actuar en nombre de la Cámara.</p>' +
         '<h3>2. Objeto, marca e identidad institucional</h3>' +
@@ -2384,7 +2415,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Las traducciones de la denominación, las abreviaturas, las siglas y las adaptaciones de cargos o títulos requieren aprobación. No podrán crearse nombres confundibles con organismos oficiales ni versiones que alteren el sentido institucional.</p>' +
         '<p>La versión española será la referencia institucional principal salvo decisión expresa de la Cámara. Las traducciones oficiales publicadas por la propia Cámara podrán utilizarse únicamente en la forma exacta aprobada, sin modificaciones ni creación de nuevas siglas.</p>' +
         '<h3>19. Solicitud, vigencia y revocación de autorizaciones</h3>' +
-        '<p>Las solicitudes deberán enviarse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a> e identificar al solicitante, su organización, la finalidad, el contexto, los materiales, los medios, la duración, la fecha prevista de publicación, los terceros involucrados y el alcance del uso solicitado.</p>' +
+        '<p>Las solicitudes deberán enviarse a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a> e identificar al solicitante, su organización, la finalidad, el contexto, los materiales, los medios, la duración, la fecha prevista de publicación, los terceros involucrados y el alcance del uso solicitado.</p>' +
         '<p>La Cámara podrá aprobar, rechazar, solicitar aclaraciones, exigir cambios, limitar el alcance, imponer condiciones o revocar la autorización. Ningún uso podrá comenzar antes de recibirse autorización escrita.</p>' +
         '<p>La autorización terminará al vencer el plazo, finalizar el proyecto o evento, cesar la membresía o el cargo, producirse un incumplimiento, utilizarse la identidad fuera del alcance aprobado o existir un riesgo institucional o reputacional relevante.</p>' +
         '<p>Tras el cese, deberán retirarse los materiales, eliminarse las versiones digitales, suspenderse las publicaciones, devolverse las credenciales y desactivarse o transferirse los perfiles, cuentas o dominios cuando corresponda. La Cámara podrá solicitar confirmación escrita de la retirada.</p>' +
@@ -2392,14 +2423,14 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>La Cámara podrá revisar usos, solicitar copias o pruebas, verificar publicaciones y canales, comprobar la vigencia de membresías, cargos y autorizaciones, exigir correcciones y requerir la retirada de materiales. La falta de supervisión previa no legitima un uso no autorizado.</p>' +
         '<p>Ante un posible incumplimiento, la Cámara podrá actuar de manera gradual y proporcional mediante solicitud de aclaración, advertencia, requerimiento de corrección o retirada, suspensión o revocación, comunicación con plataformas, solicitud de cancelación de dominios o perfiles, preservación de pruebas, aclaración pública y, cuando corresponda, acciones administrativas, civiles o penales.</p>' +
         '<p>La respuesta atenderá a la gravedad, duración, intencionalidad, alcance, riesgo de confusión, perjuicio a terceros, daño reputacional, reiteración y cooperación del responsable.</p>' +
-        '<p>Cualquier persona puede comunicar perfiles falsos, dominios confundibles, certificados dudosos, falsos representantes, captación de fondos, proyectos no autorizados, correos engañosos, documentos alterados o usos políticos no autorizados escribiendo a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Cualquier persona puede comunicar perfiles falsos, dominios confundibles, certificados dudosos, falsos representantes, captación de fondos, proyectos no autorizados, correos engañosos, documentos alterados o usos políticos no autorizados escribiendo a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<h3>21. Coordinación y modificaciones</h3>' +
         '<p>Esta Política se interpreta conjuntamente con los Estatutos, los Términos de Uso, la Política de Privacidad, la Política de Cookies, el Manual de Identidad Visual, los reglamentos internos, las condiciones particulares de autorización y el Canal de Integridad. En caso de conflicto prevalecerán las normas imperativas, los Estatutos, la autorización específica en su ámbito y el Manual de Identidad Visual para cuestiones técnicas.</p>' +
         '<p>La Cámara podrá actualizar esta Política para reflejar cambios legislativos, registros marcarios, nuevas versiones de la identidad, expansión territorial, nuevos canales digitales o modalidades de colaboración. La versión vigente será la publicada en el sitio y los cambios no legitimarán usos anteriores no autorizados.</p>' +
         '<h3>22. Legislación aplicable y jurisdicción</h3>' +
         '<p>La Política se regirá por las leyes de la República Oriental del Uruguay. Las partes procurarán resolver de buena fe cualquier diferencia y, cuando no sea posible, serán competentes los tribunales de Montevideo, sin perjuicio de las normas imperativas aplicables.</p>' +
         '<h3>23. Contacto y marco normativo</h3>' +
-        '<p>Para solicitar autorización o comunicar un posible uso indebido de la marca o de la identidad institucional puede escribirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>. Cámara de Comercio Mercosur, asociación internacional uruguaya, Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay.</p>' +
+        '<p>Para solicitar autorización o comunicar un posible uso indebido de la marca o de la identidad institucional puede escribirse a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>. Cámara de Comercio Mercosur, asociación internacional uruguaya, Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay.</p>' +
         '<p>Marco normativo de referencia: Ley N.º 17.011 de Marcas; Decreto N.º 34/999; Ley N.º 9.739 sobre derechos de autor; normas civiles aplicables; Estatutos y reglamentos internos de la Cámara.</p>',
       en:
         '<p class="privacy-eyebrow">Mercosur Chamber of Commerce</p>' +
@@ -2407,7 +2438,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Publication date: July 5, 2026</p>' +
         '<p>The identity of the Mercosur Chamber of Commerce is an institutional asset intended to clearly identify its activities, documents, authorities, programs, and properly authorized relationships. This Policy establishes the conditions under which the Chamber\'s name, logo, and other identity elements may be mentioned or used, with the purpose of protecting their integrity, preventing confusion, and protecting the Chamber, its members, collaborators, and the public from false impressions of membership, representation, certification, sponsorship, or institutional endorsement.</p>' +
         '<h3>1. Identification and scope</h3>' +
-        '<p>The Mercosur Chamber of Commerce is a Uruguayan international association located at Carlos Quijano 1290, Office 101, Montevideo 11.100, Uruguay. Any request for authorization or report of possible misuse should be sent to <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>The Mercosur Chamber of Commerce is a Uruguayan international association located at Carlos Quijano 1290, Office 101, Montevideo 11.100, Uruguay. Any request for authorization or report of possible misuse should be sent to <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>This Policy applies to any individual or legal entity that mentions, reproduces, includes, or uses elements of the Chamber\'s identity, including members and membership applicants, authorities, directors, representatives, delegates, employees, advisors, suppliers, collaborators, sponsors, speakers, institutional partners, media organizations, delegations, chapters, event organizers, and any other third party.</p>' +
         '<p>Membership, participation in an event, appearance in a publication, collaboration, sponsorship, invitation, appointment, credential, or access to the website does not, by itself, grant a general license or authorization to act on behalf of the Chamber.</p>' +
         '<h3>2. Purpose, brand, and institutional identity</h3>' +
@@ -2475,7 +2506,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Translations of the Chamber\'s name, abbreviations, acronyms, and adaptations of positions or titles require approval. No names that may be confused with official organizations or that change the institutional meaning may be created.</p>' +
         '<p>The Spanish version is the main institutional reference unless the Chamber decides otherwise. Official translations published by the Chamber may only be used exactly as approved, without changes or the creation of new acronyms.</p>' +
         '<h3>19. Request, Validity, and Revocation of Authorizations</h3>' +
-        '<p>Requests must be sent to <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a> and must identify the applicant, the organization, the purpose, the context, the materials, the communication channels, the duration, the planned publication date, the third parties involved, and the scope of the requested use.</p>' +
+        '<p>Requests must be sent to <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a> and must identify the applicant, the organization, the purpose, the context, the materials, the communication channels, the duration, the planned publication date, the third parties involved, and the scope of the requested use.</p>' +
         '<p>The Chamber may approve, reject, request additional information, require changes, limit the authorization, set conditions, or revoke the authorization. No use may begin before written authorization is received.</p>' +
         '<p>The authorization will end when the period expires, the project or event ends, the membership or position ends, a violation occurs, the identity is used beyond the approved scope, or there is a significant institutional or reputational risk.</p>' +
         '<p>After the authorization ends, the materials must be removed, digital versions deleted, publications stopped, credentials returned, and profiles, accounts, or domains deactivated or transferred when applicable. The Chamber may request written confirmation that the materials have been removed.</p>' +
@@ -2483,14 +2514,14 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>The Chamber may review the use of its identity, request copies or evidence, verify publications and communication channels, confirm the validity of memberships, positions, and authorizations, require corrections, and request the removal of materials. The absence of previous monitoring does not make an unauthorized use valid.</p>' +
         '<p>If a possible violation is identified, the Chamber may act gradually and proportionally through requests for clarification, warnings, correction or removal requests, suspension or revocation, communication with online platforms, requests to cancel domains or profiles, preservation of evidence, public clarification, and, when appropriate, administrative, civil, or criminal actions.</p>' +
         '<p>The response will consider the seriousness, duration, intention, scope, risk of confusion, harm to third parties, reputational damage, repeated conduct, and cooperation of the responsible person.</p>' +
-        '<p>Anyone may report fake profiles, confusing domains, suspicious certificates, false representatives, fundraising activities, unauthorized projects, misleading emails, altered documents, or unauthorized political use by writing to <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Anyone may report fake profiles, confusing domains, suspicious certificates, false representatives, fundraising activities, unauthorized projects, misleading emails, altered documents, or unauthorized political use by writing to <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<h3>21. Coordination and Updates</h3>' +
         '<p>This Policy must be read together with the Bylaws, the Terms of Use, the Privacy Policy, the Cookie Policy, the Visual Identity Manual, the internal regulations, the specific authorization conditions, and the Integrity Channel Policy. If there is a conflict, mandatory laws, the Bylaws, the specific authorization, and the Visual Identity Manual for technical matters will prevail.</p>' +
         '<p>The Chamber may update this Policy to reflect legal changes, trademark registrations, new identity versions, territorial expansion, new digital channels, or new forms of cooperation. The current version will be the one published on the website, and the changes will not validate previous unauthorized uses.</p>' +
         '<h3>22. Governing Law and Jurisdiction</h3>' +
         '<p>This Policy is governed by the laws of the Oriental Republic of Uruguay. The parties will try to resolve any dispute in good faith. If this is not possible, the courts of Montevideo will have jurisdiction, without prejudice to any mandatory legal provisions.</p>' +
         '<h3>23. Contact and Legal Framework</h3>' +
-        '<p>To request authorization or report possible improper use of the Chamber\'s trademark or institutional identity, please contact <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>To request authorization or report possible improper use of the Chamber\'s trademark or institutional identity, please contact <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Mercosur Chamber of Commerce. Uruguayan international association. Carlos Quijano 1290, Office 101, Montevideo 11.100, Uruguay.</p>' +
         '<p>Reference legal framework: Law No. 17.011 on Trademarks; Decree No. 34/999; Law No. 9.739 on Copyright; applicable civil laws; the Chamber\'s Bylaws and internal regulations.</p>',
       pt:
@@ -2499,7 +2530,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Data de publicação: 5 de julho de 2026</p>' +
         '<p>A identidade da Câmara de Comércio Mercosul constitui um ativo institucional destinado a identificar, de forma inequívoca, suas atividades, documentos, autoridades, programas e relações legitimamente autorizadas. Esta Política estabelece as condições sob as quais o nome, o logotipo e os demais elementos vinculados a essa identidade podem ser mencionados ou utilizados, com o objetivo de preservar sua integridade, evitar confusão e proteger a Câmara, seus associados, colaboradores e o público contra falsas aparências de filiação, representação, certificação, patrocínio ou apoio institucional.</p>' +
         '<h3>1. Identificação e alcance</h3>' +
-        '<p>A Câmara de Comércio Mercosul é uma associação internacional uruguaia, com sede na Rua Carlos Quijano 1290, Sala 101, CEP 11.100, Montevidéu, Uruguai. Qualquer solicitação de autorização ou comunicação sobre possível uso indevido deverá ser enviada para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>A Câmara de Comércio Mercosul é uma associação internacional uruguaia, com sede na Rua Carlos Quijano 1290, Sala 101, CEP 11.100, Montevidéu, Uruguai. Qualquer solicitação de autorização ou comunicação sobre possível uso indevido deverá ser enviada para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Esta Política aplica-se a qualquer pessoa física ou jurídica que mencione, reproduza, incorpore ou utilize elementos da identidade da Câmara, incluindo associados e candidatos à associação, autoridades, diretores, representantes, delegados, empregados, consultores, fornecedores, colaboradores, patrocinadores, palestrantes, parceiros institucionais, meios de comunicação, delegações, capítulos, organizadores de eventos e terceiros em geral.</p>' +
         '<p>A condição de associado, a participação em um evento, a aparição em uma publicação, uma colaboração, um patrocínio, um convite, uma nomeação, uma credencial ou o acesso ao site não concedem, por si só, uma licença geral nem autorização para atuar em nome da Câmara.</p>' +
         '<h3>2. Objeto, marca e identidade institucional</h3>' +
@@ -2567,7 +2598,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>As traduções da denominação, as abreviações, as siglas e as adaptações de cargos ou títulos exigem aprovação. Não poderão ser criados nomes que possam ser confundidos com organismos oficiais nem versões que alterem o significado institucional.</p>' +
         '<p>A versão em espanhol será a principal referência institucional, salvo decisão expressa da Câmara. As traduções oficiais publicadas pela própria Câmara poderão ser utilizadas apenas na forma exata aprovada, sem modificações nem criação de novas siglas.</p>' +
         '<h3>19. Solicitação, vigência e revogação de autorizações</h3>' +
-        '<p>As solicitações deverão ser enviadas para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>, identificando o solicitante, sua organização, a finalidade, o contexto, os materiais, os meios de divulgação, a duração, a data prevista de publicação, os terceiros envolvidos e o alcance do uso solicitado.</p>' +
+        '<p>As solicitações deverão ser enviadas para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>, identificando o solicitante, sua organização, a finalidade, o contexto, os materiais, os meios de divulgação, a duração, a data prevista de publicação, os terceiros envolvidos e o alcance do uso solicitado.</p>' +
         '<p>A Câmara poderá aprovar, rejeitar, solicitar esclarecimentos, exigir alterações, limitar o alcance, impor condições ou revogar a autorização. Nenhum uso poderá iniciar antes do recebimento de autorização por escrito.</p>' +
         '<p>A autorização terminará com o vencimento do prazo, o encerramento do projeto ou evento, o fim da associação ou do cargo, a ocorrência de descumprimento, a utilização da identidade além do alcance aprovado ou a existência de risco institucional ou reputacional relevante.</p>' +
         '<p>Após o término, os materiais deverão ser retirados, as versões digitais eliminadas, as publicações suspensas, as credenciais devolvidas e os perfis, contas ou domínios desativados ou transferidos, quando aplicável. A Câmara poderá solicitar confirmação por escrito da retirada.</p>' +
@@ -2575,14 +2606,14 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>A Câmara poderá revisar os usos, solicitar cópias ou provas, verificar publicações e canais, confirmar a validade de associações, cargos e autorizações, exigir correções e solicitar a retirada de materiais. A ausência de fiscalização prévia não legitima um uso não autorizado.</p>' +
         '<p>Diante de um possível descumprimento, a Câmara poderá atuar de forma gradual e proporcional, por meio de pedido de esclarecimentos, advertência, solicitação de correção ou retirada, suspensão ou revogação, comunicação às plataformas, solicitação de cancelamento de domínios ou perfis, preservação de provas, esclarecimento público e, quando aplicável, adoção de medidas administrativas, civis ou penais.</p>' +
         '<p>A resposta considerará a gravidade, a duração, a intenção, o alcance, o risco de confusão, o prejuízo a terceiros, o dano à reputação, a reincidência e a cooperação do responsável.</p>' +
-        '<p>Qualquer pessoa poderá comunicar perfis falsos, domínios que possam gerar confusão, certificados suspeitos, falsos representantes, captação de recursos, projetos não autorizados, e-mails enganosos, documentos alterados ou usos políticos não autorizados escrevendo para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Qualquer pessoa poderá comunicar perfis falsos, domínios que possam gerar confusão, certificados suspeitos, falsos representantes, captação de recursos, projetos não autorizados, e-mails enganosos, documentos alterados ou usos políticos não autorizados escrevendo para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<h3>21. Coordenação e alterações</h3>' +
         '<p>Esta Política deverá ser interpretada em conjunto com os Estatutos, os Termos de Uso, a Política de Privacidade, a Política de Cookies, o Manual de Identidade Visual, os regulamentos internos, as condições específicas de autorização e o Canal de Integridade. Em caso de conflito, prevalecerão as normas obrigatórias, os Estatutos, a autorização específica em seu respectivo âmbito e o Manual de Identidade Visual para questões técnicas.</p>' +
         '<p>A Câmara poderá atualizar esta Política para refletir alterações legislativas, registros de marca, novas versões da identidade, expansão territorial, novos canais digitais ou novas modalidades de colaboração. A versão vigente será a publicada no site, e as alterações não legitimarão usos anteriores não autorizados.</p>' +
         '<h3>22. Legislação aplicável e jurisdição</h3>' +
         '<p>Esta Política será regida pelas leis da República Oriental do Uruguai. As partes buscarão resolver qualquer divergência de boa-fé e, quando isso não for possível, serão competentes os tribunais de Montevidéu, sem prejuízo das normas obrigatórias aplicáveis.</p>' +
         '<h3>23. Contato e marco normativo</h3>' +
-        '<p>Para solicitar autorização ou comunicar um possível uso indevido da marca ou da identidade institucional, escreva para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Para solicitar autorização ou comunicar um possível uso indevido da marca ou da identidade institucional, escreva para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Câmara de Comércio Mercosul. Associação internacional uruguaia. Rua Carlos Quijano 1290, Sala 101, CEP 11.100, Montevidéu, Uruguai.</p>' +
         '<p>Marco normativo de referência: Lei nº 17.011 de Marcas; Decreto nº 34/999; Lei nº 9.739 sobre direitos autorais; normas civis aplicáveis; Estatutos e regulamentos internos da Câmara.</p>',
       fr:
@@ -2591,7 +2622,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Date de publication : 5 juillet 2026</p>' +
         '<p>L\'identité de la Chambre de Commerce du Mercosur est un atout institutionnel destiné à identifier sans équivoque ses actions, documents, pouvoirs, programmes et relations légitimement autorisées. Cette Politique établit les conditions dans lesquelles le nom, le logo et les autres éléments associés à cette identité peuvent être mentionnés ou utilisés, afin de préserver son intégrité, d\'éviter toute confusion et de protéger la Chambre, ses membres, ses collaborateurs et le public contre toute apparence trompeuse d\'appartenance, de représentation, de certification, de parrainage ou d\'approbation.</p>' +
         '<h3>1. Identification et étendue</h3>' +
-        '<p>La Chambre de Commerce du Mercosur est une association internationale uruguayenne dont le siège social est situé Calle Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay. Toute demande d\'autorisation ou tout signalement d\'abus potentiel doit être adressé à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>La Chambre de Commerce du Mercosur est une association internationale uruguayenne dont le siège social est situé Calle Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay. Toute demande d\'autorisation ou tout signalement d\'abus potentiel doit être adressé à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>La présente Politique s\'applique à toute personne physique ou morale qui mentionne, reproduit, incorpore ou utilise des éléments de l\'identité de la Chambre, y compris les associés et associés potentiels, les autorités, les administrateurs, les représentants, les délégués, les employés, les conseillers, les fournisseurs, les collaborateurs, les commanditaires, les panélistes, les partenaires institutionnels, les médias, les délégations, les sections, les organisateurs d\'événements et les tiers en général.</p>' +
         '<p>L\'adhésion, la participation à une activité, la parution dans une publication, la collaboration, le parrainage, l\'invitation, la nomination, l\'accréditation ou l\'accès au site web ne confèrent pas en eux-mêmes une licence générale ni le pouvoir d\'agir au nom de la Chambre.</p>' +
         '<h3>2. Objet, marque et identité institutionnelle</h3>' +
@@ -2659,7 +2690,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Les traductions de noms, d\'abréviations, d\'acronymes et les adaptations de fonctions ou de titres doivent être approuvées. Les noms susceptibles d\'être confondus avec des organismes officiels ou les versions qui en modifient le sens institutionnel seront interdits.</p>' +
         '<p>La version espagnole sera la référence institutionnelle principale, sauf décision exprimée de la Chambre. Les traductions officielles publiées par la Chambre elle-même ne pourront être utilisées que dans leur version exacte approuvée, sans modification ni création de nouveaux acronymes.</p>' +
         '<h3>19. Application, validité et révocation des autorisations</h3>' +
-        '<p>Les demandes devront être envoyées à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a> et identifier le demandeur, son organisation, le but, le contexte, les matériels, les moyens, la durée, la date de publication prévue, les tiers impliqués et l\'étendue de l\'utilisation demandée.</p>' +
+        '<p>Les demandes devront être envoyées à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a> et identifier le demandeur, son organisation, le but, le contexte, les matériels, les moyens, la durée, la date de publication prévue, les tiers impliqués et l\'étendue de l\'utilisation demandée.</p>' +
         '<p>La Chambre pourra approuver, refuser, demander des précisions, exiger des modifications, limiter la portée, imposer des conditions ou révoquer l\'autorisation. Aucune utilisation ne pourra commencer avant réception d\'une autorisation écrite.</p>' +
         '<p>L\'autorisation prendra fin à l\'expiration de sa durée, à l\'achèvement du projet ou de l\'événement, à la cessation de l\'adhésion ou du poste, à la survenance d\'une violation, à l\'utilisation de l\'identité en dehors du cadre approuvé ou à l\'existence d\'un risque institutionnel ou de réputation pertinent.</p>' +
         '<p>Suite à la résiliation, les documents devront être retirés, les versions numériques supprimées, les publications suspendues, les identifiants restitués et les profils, comptes ou domaines désactivés ou transférés, le cas échéant. La Chambre pourra exiger une confirmation écrite de ce retrait.</p>' +
@@ -2667,14 +2698,14 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>La Chambre pourra examiner l\'utilisation, demander des copies ou des preuves, vérifier les publications et les canaux de diffusion, contrôler la validité des adhésions, des cotisations et des autorisations, exiger des corrections et demander le retrait des documents. L\'absence de supervision préalable ne légitime pas une utilisation non autorisée.</p>' +
         '<p>En cas de violation potentielle, la Chambre pourra agir de manière progressive et proportionnée en demandant des éclaircissements, en émettant des avertissements, en exigeant la correction ou la suppression, en suspendant ou en révoquant, en communiquant avec les plateformes, en demandant l\'annulation des domaines ou des profils, en conservant les preuves, en publiant des clarifications et, le cas échéant, en engageant des poursuites administratives, civiles ou pénales.</p>' +
         '<p>La réponse tiendra compte de la gravité, de la durée, de l\'intention, de la portée, du risque de confusion, du préjudice causé à des tiers, de l\'atteinte à la réputation, de la répétition et de la coopération de la partie responsable.</p>' +
-        '<p>Toute personne peut signaler les faux profils, les domaines trompeurs, les certificats douteux, les faux représentants, les collectes de fonds, les projets non autorisés, les courriels trompeurs, les documents falsifiés ou les utilisations politiques non autorisées en écrivant à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Toute personne peut signaler les faux profils, les domaines trompeurs, les certificats douteux, les faux représentants, les collectes de fonds, les projets non autorisés, les courriels trompeurs, les documents falsifiés ou les utilisations politiques non autorisées en écrivant à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<h3>21. Coordination et modifications</h3>' +
         '<p>Cette Politique est interprétée conjointement avec les Statuts, les Conditions d\'Utilisation, la Politique de Confidentialité, la Politique relative aux Cookies, le Manuel d\'Identité Visuelle, le règlement intérieur, les conditions d\'autorisation spécifiques et le Canal d\'Intégrité. En cas de conflit, les règles impératives, les Statuts, l\'autorisation spécifique dans son champ d\'application et le Manuel d\'Identité Visuelle pour les aspects techniques prévalent.</p>' +
         '<p>La Chambre pourra mettre à jour la cette Politique afin de tenir compte des changements législatifs, des enregistrements de marques, des nouvelles versions de son identité, de son expansion territoriale, de ses nouveaux canaux numériques ou des accords de collaboration. La version en vigueur sera celle publiée sur le site web, et les modifications ne sauraient légitimer une utilisation antérieure non autorisée.</p>' +
         '<h3>22. Législation applicable et juridiction</h3>' +
         '<p>La Politique est régie par les lois de la République Orientale de l\'Uruguay. Les parties s\'efforceront de résoudre tout différend à l\'amiable et, à défaut, les tribunaux de Montevideo seront compétents, sans préjudice des règles impératives applicables.</p>' +
         '<h3>23. Contact et cadre réglementaire</h3>' +
-        '<p>Pour toute demande d\'autorisation ou pour signaler un éventuel usage abusif de la marque ou de l\'identité institutionnelle, veuillez écrire à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Pour toute demande d\'autorisation ou pour signaler un éventuel usage abusif de la marque ou de l\'identité institutionnelle, veuillez écrire à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p class="privacy-signature">Chambre de Commerce du Mercosur, association internationale uruguayenne, Calle Carlos Quijano 1290, bureau 101, 11100 Montevideo, Uruguay.</p>' +
         '<p style="font-size:.8rem;">Cadre réglementaire de référence : Loi N° 17.011 sur les Marques ; Décret N° 34/999 ; Loi N° 9.739 sur le droit d\'auteur ; réglementations civiles applicables ; Statuts et règlements intérieurs de la Chambre.</p>'
     };
@@ -2707,6 +2738,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
           brandHTML[currentLang()] +
         '</div>';
+      fillEmailLinks(ov);
       ov.querySelector('.privacy-close').addEventListener('click', closeModal);
       window.requestAnimationFrame(function () {
         ov.classList.add('is-open');
@@ -2744,7 +2776,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Fecha de publicación: 5 de julio de 2026</p>' +
         '<p>Estos Términos de Uso regulan el acceso, la navegación y la utilización del sitio web de la Cámara de Comercio Mercosur, así como el uso de sus formularios, contenidos, recursos y funcionalidades. Su finalidad es establecer un marco claro para la relación entre la Cámara y las personas, empresas, cámaras, instituciones y demás organizaciones que consultan el sitio o se comunican con ella a través de sus canales digitales.</p>' +
         '<h3>1. Identificación y naturaleza jurídica</h3>' +
-        '<p>El titular del sitio es la Cámara de Comercio Mercosur, asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Para consultas relacionadas con estos Términos puede escribirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>El titular del sitio es la Cámara de Comercio Mercosur, asociación internacional uruguaya con domicilio en Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay. Para consultas relacionadas con estos Términos puede escribirse a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>La Cámara desarrolla su actividad bajo el marco jurídico aplicable a las asociaciones civiles en la República Oriental del Uruguay. Este marco se integra, entre otras disposiciones, por el artículo 39 de la Constitución de la República, que reconoce el derecho de asociación; el artículo 21 del Código Civil, relativo al reconocimiento de las asociaciones como personas jurídicas; el Decreto-Ley N.º 15.089, sobre las competencias administrativas del Ministerio de Educación y Cultura en materia de asociaciones civiles y fundaciones; la normativa reglamentaria correspondiente; y los Estatutos de la propia Cámara, que regulan su organización, representación, admisión de asociados, derechos, obligaciones y funcionamiento interno.</p>' +
         '<h3>2. Objeto, alcance y aceptación</h3>' +
         '<p>Estos Términos se aplican al acceso y navegación por el sitio, a la consulta de sus contenidos, al uso de formularios, a las solicitudes de asociación, a las propuestas de cooperación, a la presentación de iniciativas empresariales, a las consultas sobre comercio, inversión, financiación e internacionalización, a la suscripción a comunicaciones institucionales y al acceso a noticias, eventos, publicaciones y enlaces externos.</p>' +
@@ -2808,7 +2840,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Si una disposición fuera declarada inválida, ilegal o inaplicable, las restantes conservarán su vigencia. La disposición afectada se interpretará o sustituirá, en la medida permitida, de la forma más cercana a su finalidad legítima.</p>' +
         '<p>La falta de ejercicio de un derecho por parte de la Cámara no implica renuncia. Estos Términos se integran con la Política de Privacidad, la Política de Cookies, la Política de Uso de Marca, el Canal de Integridad y las condiciones particulares aplicables a actividades específicas.</p>' +
         '<h3>19. Contacto</h3>' +
-        '<p>Para consultas relacionadas con estos Términos de Uso puede escribirse a <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Para consultas relacionadas con estos Términos de Uso puede escribirse a <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Cámara de Comercio Mercosur. Asociación internacional uruguaya. Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay.</p>',
       en:
         '<p class="privacy-eyebrow">Mercosur Chamber of Commerce</p>' +
@@ -2816,7 +2848,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Publication date: July 5, 2026</p>' +
         '<p>These Terms of Use explain how the access, browsing, and use of the Mercosur Chamber of Commerce website work, as well as the use of its forms, content, and other features. The goal is to make clear the relationship between the Chamber and the people, companies, chambers, institutions, and other organizations that visit the site or contact it through its digital channels.</p>' +
         '<h3>1. Identification and legal nature</h3>' +
-        '<p>The owner of the site is the Mercosur Chamber of Commerce, a Uruguayan international association based at Carlos Quijano 1290, Office 101, Montevideo 11.100, Uruguay. For questions about these Terms, please write to <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>The owner of the site is the Mercosur Chamber of Commerce, a Uruguayan international association based at Carlos Quijano 1290, Office 101, Montevideo 11.100, Uruguay. For questions about these Terms, please write to <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>The Chamber operates under the laws that apply to civil associations in Uruguay. This includes, among other rules: Article 39 of the Uruguayan Constitution, which guarantees the right of association; Article 21 of the Civil Code, on the recognition of associations as legal entities; Decree-Law No. 15.089, on the powers of the Ministry of Education and Culture regarding civil associations and foundations; the related regulations; and the Chamber\'s own Bylaws, which govern its structure, representation, admission of members, rights, duties, and internal operations.</p>' +
         '<h3>2. Purpose, scope, and acceptance</h3>' +
         '<p>These Terms apply to accessing and browsing the site, viewing its content, using its forms, submitting membership requests, proposing cooperation, presenting business projects, asking about trade, investment, financing, and internationalization, subscribing to institutional communications, and accessing news, events, publications, and external links.</p>' +
@@ -2880,7 +2912,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>If any provision of these Terms is found to be invalid, illegal, or unenforceable, the remaining provisions will stay in effect. The affected provision will be interpreted or replaced, as much as possible, in a way that stays closest to its original purpose.</p>' +
         '<p>If the Chamber does not exercise a right, this does not mean it gives up that right. These Terms form a single set together with the Privacy Policy, the Cookie Policy, the Brand Use Policy, the Integrity Channel, and the specific conditions that apply to particular activities.</p>' +
         '<h3>19. Contact</h3>' +
-        '<p>For questions about these Terms of Use, please write to <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>For questions about these Terms of Use, please write to <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Mercosur Chamber of Commerce. Uruguayan international association.</p>' +
         '<p>Carlos Quijano 1290, Office 101, Montevideo 11.100, Uruguay.</p>',
       pt:
@@ -2889,7 +2921,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Data de publicação: 5 de julho de 2026</p>' +
         '<p>Estes Termos de Uso explicam como funciona o acesso, a navegação e o uso do site da Câmara de Comércio Mercosul, além do uso dos formulários, conteúdos e outras funções do site. O objetivo é deixar claro como é a relação entre a Câmara e as pessoas, empresas, câmaras, instituições e outras organizações que visitam o site ou entram em contato pelos canais digitais.</p>' +
         '<h3>1. Identificação e natureza jurídica</h3>' +
-        '<p>A responsável pelo site é a Câmara de Comércio Mercosul, uma associação internacional uruguaia com sede na Rua Carlos Quijano 1290, Sala 101, 11.100 Montevidéu, Uruguai. Para dúvidas sobre estes Termos, escreva para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>A responsável pelo site é a Câmara de Comércio Mercosul, uma associação internacional uruguaia com sede na Rua Carlos Quijano 1290, Sala 101, 11.100 Montevidéu, Uruguai. Para dúvidas sobre estes Termos, escreva para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>A Câmara trabalha seguindo as leis que valem para associações civis no Uruguai. Isso inclui, entre outras regras: o artigo 39 da Constituição uruguaia, que garante o direito de associação; o artigo 21 do Código Civil, sobre o reconhecimento das associações como pessoas jurídicas; o Decreto-Lei nº 15.089, sobre as funções do Ministério da Educação e Cultura em relação a associações civis e fundações; as normas complementares; e o Estatuto da própria Câmara, que organiza sua estrutura, representação, admissão de associados, direitos, deveres e funcionamento interno.</p>' +
         '<h3>2. Objetivo, alcance e aceitação</h3>' +
         '<p>Estes Termos valem para o acesso e a navegação no site, a consulta dos conteúdos, o uso dos formulários, os pedidos de associação, as propostas de cooperação, a apresentação de projetos de negócio, as perguntas sobre comércio, investimento, financiamento e internacionalização, a inscrição em comunicados institucionais e o acesso a notícias, eventos, publicações e links externos.</p>' +
@@ -2953,7 +2985,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Se alguma disposição destes Termos for considerada inválida, ilegal ou inaplicável, as demais continuam valendo. A disposição afetada será interpretada ou substituída, dentro do possível, da forma mais próxima à sua finalidade original.</p>' +
         '<p>O fato de a Câmara não usar um direito não significa que ela renuncia a ele. Estes Termos formam um conjunto único com a Política de Privacidade, a Política de Cookies, a Política de Uso de Marca, o Canal de Integridade e as condições específicas de cada atividade.</p>' +
         '<h3>19. Contato</h3>' +
-        '<p>Para dúvidas sobre estes Termos de Uso, escreva para <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Para dúvidas sobre estes Termos de Uso, escreva para <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>Câmara de Comércio Mercosul. Associação internacional uruguaia. Rua Carlos Quijano 1290, Sala 101, 11.100 Montevidéu, Uruguai.</p>',
       fr:
         '<p class="privacy-eyebrow">Chambre de Commerce du Mercosur</p>' +
@@ -2961,7 +2993,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p style="font-size:.8rem;color:var(--ink-soft);margin-top:-8px;">Date de publication : 5 juillet 2026</p>' +
         '<p>Ces Conditions d\'Utilisation régissent l\'accès au site web de la Chambre de Commerce du Mercosur, sa navigation et son utilisation, ainsi que l\'utilisation de ses formulaires, contenus, ressources et fonctionnalités. Elles ont pour objet d\'établir un cadre clair pour les relations entre la Chambre et les personnes physiques, entreprises, chambres de commerce, institutions et autres organisations qui consultent le site ou communiquent avec elle par le biais de ses canaux numériques.</p>' +
         '<h3>1. Identification et nature juridique</h3>' +
-        '<p>Le propriétaire du site web est la Chambre de Commerce du Mercosur, une association internationale uruguayenne située Calle Carlos Quijano 1290, bureau 101, 11.100 Montevideo, Uruguay. Pour toute question relative aux présentes Conditions d\'Utilisation, veuillez écrire à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Le propriétaire du site web est la Chambre de Commerce du Mercosur, une association internationale uruguayenne située Calle Carlos Quijano 1290, bureau 101, 11.100 Montevideo, Uruguay. Pour toute question relative aux présentes Conditions d\'Utilisation, veuillez écrire à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p>La Chambre opère dans le cadre juridique applicable aux associations civiles en République Orientale de l\'Uruguay. Ce cadre comprend notamment l\'article 39 de la Constitution de la République, qui reconnaît le droit d\'association ; l\'article 21 du Code Civil, relatif à la reconnaissance des associations comme personnes morales ; le Décret-Loi n° 15.089, relatif aux compétences administratives du Ministère de l\'Éducation et de la Culture en matière d\'associations civiles et de fondations ; la réglementation correspondante ; et les Statuts de la Chambre, qui régissent son organisation, sa représentation, l\'admission de ses membres, ses droits, obligations et fonctionnement interne.</p>' +
         '<h3>2. Objet, portée et acceptation</h3>' +
         '<p>Les présentes Conditions s\'appliquent à l\'accès et à la navigation sur le site, à la consultation de son contenu, à l\'utilisation des formulaires, à la soumission de demandes d\'adhésion, à la soumission de propositions de coopération, à la présentation d\'initiatives commerciales, aux demandes de renseignements sur le commerce, l\'investissement, le financement et l\'internationalisation, à l\'abonnement aux communications institutionnelles et à l\'accès aux actualités, aux événements, aux publications et aux liens externes.</p>' +
@@ -3025,7 +3057,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<p>Si une disposition est déclarée invalide, illégale ou inapplicable, les autres dispositions demeurent pleinement en vigueur. La disposition concernée sera interprétée ou remplacée, dans la mesure permise par la loi, de manière à se rapprocher le plus possible de son objectif légitime.</p>' +
         '<p>Le fait pour la Chambre de ne pas exercer un droit ne constitue pas une renonciation. Ces Conditions sont intégrées à la Politique de Confidentialité, à la Politique relative aux Cookies, à la Politique d\'Utilisation de la Marque, au Canal d\'Intégrité et à toutes conditions spécifiques applicables à certaines activités.</p>' +
         '<h3>19. Contact</h3>' +
-        '<p>Pour toute question relative aux présentes Conditions d\'Utilisation, veuillez écrire à <a href="mailto:info@camaracomerciomercosur.org">info@camaracomerciomercosur.org</a>.</p>' +
+        '<p>Pour toute question relative aux présentes Conditions d\'Utilisation, veuillez écrire à <a href="#" class="js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a>.</p>' +
         '<p class="privacy-signature">Chambre de Commerce du Mercosur. Association internationale uruguayenne. Rue Carlos Quijano 1290, Bureau 101, 11.100 Montevideo, Uruguay.</p>'
     };
 
@@ -3057,6 +3089,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
           termsHTML[currentLang()] +
         '</div>';
+      fillEmailLinks(ov);
       ov.querySelector('.privacy-close').addEventListener('click', closeModal);
       window.requestAnimationFrame(function () {
         ov.classList.add('is-open');
