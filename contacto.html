@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contacto — Cámara de Comercio Mercosur</title>
-<meta name="description" content="Contacta a la Cámara de Comercio Mercosur para consultas de asociación, cooperación institucional, inversión, prensa y más.">
+<title>Blog — Cámara de Comercio Mercosur</title>
+<meta name="description" content="Noticias, eventos y análisis sobre la actualidad de MERCOSUR y la Cámara de Comercio.">
 <link rel="icon" href="assets/images/logo.png">
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -13,15 +13,15 @@
 <header class="site-header">
   <div class="container">
     <a href="index.html" class="brand">
-      <img src="assets/images/logo.png" alt="Cámara de Comercio Mercosur">
+      <img src="assets/images/logo.png" alt="Cámara de Comercio Mercosur" decoding="async">
     </a>
     <nav class="main-nav">
       <a href="index.html" data-i18n="nav.home">Inicio</a>
       <a href="nosotros.html" data-i18n="nav.about">Nosotros</a>
       <a href="participacion.html" data-i18n="nav.participation">Participación</a>
       <a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a>
-      <a href="blog.html" data-i18n="nav.blog">Blog</a>
-      <a href="contacto.html" class="is-active" data-i18n="nav.contact">Contacto</a>
+      <a href="blog.html" class="is-active" data-i18n="nav.blog">Blog</a>
+      <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
     </nav>
     <div class="header-actions">
       <div class="social-links">
@@ -51,141 +51,74 @@
 
 <main>
 
-  <!-- CONTACT INTRO + FORM -->
-  <section class="section">
+  <!-- HERO -->
+  <section class="hero hero--split">
+    <div class="hero-split-media" style="background-image:url('assets/images/blog-network.jpg');"></div>
     <div class="container">
-      <div class="contact-top-grid">
+      <div class="hero-inner hero-inner--split">
+        <h1 data-i18n-html="blog.hero.title">Mercosur alrededor<br>del mundo</h1>
+        <p class="hero-lede" data-i18n-html="blog.hero.lede">Líder en <strong>experiencias y encuentros</strong> para todo público</p>
+      </div>
+    </div>
+  </section>
 
-        <div class="reveal">
-          <h1 data-i18n-html="contact.hero.title">Conoce nuestro <span class="circled">canal</span></h1>
-          <p data-i18n="contact.hero.body">La Cámara recibe consultas de empresas, cámaras de comercio, inversores, instituciones financieras, organismos y organizaciones internacionales.</p>
-
-          <div class="contact-note" data-i18n="contact.hero.note">
-            Al llenar este formulario no envíe documentación jurídica sensible, contratos, estados financieros u otra información confidencial a través de este formulario abierto salvo que haya sido expresamente solicitada.
-          </div>
+  <!-- FEATURED EVENT -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="blog-feature reveal" style="background-image:url('assets/images/blog-event.jpg');">
+        <div class="blog-feature-content">
+          <h2>EXPO MARKET 2026</h2>
+          <p class="blog-feature-date" data-i18n="blog.expo.date">25, 26 y 27 de Septiembre de 2026</p>
+          <p class="blog-feature-place">ATLAPA Convention Center · Panamá</p>
+          <p data-i18n="blog.expo.body">Es el principal evento oficial de negocios, integración comercial y networking de Panamá y la región. Reunirá a empresarios, académicos y líderes internacionales para impulsar el crecimiento empresarial, el intercambio cultural y la innovación tecnológica.</p>
+          <a href="https://expomarketmercosur.org/" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="cta.learnMore">Conoce más</a>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="contact-form-panel reveal">
-          <form id="contact-form" action="https://formsubmit.co/info@camaracomerciomercosur.org" method="POST" novalidate>
-            <input type="hidden" name="_subject" value="Nueva consulta desde el sitio web — Cámara de Comercio Mercosur">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
+  <!-- NOTICIAS -->
+  <section class="section section--sand">
+    <div class="container">
+      <div class="split reveal" style="align-items:center; margin-bottom:8px;">
+        <div>
+          <p class="eyebrow" data-i18n="blog.news.eyebrow">Actualidad</p>
+          <h2 data-i18n="blog.news.title">Las noticias que involucran a Mercosur</h2>
+          <p data-i18n="blog.news.body">En este espacio, ponemos a tu disposición una cobertura rigurosa, análisis profundos y el seguimiento puntual de los acontecimientos más relevantes del acontecer nacional e internacional.</p>
+        </div>
+        <div style="text-align:left;">
+          <a href="#suscribete" class="btn btn-navy btn-arrow" data-i18n="cta.subscribe">Suscríbete</a>
+        </div>
+      </div>
+
+      <div id="news-grid" class="post-grid reveal"></div>
+      <nav class="pagination" id="news-pagination" aria-label="Paginación de noticias"></nav>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section section--dark" id="suscribete">
+    <div class="container">
+      <div class="newsletter reveal">
+        <div>
+          <p class="eyebrow" style="color:var(--gold);" data-i18n="blog.newsletter.eyebrow">Entérate de las noticias y de eventos próximos</p>
+          <h2 data-i18n="blog.newsletter.title">Ingresa tu correo para las notificaciones</h2>
+        </div>
+        <div>
+          <form id="newsletter-form" novalidate>
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-            <div class="form-field full">
-              <label for="c-motivo" data-i18n-html="contact.form.reason">Motivo de consulta <span class="req">*</span></label>
-              <select id="c-motivo" name="motivo" required>
-                <option value="" disabled selected data-i18n="contact.form.selectOption">Selecciona una opción</option>
-                <option value="Asociación" data-i18n="contact.reason.membership">Asociación</option>
-                <option value="Cooperación institucional" data-i18n="contact.reason.cooperation">Cooperación institucional</option>
-                <option value="Iniciativa institucional" data-i18n="contact.reason.initiative">Iniciativa institucional</option>
-                <option value="Comercio e internacionalización" data-i18n="contact.reason.trade">Comercio e internacionalización</option>
-                <option value="Inversión y financiación" data-i18n="contact.reason.investment">Inversión y financiación</option>
-                <option value="Prensa" data-i18n="contact.reason.press">Prensa</option>
-                <option value="Privacidad" data-i18n="contact.reason.privacy">Privacidad</option>
-                <option value="Cumplimiento e integridad" data-i18n="contact.reason.compliance">Cumplimiento e integridad</option>
-                <option value="Uso no autorizado de identidad" data-i18n="contact.reason.misuse">Uso no autorizado de identidad</option>
-                <option value="Consulta general" data-i18n="contact.reason.general">Consulta general</option>
-              </select>
+            <div class="newsletter-form">
+              <input type="email" placeholder="Email Address" aria-label="Correo electrónico" required>
+              <button type="submit" class="btn btn-primary" data-i18n="cta.subscribe">Registrarse</button>
             </div>
-
-            <div class="form-field full">
-              <label data-i18n-html="contact.form.name">Nombre <span class="req">*</span></label>
-              <div class="form-grid">
-                <input type="text" id="c-first" name="nombre" placeholder="First Name" aria-label="First Name" required>
-                <input type="text" id="c-last" name="apellido" placeholder="Last Name" aria-label="Last Name" required>
-              </div>
-            </div>
-
-            <div class="form-field full">
-              <label data-i18n-html="contact.form.phone">Teléfono <span class="req">*</span></label>
-              <div class="phone-group">
-                <select id="c-tel-country" name="tel_pais" aria-label="País telefónico" required>
-                  <option>Argentina</option>
-                  <option>Bolivia</option>
-                  <option>Brasil</option>
-                  <option>Chile</option>
-                  <option>Colombia</option>
-                  <option>Costa Rica</option>
-                  <option>Ecuador</option>
-                  <option>España</option>
-                  <option>Estados Unidos</option>
-                  <option>Mexico</option>
-                  <option>Panamá</option>
-                  <option>Paraguay</option>
-                  <option>Perú</option>
-                  <option selected>Uruguay</option>
-                  <option>Venezuela</option>
-                  <option>Otro</option>
-                </select>
-                <input type="tel" id="c-phone" name="telefono" placeholder="+598" required>
-              </div>
-            </div>
-
-            <div class="form-field full">
-              <label for="c-email" data-i18n-html="contact.form.email">Correo electrónico <span class="req">*</span></label>
-              <input type="email" id="c-email" name="email" required>
-            </div>
-
-            <div class="form-field full">
-              <label for="c-website" data-i18n="contact.form.website">Website</label>
-              <input type="url" id="c-website" name="website" placeholder="http://">
-            </div>
-
-            <div class="form-field full">
-              <label for="c-org" data-i18n-html="contact.form.org">Organización, cargo y sector <span class="req">*</span></label>
-              <input type="text" id="c-org" name="organizacion" required>
-            </div>
-
-            <div class="form-field full">
-              <label for="c-country" data-i18n-html="contact.form.country">País <span class="req">*</span></label>
-              <select id="c-country" name="pais" required>
-                <option value="" disabled selected data-i18n="contact.form.selectCountry">Selecciona tu país</option>
-                <option>Argentina</option>
-                <option>Bolivia</option>
-                <option>Brasil</option>
-                <option>Chile</option>
-                <option>Colombia</option>
-                <option>Costa Rica</option>
-                <option>Ecuador</option>
-                <option>España</option>
-                <option>Estados Unidos</option>
-                <option>México</option>
-                <option>Panamá</option>
-                <option>Paraguay</option>
-                <option>Perú</option>
-                <option>Uruguay</option>
-                <option>Venezuela</option>
-                <option>Otro</option>
-              </select>
-            </div>
-
-            <div class="form-field full">
-              <label for="c-subject" data-i18n-html="contact.form.subject">Asunto <span class="req">*</span></label>
-              <input type="text" id="c-subject" name="asunto" required>
-            </div>
-
-            <div class="form-field full">
-              <label for="c-message" data-i18n="contact.form.message">Mensaje</label>
-              <textarea id="c-message" name="mensaje" rows="5"></textarea>
-            </div>
-
-            <label class="form-checkbox">
-              <input type="checkbox" required>
-              <span data-i18n-html="contact.form.privacyCheck">He leído la <a href="#" class="js-privacy-link" style="color:var(--blue); font-weight:600;">Política de Privacidad</a> y comprendo cómo serán tratados mis datos. *</span>
-            </label>
-            <label class="form-checkbox">
-              <input type="checkbox">
-              <span data-i18n="contact.form.newsletterCheck">Deseo recibir comunicaciones institucionales de la Cámara (opcional).</span>
-            </label>
-
-            <button type="submit" class="btn btn-primary" data-i18n="contact.form.submit">Enviar consulta</button>
+            <p class="newsletter-note" data-i18n="blog.newsletter.note">El correo proporcionado solo se usará para nuevas actualizaciones.</p>
+            <p data-i18n-html="blog.newsletter.formLink">También puedes contestar <a href="contacto.html" style="color:#fff; text-decoration:underline;">nuestro formulario</a> para consultas.</p>
             <p class="form-msg" role="status"></p>
           </form>
         </div>
       </div>
     </div>
   </section>
-
 
 </main>
 

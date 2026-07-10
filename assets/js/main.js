@@ -1,6 +1,8 @@
 // Cámara de Comercio Mercosur — site scripts
 document.addEventListener('DOMContentLoaded', function () {
 
+  var PAGE_LOAD_TIME = Date.now();
+
   /* ---------- Shared helper: translate a status/warning message on demand ---------- */
   function mercosurText(key, fallback) {
     try {
@@ -9,6 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
       if (dict && dict[key]) return dict[key];
     } catch (e) { /* storage or dict unavailable */ }
     return fallback;
+  }
+
+  /* ---------- Shared helper: basic bot detection (honeypot + minimum fill time) ---------- */
+  function isLikelyBot(form) {
+    var honey = form.querySelector('input[name="_honey"]');
+    if (honey && honey.value) return true;
+    // A genuine visitor needs at least ~2s to notice, read, and fill a form.
+    if (Date.now() - PAGE_LOAD_TIME < 2000) return true;
+    return false;
   }
 
   /* ---------- Language switcher (ES / PT / EN active — FR coming soon) ---------- */
@@ -408,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<div class="privacy-modal bio-modal">' +
           '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
           '<div class="bio-modal-header">' +
-            '<div class="bio-modal-photo"><img src="' + person.image + '" alt="' + person.name + '"></div>' +
+            '<div class="bio-modal-photo"><img src="' + person.image + '" alt="' + person.name + '" loading="lazy" decoding="async"></div>' +
             '<div>' +
               '<p class="privacy-eyebrow">' + role + '</p>' +
               '<h2 id="bio-modal-title">' + person.name + '</h2>' +
@@ -526,6 +537,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (!contactForm.checkValidity()) {
         contactForm.reportValidity();
+        return;
+      }
+
+      if (isLikelyBot(contactForm)) {
+        // Pretend success without ever contacting FormSubmit — no point tipping off a bot/scraper.
+        if (msg) {
+          msg.textContent = mercosurText('contact.form.success', 'Tu consulta fue enviada. Nos pondremos en contacto a la brevedad.');
+          msg.className = 'form-msg ok';
+        }
+        contactForm.reset();
         return;
       }
 
@@ -849,7 +870,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var readMore = mercosurText('team.readMore', 'Read More');
       return (
         '<article class="post-card">' +
-          '<a href="#" class="post-thumb" data-news-open="' + item.id + '"><img src="' + item.image + '" alt="' + t.title + '"></a>' +
+          '<a href="#" class="post-thumb" data-news-open="' + item.id + '"><img src="' + item.image + '" alt="' + t.title + '" loading="lazy" decoding="async"></a>' +
           '<div class="post-body">' +
             '<div class="post-meta"><span>' + item.date + '</span></div>' +
             '<h3>' + t.title + '</h3>' +
@@ -926,7 +947,7 @@ document.addEventListener('DOMContentLoaded', function () {
       ov.innerHTML =
         '<div class="privacy-modal news-modal">' +
           '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
-          '<div class="news-modal-image"><img src="' + item.image + '" alt="' + t.title + '"></div>' +
+          '<div class="news-modal-image"><img src="' + item.image + '" alt="' + t.title + '" loading="lazy" decoding="async"></div>' +
           '<div class="news-modal-content">' +
             '<p class="news-modal-meta">' + item.date + '</p>' +
             '<h2 id="news-modal-title">' + t.title + '</h2>' +
@@ -979,6 +1000,13 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
+      if (isLikelyBot(newsletterForm)) {
+        msg.textContent = mercosurText('newsletter.success', '¡Listo! Te avisaremos de próximas novedades.');
+        msg.className = 'form-msg ok';
+        newsletterForm.reset();
+        return;
+      }
+
       msg.textContent = mercosurText('newsletter.sending', 'Enviando…');
       msg.className = 'form-msg';
       if (submitBtn) submitBtn.disabled = true;
@@ -988,7 +1016,8 @@ document.addEventListener('DOMContentLoaded', function () {
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
           email: input.value.trim(),
-          _subject: 'Nueva suscripción al newsletter — Cámara de Comercio Mercosur'
+          _subject: 'Nueva suscripción al newsletter — Cámara de Comercio Mercosur',
+          _honey: ''
         })
       })
         .then(function (res) {
