@@ -3364,113 +3364,113 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Institutional notice modal (shown once per session) ---------- */
   (function () {
+    // TEMPORARILY DISABLED — remove this line to re-enable the popup.
+    if (true) return;
+
     if (sessionStorage.getItem('mercosurNoticeShown') === '1') return;
 
-    var NOTICE_CONTENT = {
-      es:
-        '<p class="notice-eyebrow">Comunicado institucional</p>' +
-        '<h2 id="notice-title">La Cámara de Comercio Mercosur expresa su solidaridad con el pueblo venezolano</h2>' +
-        '<p>Desde la Cámara de Comercio Mercosur manifestamos nuestra más profunda solidaridad con el pueblo de la República Bolivariana de Venezuela ante la tragedia provocada por el devastador terremoto que ha afectado a miles de familias, dejando una profunda huella humana, social y económica.</p>' +
-        '<p>En estos momentos de enorme dolor, extendemos nuestras condolencias a quienes han perdido seres queridos y expresamos nuestro reconocimiento a los equipos de rescate, personal sanitario, voluntarios y organismos nacionales e internacionales que trabajan incansablemente para salvar vidas y asistir a las comunidades afectadas.</p>' +
-        '<p>Las crisis también ponen a prueba la capacidad de nuestras instituciones para actuar con responsabilidad, coordinación y solidaridad.</p>' +
-        '<p>Reafirmamos que la recuperación de una tragedia de esta magnitud requiere del esfuerzo conjunto de todos los sectores: gobiernos, empresas, cámaras de comercio, organizaciones de la sociedad civil, organismos internacionales y ciudadanos.</p>' +
-        '<p>Por lo expuesto, hacemos un llamado a nuestra comunidad empresarial, a las instituciones asociadas y a todos los actores del ecosistema económico a colaborar, dentro de sus posibilidades, con las iniciativas humanitarias y los mecanismos de asistencia que se encuentren oficialmente habilitados para acompañar al pueblo venezolano.</p>' +
-        '<p>El Mercosur y nuestra región se fortalecen cuando la solidaridad trasciende las fronteras y se convierte en un compromiso compartido.</p>' +
-        '<p>Asimismo, difundimos enlaces de instituciones oficiales que se encuentran recibiendo donaciones. Aclaramos que no nos encontramos vinculadas a dichas entidades, sino que compartimos esta información a modo de difusión, habiendo verificado su validez con colegas venezolanos, destacando la importancia de que las donaciones lleguen efectivamente a los lugares y a las personas que más lo necesitan.</p>' +
-        '<div class="notice-links">' +
-          '<p>Enlaces de instituciones oficiales</p>' +
-          '<ul class="notice-links-grid">' +
-            '<li><a href="https://help.unicef.org/lac/venezuela/emergenciavenezuela" target="_blank" rel="noopener">UNICEF - ONU</a></li>' +
-            '<li><a href="https://sharethemeal.org/campaigns/venezuela1" target="_blank" rel="noopener">Share The Meal</a></li>' +
-            '<li><a href="http://www.caritasvenezuela.org/donaciones" target="_blank" rel="noopener">Caritas Venezuela</a></li>' +
-            '<li><a href="http://www.globalgiving.org" target="_blank" rel="noopener">Global Giving (@globalgiving)</a></li>' +
-          '</ul>' +
-        '</div>' +
-        '<p class="notice-signature">Cámara de Comercio Mercosur</p>',
-      en:
-        '<p class="notice-eyebrow">Institutional Statement</p>' +
-        '<h2 id="notice-title">The Mercosur Chamber of Commerce expresses its solidarity with the people of Venezuela</h2>' +
-        '<p>The Mercosur Chamber of Commerce expresses its deepest solidarity with the people of the Bolivarian Republic of Venezuela following the tragedy caused by the devastating earthquake that has affected thousands of families, leaving a profound human, social, and economic impact.</p>' +
-        '<p>During this difficult time, we extend our sincere condolences to those who have lost loved ones and express our appreciation to the rescue teams, healthcare professionals, volunteers, and national and international organizations working tirelessly to save lives and support the affected communities.</p>' +
-        '<p>Times of crisis also test the ability of our institutions to act with responsibility, coordination, and solidarity.</p>' +
-        '<p>We reaffirm that recovering from a tragedy of this scale requires the joint effort of all sectors, including governments, businesses, chambers of commerce, civil society organizations, international organizations, and citizens.</p>' +
-        '<p>For this reason, we encourage our business community, partner institutions, and all members of the economic ecosystem to support, whenever possible, the humanitarian initiatives and official assistance programs established to help the Venezuelan people.</p>' +
-        '<p>MERCOSUR and our region become stronger when solidarity goes beyond borders and becomes a shared commitment.</p>' +
-        '<p>We also provide below the links to official organizations currently receiving donations. The Chamber is not affiliated with these organizations. We share this information solely for public awareness after confirming its validity with colleagues in Venezuela, highlighting the importance of ensuring that donations reach the places and people who need them most.</p>' +
-        '<div class="notice-links">' +
-          '<p>Links to Official Organizations</p>' +
-          '<ul class="notice-links-grid">' +
-            '<li><a href="https://help.unicef.org/lac/venezuela/emergenciavenezuela" target="_blank" rel="noopener">UNICEF - United Nations</a></li>' +
-            '<li><a href="https://sharethemeal.org/campaigns/venezuela1" target="_blank" rel="noopener">Share The Meal</a></li>' +
-            '<li><a href="http://www.caritasvenezuela.org/donaciones" target="_blank" rel="noopener">Caritas Venezuela</a></li>' +
-            '<li><a href="http://www.globalgiving.org" target="_blank" rel="noopener">GlobalGiving (@globalgiving)</a></li>' +
-          '</ul>' +
-        '</div>' +
-        '<p class="notice-signature">Mercosur Chamber of Commerce</p>',
-      pt:
-        '<p class="notice-eyebrow">Comunicado Institucional</p>' +
-        '<h2 id="notice-title">A Câmara de Comércio Mercosul manifesta sua solidariedade ao povo venezuelano</h2>' +
-        '<p>A Câmara de Comércio Mercosul manifesta sua mais profunda solidariedade ao povo da República Bolivariana da Venezuela diante da tragédia causada pelo devastador terremoto que afetou milhares de famílias, deixando um profundo impacto humano, social e econômico.</p>' +
-        '<p>Neste momento de grande sofrimento, expressamos nossas condolências às pessoas que perderam seus entes queridos e nosso reconhecimento às equipes de resgate, aos profissionais de saúde, aos voluntários e aos organismos nacionais e internacionais que trabalham incansavelmente para salvar vidas e prestar assistência às comunidades afetadas.</p>' +
-        '<p>As crises também colocam à prova a capacidade de nossas instituições de agir com responsabilidade, coordenação e solidariedade.</p>' +
-        '<p>Reafirmamos que a recuperação de uma tragédia dessa magnitude exige o esforço conjunto de todos os setores: governos, empresas, câmaras de comércio, organizações da sociedade civil, organismos internacionais e cidadãos.</p>' +
-        '<p>Por esse motivo, convidamos nossa comunidade empresarial, as instituições associadas e todos os integrantes do ecossistema econômico a colaborar, dentro de suas possibilidades, com as iniciativas humanitárias e os mecanismos de assistência oficialmente disponibilizados para apoiar o povo venezuelano.</p>' +
-        '<p>O Mercosul e toda a nossa região se fortalecem quando a solidariedade ultrapassa fronteiras e se transforma em um compromisso compartilhado.</p>' +
-        '<p>Também divulgamos abaixo os links de instituições oficiais que estão recebendo doações. Esclarecemos que a Câmara não possui qualquer vínculo com essas entidades. Compartilhamos essas informações apenas para fins de divulgação, após verificar sua autenticidade junto a colegas venezuelanos, destacando a importância de que as doações cheguem efetivamente aos locais e às pessoas que mais necessitam.</p>' +
-        '<div class="notice-links">' +
-          '<p>Links de instituições oficiais</p>' +
-          '<ul class="notice-links-grid">' +
-            '<li><a href="https://help.unicef.org/lac/venezuela/emergenciavenezuela" target="_blank" rel="noopener">UNICEF - ONU</a></li>' +
-            '<li><a href="https://sharethemeal.org/campaigns/venezuela1" target="_blank" rel="noopener">Share The Meal</a></li>' +
-            '<li><a href="http://www.caritasvenezuela.org/donaciones" target="_blank" rel="noopener">Cáritas Venezuela</a></li>' +
-            '<li><a href="http://www.globalgiving.org" target="_blank" rel="noopener">Global Giving (@globalgiving)</a></li>' +
-          '</ul>' +
-        '</div>' +
-        '<p class="notice-signature">Câmara de Comércio Mercosul</p>',
-      fr:
-        '<p class="notice-eyebrow">Communiqué institutionnel</p>' +
-        '<h2 id="notice-title">La Chambre de Commerce du Mercosur exprime sa solidarité avec le peuple vénézuélien</h2>' +
-        '<p>Depuis la Chambre de Commerce du Mercosur, nous exprimons notre plus profonde solidarité avec le peuple de la République bolivarienne du Venezuela face à la tragédie causée par le séisme dévastateur qui a touché des milliers de familles, laissant une profonde cicatrice humaine, sociale et économique.</p>' +
-        '<p>En ces moments d\'immense tristesse, nous présentons nos condoléances à ceux qui ont perdu des êtres chers et exprimons notre reconnaissance aux équipes de secours, au personnel de santé, aux bénévoles et aux organisations nationales et internationales qui travaillent sans relâche pour sauver des vies et aider les communautés touchées.</p>' +
-        '<p>Les crises mettent également à l\'épreuve la capacité de nos institutions à agir avec responsabilité, coordination et solidarité.</p>' +
-        '<p>Nous réaffirmons que la récupération après une tragédie de cette ampleur exige l\'effort commun de tous les secteurs : gouvernements, entreprises, chambres de commerce, organisations de la société civile, organisations internationales et citoyens.</p>' +
-        '<p>Par conséquent, nous appelons notre communauté d\'affaires, les institutions associées et tous les acteurs de l\'écosystème économique à collaborer, dans la limite de leurs moyens, avec les initiatives humanitaires et les mécanismes d\'assistance officiellement habilités à soutenir le peuple vénézuélien.</p>' +
-        '<p>Le Mercosur et notre région se renforcent lorsque la solidarité transcende les frontières et devient un engagement partagé.</p>' +
-        '<p>Nous partageons également des liens vers des institutions officielles qui reçoivent actuellement les dons. Nous tenons à préciser que nous ne sommes affiliés à aucune de ces organisations ; nous partageons simplement ces informations à titre informatif, après en avoir vérifié l\'exactitude auprès de nos collègues vénézuéliens. Nous insistons sur l\'importance de veiller à ce que les dons parviennent aux personnes et aux lieux qui en ont le plus besoin.</p>' +
-        '<div class="notice-links">' +
-          '<p>Liens des institutions officielles</p>' +
-          '<ul class="notice-links-grid">' +
-            '<li><a href="https://help.unicef.org/lac/venezuela/emergenciavenezuela" target="_blank" rel="noopener">UNICEF - ONU</a></li>' +
-            '<li><a href="https://sharethemeal.org/campaigns/venezuela1" target="_blank" rel="noopener">Share The Meal</a></li>' +
-            '<li><a href="http://www.caritasvenezuela.org/donaciones" target="_blank" rel="noopener">Caritas Venezuela</a></li>' +
-            '<li><a href="http://www.globalgiving.org" target="_blank" rel="noopener">Global Giving (@globalgiving)</a></li>' +
-          '</ul>' +
-        '</div>' +
-        '<p class="notice-signature">Chambre de Commerce du Mercosur</p>'
-    };
+    var EXPO_URL = 'https://www.expomarketmercosur.org/';
 
-    var noticeLang = 'es';
-    try { noticeLang = localStorage.getItem('mercosurLang') || 'es'; } catch (e) { /* storage unavailable */ }
-    if (!NOTICE_CONTENT[noticeLang]) noticeLang = 'es';
+    function expoHeader() {
+      return (
+        '<div class="expo-header">' +
+          '<div class="expo-logo">' +
+            '<span class="expo-logo-icon"><span class="expo-logo-icon-inner"></span></span>' +
+            '<span class="expo-logo-text">' +
+              '<span class="expo-logo-title">EXPO<span>MARKET</span></span>' +
+              '<span class="expo-logo-sub">— MERCOSUR &bull; PANAMA —</span>' +
+            '</span>' +
+          '</div>' +
+          '<div class="expo-dates">' +
+            '<div class="expo-dates-numbers">25<i>&bull;</i>26<i>&bull;</i>27</div>' +
+            '<div class="expo-dates-month">SEPTIEMBRE <strong>2026</strong></div>' +
+            '<div class="expo-dates-venue">Centro de Convenciones ATLAPA, Panamá</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    function mesaCard(num, extraClass) {
+      return (
+        '<div class="expo-mesa' + (extraClass ? ' ' + extraClass : '') + '">' +
+          '<div class="expo-mesa-pill"><span>MESA ' + num + '</span></div>' +
+          '<p class="expo-mesa-speaker">NOMBRE DE PONENTE<br>HORARIO:</p>' +
+          '<p class="expo-mesa-desc">Texto descriptivo sobre la mesa de dialogo para invitar a los asistentes a participar y si tiene cupo de oyentes o que marca colabora.</p>' +
+        '</div>'
+      );
+    }
+
+    var expoHTML =
+      '<div class="expo-modal">' +
+
+        expoHeader() +
+
+        '<div class="expo-tagline">Conectamos Oportunidades, Impulsamos el Futuro</div>' +
+        '<div class="expo-gold-bar"></div>' +
+
+        '<div class="expo-body">' +
+          '<p class="expo-desc">Disfruta de <strong>tres días en el epicentro del comercio multilateral de Panamá</strong> — donde se generan los acuerdos que trascienden el evento, y que siendo el primer Estado Asociado del Mercosur fuera de Sudamérica, abre las puertas al <strong>encuentro comercial más ambicioso de la región este 2026</strong>.</p>' +
+
+          '<h3 class="expo-list-title">Conoce nuestra lista institucional de<br>participantes de esta <span class="expo-underline">primera edición</span>:</h3>' +
+
+          '<div class="expo-participants">' +
+            '<ul>' +
+              '<li><strong>PRESIDENCIA DE PANAMÁ:</strong><span>Nombre 1</span></li>' +
+              '<li><strong>CANCILLERÍA:</strong><span>Nombre 1</span></li>' +
+              '<li><strong>MINISTRO DE TURISMO:</strong><span>Nombre 1</span></li>' +
+              '<li><strong>EMBAJADAS / CONSULADOS DE PANAMÁ:</strong><span>Nombre 1</span></li>' +
+              '<li><strong>INTEGRANTES DE LA CÁMARA DE COMERCIO:</strong><span>Nombre 1</span></li>' +
+              '<li><strong>INVITADOS ESPECIALES:</strong><span>Nombre 1</span></li>' +
+            '</ul>' +
+            '<ul>' +
+              '<li><strong>PRESIDENCIA DE PANAMÁ:</strong><span>Nombre 1</span></li>' +
+              '<li><strong>CANCILLERÍA:</strong><span>Nombre 1</span></li>' +
+              '<li><strong>MINISTRO DE TURISMO:</strong><span>Nombre 1</span></li>' +
+              '<li><strong>EMBAJADAS / CONSULADOS DE PANAMÁ:</strong><span>Nombre 1</span></li>' +
+              '<li><strong>INTEGRANTES DE LA CÁMARA DE COMERCIO:</strong><span>Nombre 1</span></li>' +
+              '<li><strong>INVITADOS ESPECIALES:</strong><span>Nombre 1</span></li>' +
+            '</ul>' +
+          '</div>' +
+          '<p class="expo-note">*Ejemplo a dos columnas si son muchos nombres de participantes.</p>' +
+          '<p class="expo-invite">TEXTO PARA FINALIZAR E INVITAR AL PÚBLICO</p>' +
+        '</div>' +
+
+        '<div class="expo-footer expo-footer--gold">Reserva tus entradas ahora en <strong><a href="' + EXPO_URL + '" target="_blank" rel="noopener">www.expomarketmercosur.org/</a></strong></div>' +
+
+        '<hr class="expo-divider">' +
+
+        expoHeader() +
+
+        '<div class="expo-conoce-mas">' +
+          '<span class="expo-pill-gold">CONOCE MÁS</span>' +
+          '<span class="expo-chevron-btn">&#8964;</span>' +
+        '</div>' +
+        '<div class="expo-navy-bar"></div>' +
+
+        '<div class="expo-body">' +
+          '<h3 class="expo-mesas-title" id="notice-title">MESAS DE DIÁLOGO:</h3>' +
+          '<p class="expo-mesas-sub">Conoce las mesas de diálogo que tenemos programadas para los asistentes de <strong>EXPOMARKET 2026</strong>.</p>' +
+
+          '<div class="expo-mesas-row">' +
+            mesaCard(1) +
+            mesaCard(2) +
+          '</div>' +
+          mesaCard(2, 'expo-mesa--solo') +
+        '</div>' +
+
+        '<div class="expo-footer expo-footer--navy">Conoce todas las actividades en <strong><a href="' + EXPO_URL + '" target="_blank" rel="noopener">www.expomarketmercosur.org/</a></strong></div>' +
+
+      '</div>';
 
     var overlay = document.createElement('div');
-    overlay.className = 'notice-overlay';
+    overlay.className = 'notice-overlay expo-overlay';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
     overlay.setAttribute('aria-labelledby', 'notice-title');
     overlay.innerHTML =
-      '<div class="notice-modal">' +
-        '<button type="button" class="notice-close" aria-label="Cerrar">&times;</button>' +
-        NOTICE_CONTENT[noticeLang] +
-        '<div class="notice-flag" aria-hidden="true">' +
-          '<div class="notice-flag-yellow"></div>' +
-          '<div class="notice-flag-blue">' +
-            '<span class="notice-flag-stars">' +
-              '<span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>' +
-            '</span>' +
-          '</div>' +
-          '<div class="notice-flag-red"></div>' +
-        '</div>' +
+      '<div class="expo-shell">' +
+        '<button type="button" class="notice-close expo-close" aria-label="Cerrar">&times;</button>' +
+        expoHTML +
       '</div>';
     document.body.appendChild(overlay);
 
