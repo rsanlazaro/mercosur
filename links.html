@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enlaces — Cámara de Comercio Mercosur</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/images/logo-circle.png">
+<style>
+  :root{
+    --navy-title:#0a2263;
+    --blue-btn:#2e52a9;
+    --blue-btn-hover:#26428a;
+    --ink-soft:#4a4a52;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    min-height:100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color:#050b1a;
+    background-image:url('assets/images/links-bg.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    display:flex; align-items:center; justify-content:center;
+    padding: 40px 20px;
+  }
+  .links-card{
+    background:#fff; width:100%; max-width:480px;
+    border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,.45);
+    padding: 36px 36px 34px; text-align:center;
+  }
+  .links-logo{ width:140px; height:auto; margin:0 auto 16px; display:block; }
+  .links-title{
+    font-size:1.4rem; font-weight:800; color: var(--navy-title); margin: 0 0 8px;
+    letter-spacing:.01em;
+  }
+  .links-tagline{
+    font-size:.92rem; color: var(--ink-soft); line-height:1.45; margin: 0 0 24px;
+  }
+  .links-tagline strong{ color: var(--ink-soft); font-weight:700; }
+  .links-list{ display:flex; flex-direction:column; gap:12px; }
+  .link-btn{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    background: var(--blue-btn); color:#fff; text-decoration:none;
+    font-size:.92rem; font-weight:700; letter-spacing:.01em;
+    padding: 14px 20px; border-radius:9px; width:100%;
+    transition: background .18s ease, transform .18s ease;
+  }
+  .link-btn:hover{ background: var(--blue-btn-hover); transform: translateY(-1px); }
+  .link-btn:active{ transform: translateY(0); }
+  .link-btn svg{ width:20px; height:20px; flex-shrink:0; fill:#fff; }
+
+  @media (min-width:600px){
+    body{ padding: 40px; }
+    .links-card{ max-width:560px; padding: 44px 48px 42px; }
+    .links-logo{ width:150px; }
+    .links-title{ font-size:1.55rem; }
+    .links-tagline{ font-size:.98rem; margin-bottom:28px; }
+    .link-btn{ font-size:.98rem; padding: 15px 22px; }
+  }
+  @media (max-width:420px){
+    .links-card{ padding: 28px 22px 26px; }
+    .link-btn{ padding: 13px 14px; font-size:.86rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="links-card">
+    <img class="links-logo" src="assets/images/logo-circle.png" alt="Cámara de Comercio Mercosur">
+    <h1 class="links-title">Cámara de Comercio MERCOSUR</h1>
+    <p class="links-tagline">Convertimos la <strong>integración regional</strong> en oportunidades concretas.</p>
+
+    <div class="links-list">
+      <a class="link-btn" href="https://camaracomerciomercosur.org/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.93 6h-2.95a15.7 15.7 0 0 0-1.38-4.3A8.03 8.03 0 0 1 18.93 8zM12 4.04c.83 1.2 1.5 2.6 1.94 3.96h-3.88c.44-1.36 1.11-2.76 1.94-3.96zM4.26 14A7.96 7.96 0 0 1 4 12c0-.69.1-1.36.26-2h3.38a16.6 16.6 0 0 0 0 4H4.26zm.81 2h2.95c.32 1.53.79 2.98 1.38 4.3A8.03 8.03 0 0 1 5.07 16zm2.95-8H5.07a8.03 8.03 0 0 1 4.33-4.3A15.7 15.7 0 0 0 8.02 8zM12 19.96c-.83-1.2-1.5-2.6-1.94-3.96h3.88c-.44 1.36-1.11 2.76-1.94 3.96zM14.36 14H9.64a14.6 14.6 0 0 1 0-4h4.72a14.6 14.6 0 0 1 0 4zm.3 5.7c.59-1.32 1.06-2.77 1.38-4.3h2.95a8.03 8.03 0 0 1-4.33 4.3zM16.35 14a16.6 16.6 0 0 0 0-4h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+        Web oficial de la CC MERCOSUR
+      </a>
+      <a class="link-btn" href="https://www.expomarketmercosur.org/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4V6zm5 0v2h2V6H9zm0 4v2h2v-2H9zm0 4v2h2v-2H9zm0 4v2h2v-2H9z"/></svg>
+        Web evento EXPO MARKET 2026
+      </a>
+      <a class="link-btn" href="https://maps.app.goo.gl/MwUyvhCVzhHNHkCEA" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2c-4.42 0-8 3.58-8 8 0 5.25 7 12.5 7.3 12.8a1 1 0 0 0 1.4 0C13 22.5 20 15.25 20 10c0-4.42-3.58-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+        Ubicación en Brasil
+      </a>
+      <a class="link-btn" href="https://www.instagram.com/cc_mercosur" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53C6.09.28 6.82.11 7.88.06 8.94.01 9.28 0 12 0zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm6.4-8.4a1.17 1.17 0 1 1-2.34 0 1.17 1.17 0 0 1 2.34 0z"/></svg>
+        Instagram
+      </a>
+      <a class="link-btn" href="https://www.facebook.com/ccmercosur/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg>
+        Facebook
+      </a>
+      <a class="link-btn" href="https://www.youtube.com/@CC_Mercosur" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.5 12 3.5 12 3.5s-7.51 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.49 20.5 12 20.5 12 20.5s7.51 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.6 15.6V8.4l6.4 3.6-6.4 3.6z"/></svg>
+        Youtube
+      </a>
+      <a class="link-btn" href="https://www.linkedin.com/company/c%C3%A1mara-de-comercio-mercosur/about/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        Linkedin
+      </a>
+      <a class="link-btn" href="https://x.com/cc_mercosur?s=11" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22H16.9l-5-6.6-5.8 6.6H2.9l8.1-9.3L2 2h6.6l4.6 6.1L18.9 2zm-1.1 18h1.7L7.3 3.9H5.5L17.8 20z"/></svg>
+        Twitter / X
+      </a>
+      <a class="link-btn" href="https://www.tiktok.com/@cc_mercosur" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M16.6 2h-3.3v13.9c0 1.6-1.3 2.9-2.9 2.9a2.9 2.9 0 0 1-2.9-2.9 2.9 2.9 0 0 1 2.9-2.9c.28 0 .55.04.8.12v-3.35a6.2 6.2 0 0 0-.8-.05A6.24 6.24 0 0 0 4.2 15.9a6.24 6.24 0 0 0 6.2 6.24 6.24 6.24 0 0 0 6.2-6.24V8.36a8.3 8.3 0 0 0 4.9 1.58V6.6a4.85 4.85 0 0 1-4.9-4.6z"/></svg>
+        Tiktok
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
