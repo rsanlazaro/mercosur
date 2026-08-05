@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog — Cámara de Comercio Mercosur</title>
-<meta name="description" content="Noticias, eventos y análisis sobre la actualidad de MERCOSUR y la Cámara de Comercio.">
+<title>Contacto — Cámara de Comercio Mercosur</title>
+<meta name="description" content="Contacta a la Cámara de Comercio Mercosur para consultas de asociación, cooperación institucional, inversión, prensa y más.">
 <link rel="icon" href="assets/images/logo.png">
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -20,10 +20,18 @@
       <a href="nosotros.html" data-i18n="nav.about">Nosotros</a>
       <a href="participacion.html" data-i18n="nav.participation">Participación</a>
       <a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a>
-      <a href="blog.html" class="is-active" data-i18n="nav.blog">Blog</a>
-      <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="contacto.html" class="is-active" data-i18n="nav.contact">Contacto</a>
     </nav>
     <div class="header-actions">
+      <div class="social-links">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" class="icon-instagram"><rect x="3" y="3" width="18" height="18" rx="6" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4.3" stroke="currentColor" stroke-width="1.7"/><circle cx="17.35" cy="6.65" r="1.15" fill="currentColor"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.9h2.65l.4-3.08h-3.05V8.05c0-.89.25-1.5 1.52-1.5h1.63V3.8A22 22 0 0 0 14.3 3.7c-2.35 0-3.96 1.44-3.96 4.07v2.26H7.68v3.07h2.66V21h3.16Z"/></svg>
+        </a>
+      </div>
       <div class="lang-switcher">
         <button type="button" class="lang-toggle" aria-haspopup="true" aria-expanded="false">
           <span>ES</span>
@@ -43,74 +51,140 @@
 
 <main>
 
-  <!-- HERO -->
-  <section class="hero hero--split">
-    <div class="hero-split-media" style="background-image:url('assets/images/blog-network.jpg');"></div>
+  <!-- CONTACT INTRO + FORM -->
+  <section class="section">
     <div class="container">
-      <div class="hero-inner hero-inner--split">
-        <h1 data-i18n-html="blog.hero.title">Mercosur alrededor<br>del mundo</h1>
-        <p class="hero-lede" data-i18n-html="blog.hero.lede">Líder en <strong>experiencias y encuentros</strong> para todo público</p>
-      </div>
-    </div>
-  </section>
+      <div class="contact-top-grid">
 
-  <!-- FEATURED EVENT -->
-  <section class="section section--tight">
-    <div class="container">
-      <div class="blog-feature reveal" data-bg="assets/images/blog-event.jpg">
-        <div class="blog-feature-content">
-          <h2>EXPO MARKET 2026</h2>
-          <p class="blog-feature-date" data-i18n="blog.expo.date">25, 26 y 27 de Septiembre de 2026</p>
-          <p class="blog-feature-place">ATLAPA Convention Center · Panamá</p>
-          <p data-i18n="blog.expo.body">Es el principal evento oficial de negocios, integración comercial y networking de Panamá y la región. Reunirá a empresarios, académicos y líderes internacionales para impulsar el crecimiento empresarial, el intercambio cultural y la innovación tecnológica.</p>
-          <a href="https://expomarketmercosur.org/" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="cta.learnMore">Conoce más</a>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="reveal">
+          <h1 data-i18n-html="contact.hero.title">Conoce nuestro <span class="circled">canal</span></h1>
+          <p data-i18n="contact.hero.body">La Cámara recibe consultas de empresas, cámaras de comercio, inversores, instituciones financieras, organismos y organizaciones internacionales.</p>
 
-  <!-- NOTICIAS -->
-  <section class="section section--sand">
-    <div class="container">
-      <div class="split reveal" style="align-items:center; margin-bottom:8px;">
-        <div>
-          <p class="eyebrow" data-i18n="blog.news.eyebrow">Actualidad</p>
-          <h2 data-i18n="blog.news.title">Las noticias que involucran a Mercosur</h2>
-          <p data-i18n="blog.news.body">En este espacio, ponemos a tu disposición una cobertura rigurosa, análisis profundos y el seguimiento puntual de los acontecimientos más relevantes del acontecer nacional e internacional.</p>
+          <div class="contact-note" data-i18n="contact.hero.note">
+            Al llenar este formulario no envíe documentación jurídica sensible, contratos, estados financieros u otra información confidencial a través de este formulario abierto salvo que haya sido expresamente solicitada.
+          </div>
         </div>
-        <div style="text-align:left;">
-          <a href="#suscribete" class="btn btn-navy btn-arrow" data-i18n="cta.subscribe">Suscríbete</a>
-        </div>
-      </div>
 
-      <div id="news-grid" class="post-grid reveal"></div>
-      <nav class="pagination" id="news-pagination" aria-label="Paginación de noticias"></nav>
-    </div>
-  </section>
-
-  <!-- NEWSLETTER -->
-  <section class="section section--dark" id="suscribete">
-    <div class="container">
-      <div class="newsletter reveal">
-        <div>
-          <p class="eyebrow" style="color:var(--gold);" data-i18n="blog.newsletter.eyebrow">Entérate de las noticias y de eventos próximos</p>
-          <h2 data-i18n="blog.newsletter.title">Ingresa tu correo para las notificaciones</h2>
-        </div>
-        <div>
-          <form id="newsletter-form" novalidate>
+        <div class="contact-form-panel reveal">
+          <form id="contact-form" action="https://formsubmit.co/info@camaracomerciomercosur.org" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="Nueva consulta desde el sitio web — Cámara de Comercio Mercosur">
+            <input type="hidden" name="_template" value="table">
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-            <div class="newsletter-form">
-              <input type="email" placeholder="Email Address" aria-label="Correo electrónico" required>
-              <button type="submit" class="btn btn-primary" data-i18n="cta.subscribe">Registrarse</button>
+            <div class="form-field full">
+              <label for="c-motivo" data-i18n-html="contact.form.reason">Motivo de consulta <span class="req">*</span></label>
+              <select id="c-motivo" name="motivo" required>
+                <option value="" disabled selected data-i18n="contact.form.selectOption">Selecciona una opción</option>
+                <option value="Asociación" data-i18n="contact.reason.membership">Asociación</option>
+                <option value="Cooperación institucional" data-i18n="contact.reason.cooperation">Cooperación institucional</option>
+                <option value="Iniciativa institucional" data-i18n="contact.reason.initiative">Iniciativa institucional</option>
+                <option value="Comercio e internacionalización" data-i18n="contact.reason.trade">Comercio e internacionalización</option>
+                <option value="Inversión y financiación" data-i18n="contact.reason.investment">Inversión y financiación</option>
+                <option value="Prensa" data-i18n="contact.reason.press">Prensa</option>
+                <option value="Privacidad" data-i18n="contact.reason.privacy">Privacidad</option>
+                <option value="Cumplimiento e integridad" data-i18n="contact.reason.compliance">Cumplimiento e integridad</option>
+                <option value="Uso no autorizado de identidad" data-i18n="contact.reason.misuse">Uso no autorizado de identidad</option>
+                <option value="Consulta general" data-i18n="contact.reason.general">Consulta general</option>
+              </select>
             </div>
-            <p class="newsletter-note" data-i18n="blog.newsletter.note">El correo proporcionado solo se usará para nuevas actualizaciones.</p>
-            <p data-i18n-html="blog.newsletter.formLink">También puedes contestar <a href="contacto.html" style="color:#fff; text-decoration:underline;">nuestro formulario</a> para consultas.</p>
+
+            <div class="form-field full">
+              <label data-i18n-html="contact.form.name">Nombre <span class="req">*</span></label>
+              <div class="form-grid">
+                <input type="text" id="c-first" name="nombre" placeholder="First Name" aria-label="First Name" required>
+                <input type="text" id="c-last" name="apellido" placeholder="Last Name" aria-label="Last Name" required>
+              </div>
+            </div>
+
+            <div class="form-field full">
+              <label data-i18n-html="contact.form.phone">Teléfono <span class="req">*</span></label>
+              <div class="phone-group">
+                <select id="c-tel-country" name="tel_pais" aria-label="País telefónico" required>
+                  <option>Argentina</option>
+                  <option>Bolivia</option>
+                  <option>Brasil</option>
+                  <option>Chile</option>
+                  <option>Colombia</option>
+                  <option>Costa Rica</option>
+                  <option>Ecuador</option>
+                  <option>España</option>
+                  <option>Estados Unidos</option>
+                  <option>Mexico</option>
+                  <option>Panamá</option>
+                  <option>Paraguay</option>
+                  <option>Perú</option>
+                  <option selected>Uruguay</option>
+                  <option>Venezuela</option>
+                  <option>Otro</option>
+                </select>
+                <input type="tel" id="c-phone" name="telefono" placeholder="+598" required>
+              </div>
+            </div>
+
+            <div class="form-field full">
+              <label for="c-email" data-i18n-html="contact.form.email">Correo electrónico <span class="req">*</span></label>
+              <input type="email" id="c-email" name="email" required>
+            </div>
+
+            <div class="form-field full">
+              <label for="c-website" data-i18n="contact.form.website">Website</label>
+              <input type="url" id="c-website" name="website" placeholder="http://">
+            </div>
+
+            <div class="form-field full">
+              <label for="c-org" data-i18n-html="contact.form.org">Organización, cargo y sector <span class="req">*</span></label>
+              <input type="text" id="c-org" name="organizacion" required>
+            </div>
+
+            <div class="form-field full">
+              <label for="c-country" data-i18n-html="contact.form.country">País <span class="req">*</span></label>
+              <select id="c-country" name="pais" required>
+                <option value="" disabled selected data-i18n="contact.form.selectCountry">Selecciona tu país</option>
+                <option>Argentina</option>
+                <option>Bolivia</option>
+                <option>Brasil</option>
+                <option>Chile</option>
+                <option>Colombia</option>
+                <option>Costa Rica</option>
+                <option>Ecuador</option>
+                <option>España</option>
+                <option>Estados Unidos</option>
+                <option>México</option>
+                <option>Panamá</option>
+                <option>Paraguay</option>
+                <option>Perú</option>
+                <option>Uruguay</option>
+                <option>Venezuela</option>
+                <option>Otro</option>
+              </select>
+            </div>
+
+            <div class="form-field full">
+              <label for="c-subject" data-i18n-html="contact.form.subject">Asunto <span class="req">*</span></label>
+              <input type="text" id="c-subject" name="asunto" required>
+            </div>
+
+            <div class="form-field full">
+              <label for="c-message" data-i18n="contact.form.message">Mensaje</label>
+              <textarea id="c-message" name="mensaje" rows="5"></textarea>
+            </div>
+
+            <label class="form-checkbox">
+              <input type="checkbox" required>
+              <span data-i18n-html="contact.form.privacyCheck">He leído la <a href="#" class="js-privacy-link" style="color:var(--blue); font-weight:600;">Política de Privacidad</a> y comprendo cómo serán tratados mis datos. *</span>
+            </label>
+            <label class="form-checkbox">
+              <input type="checkbox">
+              <span data-i18n="contact.form.newsletterCheck">Deseo recibir comunicaciones institucionales de la Cámara (opcional).</span>
+            </label>
+
+            <button type="submit" class="btn btn-primary" data-i18n="contact.form.submit">Enviar consulta</button>
             <p class="form-msg" role="status"></p>
           </form>
         </div>
       </div>
     </div>
   </section>
+
 
 </main>
 
@@ -122,26 +196,6 @@
         <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
         <p><a class="email js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a></p>
         <address data-i18n="footer.address">República Oriental del Uruguay</address>
-        <div class="footer-social">
-          <a href="https://www.instagram.com/cc_mercosur" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53C6.09.28 6.82.11 7.88.06 8.94.01 9.28 0 12 0zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm6.4-8.4a1.17 1.17 0 1 1-2.34 0 1.17 1.17 0 0 1 2.34 0z"/></svg>
-          </a>
-          <a href="https://www.facebook.com/ccmercosur/" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg>
-          </a>
-          <a href="https://x.com/cc_mercosur?s=11" target="_blank" rel="noopener" aria-label="Twitter / X">
-            <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22H16.9l-5-6.6-5.8 6.6H2.9l8.1-9.3L2 2h6.6l4.6 6.1L18.9 2zm-1.1 18h1.7L7.3 3.9H5.5L17.8 20z"/></svg>
-          </a>
-          <a href="https://www.youtube.com/@CC_Mercosur" target="_blank" rel="noopener" aria-label="Youtube">
-            <svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.5 12 3.5 12 3.5s-7.51 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.49 20.5 12 20.5 12 20.5s7.51 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.6 15.6V8.4l6.4 3.6-6.4 3.6z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/company/c%C3%A1mara-de-comercio-mercosur/about/" target="_blank" rel="noopener" aria-label="Linkedin">
-            <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
-          </a>
-          <a href="https://www.tiktok.com/@cc_mercosur" target="_blank" rel="noopener" aria-label="Tiktok">
-            <svg viewBox="0 0 24 24"><path d="M16.6 2h-3.3v13.9c0 1.6-1.3 2.9-2.9 2.9a2.9 2.9 0 0 1-2.9-2.9 2.9 2.9 0 0 1 2.9-2.9c.28 0 .55.04.8.12v-3.35a6.2 6.2 0 0 0-.8-.05A6.24 6.24 0 0 0 4.2 15.9a6.24 6.24 0 0 0 6.2 6.24 6.24 6.24 0 0 0 6.2-6.24V8.36a8.3 8.3 0 0 0 4.9 1.58V6.6a4.85 4.85 0 0 1-4.9-4.6z"/></svg>
-          </a>
-        </div>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.pagesTitle">Páginas</h4>
