@@ -1,0 +1,101 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/images/blog"
+public_folder: "/assets/images/blog"
+
+collections:
+  - name: "articulos"
+    label: "Artículos del Blog"
+    files:
+      - name: "articulo-1"
+        label: "Artículo 1"
+        file: "content/blog/articulo-1.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Información", name: "informacion", widget: "text" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "articulo-2"
+        label: "Artículo 2"
+        file: "content/blog/articulo-2.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Información", name: "informacion", widget: "text" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "articulo-3"
+        label: "Artículo 3"
+        file: "content/blog/articulo-3.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Información", name: "informacion", widget: "text" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "articulo-4"
+        label: "Artículo 4"
+        file: "content/blog/articulo-4.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Información", name: "informacion", widget: "text" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "articulo-5"
+        label: "Artículo 5"
+        file: "content/blog/articulo-5.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Información", name: "informacion", widget: "text" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "articulo-6"
+        label: "Artículo 6"
+        file: "content/blog/articulo-6.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Información", name: "informacion", widget: "text" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "articulo-7"
+        label: "Artículo 7"
+        file: "content/blog/articulo-7.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Información", name: "informacion", widget: "text" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "articulo-8"
+        label: "Artículo 8"
+        file: "content/blog/articulo-8.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Información", name: "informacion", widget: "text" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "articulo-9"
+        label: "Artículo 9"
+        file: "content/blog/articulo-9.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Información", name: "informacion", widget: "text" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "articulo-10"
+        label: "Artículo 10"
+        file: "content/blog/articulo-10.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Información", name: "informacion", widget: "text" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
+          - { label: "Imagen", name: "imagen", widget: "image" }

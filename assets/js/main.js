@@ -652,287 +652,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var PER_PAGE = 4;
     var currentPage = 1;
+    var NEWS_ITEMS = [];
+    var totalPages = 1;
 
-    var NEWS_ITEMS = [
-      {
-        id: 'uruguay-presidencia-mercosur',
-        date: '7/1/26',
-        image: 'assets/images/news-uruguay-presidencia.jpg',
-        content: {
-          es: {
-            title: 'Uruguay asume la presidencia de MERCOSUR',
-            teaser: 'Uruguay asume el liderazgo con una agenda de apertura y modernización.',
-            body: [
-              'Uruguay asumió la presidencia pro témpore del Mercosur durante la 68ª Cumbre de Jefes de Estado y Estados Asociados, realizada en Luque, Paraguay, con una agenda centrada en modernizar el bloque, fortalecer la integración regional y acelerar la concreción de acuerdos comerciales que generen resultados tangibles para los países miembros.',
-              'Al recibir la conducción del organismo, el presidente Yamandú Orsi sostuvo que el escenario internacional demanda mayor cooperación y no respuestas aisladas. En ese sentido, afirmó que el diálogo y la construcción de consensos son herramientas indispensables para enfrentar los desafíos actuales y recordó que el Mercosur nació hace 35 años con el propósito de transformar intereses comunes en oportunidades de crecimiento conjunto.',
-              'El mandatario aseguró que Uruguay buscará consolidar los avances alcanzados por el bloque reafirmando principios como la democracia, los derechos humanos, las libertades fundamentales y el Estado de derecho, pilares que consideró esenciales para fortalecer la confianza entre los socios. Además, expresó la solidaridad de Uruguay con Venezuela por los recientes terremotos y felicitó a los nuevos presidentes electos de Perú y Colombia.',
-              'La estrategia uruguaya fue complementada por el canciller Mario Lubetkin, quien anunció que durante este semestre se impulsará la implementación de los acuerdos comerciales ya alcanzados con la Unión Europea, la Asociación Europea de Libre Comercio (EFTA) y Singapur. Asimismo, Uruguay organizará en diciembre el primer Consejo del Acuerdo Interino Mercosur-Unión Europea y un Foro Empresarial para potenciar los vínculos económicos.',
-              'Uruguay ejercerá la presidencia pro témpore del Mercosur hasta diciembre con el objetivo de consolidar un bloque más dinámico, abierto al mundo y orientado a generar beneficios concretos para la región.',
-            ],
-            source: 'Portada. (2026, 30 de junio). <em>Uruguay asume la presidencia del Mercosur con la promesa de impulsar un bloque más moderno y orientado a resultados</em>. <a href="https://www.portada.com.uy/uruguay-asume-la-presidencia-del-mercosur-con-la-promesa-de-impulsar-un-bloque-mas-moderno-y-orientado-a-resultados-93879" target="_blank" rel="noopener">Portada</a>.'
-          },
-          fr: {
-            title: 'L\'Uruguay assume la présidence du MERCOSUR',
-            teaser: 'L\'Uruguay prend le leadership avec un programme d\'ouverture et de modernisation.',
-            body: [
-              'L\'Uruguay a assumé la présidence pro tempore du Mercosur lors du 68e Sommet des Chefs d\'État et d\'États Associés, qui s\'est tenu à Luque, au Paraguay, avec un programme axé sur la modernisation du bloc, le renforcement de l\'intégration régionale et l\'accélération de la réalisation d\'accords commerciaux générant des résultats concrets pour les pays membres.',
-              'Lors de sa prise de fonction à la tête de l\'organisation, le président Yamandú Orsi a déclaré que le contexte international exigeait une coopération renforcée, et non des réponses isolées. En ce sens, il a affirmé que le dialogue et la recherche de consensus étaient des outils essentiels pour relever les défis actuels et a rappelé que le Mercosur avait été fondé il y a 35 ans dans le but de transformer les intérêts communs en opportunités de croissance mutuelle.',
-              'Le président a affirmé que l\'Uruguay cherchera à consolider les progrès accomplis par le bloc en réaffirmant des principes tels que la démocratie, les droits de l\'homme, les libertés fondamentales et l\'État de droit, piliers qu\'il considère essentiels pour renforcer la confiance entre les membres. Il a également exprimé la solidarité de l\'Uruguay avec le Venezuela suite aux récents séismes et a félicité les nouveaux présidents élus du Pérou et de la Colombie.',
-              'La stratégie de l\'Uruguay a été complétée par le chancelier Mario Lubetkin, qui a annoncé que, durant ce semestre, la mise en œuvre des accords commerciaux déjà conclus avec l\'Union européenne, l\'Association Européenne de Libre-Échange (AELE) et Singapour serait encouragée. Par ailleurs, l\'Uruguay organisera en décembre la première réunion du Conseil de l\'Accord Intérimaire Mercosur-Union Européenne ainsi qu\'un Forum d\'Affaires afin de renforcer les liens économiques.',
-              'L\'Uruguay assurera la présidence pro tempore du Mercosur jusqu\'en décembre, dans le but de consolider un bloc plus dynamique, ouvert sur le monde et axé sur la génération de bénéfices concrets pour la région.',
-            ],
-            source: 'Portada. (30 juin 2026). <em>L\'Uruguay prend la présidence du Mercosur avec la promesse d\'impulser un bloc plus moderne et axé sur les résultats</em>. Portada.'
-          }
-        }
-      },
-      {
-        id: 'balance-presidencia-paraguaya',
-        date: '7/1/26',
-        image: 'assets/images/news-presidencia-paraguaya-balance.jpg',
-        content: {
-          es: {
-            title: 'Lo que dejó la presidencia paraguaya del MERCOSUR',
-            teaser: 'El bloque regional impulsa acuerdos históricos para facilitar trámites, conectividad y movilidad.',
-            body: [
-              'La Presidencia Pro Tempore de Paraguay en 2026 concluyó con importantes avances para la integración regional del MERCOSUR, destacándose un acuerdo histórico sobre reconocimiento de firma digital entre los Estados parte. Esta medida permitirá agilizar trámites, reducir costos y facilitar operaciones comerciales y administrativas entre los países miembros. Además, se avanzó en iniciativas de transformación digital que buscan modernizar los servicios públicos y fortalecer la cooperación tecnológica dentro del bloque.',
-              'En materia de integración fronteriza, el MERCOSUR impulsó acciones orientadas a mejorar la movilidad de personas y mercancías, optimizar controles y fortalecer la coordinación entre autoridades de frontera. Estos avances buscan hacer más eficiente la circulación regional y favorecer el desarrollo económico y social de las comunidades fronterizas, consolidando una agenda de integración más práctica y cercana a la ciudadanía. Los resultados obtenidos durante la presidencia paraguaya reflejan el objetivo de construir un MERCOSUR más conectado, competitivo y moderno.',
-            ],
-            source: 'MERCOSUR. (2026, 1 de julio). <em>Un acuerdo histórico, avances en integración digital y fronteriza: lo que nos deja la Presidencia Paraguaya 2026 del MERCOSUR</em>. <a href="https://www.mercosur.int/un-acuerdo-historico-avances-en-integracion-digital-y-fronteriza-lo-que-nos-deja-la-presidencia-paraguaya-2026-del-mercosur" target="_blank" rel="noopener">Secretaría de MERCOSUR</a>.'
-          },
-          fr: {
-            title: 'Ce qu\'a laissé la présidence paraguayenne du MERCOSUR',
-            teaser: 'Le bloc régional promeut des accords historiques pour faciliter les procédures, la connectivité et la mobilité.',
-            body: [
-              'La Présidence Pro Tempore du Paraguay en 2026 s\'est conclue par des progrès significatifs en matière d\'intégration régionale du MERCOSUR, notamment un accord historique sur la reconnaissance des signatures numériques entre les États membres. Cette mesure permettra de simplifier les procédures, de réduire les coûts et de faciliter les opérations commerciales et administratives entre les pays membres. Par ailleurs, des avancées ont été réalisées concernant les initiatives de transformation numérique visant à moderniser les services publics et à renforcer la coopération technologique au sein du bloc.',
-              'Dans le domaine de l\'intégration frontalière, le MERCOSUR a promu des actions visant à améliorer la circulation de personnes et de marchandises, à optimiser les contrôles et à renforcer la coordination entre les autorités frontalières. Ces avancées cherchent à rendre la circulation régionale plus efficace et à favoriser le développement économique et social des communautés frontalières, consolidant ainsi un programme d\'intégration plus pratique et plus proche des citoyens. Les résultats obtenus sous la présidence paraguayenne témoignent de l\'objectif de construire un MERCOSUR plus connecté, plus compétitif et plus moderne.',
-            ],
-            source: 'MERCOSUR. (1er juillet 2026). <em>Un accord historique, des progrès en matière d\'intégration numérique et frontalière : l\'héritage de la Présidence paraguayenne du MERCOSUR 2026</em>. Secrétariat du MERCOSUR.'
-          }
-        }
-      },
-      {
-        id: 'delegaciones-reuniones-cumbre',
-        date: '6/29/26',
-        image: 'assets/images/news-delegaciones-cumbre.jpg',
-        content: {
-          es: {
-            title: 'Delegaciones del MERCOSUR realizan reuniones para la Cumbre',
-            teaser: 'Los países miembros avanzan en acuerdos que serán presentados a los jefes de Estado.',
-            body: [
-              'Las delegaciones de Argentina, Brasil, Paraguay y Uruguay iniciaron en Asunción las reuniones preparatorias para la Cumbre del MERCOSUR, bajo la Presidencia Pro Tempore de Paraguay. Durante estos encuentros se analizan y consensúan proyectos de resoluciones, decisiones y recomendaciones que serán sometidos a consideración del Grupo Mercado Común (GMC) y del Consejo del Mercado Común (CMC), principales órganos encargados de la conducción política y ejecutiva del bloque. Estas sesiones buscan garantizar que los temas prioritarios lleguen con acuerdos previos a la reunión de los jefes de Estado.',
-              'Las reuniones preparatorias forman parte del proceso de coordinación que antecede a la Cumbre del MERCOSUR, donde se definirán políticas relacionadas con la integración regional, el comercio y la cooperación entre los países miembros. El trabajo técnico y diplomático realizado por las delegaciones permite fortalecer el proceso de toma de decisiones y contribuir al desarrollo de iniciativas que impulsen el crecimiento económico y la integración del bloque.',
-            ],
-            source: 'MERCOSUR. (2026, 29 de junio). <em>Preparatorias para la Cumbre del MERCOSUR</em>. <a href="https://www.mercosur.int/preparatorias-para-la-cumbre-del-mercosur" target="_blank" rel="noopener">Secretaría de MERCOSUR</a>.'
-          },
-          fr: {
-            title: 'Les délégations du MERCOSUR tiennent des réunions au Sommet',
-            teaser: 'Les pays membres progressent sur les accords qui seront présentés aux chefs d\'État.',
-            body: [
-              'Les délégations d\'Argentine, du Brésil, du Paraguay et d\'Uruguay ont entamé à Asunción des réunions préparatoires au Sommet du MERCOSUR, sous la Présidence Pro Tempore du Paraguay. Ces réunions permettent d\'analyser et de convenir de projets de résolutions, de décisions et de recommandations avant leur soumission au Groupe du Marché commun (GMC) et au Conseil du Marché Commun (CMC), principaux organes responsables de la direction politique et exécutive du bloc. Ces sessions cherchent à garantir un consensus sur les questions prioritaires avant la réunion des chefs d\'État.',
-              'Les réunions préparatoires font partie du processus de coordination précédant le Sommet du MERCOSUR, où seront définies les politiques relatives à l\'intégration régionale, au commerce et à la coopération entre les pays membres. Le travail technique et diplomatique mené par les délégations permet de renforcer le processus décisionnel et contribue au développement d\'initiatives favorisant la croissance économique et l\'intégration du bloc.',
-            ],
-            source: 'MERCOSUR. (29 juin 2026). <em>Préparatifs pour le Sommet du MERCOSUR</em>. Secrétariat du MERCOSUR.'
-          }
-        }
-      },
-      {
-        id: 'concurso-foto-video',
-        date: '6/29/26',
-        image: 'assets/images/news-concurso-foto-video.jpg',
-        content: {
-          es: {
-            title: 'Concurso del MERCOSUR de fotografía y vídeo',
-            teaser: 'La convocatoria invita a retratar la convivencia y diversidad cultural.',
-            body: [
-              'El MERCOSUR abrió la convocatoria para la octava edición de su Concurso de Fotografía y la segunda edición del Concurso de Reels, cuya temática de este año es "Integración Fronteriza". La iniciativa busca que los participantes capturen, a través de imágenes y videos, la convivencia cotidiana entre las comunidades fronterizas, resaltando tradiciones, costumbres, expresiones culturales y formas de vida compartidas que fortalecen la identidad regional.',
-              'El concurso está dirigido a personas mayores de 18 años que sean ciudadanas de Argentina, Bolivia, Brasil, Paraguay o Uruguay. Las inscripciones son gratuitas y permanecerán abiertas hasta el 10 de agosto de 2026. Se premiarán las obras que destaquen por su creatividad, autenticidad y calidad artística, además de reconocer la capacidad de reflejar la riqueza humana y cultural presente en las zonas fronterizas del MERCOSUR. En la categoría de reels también se otorgará un Premio del Público, elegido mediante votación en la cuenta oficial de Instagram del bloque.',
-              'Para presentar su fotografía o video, así como acceder a las bases y condiciones completas, ya pueden ingresar al sitio web <a href="https://www.mercosur.int/concursofotoreel" target="_blank" rel="noopener">mercosur.int/concursofotoreel</a>, hasta el 10 de agosto de 2026.',
-            ],
-            source: 'MERCOSUR. (2026, 29 de junio). <em>El concurso de fotografías y videos del MERCOSUR de este año está abierto y es sobre integración fronteriza</em>. <a href="https://www.mercosur.int/el-concurso-de-fotografias-y-videos-del-mercosur-de-este-ano-esta-abierto-y-es-sobre-integracion-fronteriza" target="_blank" rel="noopener">Secretaría del Mercosur</a>.'
-          },
-          fr: {
-            title: 'Concours de photographie et de vidéo du MERCOSUR',
-            teaser: 'L\'appel à candidatures invite à illustrer la coexistence et la diversité culturelle.',
-            body: [
-              'Le MERCOSUR a lancé l\'appel à candidatures pour la huitième édition de son Concours de Photographie et la deuxième édition de son Concours de Vidéos, dont le thème cette année est « L\'intégration Frontalière ». L\'initiative vise à permettre aux participants de capturer, à travers des images et vidéos, la cohabitation quotidienne des communautés frontalières, en mettant en lumière les traditions, coutumes, expressions culturelles et modes de vie partagés qui renforcent l\'identité régionale.',
-              'Le concours est ouvert aux personnes âgées de 18 ans et plus, citoyennes d\'Argentine, de Bolivie, du Brésil, du Paraguay ou d\'Uruguay. L\'inscription est gratuite et restera ouverte jusqu\'au 10 août 2026. Les œuvres se distinguant par leur créativité, leur authenticité et leur qualité artistique seront primées, en plus de reconnaître la capacité à refléter la richesse humaine et culturelle présente dans les régions frontalières du MERCOSUR. Dans la catégorie « reels », un Prix du Public sera également décerné, suite à un vote sur le compte Instagram officiel du bloc.',
-              'Pour soumettre votre photo ou vidéo, ainsi que pour accéder au règlement et conditions complètes, vous pouvez dès maintenant visiter le site web <a href="https://www.mercosur.int/concursofotoreel" target="_blank" rel="noopener">mercosur.int/concursofotoreel</a>, jusqu\'au 10 août 2026.',
-            ],
-            source: 'MERCOSUR. (29 juin 2026). <em>Le concours de photos et vidéos du MERCOSUR de cette année est ouvert et porte sur l\'intégration transfrontalière</em>. Secrétariat du Mercosur.'
-          }
-        }
-      },
-      {
-        id: 'concluye-presidencia-paraguaya',
-        date: '6/25/26',
-        image: 'assets/images/news-concluye-presidencia-paraguaya.jpg',
-        content: {
-          es: {
-            title: 'Concluye la presidencia paraguaya del MERCOSUR',
-            teaser: 'Paraguay cierra su gestión destacando avances en comercio, digitalización y cooperación regional.',
-            body: [
-              'La Presidencia Pro Tempore de Paraguay culminó con la realización de la Cumbre del MERCOSUR en Asunción, donde se reunieron los jefes de Estado, cancilleres y delegaciones de los países miembros y asociados para evaluar los resultados del semestre. Durante la gestión paraguaya se llevaron a cabo más de 360 reuniones en distintos niveles institucionales, permitiendo avanzar en áreas estratégicas como la facilitación del comercio, la agenda digital, el fortalecimiento de los controles integrados en fronteras y el relacionamiento internacional del bloque.',
-              'Con el cierre de esta etapa, Uruguay asumió la Presidencia Pro Tempore del MERCOSUR por los siguientes seis meses, dando continuidad a la rotación establecida entre los Estados Parte. La cumbre marcó el fin de una gestión orientada a consolidar la integración regional mediante el diálogo político, la cooperación y el desarrollo de iniciativas que fortalezcan la competitividad y la coordinación entre los países miembros.',
-            ],
-            source: 'MERCOSUR. (2026, 25 de junio). <em>Cierra la presidencia paraguaya del MERCOSUR</em>. <a href="https://www.mercosur.int/cierra-la-presidencia-paraguaya-del-mercosur" target="_blank" rel="noopener">Secretaría de MERCOSUR</a>.'
-          },
-          fr: {
-            title: 'La présidence paraguayenne du MERCOSUR prend fin',
-            teaser: 'Le Paraguay conclut son mandat en soulignant les progrès réalisés dans le commerce, la numérisation et la coopération régionale.',
-            body: [
-              'La Présidence Pro Tempore du Paraguay s\'est conclue avec la réalisation du Sommet du MERCOSUR à Asunción, où chefs d\'État, ministres des Affaires étrangères et délégations des pays membres et associés se sont réunis pour évaluer les résultats du semestre. Durant ce mandat, plus de 360 réunions ont eu lieu à différents niveaux institutionnels, permettant des progrès dans des domaines stratégiques tels que la facilitation des échanges, la stratégie numérique, le renforcement des contrôles intégrés aux frontières et les relations internationales du bloc.',
-              'À l\'issue de cette phase, l\'Uruguay a assumé la Présidence Pro Tempore du MERCOSUR pour les six prochains mois, perpétuant ainsi la rotation établie entre les États Membres. Le Sommet a marqué la fin d\'une période consacrée à la consolidation de l\'intégration régionale par le dialogue politique, la coopération et le développement d\'initiatives renforçant la compétitivité et la coordination entre les pays membres.',
-            ],
-            source: 'MERCOSUR. (25 juin 2026). <em>La présidence paraguayenne du MERCOSUR prend fin</em>. Secrétariat du MERCOSUR.'
-          }
-        }
-      },
-      {
-        id: 'focem-avance-proyectos',
-        date: '6/22/26',
-        image: 'assets/images/news-focem-avance.jpg',
-        content: {
-          es: {
-            title: 'Avance de Proyectos FOCEM en el Cierre de la Presidencia Paraguaya',
-            teaser: 'La CRPM evalúa avances en proyectos del FOCEM antes del cierre de la gestión paraguaya.',
-            body: [
-              'La Comisión de Representantes Permanentes del MERCOSUR (CRPM) concluyó la gestión paraguaya de la Presidencia Pro Tempore, evaluando avances significativos en proyectos del Fondo para la Convergencia Estructural (FOCEM), incluyendo saneamiento básico para comunidades indígenas y el Parque Tecnológico de Sant\\\'Ana do Livramento. El encuentro también analizó informes semestrales de gestión presupuestaria, comunicación y formación interna del bloque.',
-            ],
-            source: 'MERCOSUR. (2026, 22 de junio). <em>Avance de nuevos proyectos del fondo del MERCOSUR y últimos informes de trabajo analizados por Representantes Permanentes en la Presidencia Pro Tempore Paraguaya saliente</em>. <a href="https://www.mercosur.int/avance-de-nuevos-proyectos-del-fondo-del-mercosur-y-ultimos-informes-de-trabajo-analizados-por-representantes-permanentes-en-la-presidencia-pro-tempore-paraguaya-saliente" target="_blank" rel="noopener">Secretaría del Mercosur</a>.'
-          },
-          fr: {
-            title: 'Avancement des Projets du FOCEM à la Fermeture de la Présidence Paraguayenne',
-            teaser: 'La CRPM évalue les progrès accomplis dans le cadre des projets FOCEM avant la fin de la gestion paraguayenne.',
-            body: [
-              'La Commission des Représentants Permanents du MERCOSUR (CRPM) a conclu la gestion paraguayenne de la Présidence Pro Tempore, en évaluant les progrès significatifs accomplis dans les projets du Fonds pour la Convergence Structurelle (FOCEM), notamment l\'assainissement de base pour les communautés autochtones et le Parc Technologique de Sant\'Ana do Livramento. La réunion a également examiné les rapports semestriels de gestion budgétaire, la communication et la formation interne au sein du bloc.',
-            ],
-            source: 'MERCOSUR. (22 juin 2026). <em>Avancement de nouveaux projets du fond du MERCOSUR et derniers rapports d\'activité analysés par les Représentants Permanents à la Présidence Pro Tempore Paraguayenne sortante</em>. Secrétariat du Mercosur.'
-          }
-        }
-      },
-      {
-        id: 'efta-tratado-avances',
-        date: '6/18/26',
-        image: 'assets/images/news-efta-tratado.jpg',
-        content: {
-          es: {
-            title: 'Avances en Tratado de Libre Comercio entre el MERCOSUR y la EFTA',
-            teaser: 'Los congresos de Brasil y Uruguay aprueban de forma simultánea el proyecto de ley.',
-            body: [
-              'Las asambleas legislativas de Brasil y Uruguay aprobaron la ratificación oficial del Tratado de Libre Comercio que fue suscrito originalmente entre el MERCOSUR y los Estados de la Asociación Europea de Libre Comercio (EFTA). Esta alianza económica estratégica involucra de forma directa la cooperación de Islandia, Liechtenstein, Noruega y Suiza. El avance legislativo faculta la reducción progresiva de barreras aduaneras de importación y optimiza el flujo de inversiones tecnológicas recíprocas en Sudamérica. El resto de los parlamentos de los Estados Partes continúa gestionando sus respectivos procesos constitucionales internos para lograr la vigencia plena y conjunta de la norma arancelaria.',
-            ],
-            source: 'Secretaría del MERCOSUR. (2026, 18 de junio). <em>Avanza el proceso de ratificación del Acuerdo de Libre Comercio entre el MERCOSUR y la EFTA</em>. <a href="https://www.mercosur.int/tema/relacionamiento-externo" target="_blank" rel="noopener">Página Oficial del MERCOSUR</a>.'
-          },
-          fr: {
-            title: 'Progrès sur l\'Accord de Libre-Échange entre le MERCOSUR et l\'AELE',
-            teaser: 'Les congrès du Brésil et de l\'Uruguay approuvent simultanément le projet de loi.',
-            body: [
-              'Les assemblées législatives du Brésil et de l\'Uruguay ont officiellement ratifié l\'Accord de Libre-Échange initialement signé entre le MERCOSUR et les États de l\'Association Européenne de Libre-Échange (AELE). Cette alliance économique stratégique implique directement la coopération de l\'Islande, du Liechtenstein, de la Norvège et de la Suisse. Cette avancée législative permet la réduction progressive des droits de douane à l\'importation et optimise les flux d\'investissements technologiques réciproques en Amérique du Sud. Les parlements des autres États Membres poursuivent leurs processus constitutionnels internes respectifs afin de parvenir à la pleine et entière mise en œuvre de l\'accord tarifaire.',
-            ],
-            source: 'Secrétariat du MERCOSUR. (18 juin 2026). <em>Le processus de ratification de l\'Accord de Libre-Échange entre le MERCOSUR et l\'AELE est en cours</em>. Site officiel du MERCOSUR.'
-          }
-        }
-      },
-      {
-        id: 'japon-acuerdo-economico',
-        date: '6/17/26',
-        image: 'assets/images/news-japon-acuerdo.jpg',
-        content: {
-          es: {
-            title: 'Futuro impulso económico entre Sudamérica y Asia',
-            teaser: 'El bloque sudamericano busca fortalecer el comercio y la inversión con una de las economías principales de Asia.',
-            body: [
-              'El MERCOSUR y Japón anunciaron el inicio de las negociaciones para un Acuerdo de Asociación Económica (AAE), una iniciativa que busca fortalecer las relaciones comerciales, ampliar el acceso a los mercados e impulsar las inversiones entre ambas partes. El anuncio representa un paso importante en la estrategia del bloque sudamericano para diversificar sus vínculos económicos y consolidar su presencia en la región Asia-Pacífico.',
-              'Las negociaciones abarcarán temas relacionados con el comercio de bienes y servicios, la cooperación económica y la promoción de inversiones. Japón figura entre los principales socios comerciales del MERCOSUR, por lo que el acuerdo podría generar nuevas oportunidades para las empresas de ambas regiones, incrementar el intercambio comercial y fortalecer la integración económica internacional del bloque.',
-            ],
-            source: 'MERCOSUR. (2026, 30 de junio). <em>Lanzamiento de las negociaciones para un Acuerdo de Asociación Económica entre los Estados Partes del MERCOSUR y Japón</em>. <a href="https://www.mercosur.int/mercosur-y-japon-anuncian-el-inicio-de-negociaciones-para-un-acuerdo-de-asociacion-economica" target="_blank" rel="noopener">Secretaría del Mercosur</a>.'
-          },
-          fr: {
-            title: 'Future impulsion économique entre l\'Amérique du Sud et l\'Asie',
-            teaser: 'Le bloc sud-américain cherche à renforcer les échanges commerciaux et l\'investissement avec l\'une des principales économies d\'Asie.',
-            body: [
-              'Le MERCOSUR et le Japon ont annoncé l\'ouverture de négociations en vue d\'un Accord de Partenariat Économique (APE), une initiative visant à renforcer les relations commerciales, à élargir l\'accès aux marchés et à stimuler les investissements entre les deux parties. Cette annonce constitue une étape importante dans la stratégie du bloc sud-américain pour diversifier ses liens économiques et consolider sa présence dans la région Asie-Pacifique.',
-              'Les négociations porteront sur des thèmes en lien avec le commerce des biens et des services, la coopération économique et la promotion des investissements. Le Japon étant l\'un des principaux partenaires commerciaux du MERCOSUR, cet accord pourrait créer de nouvelles opportunités pour les entreprises des deux régions, dynamiser les échanges commerciaux et renforcer l\'intégration économique internationale du bloc.',
-            ],
-            source: 'MERCOSUR. (30 juin 2026). <em>Lancement des négociations en vue d\'un Accord de Partenariat Économique entre les États Membres du MERCOSUR et le Japon</em>. Secrétariat du Mercosur.'
-          }
-        }
-      },
-      {
-        id: 'agricultura-familiar-reaf',
-        date: '6/12/26',
-        image: 'assets/images/news-agricultura-familiar.jpg',
-        content: {
-          es: {
-            title: 'Diálogo que impulsa el fortalecimiento de la agricultura familiar en el MERCOSUR',
-            teaser: 'Representantes acordaron promover políticas para apoyar a los pequeños productores y el desarrollo rural.',
-            body: [
-              'La Reunión Especializada de Agricultura Familiar (REAF) del MERCOSUR reunió a autoridades gubernamentales, organizaciones de productores y organismos internacionales para fortalecer el diálogo regional sobre el futuro de la agricultura familiar. Durante el encuentro se analizaron temas prioritarios como el acceso a mercados, el financiamiento, la asistencia técnica y el intercambio de experiencias, con el objetivo de impulsar políticas públicas que favorezcan el desarrollo sostenible de los pequeños productores y mejoren su calidad de vida.',
-              'Los participantes destacaron que la agricultura familiar desempeña un papel fundamental en la seguridad alimentaria, la reducción de las desigualdades y el desarrollo económico de las zonas rurales. Asimismo, reafirmaron el compromiso de los países del MERCOSUR de fortalecer la cooperación regional y generar recomendaciones conjuntas que permitan consolidar un sector agrícola más inclusivo, resiliente y competitivo frente a los desafíos actuales.',
-            ],
-            source: 'MERCOSUR. (2026, 12 de junio). <em>Diálogo regional para fortalecer la agricultura familiar en el MERCOSUR</em>. <a href="https://www.mercosur.int/dialogo-regional-para-fortalecer-la-agricultura-familiar-en-el-mercosur" target="_blank" rel="noopener">Secretaría de MERCOSUR</a>.'
-          },
-          fr: {
-            title: 'Dialogue visant à promouvoir le renforcement de l\'agriculture familiale au MERCOSUR',
-            teaser: 'Les représentants se sont engagés à promouvoir des politiques de soutien aux petits producteurs et au développement rural.',
-            body: [
-              'La Réunion Spécialisée sur l\'Agriculture Familiale (REAF) du MERCOSUR a réuni des autorités gouvernementales, des organisations de producteurs et des instances internationales afin de renforcer le dialogue régional sur l\'avenir de l\'agriculture familiale. Lors de cette réunion, des questions prioritaires telles que l\'accès aux marchés, le financement, l\'assistance technique et l\'échange d\'expériences ont été analysées, dans le but de promouvoir des politiques publiques favorisant le développement durable des petits producteurs et améliorant leurs conditions de vie.',
-              'Les participants ont souligné le rôle fondamental de l\'agriculture familiale dans la sécurité alimentaire, la réduction des inégalités et le développement économique des zones rurales. Ils ont également réaffirmé l\'engagement des pays du MERCOSUR à renforcer la coopération régionale et à élaborer des recommandations communes pour consolider un secteur agricole plus inclusif, résilient et compétitif face aux défis actuels.',
-            ],
-            source: 'MERCOSUR. (12 juin 2026). <em>Dialogue régional pour renforcer l\'agriculture familiale au MERCOSUR</em>. Secrétariat du MERCOSUR.'
-          }
-        }
-      },
-      {
-        id: 'cooperacion-espanola-aecid',
-        date: '6/10/26',
-        image: 'assets/images/news-cooperacion-espanola.jpg',
-        content: {
-          es: {
-            title: 'MERCOSUR y la cooperación española fortalecen su alianza',
-            teaser: 'Un nuevo acuerdo promoverá proyectos conjuntos, capacitación e intercambio de conocimientos.',
-            body: [
-              'El MERCOSUR y la Agencia Española de Cooperación Internacional para el Desarrollo (AECID) firmaron un Memorando de Entendimiento con el objetivo de fortalecer la cooperación institucional y apoyar el proceso de integración regional. El acuerdo establece un marco para desarrollar iniciativas conjuntas enfocadas en el fortalecimiento de las instituciones, el intercambio de conocimientos, la capacitación y la ejecución de proyectos de interés común que contribuyan al desarrollo sostenible de los Estados Parte.',
-              'Durante la firma, representantes del MERCOSUR y de España destacaron que la cooperación internacional es una herramienta clave para enfrentar desafíos compartidos y consolidar una integración más sólida. El memorando también busca promover buenas prácticas, asistencia técnica y el desarrollo de capacidades, reafirmando el compromiso de ambas partes con una agenda de cooperación basada en el respeto mutuo, la solidaridad y el beneficio compartido.',
-            ],
-            source: 'MERCOSUR. (2026, 10 de junio). <em>El MERCOSUR y la cooperación española acordaron fortalecer su trabajo conjunto en apoyo a la integración regional</em>. <a href="https://www.mercosur.int/el-mercosur-y-la-cooperacion-espanola-acordaron-fortalecer-su-trabajo-conjunto-en-apoyo-a-la-integracion-regional" target="_blank" rel="noopener">Secretaria del MERCOSUR</a>.'
-          },
-          fr: {
-            title: 'Le MERCOSUR et la coopération espagnole renforcent leur alliance',
-            teaser: 'Un nouvel accord favorisera les projets conjoints, la formation et le partage des connaissances.',
-            body: [
-              'Le MERCOSUR et l\'Agence Espagnole de Coopération Internationale pour le Développement (AECID) ont signé un Mémorandum d\'Entente visant à renforcer la coopération institutionnelle et à soutenir le processus d\'intégration régionale. L\'accord établit un cadre pour le développement d\'initiatives conjointes axées sur le renforcement des institutions, l\'échange de connaissances, la formation et la mise en œuvre de projets d\'intérêt commun contribuant au développement durable des États Membres.',
-              'Lors de la signature, les représentants du MERCOSUR et d\'Espagne ont souligné que la coopération internationale est un outil essentiel pour relever les défis communs et consolider une intégration plus forte. Le mémorandum vise également à promouvoir les meilleures pratiques, l\'assistance technique et le développement des capacités, réaffirmant ainsi l\'engagement des deux parties en faveur d\'une coopération fondée sur le respect mutuel, la solidarité et l\'intérêt partagé.',
-            ],
-            source: 'MERCOSUR. (10 juin 2026). <em>Le MERCOSUR et la coopération espagnole ont convenu de renforcer leur action conjointe en soutien à l\'intégration régionale</em>. Secrétariat du MERCOSUR.'
-          }
-        }
-      }
+    var ARTICLE_FILES = [
+      'content/blog/articulo-1.json',
+      'content/blog/articulo-2.json',
+      'content/blog/articulo-3.json',
+      'content/blog/articulo-4.json',
+      'content/blog/articulo-5.json',
+      'content/blog/articulo-6.json',
+      'content/blog/articulo-7.json',
+      'content/blog/articulo-8.json',
+      'content/blog/articulo-9.json',
+      'content/blog/articulo-10.json'
     ];
 
-    var totalPages = Math.ceil(NEWS_ITEMS.length / PER_PAGE);
-
-    function newsLang() {
-      var lang = 'es';
-      try { lang = localStorage.getItem('mercosurLang') || 'es'; } catch (e) { /* storage unavailable */ }
-      return lang;
+    function formatDate(iso) {
+      if (!iso) return '';
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return iso;
+      return (d.getUTCMonth() + 1) + '/' + d.getUTCDate() + '/' + String(d.getUTCFullYear()).slice(-2);
     }
 
-    function newsContent(item) {
-      var lang = newsLang();
-      return item.content[lang] || item.content.es;
+    function teaserFrom(text) {
+      if (!text) return '';
+      var flat = String(text).replace(/\s+/g, ' ').trim();
+      if (flat.length <= 160) return flat;
+      return flat.slice(0, 160).replace(/\s+\S*$/, '') + '…';
     }
 
     function cardHTML(item) {
-      var t = newsContent(item);
       var readMore = mercosurText('team.readMore', 'Read More');
       return (
         '<article class="post-card">' +
-          '<a href="#" class="post-thumb" data-news-open="' + item.id + '"><img src="' + item.image + '" alt="' + t.title + '" loading="lazy" decoding="async"></a>' +
+          '<a href="#" class="post-thumb" data-news-open="' + item.id + '"><img src="' + item.imagen + '" alt="' + item.titulo + '" loading="lazy" decoding="async"></a>' +
           '<div class="post-body">' +
-            '<div class="post-meta"><span>' + item.date + '</span></div>' +
-            '<h3>' + t.title + '</h3>' +
-            '<p>' + t.teaser + '</p>' +
+            '<div class="post-meta"><span>' + formatDate(item.fecha) + '</span></div>' +
+            '<h3>' + item.titulo + '</h3>' +
+            '<p>' + teaserFrom(item.informacion) + '</p>' +
             '<a href="#" class="post-link" data-news-open="' + item.id + '">' + readMore + '</a>' +
           '</div>' +
         '</article>'
@@ -966,10 +724,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (scroll) {
         grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        // Replacing the grid/pager markup can shift focus and trigger the
-        // browser's own scroll adjustment (e.g. scroll anchoring). Pin the
-        // page back exactly where the user was, with no animation — and
-        // do it again next frame in case that adjustment lands late.
         window.scrollTo({ top: scrollY, left: 0, behavior: 'instant' });
         window.requestAnimationFrame(function () {
           window.scrollTo({ top: scrollY, left: 0, behavior: 'instant' });
@@ -1013,18 +767,20 @@ document.addEventListener('DOMContentLoaded', function () {
     function openNews(id) {
       var item = findItem(id);
       if (!item) return;
-      var t = newsContent(item);
       var ov = buildOverlay();
-      var bodyHTML = t.body.map(function (p) { return '<p>' + p + '</p>'; }).join('');
+      var bodyHTML = String(item.informacion || '')
+        .split(/\n{2,}/)
+        .map(function (p) { return '<p>' + p.trim() + '</p>'; })
+        .join('');
       ov.innerHTML =
         '<div class="privacy-modal news-modal">' +
           '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
-          '<div class="news-modal-image"><img src="' + item.image + '" alt="' + t.title + '" loading="lazy" decoding="async"></div>' +
+          '<div class="news-modal-image"><img src="' + item.imagen + '" alt="' + item.titulo + '" loading="lazy" decoding="async"></div>' +
           '<div class="news-modal-content">' +
-            '<p class="news-modal-meta">' + item.date + '</p>' +
-            '<h2 id="news-modal-title">' + t.title + '</h2>' +
+            '<p class="news-modal-meta">' + formatDate(item.fecha) + '</p>' +
+            '<h2 id="news-modal-title">' + item.titulo + '</h2>' +
             bodyHTML +
-            '<p class="news-modal-source">' + t.source + '</p>' +
+            (item.fuente ? '<p class="news-modal-source">' + item.fuente + '</p>' : '') +
           '</div>' +
         '</div>';
       ov.querySelector('.privacy-close').addEventListener('click', closeNews);
@@ -1049,12 +805,30 @@ document.addEventListener('DOMContentLoaded', function () {
       openNews(trigger.getAttribute('data-news-open'));
     });
 
-    document.addEventListener('mercosur:langchange', function () {
-      renderGrid(currentPage);
-    });
+    function loadArticles() {
+      return Promise.all(
+        ARTICLE_FILES.map(function (path) {
+          return fetch(path, { cache: 'no-store' })
+            .then(function (res) { return res.ok ? res.json() : null; })
+            .catch(function () { return null; })
+            .then(function (data) {
+              if (!data || !data.titulo) return null;
+              data.id = path.replace('content/blog/articulo-', '').replace('.json', '');
+              return data;
+            });
+        })
+      ).then(function (results) {
+        NEWS_ITEMS = results.filter(Boolean).sort(function (a, b) {
+          return new Date(b.fecha) - new Date(a.fecha);
+        });
+        totalPages = Math.max(1, Math.ceil(NEWS_ITEMS.length / PER_PAGE));
+        goToPage(1, false);
+      });
+    }
 
-    goToPage(1);
+    loadArticles();
   })();
+
 
   /* ---------- Newsletter form (delivers via FormSubmit) ---------- */
   var newsletterForm = document.querySelector('#newsletter-form');
