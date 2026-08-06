@@ -7,8 +7,20 @@
 <meta name="description" content="La Cámara de Comercio Mercosur articula empresas, inversores e instituciones para ampliar su alcance entre América Latina y el mundo.">
 <link rel="icon" href="assets/images/logo.png">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function (user) {
+      if (!user) {
+        window.netlifyIdentity.on("login", function () {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 
 <header class="site-header">
   <div class="container">
