@@ -364,37 +364,6 @@ document.addEventListener('DOMContentLoaded', function () {
           ]
         }
       },
-      'ramon-ricardo-martinelli': {
-        name: 'Ramón R. Martinelli',
-        image: 'assets/images/team-2.jpg',
-        role: { es: 'Tesorero', en: 'Treasurer', pt: 'Tesoureiro', fr: 'Trésorier' },
-        body: {
-          es: [
-            'Ramón Ricardo Martinelli es un ejecutivo panameño con más de 17 años de experiencia en hidrocarburos, logística operativa y desarrollo de negocios energéticos.',
-            'Fue Diputado del Parlamento Centroamericano fortaleciendo su visión estratégica sobre cooperación, integración económica y relaciones regionales.',
-            'Sigue hoy liderando varias empresas en el mercado energético.',
-            'Su experiencia comercial, liderazgo institucional y visión regional son valores fundamentales para la Cámara de Comercio Mercosur.'
-          ],
-          en: [
-            'Ramón Ricardo Martinelli is a Panamanian executive with more than 17 years of experience in hydrocarbons, operational logistics, and energy business development.',
-            'He was a Deputy of the Central American Parliament, strengthening his strategic vision of cooperation, economic integration, and regional relations.',
-            'He currently continues to lead several companies in the energy sector.',
-            'His business experience, institutional leadership, and regional vision are fundamental values for the Mercosur Chamber of Commerce.'
-          ],
-          pt: [
-            'Ramón Ricardo Martinelli é um executivo panamenho com mais de 17 anos de experiência nos setores de hidrocarbonetos, logística operacional e desenvolvimento de negócios no setor de energia.',
-            'Foi Deputado do Parlamento Centro-Americano, fortalecendo sua visão estratégica sobre cooperação, integração econômica e relações regionais.',
-            'Atualmente, continua liderando diversas empresas no mercado de energia.',
-            'Sua experiência empresarial, liderança institucional e visão regional são valores fundamentais para a Câmara de Comércio Mercosul.'
-          ],
-          fr: [
-            'Ramón Ricardo Martinelli est un dirigeant panaméen avec plus de 17 ans d\'expérience dans les secteurs des hydrocarbures, de la logistique opérationnelle et du développement d\'entreprises énergétiques.',
-            'Il fut Député du Parlement Centraméricain, ce qui renforça sa vision stratégique en matière de coopération, d\'intégration économique et de relations régionales.',
-            'Il continue aujourd\'hui à diriger plusieurs entreprises du marché de l\'énergie.',
-            'Son expérience commerciale, leadership institutionnel et vision régionale sont des valeurs fondamentales pour la Chambre de Commerce du Mercosur.'
-          ]
-        }
-      },
       'walber-castillo-castellano': {
         name: 'Walber Castillo Castellano',
         image: 'assets/images/team-5.webp',
