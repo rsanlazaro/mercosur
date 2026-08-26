@@ -1035,6 +1035,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.addEventListener('click', function (e) {
+      if (e.target.closest('.event-card-url')) return;
       var trigger = e.target.closest('[data-event-open]');
       if (!trigger) return;
       e.preventDefault();
