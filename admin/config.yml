@@ -99,3 +99,67 @@ collections:
           - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
           - { label: "Fuente (cita, admite HTML como <em> y <a>)", name: "fuente", widget: "text", required: false }
           - { label: "Imagen", name: "imagen", widget: "image" }
+
+  - name: "eventos"
+    label: "Presencia Internacional (Eventos)"
+    files:
+      - name: "evento-1"
+        label: "Evento 1"
+        file: "content/eventos/evento-1.json"
+        fields:
+          - { label: "Nombre del evento", name: "nombre", widget: "string" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "País", name: "pais", widget: "string" }
+          - { label: "Lugar (ciudad, sede)", name: "lugar", widget: "string", required: false }
+          - { label: "Descripción", name: "descripcion", widget: "text" }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "evento-2"
+        label: "Evento 2"
+        file: "content/eventos/evento-2.json"
+        fields:
+          - { label: "Nombre del evento", name: "nombre", widget: "string" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "País", name: "pais", widget: "string" }
+          - { label: "Lugar (ciudad, sede)", name: "lugar", widget: "string", required: false }
+          - { label: "Descripción", name: "descripcion", widget: "text" }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "evento-3"
+        label: "Evento 3"
+        file: "content/eventos/evento-3.json"
+        fields:
+          - { label: "Nombre del evento", name: "nombre", widget: "string" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "País", name: "pais", widget: "string" }
+          - { label: "Lugar (ciudad, sede)", name: "lugar", widget: "string", required: false }
+          - { label: "Descripción", name: "descripcion", widget: "text" }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "evento-4"
+        label: "Evento 4"
+        file: "content/eventos/evento-4.json"
+        fields:
+          - { label: "Nombre del evento", name: "nombre", widget: "string" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "País", name: "pais", widget: "string" }
+          - { label: "Lugar (ciudad, sede)", name: "lugar", widget: "string", required: false }
+          - { label: "Descripción", name: "descripcion", widget: "text" }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "evento-5"
+        label: "Evento 5"
+        file: "content/eventos/evento-5.json"
+        fields:
+          - { label: "Nombre del evento", name: "nombre", widget: "string" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "País", name: "pais", widget: "string" }
+          - { label: "Lugar (ciudad, sede)", name: "lugar", widget: "string", required: false }
+          - { label: "Descripción", name: "descripcion", widget: "text" }
+          - { label: "Imagen", name: "imagen", widget: "image" }
+      - name: "evento-6"
+        label: "Evento 6"
+        file: "content/eventos/evento-6.json"
+        fields:
+          - { label: "Nombre del evento", name: "nombre", widget: "string" }
+          - { label: "Fecha", name: "fecha", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+          - { label: "País", name: "pais", widget: "string" }
+          - { label: "Lugar (ciudad, sede)", name: "lugar", widget: "string", required: false }
+          - { label: "Descripción", name: "descripcion", widget: "text" }
+          - { label: "Imagen", name: "imagen", widget: "image" }

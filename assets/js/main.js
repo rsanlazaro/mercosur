@@ -110,6 +110,12 @@ document.addEventListener('DOMContentLoaded', function () {
         var value = dict[key] !== undefined ? dict[key] : esDict[key];
         if (value !== undefined) el.innerHTML = value;
       });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n-placeholder');
+        var value = dict[key] !== undefined ? dict[key] : esDict[key];
+        if (value !== undefined) el.setAttribute('placeholder', value);
+      });
     }
 
     function setLanguage(lang, opts) {
@@ -796,6 +802,265 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     loadArticles();
+  })();
+
+
+  /* ---------- Presencia Internacional: events data, filters, pagination, and modal ---------- */
+  (function () {
+    var grid = document.querySelector('#events-grid');
+    var pager = document.querySelector('#events-pagination');
+    var filtersForm = document.querySelector('#event-filters');
+    if (!grid || !filtersForm) return;
+
+    var emptyState = document.querySelector('#events-empty');
+    var searchInput = document.querySelector('#ev-search');
+    var countrySelect = document.querySelector('#ev-country');
+    var sortSelect = document.querySelector('#ev-sort');
+    var resetBtn = document.querySelector('#ev-reset');
+
+    var PER_PAGE = 4;
+    var currentPage = 1;
+    var ALL_EVENTS = [];
+    var FILTERED_EVENTS = [];
+    var totalPages = 1;
+
+    var EVENT_FILES = [
+      'content/eventos/evento-1.json',
+      'content/eventos/evento-2.json',
+      'content/eventos/evento-3.json'
+    ];
+
+    function displayUrl(url) {
+      if (!url) return '';
+      return String(url).replace(/^https?:\/\//i, '').replace(/\/$/, '');
+    }
+
+    function populateCountries(events) {
+      var countries = [];
+      events.forEach(function (ev) {
+        if (ev.pais && countries.indexOf(ev.pais) === -1) countries.push(ev.pais);
+      });
+      countries.sort(function (a, b) { return a.localeCompare(b); });
+
+      var allLabel = mercosurText('presence.filters.countryAll', 'Todos los países');
+      var current = countrySelect.value;
+      countrySelect.innerHTML = '<option value="" data-i18n="presence.filters.countryAll">' + allLabel + '</option>' +
+        countries.map(function (c) {
+          return '<option value="' + c + '">' + c + '</option>';
+        }).join('');
+      if (current && countries.indexOf(current) !== -1) countrySelect.value = current;
+    }
+
+    function cardHTML(item) {
+      var placeLabel = item.lugar ? item.lugar : item.pais;
+      var hasModal = !!(item.comunicadoTitulo && item.comunicadoTitulo.trim());
+      var openAttr = hasModal ? ' data-event-open="' + item.id + '"' : '';
+      var titleTag = hasModal
+        ? '<h3 class="event-card-title is-clickable"' + openAttr + '>' + item.nombre + '</h3>'
+        : '<h3 class="event-card-title">' + item.nombre + '</h3>';
+      return (
+        '<article class="event-card-simple' + (hasModal ? ' is-clickable' : '') + '"' + openAttr + '>' +
+          '<span class="event-card-badge">' + item.pais + '</span>' +
+          titleTag +
+          '<div class="event-card-meta">' +
+            '<span>' + item.fechaTexto + '</span>' +
+            '<span class="dot">•</span>' +
+            '<span>' + placeLabel + '</span>' +
+          '</div>' +
+          '<a class="event-card-url" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' + displayUrl(item.url) + '</a>' +
+        '</article>'
+      );
+    }
+
+    function renderGrid(page) {
+      var start = (page - 1) * PER_PAGE;
+      var items = FILTERED_EVENTS.slice(start, start + PER_PAGE);
+      grid.innerHTML = items.map(cardHTML).join('');
+
+      var hasResults = FILTERED_EVENTS.length > 0;
+      grid.hidden = !hasResults;
+      pager.hidden = !hasResults;
+      if (emptyState) emptyState.hidden = hasResults;
+    }
+
+    function renderPager(page) {
+      if (totalPages <= 1) { pager.innerHTML = ''; return; }
+      var html = '';
+      html += '<button type="button" class="pagination-btn" data-page="prev"' + (page === 1 ? ' disabled' : '') + ' aria-label="Página anterior">←</button>';
+      for (var i = 1; i <= totalPages; i++) {
+        html += '<button type="button" class="pagination-btn' + (i === page ? ' is-active' : '') + '" data-page="' + i + '"' + (i === page ? ' aria-current="page"' : '') + '>' + i + '</button>';
+      }
+      html += '<button type="button" class="pagination-btn" data-page="next"' + (page === totalPages ? ' disabled' : '') + ' aria-label="Página siguiente">→</button>';
+      pager.innerHTML = html;
+    }
+
+    function goToPage(page, scroll) {
+      page = Math.max(1, Math.min(totalPages, page));
+      currentPage = page;
+
+      var scrollY = window.scrollY;
+      renderGrid(currentPage);
+      renderPager(currentPage);
+
+      if (scroll) {
+        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: scrollY, left: 0, behavior: 'instant' });
+        window.requestAnimationFrame(function () {
+          window.scrollTo({ top: scrollY, left: 0, behavior: 'instant' });
+        });
+      }
+    }
+
+    pager.addEventListener('click', function (e) {
+      var btn = e.target.closest('.pagination-btn');
+      if (!btn || btn.disabled) return;
+      var target = btn.getAttribute('data-page');
+      if (target === 'prev') goToPage(currentPage - 1, false);
+      else if (target === 'next') goToPage(currentPage + 1, false);
+      else goToPage(parseInt(target, 10), false);
+    });
+
+    /* ---- Filtering + sorting ---- */
+    function applyFilters() {
+      var query = (searchInput.value || '').trim().toLowerCase();
+      var country = countrySelect.value;
+      var sort = sortSelect.value;
+
+      FILTERED_EVENTS = ALL_EVENTS.filter(function (ev) {
+        var matchesQuery = !query || String(ev.nombre || '').toLowerCase().indexOf(query) !== -1;
+        var matchesCountry = !country || ev.pais === country;
+        return matchesQuery && matchesCountry;
+      });
+
+      FILTERED_EVENTS.sort(function (a, b) {
+        var diff = new Date(a.fechaInicio) - new Date(b.fechaInicio);
+        return sort === 'desc' ? -diff : diff;
+      });
+
+      totalPages = Math.max(1, Math.ceil(FILTERED_EVENTS.length / PER_PAGE));
+      goToPage(1, false);
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    countrySelect.addEventListener('change', applyFilters);
+    sortSelect.addEventListener('change', applyFilters);
+    filtersForm.addEventListener('submit', function (e) { e.preventDefault(); });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        searchInput.value = '';
+        countrySelect.value = '';
+        sortSelect.value = 'asc';
+        applyFilters();
+      });
+    }
+
+    /* ---- "Comunicado Oficial" details modal ----
+       Only events with a non-empty `comunicadoTitulo` render this modal
+       (currently: the Bangkok / FMI-Banco Mundial event). Cards for events
+       without one are not clickable and only expose their external URL. */
+    var overlay = null;
+
+    function findEvent(id) {
+      for (var i = 0; i < ALL_EVENTS.length; i++) {
+        if (ALL_EVENTS[i].id === id) return ALL_EVENTS[i];
+      }
+      return null;
+    }
+
+    function buildOverlay() {
+      if (overlay) return overlay;
+      overlay = document.createElement('div');
+      overlay.className = 'privacy-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-labelledby', 'event-modal-title');
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeEvent();
+      });
+      return overlay;
+    }
+
+    function openEvent(id) {
+      var item = findEvent(id);
+      if (!item || !item.comunicadoTitulo || !item.comunicadoTitulo.trim()) return;
+
+      var ov = buildOverlay();
+      var bodyHTML = String(item.comunicadoTexto || '')
+        .split(/\n{2,}/)
+        .map(function (p) { return '<p>' + p.trim() + '</p>'; })
+        .join('');
+
+      ov.innerHTML =
+        '<div class="privacy-modal comunicado-modal">' +
+          '<button type="button" class="privacy-close" aria-label="Cerrar">&times;</button>' +
+          '<div class="comunicado-banner">' +
+            '<span class="comunicado-tag" data-i18n="presence.comunicado.label">Comunicado oficial</span>' +
+          '</div>' +
+          '<div class="comunicado-body">' +
+            '<h2 id="event-modal-title" class="comunicado-title">' + item.comunicadoTitulo + '</h2>' +
+            bodyHTML +
+          '</div>' +
+          '<div class="comunicado-footer">' +
+            '<div class="comunicado-footer-item">' +
+              '<span class="comunicado-footer-icons">' +
+                '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg>' +
+                '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>' +
+              '</span>' +
+              '<span>' + mercosurText('footer.brandName', 'Cámara de Comercio MERCOSUR') + '</span>' +
+            '</div>' +
+            '<div class="comunicado-footer-item">' +
+              '<span class="comunicado-footer-icons">' +
+                '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53C6.09.28 6.82.11 7.88.06 8.94.01 9.28 0 12 0zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm6.4-8.4a1.17 1.17 0 1 1-2.34 0 1.17 1.17 0 0 1 2.34 0z"/></svg>' +
+              '</span>' +
+              '<span>@CC_Mercosur</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      ov.querySelector('.privacy-close').addEventListener('click', closeEvent);
+      window.requestAnimationFrame(function () {
+        ov.classList.add('is-open');
+      });
+    }
+
+    function closeEvent() {
+      if (!overlay) return;
+      overlay.classList.remove('is-open');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) closeEvent();
+    });
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('[data-event-open]');
+      if (!trigger) return;
+      e.preventDefault();
+      openEvent(trigger.getAttribute('data-event-open'));
+    });
+
+    function loadEvents() {
+      return Promise.all(
+        EVENT_FILES.map(function (path) {
+          return fetch(path, { cache: 'no-store' })
+            .then(function (res) { return res.ok ? res.json() : null; })
+            .catch(function () { return null; })
+            .then(function (data) {
+              if (!data || !data.nombre) return null;
+              data.id = path.replace('content/eventos/evento-', '').replace('.json', '');
+              return data;
+            });
+        })
+      ).then(function (results) {
+        ALL_EVENTS = results.filter(Boolean);
+        populateCountries(ALL_EVENTS);
+        applyFilters();
+      });
+    }
+
+    loadEvents();
   })();
 
 

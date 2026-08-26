@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Participación — Cámara de Comercio Mercosur</title>
-<meta name="description" content="Conoce las distintas formas de relacionarse con la Cámara de Comercio Mercosur: asociación, cooperación institucional, iniciativas empresariales y manifestación de interés.">
+<title>Presencia Internacional — Cámara de Comercio Mercosur</title>
+<meta name="description" content="Cumbres, foros y misiones donde Mercosur y la Cámara de Comercio tienen presencia internacional activa.">
 <link rel="icon" href="assets/images/logo.png">
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -18,9 +18,9 @@
     <nav class="main-nav">
       <a href="index.html" data-i18n="nav.home">Inicio</a>
       <a href="nosotros.html" data-i18n="nav.about">Nosotros</a>
-      <a href="participacion.html" class="is-active" data-i18n="nav.participation">Participación</a>
+      <a href="participacion.html" data-i18n="nav.participation">Participación</a>
       <a href="transparencia.html" data-i18n="nav.transparency">Transparencia</a>
-      <a href="presencia-internacional.html" data-i18n="nav.presence">Presencia Internacional</a>
+      <a href="presencia-internacional.html" class="is-active" data-i18n="nav.presence">Presencia Internacional</a>
       <a href="blog.html" data-i18n="nav.blog">Blog</a>
       <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
     </nav>
@@ -45,91 +45,73 @@
 <main>
 
   <!-- HERO -->
-  <section class="hero hero--page hero--tint-blue" style="background-image:url('assets/images/participacion-hero.jpg');">
+  <section class="hero hero--split">
+    <div class="hero-split-media" style="background-image:url('assets/images/participacion-hero.jpg');"></div>
     <div class="container">
-      <div class="hero-inner hero-inner--center">
-        <p class="hero-lede" data-i18n-html="participation.hero.lede">Existen <strong>distintas formas de relacionarse</strong> con la Cámara según el <strong>objetivo de cada organización</strong></p>
-        <h1 data-i18n="participation.hero.title">Conoce como formar parte de la Cámara</h1>
+      <div class="hero-inner hero-inner--split">
+        <h1 data-i18n-html="presence.hero.title">Presencia Internacional<br>del Mercosur</h1>
+        <p class="hero-lede" data-i18n-html="presence.hero.lede">Un recorrido por <strong>cumbres, foros y misiones</strong> que conectan a la región con el mundo</p>
       </div>
     </div>
   </section>
 
-  <!-- CÓMO PARTICIPAR + ACCORDION -->
-  <section class="section section--light">
+  <!-- EVENTOS -->
+  <section class="section section--sand">
     <div class="container">
-      <div class="participacion-grid">
+      <div class="reveal section--events-intro" style="margin-bottom:8px;">
+        <p class="eyebrow" data-i18n="presence.events.eyebrow">Agenda internacional</p>
+        <h2 data-i18n="presence.events.title">Eventos y presencia de Mercosur en el mundo</h2>
+        <p data-i18n="presence.events.body">Explora los encuentros, cumbres y misiones donde la Cámara de Comercio Mercosur y el bloque tienen presencia activa. Filtra por nombre, fecha o país para encontrar el evento que te interesa.</p>
+      </div>
 
-        <div class="reveal">
-          <h2 class="heading-wavy" data-i18n="participation.how.title">¿Cómo participar?</h2>
-          <p data-i18n-html="participation.how.body">La Cámara se construye mediante <strong>la participación responsable de organizaciones</strong> que comparten una visión de cooperación, apertura y desarrollo regional. Cada propuesta será evaluada de acuerdo con los fines institucionales, su alcance, los recursos disponibles y los requisitos de integridad y cumplimiento.</p>
-          <p class="note-bullet" data-i18n="participation.how.note">La presentación de una solicitud o iniciativa no genera automáticamente derechos, representación ni condición de asociado.</p>
-          <hr>
-          <a href="contacto.html" class="btn btn-blue" data-i18n="cta.sendProposal">Manda tu propuesta</a>
+      <!-- FILTROS -->
+      <form class="event-filters reveal" id="event-filters" novalidate>
+        <div class="form-field">
+          <label for="ev-search" data-i18n="presence.filters.searchLabel">Buscar por nombre</label>
+          <input type="text" id="ev-search" name="search" data-i18n-placeholder="presence.filters.searchPlaceholder" placeholder="Ej: Cumbre, Foro, Misión…" autocomplete="off">
         </div>
-
-        <div class="reveal">
-          <div class="accordion accordion--numbered">
-
-            <div class="accordion-item">
-              <button class="accordion-trigger" aria-expanded="false">
-                <span data-i18n="participation.step1.title">01 - Asociarse</span>
-                <span class="icon" aria-hidden="true"></span>
-              </button>
-              <div class="accordion-panel">
-                <div class="accordion-panel-inner">
-                  <p class="sub" data-i18n="participation.step1.sub">Solicitud de admisión como asociado</p>
-                  <p data-i18n="participation.step1.p1">La Cámara podrá admitir como asociados activos a personas jurídicas empresariales, cámaras, asociaciones empresariales, cooperativas e instituciones económicas, así como a empresarios individuales, profesionales y titulares de empresas unipersonales que cumplan los requisitos estatutarios.</p>
-                  <p data-i18n="participation.step1.p2">La solicitud de admisión supone la aceptación de los Estatutos, la acreditación de la identidad, existencia, vigencia y representación que corresponda, y la presentación de la información necesaria para evaluar la compatibilidad del solicitante con los fines de la Cámara.</p>
-                  <p class="note-bullet" data-i18n="participation.step1.note">Completar el formulario de interés no produce admisión automática. La decisión corresponde al órgano competente y podrá requerir documentación adicional.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <button class="accordion-trigger" aria-expanded="false">
-                <span data-i18n="participation.step2.title">02 - Cooperación institucional</span>
-                <span class="icon" aria-hidden="true"></span>
-              </button>
-              <div class="accordion-panel">
-                <div class="accordion-panel-inner">
-                  <p class="sub" data-i18n="participation.step2.sub">Propuestas de organizaciones e instituciones</p>
-                  <p data-i18n="participation.step2.p1">Las cámaras de comercio, asociaciones, universidades, organismos públicos, agencias de inversión, instituciones financieras y organizaciones internacionales pueden proponer acuerdos, programas, estudios, actividades o iniciativas conjuntas.</p>
-                  <p data-i18n="participation.step2.p2">La Cámara priorizará propuestas con objetivos definidos, responsabilidades claras y capacidad real para aportar valor a las empresas y al desarrollo regional.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <button class="accordion-trigger" aria-expanded="false">
-                <span data-i18n="participation.step3.title">03 - Iniciativas empresariales</span>
-                <span class="icon" aria-hidden="true"></span>
-              </button>
-              <div class="accordion-panel">
-                <div class="accordion-panel-inner">
-                  <p class="sub" data-i18n="participation.step3.sub">Presentación de proyectos e iniciativas</p>
-                  <p data-i18n="participation.step3.p1">Las empresas y organizaciones pueden presentar iniciativas relacionadas con internacionalización, comercio, inversión, financiación, alianzas, acceso a mercados o desarrollo de proyectos regionales.</p>
-                  <p data-i18n="participation.step3.p2">La información inicial debe permitir comprender el objetivo, los países involucrados, el sector, las necesidades principales y el tipo de apoyo institucional solicitado.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <button class="accordion-trigger" aria-expanded="false">
-                <span data-i18n="participation.step4.title">04 - Manifestación de interés</span>
-                <span class="icon" aria-hidden="true"></span>
-              </button>
-              <div class="accordion-panel">
-                <div class="accordion-panel-inner">
-                  <p class="sub" data-i18n="participation.step4.sub">Consulta general o interés inicial</p>
-                  <p data-i18n="participation.step4.p1">Quienes todavía no hayan definido una vía concreta de participación pueden enviar una manifestación general de interés. El equipo institucional orientará la consulta hacia el área o procedimiento adecuado.</p>
-                  <p class="note-bullet" data-i18n="participation.step4.note">Participar en una actividad, presentar una iniciativa o colaborar con la Cámara no confiere por sí mismo la condición de asociado ni autoriza el uso de su nombre, logotipo, cargos o representación institucional.</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
+        <div class="form-field">
+          <label for="ev-country" data-i18n="presence.filters.countryLabel">País</label>
+          <select id="ev-country" name="country">
+            <option value="" data-i18n="presence.filters.countryAll">Todos los países</option>
+          </select>
         </div>
+        <div class="form-field">
+          <label for="ev-sort" data-i18n="presence.filters.sortLabel">Ordenar por fecha</label>
+          <select id="ev-sort" name="sort">
+            <option value="asc" data-i18n="presence.filters.sortNewest">Más próximos primero</option>
+            <option value="desc" data-i18n="presence.filters.sortOldest">Más antiguos primero</option>
+          </select>
+        </div>
+        <button type="button" class="btn-reset" id="ev-reset" data-i18n="presence.filters.reset">Limpiar filtros</button>
+      </form>
 
+      <div id="events-grid" class="post-grid reveal"></div>
+      <p id="events-empty" class="event-empty" data-i18n="presence.events.empty" hidden>No se encontraron eventos con los filtros seleccionados.</p>
+      <nav class="pagination" id="events-pagination" aria-label="Paginación de eventos"></nav>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section section--dark" id="suscribete">
+    <div class="container">
+      <div class="newsletter reveal">
+        <div>
+          <p class="eyebrow" style="color:var(--gold);" data-i18n="blog.newsletter.eyebrow">Entérate de las noticias y de eventos próximos</p>
+          <h2 data-i18n="blog.newsletter.title">Ingresa tu correo para las notificaciones</h2>
+        </div>
+        <div>
+          <form id="newsletter-form" novalidate>
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+            <div class="newsletter-form">
+              <input type="email" placeholder="Email Address" aria-label="Correo electrónico" required>
+              <button type="submit" class="btn btn-primary" data-i18n="cta.subscribe">Registrarse</button>
+            </div>
+            <p class="newsletter-note" data-i18n="blog.newsletter.note">El correo proporcionado solo se usará para nuevas actualizaciones.</p>
+            <p data-i18n-html="blog.newsletter.formLink">También puedes contestar <a href="contacto.html" style="color:#fff; text-decoration:underline;">nuestro formulario</a> para consultas.</p>
+            <p class="form-msg" role="status"></p>
+          </form>
+        </div>
       </div>
     </div>
   </section>
