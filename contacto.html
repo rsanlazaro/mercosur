@@ -45,7 +45,7 @@
           <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem">Français</button></li>
         </ul>
       </div>
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+      <button class="nav-toggle" data-i18n-aria="nav.openMenu" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
     </div>
   </div>
 </header>
@@ -58,11 +58,14 @@
       <div class="contact-top-grid">
 
         <div class="reveal">
-          <h1 data-i18n-html="contact.hero.title">Conoce nuestro <span class="circled">canal</span></h1>
-          <p data-i18n="contact.hero.body">La Cámara recibe consultas de empresas, cámaras de comercio, inversores, instituciones financieras, organismos y organizaciones internacionales.</p>
+          <h1 data-i18n-html="contact.hero.title">Contacta con la <span class="circled">Cámara</span></h1>
+          <p data-i18n="contact.hero.body">La Cámara recibe consultas de empresas, cámaras de comercio, inversores, instituciones financieras, organismos, organizaciones internacionales y actores interesados en comercio, inversión, cooperación empresarial e integración económica.</p>
 
           <div class="contact-note" data-i18n="contact.hero.note">
-            Al llenar este formulario no envíe documentación jurídica sensible, contratos, estados financieros u otra información confidencial a través de este formulario abierto salvo que haya sido expresamente solicitada.
+            Al completar este formulario, evite enviar documentación jurídica sensible, contratos, estados financieros u otra información confidencial a través de este canal abierto, salvo que haya sido expresamente solicitada por la Cámara.
+          </div>
+          <div class="contact-note" data-i18n="contact.hero.note2">
+            Si su comunicación incluye una posible irregularidad, uso indebido de identidad institucional, conflicto de interés o denuncia de integridad, indique expresamente ese motivo para su adecuada derivación.
           </div>
         </div>
 
@@ -97,9 +100,9 @@
             </div>
 
             <div class="form-field full">
-              <label data-i18n-html="contact.form.phone">Teléfono <span class="req">*</span></label>
+              <label data-i18n="contact.form.phone">Teléfono / WhatsApp institucional</label>
               <div class="phone-group">
-                <select id="c-tel-country" name="tel_pais" aria-label="País telefónico" required>
+                <select id="c-tel-country" name="tel_pais" aria-label="País telefónico">
                   <option>Argentina</option>
                   <option>Bolivia</option>
                   <option>Brasil</option>
@@ -117,7 +120,7 @@
                   <option>Venezuela</option>
                   <option>Otro</option>
                 </select>
-                <input type="tel" id="c-phone" name="telefono" placeholder="+598" required>
+                <input type="tel" id="c-phone" name="telefono" placeholder="+598">
               </div>
             </div>
 
@@ -132,8 +135,8 @@
             </div>
 
             <div class="form-field full">
-              <label for="c-org" data-i18n-html="contact.form.org">Organización, cargo y sector <span class="req">*</span></label>
-              <input type="text" id="c-org" name="organizacion" required>
+              <label for="c-org" data-i18n="contact.form.org">Organización, cargo y sector, si aplica</label>
+              <input type="text" id="c-org" name="organizacion">
             </div>
 
             <div class="form-field full">
@@ -171,7 +174,7 @@
 
             <label class="form-checkbox">
               <input type="checkbox" required>
-              <span data-i18n-html="contact.form.privacyCheck">He leído la <a href="#" class="js-privacy-link" style="color:var(--blue); font-weight:600;">Política de Privacidad</a> y comprendo cómo serán tratados mis datos. *</span>
+              <span data-i18n-html="contact.form.privacyCheck">He leído la <a href="politica-de-privacidad.html" target="_blank" rel="noopener" style="color:var(--blue); font-weight:600;">Política de Privacidad</a> y comprendo cómo serán tratados mis datos. *</span>
             </label>
             <label class="form-checkbox">
               <input type="checkbox">
@@ -193,8 +196,10 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur</div>
-        <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur (OSC)</div>
+        <p data-i18n="footer.brandDescription">Organización de la Sociedad Civil (OSC), privada, independiente y sin fines de lucro, con sede en Uruguay y proyección internacional, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <p data-i18n="footer.brandDescription2">Identidad institucional propia. Actuación empresarial y de sociedad civil en el ámbito MERCOSUR e internacional, sin carácter gubernamental ni representación oficial del MERCOSUR.</p>
+        <p><a href="presencia-internacional.html" class="footer-agenda-link" data-i18n="footer.brandDescription3">Agenda internacional activa en foros de sociedad civil, comercio, inversión y desarrollo.</a></p>
         <p><a class="email js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a></p>
         <address data-i18n="footer.address">República Oriental del Uruguay</address>
       </div>
@@ -213,25 +218,28 @@
       <div class="footer-col">
         <h4 data-i18n="footer.legalTitle">Legal</h4>
         <ul class="footer-legal-list">
-          <li><a href="#" class="js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
-          <li><a href="#" class="js-cookies-policy-link" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
-          <li><a href="#" class="js-terms-link" data-i18n="footer.legal.terms">Términos de Uso</a></li>
-          <li><a href="#" class="js-brand-link" data-i18n="footer.legal.brand">Uso de Marca</a></li>
-          <li><a href="#" class="js-integrity-link" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
+          <li><a href="politica-de-privacidad.html" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
+          <li><a href="politica-de-cookies.html" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
+          <li><a href="terminos-de-uso.html" data-i18n="footer.legal.terms">Términos de Uso</a></li>
+          <li><a href="uso-de-marca.html" data-i18n="footer.legal.brand">Uso de Marca</a></li>
+          <li><a href="canal-de-integridad.html" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.institutionalTitle">Datos Institucionales</h4>
-        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
-        <p class="footer-legal-note" data-i18n="footer.civilAssoc">Asociación Civil Internacional sin Ánimo de Lucro</p>
-        <p class="footer-legal-note" data-i18n="footer.mosRegistry">Registro MOS:</p>
-        <p class="footer-legal-note" data-i18n="footer.disclaimer">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
+        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
+        <p class="footer-legal-note" data-i18n="footer.institutionalEmail">Correo institucional: info@camaracomerciomercosur.org</p>
       </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p data-i18n="footer.copyright">© 2026 Cámara de Comercio Mercosur. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
 
-<button class="back-to-top" aria-label="Volver arriba">↑</button>
+<button class="back-to-top" data-i18n-aria="nav.backToTop" aria-label="Volver arriba">↑</button>
 <script src="assets/js/i18n-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>

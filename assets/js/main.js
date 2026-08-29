@@ -116,6 +116,12 @@ document.addEventListener('DOMContentLoaded', function () {
         var value = dict[key] !== undefined ? dict[key] : esDict[key];
         if (value !== undefined) el.setAttribute('placeholder', value);
       });
+
+      document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n-aria');
+        var value = dict[key] !== undefined ? dict[key] : esDict[key];
+        if (value !== undefined) el.setAttribute('aria-label', value);
+      });
     }
 
     function setLanguage(lang, opts) {
@@ -625,6 +631,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var pager = document.querySelector('#news-pagination');
     if (!grid) return;
 
+    var emptyState = document.querySelector('#blog-empty');
     var PER_PAGE = 4;
     var currentPage = 1;
     var NEWS_ITEMS = [];
@@ -676,6 +683,11 @@ document.addEventListener('DOMContentLoaded', function () {
       var start = (page - 1) * PER_PAGE;
       var items = NEWS_ITEMS.slice(start, start + PER_PAGE);
       grid.innerHTML = items.map(cardHTML).join('');
+
+      var hasResults = NEWS_ITEMS.length > 0;
+      grid.hidden = !hasResults;
+      pager.hidden = !hasResults;
+      if (emptyState) emptyState.hidden = hasResults;
     }
 
     function renderPager(page) {

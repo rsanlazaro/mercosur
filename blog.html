@@ -37,7 +37,7 @@
           <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem">Français</button></li>
         </ul>
       </div>
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+      <button class="nav-toggle" data-i18n-aria="nav.openMenu" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
     </div>
   </div>
 </header>
@@ -49,20 +49,67 @@
     <div class="hero-split-media" style="background-image:url('assets/images/blog-network.jpg');"></div>
     <div class="container">
       <div class="hero-inner hero-inner--split">
-        <h1 data-i18n-html="blog.hero.title">Mercosur alrededor<br>del mundo</h1>
-        <p class="hero-lede" data-i18n-html="blog.hero.lede">Líder en <strong>experiencias y encuentros</strong> para todo público</p>
+        <h1 data-i18n="blog.hero.title">Actualidad y análisis</h1>
+        <p class="hero-lede" data-i18n="blog.hero.lede">Publicaciones de la Cámara de Comercio Mercosur (OSC) sobre integración económica, desarrollo productivo y proyección internacional de América Latina.</p>
       </div>
     </div>
   </section>
 
-  <!-- NOTICIAS -->
+  <!-- TEXTO DE APERTURA -->
+  <section class="section section--light">
+    <div class="container">
+      <div class="reveal" style="max-width:820px;">
+        <p data-i18n="blog.intro.p1">La Cámara de Comercio Mercosur (OSC) comparte en esta sección notas institucionales, análisis y contenidos dirigidos a empresas, cámaras, inversores, instituciones y actores de sociedad civil.</p>
+        <p data-i18n="blog.intro.p2">El objetivo es aportar contexto, criterio empresarial y lectura institucional sobre asuntos relevantes para el ámbito MERCOSUR, América Latina y su relación con los mercados internacionales.</p>
+      </div>
+
+      <!-- LÍNEA EDITORIAL -->
+      <div class="reveal" style="margin-top:48px; max-width:820px;">
+        <h2 data-i18n="blog.editorial.title">Línea editorial</h2>
+        <p data-i18n="blog.editorial.p1">Actualidad y análisis reúne contenidos elaborados o difundidos por la Cámara conforme a su mandato institucional.</p>
+        <p data-i18n="blog.editorial.p2">Las publicaciones abordan oportunidades regionales e internacionales, cadenas de valor, financiación, infraestructura, energía, recursos naturales, innovación, sostenibilidad y desarrollo empresarial.</p>
+      </div>
+
+      <!-- CATEGORÍAS EDITORIALES -->
+      <div class="reveal" style="margin-top:48px;">
+        <h2 data-i18n="blog.categories.title">Categorías editoriales</h2>
+        <div class="editorial-grid">
+          <div class="editorial-card">
+            <h3 data-i18n="blog.categories.cat1.name">Institucional</h3>
+            <p data-i18n="blog.categories.cat1.desc">Comunicaciones de la Cámara, documentos aprobados, hitos institucionales, gobernanza y desarrollo organizacional.</p>
+          </div>
+          <div class="editorial-card">
+            <h3 data-i18n="blog.categories.cat2.name">Comercio e inversión</h3>
+            <p data-i18n="blog.categories.cat2.desc">Mercados, internacionalización empresarial, acuerdos comerciales, inversión, financiación y oportunidades sectoriales.</p>
+          </div>
+          <div class="editorial-card">
+            <h3 data-i18n="blog.categories.cat3.name">Integración económica</h3>
+            <p data-i18n="blog.categories.cat3.desc">Ámbito MERCOSUR, Estados Asociados, América Latina, cadenas regionales de valor y cooperación empresarial.</p>
+          </div>
+          <div class="editorial-card">
+            <h3 data-i18n="blog.categories.cat4.name">Sectores estratégicos</h3>
+            <p data-i18n="blog.categories.cat4.desc">Infraestructura, logística, energía, recursos naturales, conectividad, transición energética e inversión productiva.</p>
+          </div>
+          <div class="editorial-card">
+            <h3 data-i18n="blog.categories.cat5.name">Innovación y desarrollo productivo</h3>
+            <p data-i18n="blog.categories.cat5.desc">Ciudades inteligentes, tecnología, transformación digital, productividad y modernización institucional.</p>
+          </div>
+          <div class="editorial-card">
+            <h3 data-i18n="blog.categories.cat6.name">Foros y actividades</h3>
+            <p data-i18n="blog.categories.cat6.desc">Notas editoriales derivadas de eventos, reuniones, misiones y espacios internacionales vinculados a la agenda de la Cámara.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÚLTIMAS PUBLICACIONES -->
   <section class="section section--sand">
     <div class="container">
       <div class="split reveal" style="align-items:center; margin-bottom:8px;">
         <div>
-          <p class="eyebrow" data-i18n="blog.news.eyebrow">Actualidad</p>
-          <h2 data-i18n="blog.news.title">Las noticias que involucran a Mercosur</h2>
-          <p data-i18n="blog.news.body">En este espacio, ponemos a tu disposición una cobertura rigurosa, análisis profundos y el seguimiento puntual de los acontecimientos más relevantes del acontecer nacional e internacional.</p>
+          <h2 data-i18n="blog.latest.title">Últimas publicaciones</h2>
+          <p data-i18n="blog.latest.lede">Consulta las publicaciones recientes de la Cámara.</p>
         </div>
         <div style="text-align:left;">
           <a href="#suscribete" class="btn btn-navy btn-arrow" data-i18n="cta.subscribe">Suscríbete</a>
@@ -70,6 +117,10 @@
       </div>
 
       <div id="news-grid" class="post-grid reveal"></div>
+      <div id="blog-empty" class="blog-empty" hidden>
+        <h3 data-i18n="blog.empty.title">Publicaciones en preparación</h3>
+        <p data-i18n="blog.empty.body">Este espacio reúne notas institucionales, análisis y contenidos técnicos vinculados a la agenda de trabajo de la Cámara.</p>
+      </div>
       <nav class="pagination" id="news-pagination" aria-label="Paginación de noticias"></nav>
     </div>
   </section>
@@ -79,18 +130,17 @@
     <div class="container">
       <div class="newsletter reveal">
         <div>
-          <p class="eyebrow" style="color:var(--gold);" data-i18n="blog.newsletter.eyebrow">Entérate de las noticias y de eventos próximos</p>
-          <h2 data-i18n="blog.newsletter.title">Ingresa tu correo para las notificaciones</h2>
+          <h2 data-i18n="blog.newsletter.title">Recibe publicaciones de la Cámara</h2>
+          <p style="color:rgba(255,255,255,.82);" data-i18n="blog.newsletter.body">Suscríbete para recibir notas institucionales, análisis y contenidos de actualidad.</p>
         </div>
         <div>
           <form id="newsletter-form" novalidate>
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
             <div class="newsletter-form">
-              <input type="email" placeholder="Email Address" aria-label="Correo electrónico" required>
+              <input type="email" data-i18n-placeholder="newsletter.emailPlaceholder" placeholder="Correo electrónico" data-i18n-aria="newsletter.emailPlaceholder" aria-label="Correo electrónico" required>
               <button type="submit" class="btn btn-primary" data-i18n="cta.subscribe">Registrarse</button>
             </div>
-            <p class="newsletter-note" data-i18n="blog.newsletter.note">El correo proporcionado solo se usará para nuevas actualizaciones.</p>
-            <p data-i18n-html="blog.newsletter.formLink">También puedes contestar <a href="contacto.html" style="color:#fff; text-decoration:underline;">nuestro formulario</a> para consultas.</p>
+            <p class="newsletter-note" data-i18n="blog.newsletter.privacyNote">El correo proporcionado se utiliza únicamente para el envío de comunicaciones institucionales de la Cámara, conforme a la Política de Privacidad.</p>
             <p class="form-msg" role="status"></p>
           </form>
         </div>
@@ -104,8 +154,10 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur</div>
-        <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur (OSC)</div>
+        <p data-i18n="footer.brandDescription">Organización de la Sociedad Civil (OSC), privada, independiente y sin fines de lucro, con sede en Uruguay y proyección internacional, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <p data-i18n="footer.brandDescription2">Identidad institucional propia. Actuación empresarial y de sociedad civil en el ámbito MERCOSUR e internacional, sin carácter gubernamental ni representación oficial del MERCOSUR.</p>
+        <p><a href="presencia-internacional.html" class="footer-agenda-link" data-i18n="footer.brandDescription3">Agenda internacional activa en foros de sociedad civil, comercio, inversión y desarrollo.</a></p>
         <p><a class="email js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a></p>
         <address data-i18n="footer.address">República Oriental del Uruguay</address>
         <div class="footer-social">
@@ -144,25 +196,28 @@
       <div class="footer-col">
         <h4 data-i18n="footer.legalTitle">Legal</h4>
         <ul class="footer-legal-list">
-          <li><a href="#" class="js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
-          <li><a href="#" class="js-cookies-policy-link" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
-          <li><a href="#" class="js-terms-link" data-i18n="footer.legal.terms">Términos de Uso</a></li>
-          <li><a href="#" class="js-brand-link" data-i18n="footer.legal.brand">Uso de Marca</a></li>
-          <li><a href="#" class="js-integrity-link" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
+          <li><a href="politica-de-privacidad.html" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
+          <li><a href="politica-de-cookies.html" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
+          <li><a href="terminos-de-uso.html" data-i18n="footer.legal.terms">Términos de Uso</a></li>
+          <li><a href="uso-de-marca.html" data-i18n="footer.legal.brand">Uso de Marca</a></li>
+          <li><a href="canal-de-integridad.html" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.institutionalTitle">Datos Institucionales</h4>
-        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
-        <p class="footer-legal-note" data-i18n="footer.civilAssoc">Asociación Civil Internacional sin Ánimo de Lucro</p>
-        <p class="footer-legal-note" data-i18n="footer.mosRegistry">Registro MOS:</p>
-        <p class="footer-legal-note" data-i18n="footer.disclaimer">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
+        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
+        <p class="footer-legal-note" data-i18n="footer.institutionalEmail">Correo institucional: info@camaracomerciomercosur.org</p>
       </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p data-i18n="footer.copyright">© 2026 Cámara de Comercio Mercosur. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
 
-<button class="back-to-top" aria-label="Volver arriba">↑</button>
+<button class="back-to-top" data-i18n-aria="nav.backToTop" aria-label="Volver arriba">↑</button>
 <script src="assets/js/i18n-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>

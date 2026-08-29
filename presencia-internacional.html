@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Presencia Internacional — Cámara de Comercio Mercosur</title>
-<meta name="description" content="Cumbres, foros y misiones donde Mercosur y la Cámara de Comercio tienen presencia internacional activa.">
+<meta name="description" content="Foros, eventos y actividades internacionales de la Cámara de Comercio Mercosur (OSC) como organización de sociedad civil y plataforma empresarial independiente.">
 <link rel="icon" href="assets/images/logo.png">
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -37,7 +37,7 @@
           <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem">Français</button></li>
         </ul>
       </div>
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+      <button class="nav-toggle" data-i18n-aria="nav.openMenu" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
     </div>
   </div>
 </header>
@@ -49,46 +49,281 @@
     <div class="hero-split-media" style="background-image:url('assets/images/participacion-hero.jpg');"></div>
     <div class="container">
       <div class="hero-inner hero-inner--split">
-        <h1 data-i18n-html="presence.hero.title">Presencia Internacional<br>del Mercosur</h1>
-        <p class="hero-lede" data-i18n-html="presence.hero.lede">Un recorrido por <strong>cumbres, foros y misiones</strong> que conectan a la región con el mundo</p>
+        <h1 data-i18n-html="presence.hero.title">Presencia internacional<br>de la Cámara</h1>
+        <p class="hero-lede" data-i18n="presence.hero.lede">Agenda institucional, empresarial y de sociedad civil para conectar el ámbito MERCOSUR y América Latina con mercados, foros y actores internacionales.</p>
       </div>
     </div>
   </section>
 
-  <!-- EVENTOS -->
-  <section class="section section--sand">
+  <!-- INTRODUCCIÓN + POSICIONAMIENTO INSTITUCIONAL -->
+  <section class="section section--light">
     <div class="container">
-      <div class="reveal section--events-intro" style="margin-bottom:8px;">
-        <p class="eyebrow" data-i18n="presence.events.eyebrow">Agenda internacional</p>
-        <h2 data-i18n="presence.events.title">Eventos y presencia de Mercosur en el mundo</h2>
-        <p data-i18n="presence.events.body">Explora los encuentros, cumbres y misiones donde la Cámara de Comercio Mercosur y el bloque tienen presencia activa. Filtra por nombre, fecha o país para encontrar el evento que te interesa.</p>
+      <div class="reveal" style="max-width:820px;">
+        <p data-i18n="presence.intro.p1">La Cámara de Comercio Mercosur (OSC) desarrolla una agenda internacional propia como organización de sociedad civil y plataforma empresarial independiente, orientada a conectar empresas, cámaras, inversores, instituciones y actores de sociedad civil con oportunidades de comercio, inversión, financiación, cooperación empresarial y desarrollo.</p>
+        <p data-i18n="presence.intro.p2">Esta presencia internacional se articula mediante registros institucionales, espacios de diálogo CSO, foros multilaterales, congresos sectoriales, misiones empresariales y reuniones de trabajo vinculadas al mandato de la Cámara.</p>
+        <p data-i18n="presence.intro.p3">Cada actividad se informa conforme a su alcance específico, categoría de participación o confirmación institucional, preservando la identidad propia de la Cámara y sin atribución de representación oficial del MERCOSUR.</p>
       </div>
 
-      <!-- FILTROS -->
-      <form class="event-filters reveal" id="event-filters" novalidate>
-        <div class="form-field">
-          <label for="ev-search" data-i18n="presence.filters.searchLabel">Buscar por nombre</label>
-          <input type="text" id="ev-search" name="search" data-i18n-placeholder="presence.filters.searchPlaceholder" placeholder="Ej: Cumbre, Foro, Misión…" autocomplete="off">
-        </div>
-        <div class="form-field">
-          <label for="ev-country" data-i18n="presence.filters.countryLabel">País</label>
-          <select id="ev-country" name="country">
-            <option value="" data-i18n="presence.filters.countryAll">Todos los países</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label for="ev-sort" data-i18n="presence.filters.sortLabel">Ordenar por fecha</label>
-          <select id="ev-sort" name="sort">
-            <option value="asc" data-i18n="presence.filters.sortNewest">Más próximos primero</option>
-            <option value="desc" data-i18n="presence.filters.sortOldest">Más antiguos primero</option>
-          </select>
-        </div>
-        <button type="button" class="btn-reset" id="ev-reset" data-i18n="presence.filters.reset">Limpiar filtros</button>
-      </form>
+      <div class="reveal" style="margin-top:48px; max-width:820px;">
+        <h2 data-i18n="presence.position.title">Posicionamiento institucional internacional</h2>
+        <p data-i18n="presence.position.body">La presencia internacional de la Cámara se apoya en hitos verificables, participación en espacios de sociedad civil y una agenda de trabajo orientada a resultados concretos para empresas, cámaras, instituciones e inversores.</p>
+      </div>
 
-      <div id="events-grid" class="post-grid reveal"></div>
-      <p id="events-empty" class="event-empty" data-i18n="presence.events.empty" hidden>No se encontraron eventos con los filtros seleccionados.</p>
-      <nav class="pagination" id="events-pagination" aria-label="Paginación de eventos"></nav>
+      <div class="position-card reveal" style="margin-top:32px;">
+        <h3 data-i18n="presence.position.card1.title">Perfil organizacional aceptado en DESA / Naciones Unidas</h3>
+        <p data-i18n="presence.position.card1.p1">La Cámara de Comercio Mercosur cuenta con perfil organizacional aceptado en la base de datos de sociedad civil del Departamento de Asuntos Económicos y Sociales de las Naciones Unidas (DESA), bajo su nombre institucional en español e inglés.</p>
+        <p data-i18n="presence.position.card1.p2">El perfil registrado identifica a la organización como Cámara de Comercio Mercosur / Mercosur Chamber of Commerce, con tipo de organización “Association”, y recoge una misión vinculada a integración económica, comercio internacional, inversión, cooperación empresarial y relación con actores institucionales y de sociedad civil.</p>
+        <p data-i18n="presence.position.card1.p3">La confirmación de incorporación del perfil organizacional de la Cámara en la base de datos de sociedad civil de DESA fue recibida el 10 de agosto de 2026.</p>
+      </div>
+
+      <div class="position-card reveal" style="margin-top:24px;">
+        <h3 data-i18n="presence.position.card2.title">Agenda CSO con el Grupo Banco Mundial, UNCTAD y foros FMI–Grupo Banco Mundial</h3>
+        <p data-i18n="presence.position.card2.p1">La Cámara de Comercio Mercosur (OSC) mantiene y desarrolla una agenda activa de participación institucional en espacios de sociedad civil, inversión, financiación y desarrollo vinculados al Grupo Banco Mundial, ONU Comercio y Desarrollo (UNCTAD) y al marco internacional del Fondo Monetario Internacional (FMI) y el Grupo Banco Mundial.</p>
+        <p data-i18n="presence.position.card2.p2">Esta agenda integra convocatorias CSO del Grupo Banco Mundial sobre desarrollo, sostenibilidad, gestión de riesgos ambientales y sociales e igualdad de género; participación en las Reuniones Anuales 2026 del Fondo Monetario Internacional y el Grupo Banco Mundial; participación activa en actividades de ONU Comercio y Desarrollo (UNCTAD), incluyendo el World Investment Forum 2026; y presencia en foros multilaterales de alto nivel donde convergen instituciones financieras internacionales, gobiernos, sector privado, sociedad civil, inversores e interlocutores de desarrollo.</p>
+        <p data-i18n="presence.position.card2.p3">A través de estos espacios, la Cámara fortalece su interlocución internacional, identifica prioridades de financiación, inversión y desarrollo, amplía relaciones con instituciones financieras, cámaras, inversores y organismos especializados, y proyecta oportunidades concretas para empresas y organizaciones del ámbito MERCOSUR y América Latina.</p>
+        <p data-i18n="presence.position.card2.p4">Los eventos específicos de esta agenda se presentan más abajo en fichas individuales, indicando en cada caso la naturaleza de la participación, fecha, sede y objetivo institucional.</p>
+      </div>
+
+      <div class="position-card reveal" style="margin-top:24px;">
+        <h3 data-i18n="presence.position.card3.title">Líneas internacionales de trabajo</h3>
+        <p data-i18n="presence.position.card3.intro">La agenda internacional de la Cámara se organiza en torno a líneas de trabajo directamente vinculadas con su mandato institucional:</p>
+        <ul>
+          <li data-i18n="presence.position.card3.item1">Comercio internacional y acceso a mercados.</li>
+          <li data-i18n="presence.position.card3.item2">Inversión, financiación y cooperación empresarial.</li>
+          <li data-i18n="presence.position.card3.item3">Infraestructura, logística, energía y recursos naturales.</li>
+          <li data-i18n="presence.position.card3.item4">Desarrollo productivo, innovación y cadenas regionales de valor.</li>
+          <li data-i18n="presence.position.card3.item5">Relación con cámaras, instituciones financieras, organismos internacionales y actores de sociedad civil.</li>
+          <li data-i18n="presence.position.card3.item6">Promoción de América Latina y del ámbito MERCOSUR como espacio de oportunidades empresariales.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOROS, EVENTOS Y ACTIVIDADES INTERNACIONALES -->
+  <section class="section section--sand">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:36px; max-width:820px;">
+        <h2 data-i18n="presence.forums.title">Foros, eventos y actividades internacionales</h2>
+        <p data-i18n="presence.forums.body">A continuación se presentan foros, reuniones, registros, actividades y eventos vinculados a la agenda internacional de la Cámara. Cada ficha describe la naturaleza de la participación, el contexto institucional y el objetivo de trabajo correspondiente.</p>
+      </div>
+
+      <!-- FICHA 1: Urban Cities Buenos Aires 2026 -->
+      <article class="event-detail-card reveal">
+        <h3>Urban Cities Buenos Aires 2026</h3>
+        <p class="sub" data-i18n="presence.forums.urbancities.sub">Primer Congreso Federal de Ciudades Inteligentes</p>
+        <div class="event-detail-meta">
+          <span data-i18n="presence.forums.urbancities.loc1">Ciudad de Buenos Aires, Argentina</span>
+          <span data-i18n="presence.forums.urbancities.loc2">Usina del Arte</span>
+          <span data-i18n="presence.forums.urbancities.loc3">2 de septiembre de 2026</span>
+        </div>
+        <div class="event-detail-body">
+          <p data-i18n="presence.forums.urbancities.p1">La Cámara de Comercio Mercosur participará en Urban Cities Buenos Aires 2026, Primer Congreso Federal de Ciudades Inteligentes, a través de su Prosecretaria, Nicole Magali Peters, quien acudirá al evento que se celebrará en la Usina del Arte de la Ciudad de Buenos Aires el 2 de septiembre de 2026.</p>
+          <p data-i18n="presence.forums.urbancities.p2">Urban Cities Buenos Aires 2026 reúne a ciudades, gobiernos, empresas, universidades, organismos internacionales, redes de ciudades y actores vinculados a innovación urbana, inteligencia artificial, sostenibilidad, movilidad, seguridad, infraestructura y desarrollo territorial.</p>
+          <p data-i18n="presence.forums.urbancities.p3">La presencia de la Cámara permitirá relevar oportunidades de vinculación institucional y empresarial en ciudades inteligentes, transformación digital, innovación pública, infraestructura urbana, sostenibilidad y cooperación territorial en el ámbito MERCOSUR y América Latina.</p>
+        </div>
+        <p class="event-detail-label" data-i18n="presence.forums.areasLabel">Áreas vinculadas</p>
+        <ul class="event-detail-tags">
+          <li data-i18n="presence.forums.urbancities.area1">Ciudades inteligentes</li>
+          <li data-i18n="presence.forums.urbancities.area2">Innovación urbana</li>
+          <li data-i18n="presence.forums.urbancities.area3">Transformación digital</li>
+          <li data-i18n="presence.forums.urbancities.area4">Infraestructura y conectividad</li>
+          <li data-i18n="presence.forums.urbancities.area5">Movilidad y sostenibilidad</li>
+          <li data-i18n="presence.forums.urbancities.area6">Cooperación territorial</li>
+          <li data-i18n="presence.forums.urbancities.area7">Relación institucional Argentina–MERCOSUR</li>
+        </ul>
+        <p class="event-detail-label" data-i18n="presence.forums.websitesLabel">Websites</p>
+        <ul class="event-detail-links">
+          <li><a href="https://buenosaires.gob.ar/urban-cities-buenos-aires-2026" target="_blank" rel="noopener noreferrer">https://buenosaires.gob.ar/urban-cities-buenos-aires-2026</a></li>
+          <li><a href="https://buenosaires.gob.ar/urban-cities-buenos-aires-2026/urban-cities-agenda" target="_blank" rel="noopener noreferrer">https://buenosaires.gob.ar/urban-cities-buenos-aires-2026/urban-cities-agenda</a></li>
+        </ul>
+      </article>
+
+      <!-- FICHA 2: Llamada mensual CSO del Grupo Banco Mundial -->
+      <article class="event-detail-card reveal">
+        <h3 data-i18n="presence.forums.wbrisk.title">Llamada mensual CSO del Grupo Banco Mundial</h3>
+        <p class="sub" data-i18n="presence.forums.wbrisk.sub">Gestión de riesgos ambientales y sociales</p>
+        <div class="event-detail-meta">
+          <span data-i18n="presence.forums.wbrisk.loc1">Formato virtual</span>
+          <span data-i18n="presence.forums.wbrisk.loc2">16 de septiembre de 2026</span>
+        </div>
+        <div class="event-detail-body">
+          <p data-i18n="presence.forums.wbrisk.p1">La Cámara de Comercio Mercosur, a través de su Presidente, Erik Aaron Lara Riveros, ha confirmado su participación en la llamada mensual CSO del Grupo Banco Mundial del 16 de septiembre de 2026, dedicada a la gestión de riesgos ambientales y sociales y al fortalecimiento de resultados de desarrollo.</p>
+          <p data-i18n="presence.forums.wbrisk.p2">La sesión contará con la participación de Larissa Luy, Directora en la organización del Chief Risk Officer del Grupo Banco Mundial, y abordará prioridades vinculadas al Environmental and Social Framework, la gestión de riesgos ambientales y sociales, los desafíos de implementación y las oportunidades de intercambio con organizaciones de sociedad civil.</p>
+          <p data-i18n="presence.forums.wbrisk.p3">La participación de la Cámara forma parte de su agenda internacional CSO y de su seguimiento institucional a asuntos de sostenibilidad, financiación responsable, desarrollo, infraestructura, energía, recursos naturales e inversión en América Latina.</p>
+        </div>
+        <p class="event-detail-label" data-i18n="presence.forums.areasLabel">Áreas vinculadas</p>
+        <ul class="event-detail-tags">
+          <li data-i18n="presence.forums.wbrisk.area1">Sociedad civil y desarrollo</li>
+          <li data-i18n="presence.forums.wbrisk.area2">Gestión de riesgos ambientales y sociales</li>
+          <li data-i18n="presence.forums.wbrisk.area3">Sostenibilidad</li>
+          <li data-i18n="presence.forums.wbrisk.area4">Financiación responsable</li>
+          <li data-i18n="presence.forums.wbrisk.area5">Infraestructura e inversión</li>
+          <li data-i18n="presence.forums.wbrisk.area6">Cooperación institucional</li>
+        </ul>
+        <p class="event-detail-label" data-i18n="presence.forums.referenceLabel">Referencia institucional</p>
+        <p class="event-detail-reference" data-i18n="presence.forums.wbrisk.reference">Convocatoria recibida por comunicación directa del equipo CSO del Grupo Banco Mundial.</p>
+      </article>
+
+      <!-- FICHA 2B: Llamada mensual CSO del Grupo Banco Mundial - Estrategia de Género -->
+      <article class="event-detail-card reveal">
+        <h3 data-i18n="presence.forums.wbgender.title">Llamada mensual CSO del Grupo Banco Mundial</h3>
+        <p class="sub" data-i18n="presence.forums.wbgender.sub">Implementación de la Estrategia de Género 2024–2030</p>
+        <div class="event-detail-meta">
+          <span data-i18n="presence.forums.wbgender.location">Formato virtual</span>
+          <span data-i18n="presence.forums.wbgender.date">22 de septiembre de 2026</span>
+        </div>
+        <div class="event-detail-body">
+          <p data-i18n="presence.forums.wbgender.p1">La Cámara de Comercio Mercosur, a través de su Presidente, Erik Aaron Lara Riveros, ha confirmado su participación en la segunda llamada mensual CSO de septiembre del Grupo Banco Mundial, dedicada a la implementación de la Estrategia de Género del Grupo Banco Mundial 2024–2030.</p>
+          <p data-i18n="presence.forums.wbgender.p2">La sesión estará liderada por Robin Mearns, Director de Género del Grupo Banco Mundial, y abordará avances de implementación, prioridades emergentes, oportunidades de colaboración con organizaciones de sociedad civil e intercambio de experiencias para acelerar el progreso en igualdad de género.</p>
+          <p data-i18n="presence.forums.wbgender.p3">La participación de la Cámara forma parte de su agenda internacional CSO y de su seguimiento institucional a asuntos de desarrollo inclusivo, oportunidades económicas, financiación responsable, fortalecimiento institucional, capital humano, innovación social y participación de sociedad civil en prioridades de desarrollo.</p>
+        </div>
+        <p class="event-detail-label" data-i18n="presence.forums.areasLabel">Áreas vinculadas</p>
+        <ul class="event-detail-tags">
+          <li data-i18n="presence.forums.wbgender.area1">Sociedad civil y desarrollo</li>
+          <li data-i18n="presence.forums.wbgender.area2">Igualdad de género</li>
+          <li data-i18n="presence.forums.wbgender.area3">Desarrollo inclusivo</li>
+          <li data-i18n="presence.forums.wbgender.area4">Capital humano</li>
+          <li data-i18n="presence.forums.wbgender.area5">Oportunidades económicas</li>
+          <li data-i18n="presence.forums.wbgender.area6">Financiación responsable</li>
+          <li data-i18n="presence.forums.wbgender.area7">Cooperación institucional</li>
+          <li data-i18n="presence.forums.wbgender.area8">Participación de sociedad civil</li>
+        </ul>
+        <p class="event-detail-label" data-i18n="presence.forums.referenceLabel">Referencia institucional</p>
+        <p class="event-detail-reference" data-i18n="presence.forums.wbgender.reference">Convocatoria recibida por comunicación directa del equipo CSO del Grupo Banco Mundial y participación confirmada por el Presidente de la Cámara.</p>
+        <p class="event-detail-label" data-i18n="presence.forums.websitesLabel">Websites</p>
+        <ul class="event-detail-links">
+          <li><a href="https://www.worldbank.org/en/topic/gender" target="_blank" rel="noopener noreferrer">https://www.worldbank.org/en/topic/gender</a></li>
+          <li><a href="https://www.worldbank.org/en/brief/2024/10/10/gender-strategy-update-2024-30-accelerating-equality-and-empowerment-for-all" target="_blank" rel="noopener noreferrer">https://www.worldbank.org/en/brief/2024/10/10/gender-strategy-update-2024-30-accelerating-equality-and-empowerment-for-all</a></li>
+        </ul>
+      </article>
+
+      <!-- FICHA 3: Reuniones Anuales 2026 del FMI y el Grupo Banco Mundial -->
+      <article class="event-detail-card reveal">
+        <h3 data-i18n="presence.forums.imfwb.title">Reuniones Anuales 2026 del Fondo Monetario Internacional y el Grupo Banco Mundial</h3>
+        <div class="event-detail-meta">
+          <span data-i18n="presence.forums.imfwb.loc1">Bangkok, Tailandia</span>
+          <span data-i18n="presence.forums.imfwb.loc2">12 al 18 de octubre de 2026</span>
+        </div>
+        <div class="event-detail-body">
+          <p data-i18n="presence.forums.imfwb.p1">La Cámara de Comercio Mercosur prepara su agenda institucional para las Reuniones Anuales 2026 del Fondo Monetario Internacional y el Grupo Banco Mundial, que se celebrarán en Bangkok, Tailandia, del 12 al 18 de octubre de 2026.</p>
+          <p data-i18n="presence.forums.imfwb.p2">La Cámara ha confirmado el registro de su Presidente, Erik Aaron Lara Riveros, para participar en las Reuniones Anuales bajo la categoría “CSO Parliamentarians”.</p>
+          <p data-i18n="presence.forums.imfwb.p3">Las Reuniones Anuales constituyen uno de los principales espacios internacionales de diálogo económico y financiero, con participación de instituciones financieras internacionales, gobiernos, bancos centrales, sector privado, sociedad civil, academia y actores vinculados al desarrollo global.</p>
+          <p data-i18n="presence.forums.imfwb.p4">La agenda de la Cámara prestará especial atención al comercio y la inversión internacional, infraestructura, energía y recursos naturales, desarrollo productivo, acceso a capital y cooperación empresarial transfronteriza.</p>
+          <p data-i18n="presence.forums.imfwb.p5">La Cámara se encuentra coordinando reuniones institucionales y empresariales para la semana de las Reuniones Anuales.</p>
+        </div>
+        <p class="event-detail-label" data-i18n="presence.forums.areasLabel">Áreas vinculadas</p>
+        <ul class="event-detail-tags">
+          <li data-i18n="presence.forums.imfwb.area1">Financiación internacional</li>
+          <li data-i18n="presence.forums.imfwb.area2">Comercio e inversión</li>
+          <li data-i18n="presence.forums.imfwb.area3">Infraestructura</li>
+          <li data-i18n="presence.forums.imfwb.area4">Energía y recursos naturales</li>
+          <li data-i18n="presence.forums.imfwb.area5">Desarrollo productivo</li>
+          <li data-i18n="presence.forums.imfwb.area6">Acceso a capital</li>
+          <li data-i18n="presence.forums.imfwb.area7">Cooperación empresarial transfronteriza</li>
+        </ul>
+        <p class="event-detail-label" data-i18n="presence.forums.websitesLabel">Websites</p>
+        <ul class="event-detail-links">
+          <li><a href="https://www.worldbank.org/en/meetings/splash/annual" target="_blank" rel="noopener noreferrer">https://www.worldbank.org/en/meetings/splash/annual</a></li>
+          <li><a href="https://www.imf.org/en/news/seminars/campaigns/2026/10/thailand-2026" target="_blank" rel="noopener noreferrer">https://www.imf.org/en/news/seminars/campaigns/2026/10/thailand-2026</a></li>
+        </ul>
+      </article>
+
+      <!-- FICHA 4: Saudi Maritime & Logistics Congress 2026 -->
+      <article class="event-detail-card reveal">
+        <h3>Saudi Maritime &amp; Logistics Congress 2026</h3>
+        <div class="event-detail-meta">
+          <span data-i18n="presence.forums.saudi.loc1">Jeddah, Arabia Saudita</span>
+          <span data-i18n="presence.forums.saudi.loc2">Jeddah Superdome</span>
+          <span data-i18n="presence.forums.saudi.loc3">21 y 22 de octubre de 2026</span>
+        </div>
+        <div class="event-detail-body">
+          <p data-i18n="presence.forums.saudi.p1">La Cámara de Comercio Mercosur ha confirmado el registro de su Presidente, Erik Aaron Lara Riveros, para participar en el Saudi Maritime &amp; Logistics Congress 2026, que se celebrará en Jeddah Superdome, Arabia Saudita, los días 21 y 22 de octubre de 2026.</p>
+          <p data-i18n="presence.forums.saudi.p2">Saudi Maritime &amp; Logistics Congress 2026 es uno de los principales encuentros B2B del sector marítimo y logístico en Arabia Saudita, con una agenda orientada a transporte marítimo, puertos, logística, infraestructura, tecnología, cadenas de suministro, inversión y transformación del comercio global.</p>
+          <p data-i18n="presence.forums.saudi.p3">La celebración del evento en Jeddah refuerza su relevancia estratégica dentro del ecosistema marítimo y logístico del Mar Rojo, en conexión con corredores comerciales entre Medio Oriente, Asia, África, Europa y otros mercados internacionales. El puerto islámico de Jeddah es una infraestructura clave para el comercio exterior saudí y para la conectividad logística regional.</p>
+          <p data-i18n="presence.forums.saudi.p4">La presencia de la Cámara permitirá explorar vínculos sectoriales en logística internacional, infraestructura portuaria, transporte marítimo, cadenas de suministro y comercio global entre América Latina, Medio Oriente, Asia y otros mercados internacionales.</p>
+        </div>
+        <p class="event-detail-label" data-i18n="presence.forums.areasLabel">Áreas vinculadas</p>
+        <ul class="event-detail-tags">
+          <li data-i18n="presence.forums.saudi.area1">Logística internacional</li>
+          <li data-i18n="presence.forums.saudi.area2">Infraestructura portuaria</li>
+          <li data-i18n="presence.forums.saudi.area3">Transporte marítimo</li>
+          <li data-i18n="presence.forums.saudi.area4">Cadenas de suministro</li>
+          <li data-i18n="presence.forums.saudi.area5">Comercio global</li>
+          <li data-i18n="presence.forums.saudi.area6">Relación América Latina–Medio Oriente</li>
+          <li data-i18n="presence.forums.saudi.area7">Conectividad interregional</li>
+        </ul>
+        <p class="event-detail-label" data-i18n="presence.forums.websitesLabel">Websites</p>
+        <ul class="event-detail-links">
+          <li><a href="https://www.saudimaritimecongress.com/" target="_blank" rel="noopener noreferrer">https://www.saudimaritimecongress.com/</a></li>
+          <li><a href="https://www.saudimaritimecongress.com/visit/why-visit/" target="_blank" rel="noopener noreferrer">https://www.saudimaritimecongress.com/visit/why-visit/</a></li>
+          <li><a href="https://www.saudimaritimecongress.com/conference/2026-conference-tracks/" target="_blank" rel="noopener noreferrer">https://www.saudimaritimecongress.com/conference/2026-conference-tracks/</a></li>
+        </ul>
+      </article>
+
+      <!-- FICHA 4B: World Investment Forum 2026 de UNCTAD -->
+      <article class="event-detail-card reveal">
+        <h3 data-i18n="presence.forums.unctad.title">World Investment Forum 2026 de UNCTAD</h3>
+        <div class="event-detail-meta">
+          <span data-i18n="presence.forums.unctad.loc1">Doha, Qatar</span>
+          <span data-i18n="presence.forums.unctad.loc2">Sheraton Convention Center</span>
+          <span data-i18n="presence.forums.unctad.loc3">25 al 27 de octubre de 2026</span>
+        </div>
+        <div class="event-detail-body">
+          <p data-i18n="presence.forums.unctad.p1">La Cámara de Comercio Mercosur participará en el World Investment Forum 2026 de ONU Comercio y Desarrollo (UNCTAD), a través de su Presidente, Erik Aaron Lara Riveros, en el evento que se celebrará en Doha, Qatar, del 25 al 27 de octubre de 2026.</p>
+          <p data-i18n="presence.forums.unctad.p2">El World Investment Forum es uno de los principales espacios mundiales en materia de inversión, desarrollo, financiación, políticas públicas, empresa y sostenibilidad. Su edición 2026 reunirá a responsables de políticas públicas, instituciones internacionales, inversores, líderes empresariales, entidades financieras, organismos de desarrollo y actores vinculados a la inversión sostenible, resiliente e inclusiva.</p>
+          <p data-i18n="presence.forums.unctad.p3">La participación de la Cámara refuerza su agenda internacional en inversión, financiación, desarrollo productivo, cadenas de valor, infraestructura, innovación, sostenibilidad y cooperación empresarial, conectando el ámbito MERCOSUR y América Latina con una plataforma global de discusión y acción sobre inversión para el desarrollo.</p>
+        </div>
+        <p class="event-detail-label" data-i18n="presence.forums.areasLabel">Áreas vinculadas</p>
+        <ul class="event-detail-tags">
+          <li data-i18n="presence.forums.unctad.area1">Inversión internacional</li>
+          <li data-i18n="presence.forums.unctad.area2">Financiación para el desarrollo</li>
+          <li data-i18n="presence.forums.unctad.area3">Desarrollo productivo</li>
+          <li data-i18n="presence.forums.unctad.area4">Cadenas de valor</li>
+          <li data-i18n="presence.forums.unctad.area5">Infraestructura y sostenibilidad</li>
+          <li data-i18n="presence.forums.unctad.area6">Innovación y transformación productiva</li>
+          <li data-i18n="presence.forums.unctad.area7">Relación América Latina–UNCTAD</li>
+          <li data-i18n="presence.forums.unctad.area8">Ámbito MERCOSUR y comunidad global de inversión</li>
+        </ul>
+        <p class="event-detail-label" data-i18n="presence.forums.websitesLabel">Websites</p>
+        <ul class="event-detail-links">
+          <li><a href="https://worldinvestmentforum.unctad.org/" target="_blank" rel="noopener noreferrer">https://worldinvestmentforum.unctad.org/</a></li>
+          <li><a href="https://worldinvestmentforum.unctad.org/update/world-investment-forum-2026-qatar-take-place-25-27-october-2026" target="_blank" rel="noopener noreferrer">https://worldinvestmentforum.unctad.org/update/world-investment-forum-2026-qatar-take-place-25-27-october-2026</a></li>
+        </ul>
+      </article>
+
+      <!-- FICHA 5: XVI Encuentro Empresarial Iberoamericano -->
+      <article class="event-detail-card reveal">
+        <h3>XVI Encuentro Empresarial Iberoamericano</h3>
+        <p class="sub" data-i18n="presence.forums.iberoamericano.sub">Encuentro Empresarial Iberoamericano</p>
+        <div class="event-detail-meta">
+          <span data-i18n="presence.forums.iberoamericano.loc1">Madrid, España</span>
+          <span data-i18n="presence.forums.iberoamericano.loc2">3 y 4 de noviembre de 2026</span>
+        </div>
+        <div class="event-detail-body">
+          <p data-i18n="presence.forums.iberoamericano.p1">La Cámara de Comercio Mercosur ha confirmado el registro de su Presidente, Erik Aaron Lara Riveros, para participar en el XVI Encuentro Empresarial Iberoamericano, que se celebrará en Madrid, España, los días 3 y 4 de noviembre de 2026.</p>
+          <p data-i18n="presence.forums.iberoamericano.p2">El Encuentro Empresarial Iberoamericano se celebra en el marco de la Cumbre Iberoamericana y constituye uno de los principales espacios de diálogo público-privado de la región iberoamericana, articulando la visión del sector empresarial, las prioridades institucionales y los desafíos estructurales de la economía regional.</p>
+          <p data-i18n="presence.forums.iberoamericano.p3">La edición de Madrid 2026 se desarrolla en el contexto de la XXX Cumbre Iberoamericana de Jefas y Jefes de Estado y de Gobierno, prevista en Madrid los días 4 y 5 de noviembre de 2026. El evento empresarial aborda asuntos centrales para la competitividad iberoamericana, incluyendo transformación productiva, cooperación público-privada, innovación, economía del conocimiento, ecosistemas emprendedores, inclusión y condiciones habilitantes para el desarrollo.</p>
+          <p data-i18n="presence.forums.iberoamericano.p4">La presencia de la Cámara permitirá fortalecer su agenda iberoamericana de comercio, inversión, cooperación empresarial, desarrollo productivo, cadenas de valor, innovación y relación institucional entre América Latina, el ámbito MERCOSUR, España, Portugal y otros actores estratégicos del espacio iberoamericano.</p>
+        </div>
+        <p class="event-detail-label" data-i18n="presence.forums.areasLabel">Áreas vinculadas</p>
+        <ul class="event-detail-tags">
+          <li data-i18n="presence.forums.iberoamericano.area1">Diálogo empresarial iberoamericano</li>
+          <li data-i18n="presence.forums.iberoamericano.area2">Cooperación público-privada</li>
+          <li data-i18n="presence.forums.iberoamericano.area3">Comercio e inversión</li>
+          <li data-i18n="presence.forums.iberoamericano.area4">Transformación productiva</li>
+          <li data-i18n="presence.forums.iberoamericano.area5">Innovación y economía del conocimiento</li>
+          <li data-i18n="presence.forums.iberoamericano.area6">Cadenas de valor</li>
+          <li data-i18n="presence.forums.iberoamericano.area7">Relación América Latina–Europa</li>
+          <li data-i18n="presence.forums.iberoamericano.area8">Ámbito MERCOSUR e Iberoamérica</li>
+        </ul>
+        <p class="event-detail-label" data-i18n="presence.forums.websitesLabel">Websites</p>
+        <ul class="event-detail-links">
+          <li><a href="https://eeib.org/" target="_blank" rel="noopener noreferrer">https://eeib.org/</a></li>
+          <li><a href="https://segib.org/es/cumbre/xxx-cumbre-iberoamericana/" target="_blank" rel="noopener noreferrer">https://segib.org/es/cumbre/xxx-cumbre-iberoamericana/</a></li>
+          <li><a href="https://www.ceib.info/es" target="_blank" rel="noopener noreferrer">https://www.ceib.info/es</a></li>
+        </ul>
+      </article>
+
     </div>
   </section>
 
@@ -97,18 +332,17 @@
     <div class="container">
       <div class="newsletter reveal">
         <div>
-          <p class="eyebrow" style="color:var(--gold);" data-i18n="blog.newsletter.eyebrow">Entérate de las noticias y de eventos próximos</p>
-          <h2 data-i18n="blog.newsletter.title">Ingresa tu correo para las notificaciones</h2>
+          <h2 data-i18n="presence.newsletter.title">Recibe actualizaciones institucionales</h2>
+          <p style="color:rgba(255,255,255,.82);" data-i18n="presence.newsletter.body">Suscríbete para recibir información sobre actividades, foros, misiones, publicaciones y oportunidades vinculadas a la agenda internacional de la Cámara.</p>
         </div>
         <div>
           <form id="newsletter-form" novalidate>
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
             <div class="newsletter-form">
-              <input type="email" placeholder="Email Address" aria-label="Correo electrónico" required>
+              <input type="email" data-i18n-placeholder="newsletter.emailPlaceholder" placeholder="Correo electrónico" data-i18n-aria="newsletter.emailPlaceholder" aria-label="Correo electrónico" required>
               <button type="submit" class="btn btn-primary" data-i18n="cta.subscribe">Registrarse</button>
             </div>
-            <p class="newsletter-note" data-i18n="blog.newsletter.note">El correo proporcionado solo se usará para nuevas actualizaciones.</p>
-            <p data-i18n-html="blog.newsletter.formLink">También puedes contestar <a href="contacto.html" style="color:#fff; text-decoration:underline;">nuestro formulario</a> para consultas.</p>
+            <p class="newsletter-note" data-i18n="presence.newsletter.privacyNote">El correo proporcionado será utilizado únicamente para el envío de actualizaciones institucionales de la Cámara, conforme a la Política de Privacidad.</p>
             <p class="form-msg" role="status"></p>
           </form>
         </div>
@@ -122,8 +356,10 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur</div>
-        <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur (OSC)</div>
+        <p data-i18n="footer.brandDescription">Organización de la Sociedad Civil (OSC), privada, independiente y sin fines de lucro, con sede en Uruguay y proyección internacional, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <p data-i18n="footer.brandDescription2">Identidad institucional propia. Actuación empresarial y de sociedad civil en el ámbito MERCOSUR e internacional, sin carácter gubernamental ni representación oficial del MERCOSUR.</p>
+        <p><a href="presencia-internacional.html" class="footer-agenda-link" data-i18n="footer.brandDescription3">Agenda internacional activa en foros de sociedad civil, comercio, inversión y desarrollo.</a></p>
         <p><a class="email js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a></p>
         <address data-i18n="footer.address">República Oriental del Uruguay</address>
         <div class="footer-social">
@@ -162,25 +398,28 @@
       <div class="footer-col">
         <h4 data-i18n="footer.legalTitle">Legal</h4>
         <ul class="footer-legal-list">
-          <li><a href="#" class="js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
-          <li><a href="#" class="js-cookies-policy-link" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
-          <li><a href="#" class="js-terms-link" data-i18n="footer.legal.terms">Términos de Uso</a></li>
-          <li><a href="#" class="js-brand-link" data-i18n="footer.legal.brand">Uso de Marca</a></li>
-          <li><a href="#" class="js-integrity-link" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
+          <li><a href="politica-de-privacidad.html" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
+          <li><a href="politica-de-cookies.html" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
+          <li><a href="terminos-de-uso.html" data-i18n="footer.legal.terms">Términos de Uso</a></li>
+          <li><a href="uso-de-marca.html" data-i18n="footer.legal.brand">Uso de Marca</a></li>
+          <li><a href="canal-de-integridad.html" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.institutionalTitle">Datos Institucionales</h4>
-        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
-        <p class="footer-legal-note" data-i18n="footer.civilAssoc">Asociación Civil Internacional sin Ánimo de Lucro</p>
-        <p class="footer-legal-note" data-i18n="footer.mosRegistry">Registro MOS:</p>
-        <p class="footer-legal-note" data-i18n="footer.disclaimer">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
+        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
+        <p class="footer-legal-note" data-i18n="footer.institutionalEmail">Correo institucional: info@camaracomerciomercosur.org</p>
       </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p data-i18n="footer.copyright">© 2026 Cámara de Comercio Mercosur. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
 
-<button class="back-to-top" aria-label="Volver arriba">↑</button>
+<button class="back-to-top" data-i18n-aria="nav.backToTop" aria-label="Volver arriba">↑</button>
 <script src="assets/js/i18n-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>

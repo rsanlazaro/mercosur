@@ -37,7 +37,7 @@
           <li role="none"><button type="button" class="lang-option" data-lang="fr" role="menuitem">Français</button></li>
         </ul>
       </div>
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+      <button class="nav-toggle" data-i18n-aria="nav.openMenu" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
     </div>
   </div>
 </header>
@@ -49,7 +49,8 @@
     <div class="container">
       <div class="hero-inner hero-inner--center">
         <h1 style="margin-bottom:26px;" data-i18n="transparency.hero.title">Cumplimiento y transparencia</h1>
-        <p style="margin:0 auto 30px;" data-i18n-html="transparency.hero.body">La Cámara integra <strong>la legalidad, la integridad, el control y la protección</strong> de la información en su modelo institucional.</p>
+        <p style="margin:0 auto 10px;" data-i18n-html="transparency.hero.body">La Cámara integra la legalidad, la integridad, el control, la protección de la información y la responsabilidad institucional en su modelo de actuación.</p>
+        <p style="margin:0 auto 30px;" data-i18n-html="transparency.hero.body2">La transparencia no se limita a publicar documentos: implica actuar con reglas claras, responsabilidades definidas, controles internos y canales adecuados para proteger a miembros, colaboradores, instituciones y terceros.</p>
         <a href="#marco" class="btn btn-light" data-i18n="cta.learnMore">Conoce más</a>
       </div>
     </div>
@@ -69,26 +70,30 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V5Z"/><path d="M9 12l2 2 4-4"/></svg>
           <h3 data-i18n="transparency.card.privacy.title">Protección de datos personales</h3>
           <p data-i18n="transparency.card.privacy.body">La Cámara trata los datos personales de forma lícita, responsable y limitada a las finalidades institucionales informadas.</p>
+          <a href="politica-de-privacidad.html" class="post-link" data-i18n="footer.legal.privacy">Política de Privacidad</a>
         </div>
         <div class="compliance-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
           <h3 data-i18n="transparency.card.cookies.title">Cookies y tecnologías digitales</h3>
           <p data-i18n="transparency.card.cookies.body">El sitio utiliza las cookies necesarias para su funcionamiento y aquellas categorías adicionales informadas y aceptadas por el usuario.</p>
+          <a href="politica-de-cookies.html" class="post-link" data-i18n="footer.legal.cookies">Política de Cookies</a>
         </div>
         <div class="compliance-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.6 2.7-6 6-6s6 2.4 6 6"/><path d="M16 9a3 3 0 1 0 0-6"/><path d="M18 14c2.2.5 3.8 2.4 3.8 6"/></svg>
           <h3 data-i18n="transparency.card.brand.title">Uso del nombre, marca e identidad</h3>
           <p data-i18n="transparency.card.brand.body">El nombre, logotipo, cargos, dominios y demás elementos de identidad pertenecen exclusivamente a la Cámara. Ninguna persona o entidad podrá presentarse como miembro, representante o portavoz sin autorización escrita y vigente.</p>
+          <a href="uso-de-marca.html" class="post-link" data-i18n="footer.legal.brand">Uso de Marca</a>
         </div>
         <div class="compliance-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10c3-2.5 15-2.5 18 0"/><circle cx="8" cy="12" r="2.4"/><circle cx="16" cy="12" r="2.4"/><line x1="10.4" y1="12" x2="13.6" y2="12"/><path d="M4 12v1.5"/><path d="M20 12v1.5"/></svg>
           <h3 data-i18n="transparency.card.integrity.title">Canal de Integridad</h3>
-          <p data-i18n="transparency.card.integrity.body">Permite comunicar posibles casos de fraude, corrupción, conflictos no declarados, uso indebido de la marca, suplantación u otros incumplimientos institucionales. Las comunicaciones serán tratadas con confidencialidad.</p>
+          <p data-i18n="transparency.card.integrity.body">Permite comunicar posibles casos de fraude, corrupción, conflictos no declarados, uso indebido de la marca, suplantación u otros incumplimientos institucionales. Las comunicaciones serán tratadas con confidencialidad dentro de los límites legales y necesarios para una revisión justa.</p>
+          <a href="canal-de-integridad.html" class="post-link" data-i18n="footer.legal.integrity">Canal de Integridad</a>
         </div>
       </div>
 
       <div class="link-row--grid reveal">
-        <a href="#" class="btn btn-outline-blue js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a>
+        <a href="politica-de-privacidad.html" class="btn btn-outline-blue" data-i18n="footer.legal.privacy">Política de Privacidad</a>
         <a href="#" class="btn btn-outline-blue js-cookies-link" data-i18n="transparency.configureCookies">Configurar Cookies</a>
         <a href="contacto.html?motivo=Uso+no+autorizado+de+identidad" class="btn btn-outline-blue" data-i18n="transparency.reportMisuse">Informar de uso no autorizado</a>
         <a href="contacto.html?motivo=Prensa" class="btn btn-outline-blue" data-i18n="transparency.sendRelease">Enviar comunicado</a>
@@ -102,8 +107,7 @@
       <div class="aspectos-grid">
 
         <div class="reveal">
-          <h2><span class="heading-wavy" data-i18n="transparency.moreTopics.title">Más aspectos importantes:</span></h2>
-          <p style="color:var(--ink-soft); max-width:520px;" data-i18n="transparency.moreTopics.body">Como los puntos para procurar una navegación e integración segura de las personas que se presentan en el aparte de arriba, también hay que mencionar:</p>
+          <h2><span class="heading-wavy" data-i18n="transparency.moreTopics.title">Gobernanza y cumplimiento institucional</span></h2>
 
           <div class="accordion accordion--compact">
             <div class="accordion-item">
@@ -163,12 +167,23 @@
             </div>
             <div class="accordion-item">
               <button class="accordion-trigger" aria-expanded="false">
+                <span data-i18n="transparency.topic.registries.title">Registros, perfiles institucionales y procesos en curso</span>
+                <span class="chevron" aria-hidden="true">⌄</span>
+              </button>
+              <div class="accordion-panel">
+                <div class="accordion-panel-inner">
+                  <p data-i18n-html="transparency.topic.registries.body"><strong>Registro MOS — proceso en curso.</strong> La Cámara de Comercio Mercosur (OSC) se encuentra desarrollando el proceso correspondiente para su inscripción en el Registro de Organizaciones y Movimientos Sociales del MERCOSUR —MOS—. Esta eventual inscripción tendría el alcance propio de un registro de participación social e institucional, sin modificar la naturaleza privada, independiente y sin fines de lucro de la Cámara, ni otorgarle carácter gubernamental, condición de órgano del MERCOSUR o representación oficial del bloque, sus Estados Partes o Estados Asociados. La información será actualizada cuando exista confirmación oficial verificable o publicación en el registro correspondiente.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
                 <span data-i18n="transparency.topic.documents.title">Documentos institucionales</span>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </button>
               <div class="accordion-panel">
                 <div class="accordion-panel-inner">
-                  <p data-i18n="transparency.topic.documents.body">La Cámara publicará sus Estatutos, políticas y demás documentos institucionales a medida que sean formalmente aprobados.</p>
+                  <p data-i18n="transparency.topic.documents.body">La Cámara publicará sus Estatutos, políticas institucionales, documentos de cumplimiento y demás instrumentos aprobados por los órganos competentes. Los documentos en preparación o sujetos a revisión no se presentarán como vigentes hasta su aprobación formal.</p>
                 </div>
               </div>
             </div>
@@ -189,8 +204,10 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur</div>
-        <p data-i18n="footer.brandDescription">Asociación civil privada, independiente y sin fines de lucro, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <div class="footer-brand-text" data-i18n="footer.brandName">Cámara de Comercio Mercosur (OSC)</div>
+        <p data-i18n="footer.brandDescription">Organización de la Sociedad Civil (OSC), privada, independiente y sin fines de lucro, con sede en Uruguay y proyección internacional, orientada a fortalecer el comercio, la inversión, la cooperación empresarial y la integración económica entre América Latina y el mundo.</p>
+        <p data-i18n="footer.brandDescription2">Identidad institucional propia. Actuación empresarial y de sociedad civil en el ámbito MERCOSUR e internacional, sin carácter gubernamental ni representación oficial del MERCOSUR.</p>
+        <p><a href="presencia-internacional.html" class="footer-agenda-link" data-i18n="footer.brandDescription3">Agenda internacional activa en foros de sociedad civil, comercio, inversión y desarrollo.</a></p>
         <p><a class="email js-mail" data-u="info" data-d="camaracomerciomercosur.org"></a></p>
         <address data-i18n="footer.address">República Oriental del Uruguay</address>
         <div class="footer-social">
@@ -229,25 +246,28 @@
       <div class="footer-col">
         <h4 data-i18n="footer.legalTitle">Legal</h4>
         <ul class="footer-legal-list">
-          <li><a href="#" class="js-privacy-link" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
-          <li><a href="#" class="js-cookies-policy-link" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
-          <li><a href="#" class="js-terms-link" data-i18n="footer.legal.terms">Términos de Uso</a></li>
-          <li><a href="#" class="js-brand-link" data-i18n="footer.legal.brand">Uso de Marca</a></li>
-          <li><a href="#" class="js-integrity-link" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
+          <li><a href="politica-de-privacidad.html" data-i18n="footer.legal.privacy">Política de Privacidad</a></li>
+          <li><a href="politica-de-cookies.html" data-i18n="footer.legal.cookies">Política de Cookies</a></li>
+          <li><a href="terminos-de-uso.html" data-i18n="footer.legal.terms">Términos de Uso</a></li>
+          <li><a href="uso-de-marca.html" data-i18n="footer.legal.brand">Uso de Marca</a></li>
+          <li><a href="canal-de-integridad.html" data-i18n="footer.legal.integrity">Canal de Integridad</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.institutionalTitle">Datos Institucionales</h4>
-        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio legal: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
-        <p class="footer-legal-note" data-i18n="footer.civilAssoc">Asociación Civil Internacional sin Ánimo de Lucro</p>
-        <p class="footer-legal-note" data-i18n="footer.mosRegistry">Registro MOS:</p>
-        <p class="footer-legal-note" data-i18n="footer.disclaimer">La Cámara de Comercio Mercosur es una entidad privada e independiente. No forma parte de la estructura política del MERCOSUR ni ejerce su representación.</p>
+        <p class="footer-legal-note" data-i18n="footer.legalDomicile">Domicilio: Calle Carlos Quijano 1290, Oficina 101, 11.100 Montevideo, Uruguay</p>
+        <p class="footer-legal-note" data-i18n="footer.institutionalEmail">Correo institucional: info@camaracomerciomercosur.org</p>
       </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p data-i18n="footer.copyright">© 2026 Cámara de Comercio Mercosur. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
 
-<button class="back-to-top" aria-label="Volver arriba">↑</button>
+<button class="back-to-top" data-i18n-aria="nav.backToTop" aria-label="Volver arriba">↑</button>
 <script src="assets/js/i18n-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>

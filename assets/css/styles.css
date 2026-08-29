@@ -264,12 +264,14 @@ input,textarea,select{ font-family: inherit; font-size: 1rem; }
 /* ---------- Footer ---------- */
 .site-footer{ background: var(--blue); color: rgba(255,255,255,.86); position:relative; border-top: 5px solid var(--green); }
 .footer-top{
-  display:grid; grid-template-columns: 1.3fr 1fr 1fr 1.2fr; gap: 48px;
+  display:grid; grid-template-columns: 2fr 0.85fr 0.85fr 1fr; gap: 48px;
   padding: 56px 0 46px;
 }
 .footer-brand-text{ color:#fff; font-family: var(--font-display); font-size:1.3rem; margin-bottom:16px; }
 .footer-col p{ font-size:.92rem; color: rgba(255,255,255,.82); }
 .footer-col a.email{ text-decoration: underline; color:#fff; }
+.footer-col a.footer-agenda-link{ color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.footer-col a.footer-agenda-link:hover{ color:#fff; }
 .footer-col address{ font-style: italic; color: rgba(255,255,255,.82); font-size:.92rem; }
 .footer-col h4{
   color:#fff; font-family: var(--font-display); font-style: italic; font-weight:700;
@@ -282,6 +284,14 @@ input,textarea,select{ font-family: inherit; font-size: 1rem; }
 .footer-legal-list li a:hover{ text-decoration: underline; }
 .footer-legal-note{ font-size:.82rem; color: rgba(255,255,255,.7); line-height:1.6; }
 .footer-legal-note + .footer-legal-note{ margin-top: 12px; }
+.footer-col p + p{ margin-top: 12px; }
+.footer-bottom{
+  border-top: 1px solid rgba(255,255,255,.16);
+  padding: 20px 0;
+  text-align:center;
+  font-size:.82rem;
+  color: rgba(255,255,255,.65);
+}
 
 /* ---------- Scroll reveal ---------- */
 .reveal{ opacity:0; transform: translateY(20px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
@@ -813,6 +823,75 @@ h2 em, h1 em{ font-style: italic; }
 /* ---------- Presencia Internacional: page-appropriate top spacing ---------- */
 .section--events-intro{ padding-bottom: 0; }
 
+/* ---------- Presencia Internacional: institutional positioning card ---------- */
+.position-card{
+  background:#fff; border-radius:10px; padding:32px 36px; box-shadow: var(--shadow-card);
+  max-width:760px;
+}
+.position-card h3{ font-size:1.05rem; color: var(--ink); margin:0 0 16px; }
+.position-card p{ color: var(--ink-soft); font-size:.92rem; line-height:1.7; margin-bottom:1em; }
+.position-card p:last-child{ margin-bottom:0; }
+
+@media (max-width: 560px){
+  .position-card{ padding:26px 24px; }
+}
+
+.position-card ul{ margin:14px 0 0; padding-left:20px; color: var(--ink-soft); font-size:.92rem; line-height:1.8; }
+.position-card ul li{ margin-bottom:4px; }
+
+/* ---------- Presencia Internacional: rich event profile cards (fichas) ---------- */
+.event-detail-card{
+  background:#fff; border-radius:10px; padding:36px 40px; box-shadow: var(--shadow-card);
+  margin-bottom:28px;
+}
+.event-detail-card h3{ font-size:1.15rem; color: var(--ink); margin:0 0 4px; }
+.event-detail-card .sub{ color: var(--ink-soft); font-size:.95rem; margin:0 0 18px; }
+.event-detail-meta{
+  display:flex; flex-wrap:wrap; gap:6px 16px; font-size:.85rem; color: var(--ink-soft);
+  margin-bottom:22px; padding-bottom:18px; border-bottom:1px solid rgba(10,24,48,.08);
+}
+.event-detail-body p{ color: var(--ink-soft); font-size:.92rem; line-height:1.7; margin-bottom:1em; text-align:justify; }
+.event-detail-label{
+  font-size:.76rem; text-transform:uppercase; letter-spacing:.04em; color: var(--ink-soft);
+  font-weight:700; margin:22px 0 10px;
+}
+.event-detail-tags{ list-style:none; display:flex; flex-wrap:wrap; gap:8px; padding:0; margin:0; }
+.event-detail-tags li{
+  background: rgba(15,58,110,.08); color: var(--blue); font-size:.78rem; font-weight:600;
+  padding:5px 12px; border-radius:20px;
+}
+.event-detail-links{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; }
+.event-detail-links a{ color: var(--blue); font-size:.88rem; text-decoration:none; word-break:break-word; }
+.event-detail-links a:hover{ text-decoration:underline; }
+.event-detail-reference{ color: var(--ink-soft); font-size:.88rem; margin:0; }
+
+/* ---------- Blog: editorial categories grid ---------- */
+.editorial-grid{
+  display:grid; grid-template-columns: repeat(3,1fr); gap:28px; margin-top:36px;
+}
+.editorial-card{
+  background:#fff; border-radius:10px; padding:28px 26px; box-shadow: var(--shadow-card);
+}
+.editorial-card h3{ font-size:1.05rem; color: var(--ink); margin:0 0 10px; }
+.editorial-card p{ color: var(--ink-soft); font-size:.88rem; line-height:1.6; margin:0; }
+
+.blog-empty{
+  text-align:center; padding: 50px 20px; color: var(--ink-soft); font-size:.95rem;
+  background:#fff; border-radius:10px; box-shadow: var(--shadow-card); margin-top:24px;
+}
+.blog-empty h3{ color: var(--ink); font-size:1.1rem; margin:0 0 10px; }
+
+@media (max-width: 900px){
+  .editorial-grid{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px){
+  .editorial-grid{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px){
+  .event-detail-card{ padding:26px 24px; }
+}
+
 
 
 /* ---------- Team bio modal (shares .privacy-overlay/.privacy-modal base) ---------- */
@@ -1086,6 +1165,29 @@ h2 em, h1 em{ font-style: italic; }
 
 @media (max-width: 560px){
   .privacy-modal{ padding: 34px 22px 28px; }
+}
+
+/* ---------- Standalone legal document pages ---------- */
+.legal-page-content{
+  background:#fff; border-radius:10px; max-width:860px; margin:0 auto;
+  padding: 48px 56px; box-shadow: var(--shadow-card);
+}
+.legal-page-content h2{ font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-bottom:.3em; color: var(--blue-deep); }
+.legal-page-content .privacy-updated{ font-size:.82rem; color: var(--ink-soft); margin-bottom: 1.4em; }
+.legal-page-content h3{ font-family: var(--font-body); font-size:1.05rem; color: var(--blue-deep); margin: 1.8em 0 .6em; }
+.legal-page-content h3:first-of-type{ margin-top: .6em; }
+.legal-page-content h4{ font-family: var(--font-body); font-size:.95rem; font-weight:700; color: var(--blue); margin: 1.3em 0 .3em; }
+.legal-page-content p{ font-size:.95rem; color: var(--ink-soft); line-height:1.75; margin-bottom: 1.1em; }
+.legal-page-content a{ color: var(--blue); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+.legal-page-content a:hover{ color: var(--blue-deep); }
+.legal-page-back{
+  display:inline-flex; align-items:center; gap:6px; font-size:.88rem; font-weight:600;
+  color: var(--blue); text-decoration:none; margin-bottom:24px;
+}
+.legal-page-back:hover{ color: var(--blue-deep); text-decoration:underline; }
+
+@media (max-width: 560px){
+  .legal-page-content{ padding: 32px 24px; }
 }
 
 /* ---------- Cookie preferences modal (shares .privacy-overlay/.privacy-modal base) ---------- */
