@@ -338,9 +338,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       },
       'nicole-peters': {
-        name: 'Nicole M. Peters',
+        name: 'Nicole Magali Peters',
         image: 'assets/images/team-1.jpg',
-        role: { es: 'Prosecretaria', en: 'Deputy Secretary', pt: 'Secretária-Adjunta', fr: 'Prosecrétaire' },
+        role: { es: 'Secretaria General', en: 'Secretary General', pt: 'Secretária-Geral', fr: 'Secrétaire générale' },
         body: {
           es: [
             'Nicole Peters es abogada por la Universidad de Buenos Aires (UBA), con MBA y formación de posgrado en Políticas Públicas, Agenda 2030, Asuntos Públicos, marketing político y Derecho Público.',

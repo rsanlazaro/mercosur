@@ -1224,3 +1224,30 @@ h2 em, h1 em{ font-style: italic; }
   .cookie-banner-actions{ width:100%; }
   .cookie-banner-actions .btn{ flex:1 1 auto; text-align:center; }
 }
+
+/* ---------- Modelo institucional (Participación + footer) ---------- */
+.institutional-model{
+  background: var(--white); border-left: 4px solid var(--green);
+  border-radius: 6px; box-shadow: var(--shadow-card);
+  padding: 28px 30px; margin-top: 34px;
+}
+.institutional-model h3{
+  font-family: var(--font-display); font-weight:700; color: var(--blue);
+  font-size: 1.32rem; margin: 0 0 14px;
+}
+.institutional-model p{ color: var(--ink); font-size:.96rem; line-height:1.65; }
+.institutional-model p + p{ margin-top: 12px; }
+.institutional-model p.institutional-model-lead{ font-weight:700; }
+.anchor-alias{ display:block; height:0; overflow:hidden; }
+.institutional-model, .anchor-alias{ scroll-margin-top: 160px; }
+.footer-col p.footer-model a.footer-agenda-link{ font-weight:700; color:#fff; }
+.footer-legal-note.footer-address strong{ color:#fff; font-weight:600; }
+@media (max-width: 720px){
+  .institutional-model{ padding: 22px 20px; }
+  .institutional-model, .anchor-alias{ scroll-margin-top: 124px; }
+}
+
+/* ---------- Transparencia: párrafos adicionales y domicilio Delaware ---------- */
+.compliance-card p + p{ margin-top: 10px; }
+.accordion--compact .accordion-panel-inner p.registry-address{ margin-top: 16px; line-height: 1.6; }
+.registry-address strong{ color: var(--ink); }
