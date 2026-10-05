@@ -1251,3 +1251,97 @@ h2 em, h1 em{ font-style: italic; }
 .compliance-card p + p{ margin-top: 10px; }
 .accordion--compact .accordion-panel-inner p.registry-address{ margin-top: 16px; line-height: 1.6; }
 .registry-address strong{ color: var(--ink); }
+
+/* ---------- Presencia Internacional: institutional positioning accordion + section buttons ---------- */
+.org-accordion{ margin-top:20px; display:flex; flex-direction:column; gap:10px; }
+.org-item{ background:#fff; border:1.5px solid var(--line); border-radius:10px; overflow:hidden; }
+.org-trigger{
+  width:100%; display:flex; align-items:center; justify-content:space-between; gap:20px;
+  padding:14px 22px; background:none; border:none; text-align:left; cursor:pointer;
+  font-family: var(--font-body); font-weight:700; font-size:1rem; color: var(--blue-ink);
+}
+.org-icon{ flex:none; width:16px; height:16px; position:relative; color: var(--gold); }
+.org-icon::before, .org-icon::after{ content:""; position:absolute; background: currentColor; border-radius:2px; }
+.org-icon::before{ left:0; right:0; top:50%; height:2.5px; transform: translateY(-50%); }
+.org-icon::after{ top:0; bottom:0; left:50%; width:2.5px; transform: translateX(-50%); transition: transform .25s var(--ease), opacity .25s var(--ease); }
+.org-item.is-open .org-icon::after{ transform: translateX(-50%) scaleY(0); opacity:0; }
+.org-panel{ max-height:0; overflow:hidden; transition: max-height .32s var(--ease); }
+.org-panel-inner{ padding: 0 22px 18px; }
+.org-panel-inner:empty{ padding:0; }
+.org-panel-inner p{ color: var(--ink-soft); font-size:.94rem; margin-bottom:.9em; }
+
+.presence-actions{ display:flex; flex-wrap:wrap; justify-content:center; gap:32px; margin-top:36px; }
+.presence-action-btn{
+  background: var(--blue-ink); color:#fff; border-radius:14px; min-width:240px;
+  padding:18px 34px; text-transform:uppercase; letter-spacing:.04em; font-weight:700; font-size:.88rem;
+}
+.presence-action-btn:hover{ background: var(--blue); }
+
+@media (max-width: 700px){
+  .presence-actions{ gap:14px; }
+  .presence-action-btn{ width:100%; min-width:0; }
+}
+
+/* Presencia Internacional: accordion panel content */
+.org-panel-inner{ padding-top:4px; }
+.org-panel-inner .org-links-label{
+  font-size:.76rem; text-transform:uppercase; letter-spacing:.04em; font-weight:700;
+  color: var(--ink-soft); margin:20px 0 8px;
+}
+.org-links{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; }
+.org-links li{ color: var(--ink-soft); font-size:.9rem; word-break:break-word; }
+.org-links a{ color: var(--blue); text-decoration:none; font-weight:600; }
+.org-links a:hover{ text-decoration:underline; }
+
+/* ---------- Presencia Internacional: Próximas actividades (cards + inline detail) ---------- */
+.upcoming-sub{ color: var(--ink-soft); font-size:.98rem; margin:-4px 0 28px; }
+.upcoming-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap:24px; }
+.upcoming-card{
+  flex:0 1 calc((100% - 48px) / 3); min-width:0; display:flex; flex-direction:column;
+  background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:16px 18px 14px;
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.upcoming-card:hover{ box-shadow: var(--shadow-card); }
+.upcoming-card.is-active{ border-color:#b99b58; box-shadow: var(--shadow-card); }
+.upcoming-card-top{ display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:8px 12px; }
+.upcoming-date{
+  flex:0 1 auto; background:#b99b58; color:#fff; font-weight:700; font-size:.74rem; line-height:1.3;
+  padding:6px 16px; border-radius:10px;
+}
+.upcoming-loc{ flex:1 1 100px; text-align:right; font-weight:700; font-size:.72rem; line-height:1.35; color:#6b7a8a; padding-top:5px; }
+.upcoming-title{
+  font-family: var(--font-body); font-weight:700; font-size:.98rem; line-height:1.32; color: var(--blue-ink);
+  margin:20px 0 14px; flex:1 1 auto;
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+}
+.upcoming-card-foot{ display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:30px; }
+.upcoming-badge{ background: var(--green); color:#fff; font-weight:700; font-size:.7rem; letter-spacing:.04em; padding:5px 22px; border-radius:10px; }
+.upcoming-more{
+  margin-left:auto; background:none; border:none; cursor:pointer; padding:4px 0;
+  font-family: var(--font-body); font-weight:700; font-size:.74rem; color:#b99b58;
+}
+.upcoming-more:hover{ text-decoration:underline; text-underline-offset:2px; }
+
+.upcoming-details{ margin-top:28px; }
+.upcoming-detail{ scroll-margin-top:110px; margin-bottom:0; }
+.upcoming-detail[hidden]{ display:none; }
+.upcoming-meta{ color: var(--ink-soft); font-size:.88rem; margin:0 0 18px; padding-bottom:16px; border-bottom:1px solid rgba(10,24,48,.08); }
+.event-detail-links li{ color: var(--ink-soft); font-size:.88rem; word-break:break-word; }
+
+@media (max-width: 980px){
+  .upcoming-card{ flex-basis: calc((100% - 24px) / 2); }
+}
+@media (max-width: 620px){
+  .upcoming-card{ flex-basis:100%; }
+}
+
+/* ---------- Presencia Internacional: Líneas internacionales de trabajo ---------- */
+.lines-list{ list-style:none; padding:0; margin:20px 0 0; display:flex; flex-direction:column; gap:10px; }
+.lines-item{
+  display:flex; align-items:center; gap:14px; background:#fff; border:1.5px solid var(--line);
+  border-radius:10px; padding:14px 22px; font-size:.98rem; color: var(--ink);
+}
+.lines-item::before{ content:""; flex:none; width:10px; height:10px; border-radius:50%; background:#b99b58; }
+.presence-newsletter-btn{ text-transform:uppercase; letter-spacing:.04em; font-weight:700; }
+.upcoming-detail{ scroll-margin-top:150px; }
+#proximas-actividades, #actividades-anteriores, #lineas-de-trabajo{ scroll-margin-top:80px; }
