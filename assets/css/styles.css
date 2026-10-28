@@ -1345,3 +1345,18 @@ h2 em, h1 em{ font-style: italic; }
 .presence-newsletter-btn{ text-transform:uppercase; letter-spacing:.04em; font-weight:700; }
 .upcoming-detail{ scroll-margin-top:150px; }
 #proximas-actividades, #actividades-anteriores, #lineas-de-trabajo{ scroll-margin-top:80px; }
+
+/* ---------- Institutional notice: additions (language pills, action row, stacking above cookie banner) ---------- */
+.notice-overlay{ z-index:1300; }
+.notice-modal h2{ text-transform:uppercase; letter-spacing:.05em; padding-right:40px; }
+.notice-modal p{ text-align:justify; }
+.notice-modal .notice-signature{ text-align:left; }
+.notice-modal{ max-height:92vh; padding:34px 40px 24px; }
+.notice-modal p{ font-size:.9rem; line-height:1.55; margin-bottom:.8em; }
+.notice-modal .notice-signature{ margin-top:16px; }
+.notice-actions{ display:flex; justify-content:flex-end; position:sticky; bottom:-24px; margin:12px 0 -24px; padding:14px 0 24px; background:#fff; }
+@media (max-width: 560px){
+  .notice-modal{ padding:28px 22px 20px; }
+  .notice-modal p{ text-align:left; }
+  .notice-modal h2{ font-size:1.15rem; }
+}

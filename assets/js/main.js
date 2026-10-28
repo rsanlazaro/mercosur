@@ -3385,134 +3385,86 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Institutional notice modal (shown once per session) ---------- */
   (function () {
-    // TEMPORARILY DISABLED — remove this line to re-enable the popup.
-    if (true) return;
+    var STORAGE = 'mercosurNoticeShown';
+    try { if (sessionStorage.getItem(STORAGE) === '1') return; } catch (e) { /* storage unavailable */ }
 
-    if (sessionStorage.getItem('mercosurNoticeShown') === '1') return;
+    var DICT = window.MERCOSUR_I18N;
+    if (!DICT || !DICT.es) return;
+    var LANG_KEY = 'mercosurLang';
 
-    var EXPO_URL = 'https://www.expomarketmercosur.org/';
-
-    function expoHeader() {
-      return (
-        '<div class="expo-header">' +
-          '<div class="expo-logo">' +
-            '<span class="expo-logo-icon"><span class="expo-logo-icon-inner"></span></span>' +
-            '<span class="expo-logo-text">' +
-              '<span class="expo-logo-title">EXPO<span>MARKET</span></span>' +
-              '<span class="expo-logo-sub">— MERCOSUR &bull; PANAMA —</span>' +
-            '</span>' +
-          '</div>' +
-          '<div class="expo-dates">' +
-            '<div class="expo-dates-numbers">25<i>&bull;</i>26<i>&bull;</i>27</div>' +
-            '<div class="expo-dates-month">SEPTIEMBRE <strong>2026</strong></div>' +
-            '<div class="expo-dates-venue">Centro de Convenciones ATLAPA, Panamá</div>' +
-          '</div>' +
-        '</div>'
-      );
+    function currentLang() {
+      var l = document.documentElement.getAttribute('lang');
+      if (!DICT[l]) { try { l = localStorage.getItem(LANG_KEY); } catch (e) { l = null; } }
+      return DICT[l] ? l : 'es';
     }
-
-    function mesaCard(num, extraClass) {
-      return (
-        '<div class="expo-mesa' + (extraClass ? ' ' + extraClass : '') + '">' +
-          '<div class="expo-mesa-pill"><span>MESA ' + num + '</span></div>' +
-          '<p class="expo-mesa-speaker">NOMBRE DE PONENTE<br>HORARIO:</p>' +
-          '<p class="expo-mesa-desc">Texto descriptivo sobre la mesa de dialogo para invitar a los asistentes a participar y si tiene cupo de oyentes o que marca colabora.</p>' +
-        '</div>'
-      );
+    function tr(key, lang) {
+      var d = DICT[lang] || {};
+      return d[key] !== undefined ? d[key] : DICT.es[key];
     }
-
-    var expoHTML =
-      '<div class="expo-modal">' +
-
-        expoHeader() +
-
-        '<div class="expo-tagline">Conectamos Oportunidades, Impulsamos el Futuro</div>' +
-        '<div class="expo-gold-bar"></div>' +
-
-        '<div class="expo-body">' +
-          '<p class="expo-desc">Disfruta de <strong>tres días en el epicentro del comercio multilateral de Panamá</strong> — donde se generan los acuerdos que trascienden el evento, y que siendo el primer Estado Asociado del Mercosur fuera de Sudamérica, abre las puertas al <strong>encuentro comercial más ambicioso de la región este 2026</strong>.</p>' +
-
-          '<h3 class="expo-list-title">Conoce nuestra lista institucional de<br>participantes de esta <span class="expo-underline">primera edición</span>:</h3>' +
-
-          '<div class="expo-participants">' +
-            '<ul>' +
-              '<li><strong>PRESIDENCIA DE PANAMÁ:</strong><span>Nombre 1</span></li>' +
-              '<li><strong>CANCILLERÍA:</strong><span>Nombre 1</span></li>' +
-              '<li><strong>MINISTRO DE TURISMO:</strong><span>Nombre 1</span></li>' +
-              '<li><strong>EMBAJADAS / CONSULADOS DE PANAMÁ:</strong><span>Nombre 1</span></li>' +
-              '<li><strong>INTEGRANTES DE LA CÁMARA DE COMERCIO:</strong><span>Nombre 1</span></li>' +
-              '<li><strong>INVITADOS ESPECIALES:</strong><span>Nombre 1</span></li>' +
-            '</ul>' +
-            '<ul>' +
-              '<li><strong>PRESIDENCIA DE PANAMÁ:</strong><span>Nombre 1</span></li>' +
-              '<li><strong>CANCILLERÍA:</strong><span>Nombre 1</span></li>' +
-              '<li><strong>MINISTRO DE TURISMO:</strong><span>Nombre 1</span></li>' +
-              '<li><strong>EMBAJADAS / CONSULADOS DE PANAMÁ:</strong><span>Nombre 1</span></li>' +
-              '<li><strong>INTEGRANTES DE LA CÁMARA DE COMERCIO:</strong><span>Nombre 1</span></li>' +
-              '<li><strong>INVITADOS ESPECIALES:</strong><span>Nombre 1</span></li>' +
-            '</ul>' +
-          '</div>' +
-          '<p class="expo-note">*Ejemplo a dos columnas si son muchos nombres de participantes.</p>' +
-          '<p class="expo-invite">TEXTO PARA FINALIZAR E INVITAR AL PÚBLICO</p>' +
-        '</div>' +
-
-        '<div class="expo-footer expo-footer--gold">Reserva tus entradas ahora en <strong><a href="' + EXPO_URL + '" target="_blank" rel="noopener">www.expomarketmercosur.org/</a></strong></div>' +
-
-        '<hr class="expo-divider">' +
-
-        expoHeader() +
-
-        '<div class="expo-conoce-mas">' +
-          '<span class="expo-pill-gold">CONOCE MÁS</span>' +
-          '<span class="expo-chevron-btn">&#8964;</span>' +
-        '</div>' +
-        '<div class="expo-navy-bar"></div>' +
-
-        '<div class="expo-body">' +
-          '<h3 class="expo-mesas-title" id="notice-title">MESAS DE DIÁLOGO:</h3>' +
-          '<p class="expo-mesas-sub">Conoce las mesas de diálogo que tenemos programadas para los asistentes de <strong>EXPOMARKET 2026</strong>.</p>' +
-
-          '<div class="expo-mesas-row">' +
-            mesaCard(1) +
-            mesaCard(2) +
-          '</div>' +
-          mesaCard(2, 'expo-mesa--solo') +
-        '</div>' +
-
-        '<div class="expo-footer expo-footer--navy">Conoce todas las actividades en <strong><a href="' + EXPO_URL + '" target="_blank" rel="noopener">www.expomarketmercosur.org/</a></strong></div>' +
-
-      '</div>';
 
     var overlay = document.createElement('div');
-    overlay.className = 'notice-overlay expo-overlay';
+    overlay.className = 'notice-overlay';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
     overlay.setAttribute('aria-labelledby', 'notice-title');
     overlay.innerHTML =
-      '<div class="expo-shell">' +
-        '<button type="button" class="notice-close expo-close" aria-label="Cerrar">&times;</button>' +
-        expoHTML +
+      '<div class="notice-modal">' +
+        '<button type="button" class="notice-close" aria-label="">&times;</button>' +
+        '<h2 id="notice-title"></h2>' +
+        '<p data-notice="p1"></p><p data-notice="p2"></p><p data-notice="p3"></p><p data-notice="p4"></p>' +
+        '<p class="notice-signature" data-notice="sig"></p>' +
+        '<div class="notice-actions"><button type="button" class="btn btn-primary notice-ok"></button></div>' +
       '</div>';
     document.body.appendChild(overlay);
 
+    function render() {
+      var lang = currentLang();
+      overlay.querySelector('#notice-title').textContent = tr('notice.title', lang);
+      [1, 2, 3, 4].forEach(function (i) {
+        overlay.querySelector('[data-notice="p' + i + '"]').textContent = tr('notice.p' + i, lang);
+      });
+      overlay.querySelector('[data-notice="sig"]').textContent = tr('notice.signature', lang);
+      overlay.querySelector('.notice-ok').textContent = tr('notice.button', lang);
+      overlay.querySelector('.notice-close').setAttribute('aria-label', tr('notice.close', lang));
+    }
+    render();
+    document.addEventListener('mercosur:langchange', render);
+
+    var lastFocus = document.activeElement;
+    var closed = false;
+
+    function onKey(e) {
+      if (e.key === 'Escape') { closeNotice(); return; }
+      if (e.key === 'Tab') {                 // keep keyboard focus inside the dialog
+        var f = overlay.querySelectorAll('button');
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+
     function closeNotice() {
+      if (closed) return;
+      closed = true;
       overlay.classList.remove('is-open');
-      sessionStorage.setItem('mercosurNoticeShown', '1');
-      window.setTimeout(function () {
-        overlay.remove();
-      }, 260);
+      try { sessionStorage.setItem(STORAGE, '1'); } catch (e) { /* storage unavailable */ }
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mercosur:langchange', render);
+      document.body.style.overflow = '';
+      window.setTimeout(function () { overlay.remove(); }, 260);
+      if (lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) { /* ignore */ } }
     }
 
     overlay.querySelector('.notice-close').addEventListener('click', closeNotice);
-    overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) closeNotice();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeNotice();
-    });
+    overlay.querySelector('.notice-ok').addEventListener('click', closeNotice);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeNotice(); });
+    document.addEventListener('keydown', onKey);
 
+    document.body.style.overflow = 'hidden';
     window.requestAnimationFrame(function () {
       overlay.classList.add('is-open');
+      overlay.querySelector('.notice-ok').focus({ preventScroll: true });
+      overlay.querySelector('.notice-modal').scrollTop = 0;
     });
   })();
 
